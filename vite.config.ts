@@ -108,6 +108,7 @@ export default defineConfig({
   build: {
     target: 'esnext',
     reportCompressedSize: true,
+    minify: 'oxc',
     lib: {
       entry: {
         index: fileURLToPath(new URL('./src/index.ts', import.meta.url)),
