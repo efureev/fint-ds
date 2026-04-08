@@ -6,7 +6,7 @@
     "emitDeclarationOnly": true,
     "rootDir": "src",
     "declarationDir": "./dist/types",
-    "outDir": "./dist/types"
+    "outDir": "./dist"
   },
   "include": [
     "vite-env.d.ts",
