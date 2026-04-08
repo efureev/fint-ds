@@ -1,45 +1,10 @@
 <script setup lang="ts">
-import { computed, onBeforeUnmount, onMounted, ref, watch } from 'vue'
+import { computed, defineAsyncComponent, onBeforeUnmount, onMounted, ref, watch } from 'vue'
 
 import { useFintI18n } from '@feugene/fint-i18n'
 
 import IconGlobe from '~icons/lucide/globe'
 import IconLayers from '~icons/lucide/layers'
-
-import CheckboxPage from './pages/CheckboxPage.vue'
-import SwitchPage from './pages/SwitchPage.vue'
-import ButtonsPage from './pages/ButtonsPage.vue'
-import InputsPage from './pages/InputsPage.vue'
-import InputTagPage from './pages/InputTagPage.vue'
-import FileUploadPage from './pages/FileUploadPage.vue'
-import FilesDocsPage from './pages/FilesDocsPage.vue'
-import DirectivesPage from './pages/DirectivesPage.vue'
-import DialogsPage from './pages/DialogsPage.vue'
-import SelectPage from './pages/SelectPage.vue'
-import TabsPage from './pages/TabsPage.vue'
-import CollapsePage from './pages/CollapsePage.vue'
-import RadioPage from './pages/RadioPage.vue'
-import LinksPage from './pages/LinksPage.vue'
-import LayoutPage from './pages/LayoutPage.vue'
-import ProgressPage from './pages/ProgressPage.vue'
-import PaginationPage from './pages/PaginationPage.vue'
-import TokensPage from './pages/TokensPage.vue'
-import AlertsPage from './pages/AlertsPage.vue'
-import BadgesPage from './pages/BadgesPage.vue'
-import CardsPage from './pages/CardsPage.vue'
-import EmptyStateSkeletonPage from './pages/EmptyStateSkeletonPage.vue'
-import NavigationPage from './pages/NavigationPage.vue'
-import LoadingPage from './pages/LoadingPage.vue'
-import DropdownPage from './pages/DropdownPage.vue'
-import DropdownMenuPage from './pages/DropdownMenuPage.vue'
-import DrawerPage from './pages/DrawerPage.vue'
-import ImageViewerPage from './pages/ImageViewerPage.vue'
-import TreePage from './pages/TreePage.vue'
-import TreeSelectPage from './pages/TreeSelectPage.vue'
-import IconsPage from './pages/IconsPage.vue'
-import AvatarPage from './pages/AvatarPage.vue'
-import BottomNavPage from './pages/BottomNavPage.vue'
-import TooltipPage from './pages/TooltipPage.vue'
 
 type PageId =
   | 'checkbox'
@@ -115,6 +80,43 @@ const pageIds: PageId[] = [
   'bottomNav',
   'tooltip',
 ]
+
+const pageComponents = {
+  checkbox: defineAsyncComponent(() => import('./pages/CheckboxPage.vue')),
+  switch: defineAsyncComponent(() => import('./pages/SwitchPage.vue')),
+  radio: defineAsyncComponent(() => import('./pages/RadioPage.vue')),
+  buttons: defineAsyncComponent(() => import('./pages/ButtonsPage.vue')),
+  inputs: defineAsyncComponent(() => import('./pages/InputsPage.vue')),
+  inputTag: defineAsyncComponent(() => import('./pages/InputTagPage.vue')),
+  fileUpload: defineAsyncComponent(() => import('./pages/FileUploadPage.vue')),
+  filesDocs: defineAsyncComponent(() => import('./pages/FilesDocsPage.vue')),
+  icons: defineAsyncComponent(() => import('./pages/IconsPage.vue')),
+  directives: defineAsyncComponent(() => import('./pages/DirectivesPage.vue')),
+  select: defineAsyncComponent(() => import('./pages/SelectPage.vue')),
+  dropdown: defineAsyncComponent(() => import('./pages/DropdownPage.vue')),
+  dropdownMenu: defineAsyncComponent(() => import('./pages/DropdownMenuPage.vue')),
+  links: defineAsyncComponent(() => import('./pages/LinksPage.vue')),
+  layout: defineAsyncComponent(() => import('./pages/LayoutPage.vue')),
+  progress: defineAsyncComponent(() => import('./pages/ProgressPage.vue')),
+  pagination: defineAsyncComponent(() => import('./pages/PaginationPage.vue')),
+  tokens: defineAsyncComponent(() => import('./pages/TokensPage.vue')),
+  dialogs: defineAsyncComponent(() => import('./pages/DialogsPage.vue')),
+  drawer: defineAsyncComponent(() => import('./pages/DrawerPage.vue')),
+  imageViewer: defineAsyncComponent(() => import('./pages/ImageViewerPage.vue')),
+  tabs: defineAsyncComponent(() => import('./pages/TabsPage.vue')),
+  collapse: defineAsyncComponent(() => import('./pages/CollapsePage.vue')),
+  alerts: defineAsyncComponent(() => import('./pages/AlertsPage.vue')),
+  badges: defineAsyncComponent(() => import('./pages/BadgesPage.vue')),
+  cards: defineAsyncComponent(() => import('./pages/CardsPage.vue')),
+  empty: defineAsyncComponent(() => import('./pages/EmptyStateSkeletonPage.vue')),
+  navigation: defineAsyncComponent(() => import('./pages/NavigationPage.vue')),
+  loading: defineAsyncComponent(() => import('./pages/LoadingPage.vue')),
+  tree: defineAsyncComponent(() => import('./pages/TreePage.vue')),
+  treeSelect: defineAsyncComponent(() => import('./pages/TreeSelectPage.vue')),
+  avatar: defineAsyncComponent(() => import('./pages/AvatarPage.vue')),
+  bottomNav: defineAsyncComponent(() => import('./pages/BottomNavPage.vue')),
+  tooltip: defineAsyncComponent(() => import('./pages/TooltipPage.vue')),
+} satisfies Record<PageId, ReturnType<typeof defineAsyncComponent>>
 
 function isPageId(value: string): value is PageId {
   return pageIds.includes(value as PageId)
@@ -266,6 +268,7 @@ const navGroups = computed<NavGroup[]>(() => {
 })
 
 const current = computed(() => page.value)
+const currentPageComponent = computed(() => pageComponents[current.value])
 
 const { locale, setLocale, t } = useFintI18n()
 
@@ -358,40 +361,7 @@ const localeAriaLabel = computed(() => {
       </aside>
 
       <main>
-        <CheckboxPage v-if="current === 'checkbox'" />
-        <SwitchPage v-else-if="current === 'switch'" />
-        <RadioPage v-else-if="current === 'radio'" />
-        <ButtonsPage v-else-if="current === 'buttons'" />
-        <InputsPage v-else-if="current === 'inputs'" />
-        <InputTagPage v-else-if="current === 'inputTag'" />
-        <FileUploadPage v-else-if="current === 'fileUpload'" />
-        <FilesDocsPage v-else-if="current === 'filesDocs'" />
-        <IconsPage v-else-if="current === 'icons'" />
-        <DirectivesPage v-else-if="current === 'directives'" />
-        <SelectPage v-else-if="current === 'select'" />
-        <DropdownPage v-else-if="current === 'dropdown'" />
-        <DropdownMenuPage v-else-if="current === 'dropdownMenu'" />
-        <LinksPage v-else-if="current === 'links'" />
-        <LayoutPage v-else-if="current === 'layout'" />
-        <ProgressPage v-else-if="current === 'progress'" />
-        <LoadingPage v-else-if="current === 'loading'" />
-        <PaginationPage v-else-if="current === 'pagination'" />
-        <AvatarPage v-else-if="current === 'avatar'" />
-        <AlertsPage v-else-if="current === 'alerts'" />
-        <BadgesPage v-else-if="current === 'badges'" />
-        <CardsPage v-else-if="current === 'cards'" />
-        <EmptyStateSkeletonPage v-else-if="current === 'empty'" />
-        <NavigationPage v-else-if="current === 'navigation'" />
-        <BottomNavPage v-else-if="current === 'bottomNav'" />
-        <TokensPage v-else-if="current === 'tokens'" />
-        <DialogsPage v-else-if="current === 'dialogs'" />
-        <DrawerPage v-else-if="current === 'drawer'" />
-        <ImageViewerPage v-else-if="current === 'imageViewer'" />
-        <TabsPage v-else-if="current === 'tabs'" />
-        <CollapsePage v-else-if="current === 'collapse'" />
-        <TreePage v-else-if="current === 'tree'" />
-        <TreeSelectPage v-else-if="current === 'treeSelect'" />
-        <TooltipPage v-else-if="current === 'tooltip'" />
+        <component :is="currentPageComponent" />
       </main>
     </div>
   </div>

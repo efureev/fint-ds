@@ -6,6 +6,7 @@ import UnoCSS from 'unocss/vite'
 
 export default defineConfig({
   root: fileURLToPath(new URL('./', import.meta.url)),
+  base: '/fint-ds/',
   plugins: [
     vue(),
     Icons({
