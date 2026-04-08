@@ -122,6 +122,7 @@ jobs:
             echo "| Branches | $(jq -r '.total.branches.total' coverage/playground/coverage-summary.json) | $(jq -r '.total.branches.covered' coverage/playground/coverage-summary.json) | $(jq -r '.total.branches.pct' coverage/playground/coverage-summary.json)% |" >> $GITHUB_STEP_SUMMARY
           fi
 
+
   deploy-playground:
     needs:
       - build-and-test

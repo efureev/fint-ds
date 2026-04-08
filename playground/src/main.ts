@@ -9,7 +9,7 @@ import '@unocss/reset/tailwind-compat.css'
 import 'virtual:uno.css'
 
 // Use the same styles as consumers of the library.
-import '@ds/styles.ts'
+import '../../src/styles/index.css'
 
 // Register components globally like in real apps.
 import FintDs from '@ds'

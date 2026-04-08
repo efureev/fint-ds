@@ -1,4 +1,4 @@
-import { createFintI18n, HookLoggerPlugin, PersistencePlugin, type FintI18n } from '@feugene/fint-i18n'
+import { createFintI18n, PersistencePlugin, type FintI18n } from '@feugene/fint-i18n'
 
 import { FINT_DS_I18N_BLOCK, fintDsLocaleLoaders } from '@ds'
 import { playgroundLocaleLoaders, PLAYGROUND_I18N_BLOCK } from './messages'
@@ -8,7 +8,7 @@ type CreatePlaygroundI18nOptions = {
 }
 
 export async function createPlaygroundI18n(options: CreatePlaygroundI18nOptions = {}): Promise<FintI18n> {
-  const plugins = [new HookLoggerPlugin()]
+  const plugins = []
 
   if (options.enablePersistence !== false) {
     plugins.push(new PersistencePlugin({ key: 'fint-ds-playground-locale' }))
