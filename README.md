@@ -1,4 +1,4 @@
-# fint-ds (Vue 3)
+# Fint-DS (Vue 3)
 
 `@feugene/fint-ds` is a Vue 3 design-system package. Consumers install the published package and use the build artifacts from `dist`.
 
