@@ -1,0 +1,85 @@
+{
+  "name": "@feugene/fint-ds",
+  "description": "Vue 3 design system package with components, styles, directives, and localization helpers.",
+  "version": "0.1.0",
+  "license": "UNLICENSED",
+  "type": "module",
+  "types": "./dist/types/src/index.d.ts",
+  "web-types": "./web-types.json",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/efureev/fint-ds.git"
+  },
+  "homepage": "https://github.com/efureev/fint-ds#readme",
+  "bugs": {
+    "url": "https://github.com/efureev/fint-ds/issues"
+  },
+  "keywords": [
+    "vue",
+    "vue3",
+    "design-system",
+    "component-library",
+    "unocss",
+    "ui"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "files": [
+    "dist"
+  ],
+  "sideEffects": [
+    "**/*.css"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/types/src/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./uno": {
+      "types": "./dist/types/src/uno.d.ts",
+      "import": "./dist/uno.js"
+    },
+    "./styles.css": "./dist/styles.css",
+    "./base.css": "./dist/base.css",
+    "./fonts.css": "./dist/fonts.css"
+  },
+  "peerDependencies": {
+    "vue": "^3.5.32"
+  },
+  "dependencies": {
+    "@headlessui/vue": "^1.7.23"
+  },
+  "devDependencies": {
+    "@antfu/eslint-config": "^7.7.3",
+    "@feugene/fint-i18n": "^0.1.1",
+    "@iconify-json/lucide": "^1.2.101",
+    "@types/node": "^25.5.2",
+    "@unocss/eslint-plugin": "^66.6.7",
+    "@unocss/reset": "^66.6.7",
+    "@vitejs/plugin-vue": "^6.0.5",
+    "@vue/test-utils": "^2.4.6",
+    "eslint": "^10.2.0",
+    "globals": "^17.4.0",
+    "jsdom": "^29.0.1",
+    "typescript": "^6.0.2",
+    "unocss": "^66.6.7",
+    "unplugin-icons": "^23.0.1",
+    "vite": "^8.0.4",
+    "vitest": "^4.1.2",
+    "vue": "^3.5.32",
+    "vue-tsc": "^3.2.6"
+  },
+  "scripts": {
+    "dev": "vite --config playground/vite.config.ts",
+    "playground": "vite --config playground/vite.config.ts",
+    "playground:build": "vite build --config playground/vite.config.ts",
+    "build": "vite build && vue-tsc -p tsconfig.build.json && node ./scripts/check-dist-no-tests.mjs",
+    "lint": "eslint --cache .",
+    "lint:fix": "eslint --cache --fix .",
+    "test": "vitest --config vitest.config.ts",
+    "test:run": "vitest run --config vitest.config.ts",
+    "test:playground": "vitest --config playground/vitest.config.ts",
+    "test:run:playground": "vitest run --config playground/vitest.config.ts"
+  }
+}

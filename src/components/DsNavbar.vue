@@ -1,0 +1,57 @@
+<script setup lang="ts">
+import { computed } from 'vue'
+
+import { useFintDsTranslations } from '@/internal/fintI18n'
+import DsButton from '@/components/DsButton.vue'
+import IconMenu from '~icons/lucide/menu'
+
+const { t } = useFintDsTranslations()
+
+withDefaults(
+  defineProps<{
+    title: string
+    showMenuButton?: boolean
+    /** Extra classes applied to the menu button wrapper (e.g. `sm:hidden`). */
+    menuButtonClass?: string
+  }>(),
+  {
+    showMenuButton: false,
+    menuButtonClass: '',
+  },
+)
+
+const emit = defineEmits<{
+  (e: 'menu'): void
+}>()
+
+const menuAriaLabel = computed(() => {
+  return t('fintDs.navbar.openMenu', 'Open menu')
+})
+</script>
+
+<template>
+  <header class="h-[56px] border-b border-[var(--border)] bg-[var(--background)] flex items-center justify-between px-4 sm:px-6">
+    <div class="flex items-center gap-3">
+      <DsButton
+        v-if="showMenuButton"
+        variant="ghost"
+        size="sm"
+        square
+        :aria-label="menuAriaLabel"
+        :class="menuButtonClass"
+        @click="emit('menu')"
+      >
+        <IconMenu class="h-4 w-4" aria-hidden="true" />
+      </DsButton>
+      <div class="text-[14px] font-700">
+        <slot name="title">
+          {{ title }}
+        </slot>
+</div>
+    </div>
+
+    <div class="flex items-center gap-3">
+      <slot />
+    </div>
+  </header>
+</template>

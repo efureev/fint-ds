@@ -1,0 +1,32 @@
+{
+  "$schema": "https://raw.githubusercontent.com/JetBrains/web-types/master/schema/web-types.json",
+  "name": "@feugene/fint-ds",
+  "version": "0.1.0",
+  "framework": "vue",
+  "js-types-syntax": "typescript",
+  "description-markup": "markdown",
+  "contributions": {
+    "html": {
+      "vue-directives": [
+        {
+          "name": "autofocus"
+        },
+        {
+          "name": "autosize"
+        },
+        {
+          "name": "click-outside"
+        },
+        {
+          "name": "dropzone"
+        },
+        {
+          "name": "hotkey"
+        },
+        {
+          "name": "loading"
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,13 @@
+/*
+  Optional remote fonts.
+
+  Import this file ONLY if you want to load Inter / JetBrains Mono from Google Fonts.
+  By default, `@feugene/fint-ds/styles.css` does not make any network requests.
+*/
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500;600&display=swap');
+
+:root {
+  --ds-font-ui: Inter, Roboto, system-ui, -apple-system, Segoe UI, Arial, sans-serif;
+  --ds-font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', monospace;
+}

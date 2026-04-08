@@ -1,0 +1,9 @@
+@import './fonts.css';
+@import './tokens.css';
+
+/* Темы вынесены по файлам */
+@import './themes/light.css';
+@import './themes/dark.css';
+
+/* Global base rules (can be used separately via `@feugene/fint-ds/base.css`). */
+@import './base.css';

@@ -1,0 +1,170 @@
+name: CI/CD
+
+on:
+  push:
+    branches: [ main ]
+    tags: [ 'v*' ]
+  pull_request:
+    branches: [ main ]
+
+permissions:
+  contents: write
+  packages: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node: [ 22, 24 ]
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
+        with:
+          node-version: ${{ matrix.node }}
+
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+
+      - name: Lint
+        run: yarn lint
+
+      - name: Test
+        run: yarn test:coverage:package
+
+      - name: Upload test results to Codecov
+        if: ${{ !cancelled() }}
+        uses: codecov/test-results-action@v1
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          files: ./junit-report.xml
+          name: fint-ds-package-test-results
+
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v6
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          files: ./coverage/package/lcov.info
+          flags: package
+          name: fint-ds-package
+
+      - name: Test playground
+        run: yarn test:coverage:playground
+
+      - name: Upload playground coverage to Codecov
+        uses: codecov/codecov-action@v6
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          files: ./coverage/playground/lcov.info
+          flags: playground
+          name: fint-ds-playground
+
+      - name: Add coverage summary to GITHUB_STEP_SUMMARY
+        if: always()
+        run: |
+          if [ -f coverage/package/coverage-summary.json ]; then
+            echo "### Package Coverage Summary" >> $GITHUB_STEP_SUMMARY
+            echo "| Metric | Total | Covered | Percentage |" >> $GITHUB_STEP_SUMMARY
+            echo "| --- | --- | --- | --- |" >> $GITHUB_STEP_SUMMARY
+            echo "| Lines | $(jq -r '.total.lines.total' coverage/package/coverage-summary.json) | $(jq -r '.total.lines.covered' coverage/package/coverage-summary.json) | $(jq -r '.total.lines.pct' coverage/package/coverage-summary.json)% |" >> $GITHUB_STEP_SUMMARY
+            echo "| Statements | $(jq -r '.total.statements.total' coverage/package/coverage-summary.json) | $(jq -r '.total.statements.covered' coverage/package/coverage-summary.json) | $(jq -r '.total.statements.pct' coverage/package/coverage-summary.json)% |" >> $GITHUB_STEP_SUMMARY
+            echo "| Functions | $(jq -r '.total.functions.total' coverage/package/coverage-summary.json) | $(jq -r '.total.functions.covered' coverage/package/coverage-summary.json) | $(jq -r '.total.functions.pct' coverage/package/coverage-summary.json)% |" >> $GITHUB_STEP_SUMMARY
+            echo "| Branches | $(jq -r '.total.branches.total' coverage/package/coverage-summary.json) | $(jq -r '.total.branches.covered' coverage/package/coverage-summary.json) | $(jq -r '.total.branches.pct' coverage/package/coverage-summary.json)% |" >> $GITHUB_STEP_SUMMARY
+          fi
+
+      - name: Build package
+        run: yarn build
+
+      - name: Build playground
+        run: yarn playground:build
+
+      - name: Upload dist
+        if: matrix.node == 24
+        uses: actions/upload-artifact@v7
+        with:
+          name: dist
+          path: dist/
+
+      - name: Upload playground
+        if: matrix.node == 24
+        uses: actions/upload-artifact@v7
+        with:
+          name: playground-dist
+          path: playground/dist/
+
+  deploy-playground:
+    needs: build-and-test
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Download playground dist
+        uses: actions/download-artifact@v8
+        with:
+          name: playground-dist
+          path: playground-dist
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: playground-dist
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v5
+
+  publish:
+    needs: build-and-test
+    if: startsWith(github.ref, 'refs/tags/v')
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 24
+          registry-url: 'https://registry.npmjs.org'
+
+      - name: Download dist
+        uses: actions/download-artifact@v6
+        with:
+          name: dist
+          path: dist
+
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+
+      - name: Publish to NPM
+        run: npm publish --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Setup for GitHub Packages
+        uses: actions/setup-node@v6
+        with:
+          node-version: 24
+          registry-url: 'https://npm.pkg.github.com'
+          scope: '@efureev'
+
+      - name: Publish to GitHub Packages
+        run: |
+          # У GitHub Packages имя пакета (scope) должно совпадать с владельцем репозитория (efureev)
+          # Чтобы не менять основной package.json, временно меняем имя перед публикацией в GPR
+          sed -i 's/"name": "@feugene\/fint-ds"/"name": "@efureev\/fint-ds"/' package.json
+          npm publish --ignore-scripts
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
