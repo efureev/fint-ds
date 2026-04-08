@@ -19,6 +19,11 @@ export default defineConfig({
     },
   },
   test: {
+    coverage: {
+      provider: 'v8',
+      reportsDirectory: '../coverage/playground',
+      reporter: ['text', 'json-summary', 'lcov'],
+    },
     environment: 'jsdom',
     include: ['src/**/*.{test,spec}.{ts,tsx}'],
     setupFiles: ['../src/test/setup.ts'],

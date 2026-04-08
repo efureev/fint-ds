@@ -106,8 +106,7 @@ const splitRegex = computed(() => {
 })
 
 function normalizeTag(raw: string): string {
-  const v = props.trim ? raw.trim() : raw
-  return v
+  return props.trim ? raw.trim() : raw
 }
 
 function splitToTags(raw: string): string[] {

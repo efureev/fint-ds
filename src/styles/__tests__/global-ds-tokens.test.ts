@@ -11,7 +11,7 @@ function collectDefinedTokens(css: string): Set<string> {
 }
 
 function collectUsedTokens(css: string): Set<string> {
-  return new Set(css.match(/var\((--ds-[A-Za-z0-9_-]+)/g)?.map((token) => token.slice(4)) ?? [])
+  return new Set(css.match(/var\(--ds-[A-Za-z0-9_-]+/g)?.map((token) => token.slice(4)) ?? [])
 }
 
 describe('global DS tokens', () => {
