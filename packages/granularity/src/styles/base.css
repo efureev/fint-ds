@@ -1,0 +1,55 @@
+html,
+body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    font-family: var(--ds-font-ui);
+    background: var(--background);
+    color: var(--foreground);
+}
+
+/*
+ * UnoCSS tailwind-compat reset intentionally does not force `background-color: transparent` for buttons
+ * (to avoid breaking component libraries). In our DS we want plain buttons/links to be transparent by default.
+ */
+:where(a, button) {
+    background-color: transparent;
+}
+
+:where(input[type='button'], input[type='submit'], input[type='reset']) {
+    background-color: transparent;
+}
+
+code,
+pre,
+kbd {
+    font-family: var(--ds-font-mono);
+}
+
+* {
+    box-sizing: border-box;
+}
+
+/*
+ * DS semantic helpers.
+ *
+ * These classes are used by exported DS components and must not depend on UnoCSS shortcuts
+ * in consumer applications.
+ */
+
+.ds-muted {
+    color: var(--muted-foreground);
+}
+
+.ds-card {
+    border-radius: var(--ds-radius-lg);
+    border: 1px solid var(--border);
+    background: var(--card);
+    color: var(--card-foreground);
+}
+
+.uppercase {
+    text-transform: uppercase;
+}

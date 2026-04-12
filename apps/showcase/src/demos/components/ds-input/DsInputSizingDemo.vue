@@ -1,0 +1,59 @@
+<script setup lang="ts">
+import { ref } from 'vue'
+
+import { DsInput, DsRadioGroup } from '@feugene/granularity'
+
+const alignment = ref<'left' | 'center' | 'right'>('left')
+const alignmentOptions = [
+  { label: 'Left', value: 'left' },
+  { label: 'Center', value: 'center' },
+  { label: 'Right', value: 'right' },
+]
+
+const sizeValues = {
+  xs: ref('xs size'),
+  sm: ref('sm size'),
+  md: ref('md size'),
+  lg: ref('lg size'),
+}
+</script>
+
+<template>
+  <div class="grid gap-4">
+    <div class="grid gap-2 rounded-2xl border border-[var(--border)] bg-[var(--card)] p-4">
+      <div class="text-sm font-semibold text-slate-900 dark:text-slate-100">
+        Text alignment
+      </div>
+      <DsRadioGroup
+        v-model="alignment"
+        :options="alignmentOptions"
+        variant="button"
+        size="sm"
+      />
+      <DsInput
+        :model-value="`Aligned to ${alignment}`"
+        :text-align="alignment"
+        placeholder="Editable content"
+      />
+    </div>
+
+    <div class="grid gap-3 md:grid-cols-2 xl:grid-cols-4">
+      <div class="grid gap-2">
+        <div class="text-xs uppercase tracking-[0.16em] text-slate-500 dark:text-slate-400">xs</div>
+        <DsInput v-model="sizeValues.xs.value" size="xs" placeholder="Extra small" />
+      </div>
+      <div class="grid gap-2">
+        <div class="text-xs uppercase tracking-[0.16em] text-slate-500 dark:text-slate-400">sm</div>
+        <DsInput v-model="sizeValues.sm.value" size="sm" placeholder="Small" />
+      </div>
+      <div class="grid gap-2">
+        <div class="text-xs uppercase tracking-[0.16em] text-slate-500 dark:text-slate-400">md</div>
+        <DsInput v-model="sizeValues.md.value" size="md" placeholder="Medium" />
+      </div>
+      <div class="grid gap-2">
+        <div class="text-xs uppercase tracking-[0.16em] text-slate-500 dark:text-slate-400">lg</div>
+        <DsInput v-model="sizeValues.lg.value" size="lg" placeholder="Large" />
+      </div>
+    </div>
+  </div>
+</template>

@@ -1,0 +1,81 @@
+:root {
+  /* Surface roles */
+  --background: #f8fafc;
+  --foreground: #0f172a;
+  --card: #ffffff;
+  --card-foreground: #0f172a;
+  --popover: #ffffff;
+  --popover-foreground: #0f172a;
+  --muted: #f1f5f9;
+  --muted-foreground: #64748b;
+  --secondary: #e2e8f0;
+  --secondary-foreground: #1e293b;
+  --border: #e2e8f0;
+  --input: #e2e8f0;
+  --ring: #6366f1;
+
+  /* Action roles */
+  --primary: #4f46e5;
+  --primary-foreground: #ffffff;
+  --accent: #eef2ff;
+  --accent-foreground: #3730a3;
+  --destructive: #dc2626;
+  --destructive-foreground: #ffffff;
+
+  /* Status roles */
+  --ds-success: #10b981;
+  --ds-success-light: #d1fae5;
+  --ds-warning: #f97316;
+  --ds-warning-light: #ffedd5;
+  --ds-danger: #dc2626;
+  --ds-danger-light: #fee2e2;
+  --ds-info: #6366f1;
+  --ds-info-light: #e0e7ff;
+
+  /* Data visualization roles */
+  --chart-1: #4f46e5;
+  --chart-2: #10b981;
+  --chart-3: #f97316;
+  --chart-4: #6366f1;
+  --chart-5: #8b5cf6;
+
+  /* Navigation roles */
+  --sidebar: #ffffff;
+  --sidebar-foreground: #0f172a;
+  --sidebar-primary: #4f46e5;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #f1f5f9;
+  --sidebar-accent-foreground: #1e293b;
+  --sidebar-border: #e2e8f0;
+  --sidebar-ring: #6366f1;
+
+  /* Component semantic roles */
+  --ds-category-tree-branch-line-active-color: color-mix(in srgb, var(--primary) 20%, var(--border));
+}
+
+@supports not (color: color-mix(in srgb, #000 50%, #fff)) {
+  :root {
+    /* Action role fallbacks */
+    --primary-hover: #4a42d6;
+    --primary-active: #453ec7;
+    --secondary-hover: #d1d7e0;
+    --secondary-active: #c0c7d0;
+    --border-hover: #a3a9b5;
+    --border-active: #838a97;
+    --destructive-hover: #cc2526;
+    --destructive-active: #bb2427;
+
+    /* Status role fallbacks */
+    --ds-success-hover: #10ac7a;
+    --ds-success-active: #109f73;
+    --ds-warning-hover: #e66c18;
+    --ds-warning-active: #d46419;
+    --ds-danger-hover: #cc2526;
+    --ds-danger-active: #bb2427;
+    --ds-info-hover: #5c60e1;
+    --ds-info-active: #5659d1;
+
+    /* Component semantic fallbacks */
+    --ds-category-tree-branch-line-active-color: #c4cdf7;
+  }
+}

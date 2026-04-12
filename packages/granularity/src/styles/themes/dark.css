@@ -1,0 +1,85 @@
+.theme-dark,
+.dark,
+[data-theme='dark'] {
+  /* Surface roles */
+  --background: #0f172a;
+  --foreground: #f8fafc;
+  --card: #1e293b;
+  --card-foreground: #f8fafc;
+  --popover: #1e293b;
+  --popover-foreground: #f8fafc;
+  --muted: #334155;
+  --muted-foreground: #94a3b8;
+  --secondary: #334155;
+  --secondary-foreground: #f1f5f9;
+  --border: #334155;
+  --input: #334155;
+  --ring: #818cf8;
+
+  /* Action roles */
+  --primary: #6366f1;
+  --primary-foreground: #ffffff;
+  --accent: #1e1b4b;
+  --accent-foreground: #c7d2fe;
+  --destructive: #ef4444;
+  --destructive-foreground: #ffffff;
+
+  /* Status roles */
+  --ds-success: #34d399;
+  --ds-success-light: #064e3b;
+  --ds-warning: #fb923c;
+  --ds-warning-light: #7c2d12;
+  --ds-danger: #f87171;
+  --ds-danger-light: #7f1d1d;
+  --ds-info: #818cf8;
+  --ds-info-light: #312e81;
+
+  /* Data visualization roles */
+  --chart-1: #6366f1;
+  --chart-2: #34d399;
+  --chart-3: #fb923c;
+  --chart-4: #818cf8;
+  --chart-5: #a78bfa;
+
+  /* Navigation roles */
+  --sidebar: #1e293b;
+  --sidebar-foreground: #f8fafc;
+  --sidebar-primary: #6366f1;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #334155;
+  --sidebar-accent-foreground: #f1f5f9;
+  --sidebar-border: #334155;
+  --sidebar-ring: #818cf8;
+
+  /* Component semantic roles */
+  --ds-category-tree-branch-line-active-color: color-mix(in srgb, var(--primary) 38%, var(--border));
+}
+
+@supports not (color: color-mix(in srgb, #000 50%, #fff)) {
+  .theme-dark,
+  .dark,
+  [data-theme='dark'] {
+    /* Action role fallbacks */
+    --primary-hover: #6f72f2;
+    --primary-active: #7b7ef3;
+    --secondary-hover: #435062;
+    --secondary-active: #535f70;
+    --border-hover: #6e7987;
+    --border-active: #8c94a0;
+    --destructive-hover: #f05353;
+    --destructive-active: #f06161;
+
+    /* Status role fallbacks */
+    --ds-success-hover: #44d6a1;
+    --ds-success-active: #53d9a9;
+    --ds-warning-hover: #fb9a4b;
+    --ds-warning-active: #fba35b;
+    --ds-danger-hover: #f87c7c;
+    --ds-danger-active: #f88787;
+    --ds-info-hover: #8b95f8;
+    --ds-info-active: #949ef9;
+
+    /* Component semantic fallbacks */
+    --ds-category-tree-branch-line-active-color: #505b8c;
+  }
+}

@@ -1,0 +1,1 @@
+export { dsIconSafelist } from './dsIconStyles'

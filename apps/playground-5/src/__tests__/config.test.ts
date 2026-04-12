@@ -1,0 +1,59 @@
+import { readFileSync } from 'node:fs'
+import { fileURLToPath, URL } from 'node:url'
+import { describe, expect, it } from 'vitest'
+
+import {
+  playground5ContentIncludes,
+  playground5GranularityLayer,
+} from '../../uno.config'
+import {
+  playground5GranularityChunkGroup,
+  playground5VueChunkGroup,
+} from '../../vite.config'
+
+const playground5MainEntry = readFileSync(
+  fileURLToPath(new URL('../main.ts', import.meta.url)),
+  'utf8',
+)
+
+const playground5AppEntry = readFileSync(
+  fileURLToPath(new URL('../App.vue', import.meta.url)),
+  'utf8',
+)
+
+const playground5UnoConfig = readFileSync(
+  fileURLToPath(new URL('../../uno.config.ts', import.meta.url)),
+  'utf8',
+)
+
+describe('playground-5 config', () => {
+  it('выделяет vue и granularity в отдельные чанки', () => {
+    expect(playground5VueChunkGroup.name).toBe('vue')
+    expect(playground5GranularityChunkGroup.name).toBe('granularity')
+    expect(playground5VueChunkGroup.priority).toBeGreaterThan(playground5GranularityChunkGroup.priority)
+  })
+
+  it('подключает node-only preset и сканирует только свои исходники', () => {
+    expect(playground5UnoConfig).toContain("import { presetGranularityNode } from '@feugene/granularity/uno-node'")
+    expect(playground5UnoConfig).toContain("components: [...playground5GranularityComponents]")
+    expect(playground5UnoConfig).toContain('layer: playground5GranularityLayer')
+    expect(playground5GranularityLayer).toBe('granularity')
+    expect(playground5ContentIncludes.some(re => re.test('/repo/apps/playground-5/src/App.vue'))).toBe(true)
+    expect(playground5ContentIncludes.some(re => re.test('/repo/apps/playground-6/src/App.vue'))).toBe(false)
+    expect(playground5MainEntry).toContain('await Promise.all([')
+    expect(playground5MainEntry).toContain("import('./reset')")
+    expect(playground5MainEntry).toContain("import('./granularity')")
+    expect(playground5MainEntry).toContain("import('./app-styles')")
+  })
+
+  it('показывает на странице примерные размеры bundle', () => {
+    expect(playground5AppEntry).toContain('Примерный размер bundle')
+    expect(playground5AppEntry).toContain('data-bundle-group="vue"')
+    expect(playground5AppEntry).toContain('data-bundle-group="granularity"')
+    expect(playground5AppEntry).toContain('data-bundle-group="reset"')
+    expect(playground5AppEntry).toContain('data-bundle-group="app"')
+    expect(playground5AppEntry).toContain('gzip ~23.6 kB')
+    expect(playground5AppEntry).toContain('gzip ~1.6 kB')
+    expect(playground5AppEntry).toContain('gzip ~1.0 kB')
+  })
+})
