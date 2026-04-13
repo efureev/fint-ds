@@ -1,3 +1,7 @@
+<script setup lang="ts">
+import { DsBadgeWrap, DsButton } from '@feugene/granularity'
+</script>
+
 <template>
   <div class="grid gap-4">
     <div class="flex flex-wrap items-center gap-3 rounded-2xl border border-[var(--border)] bg-[var(--card)] p-4">

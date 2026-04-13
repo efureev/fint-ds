@@ -1,3 +1,7 @@
+<script setup lang="ts">
+import { DsAvatar, DsBadgeWrap, DsCard } from '@feugene/granularity'
+</script>
+
 <template>
   <div class="flex flex-wrap items-center gap-6">
     <DsBadgeWrap dot>

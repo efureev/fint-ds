@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 
-import { DsBadge, DsButton, DsButtonGroup } from '@feugene/granularity'
+import { DsBadge, DsButton, DsButtonGroup, DsCard } from '@feugene/granularity'
 
 const activeFilter = ref<'all' | 'failed' | 'review'>('all')
 </script>
