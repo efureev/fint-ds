@@ -7,12 +7,17 @@ export const playground5GranularityDistDir = fileURLToPath(new URL('../../packag
 export const playground5VueChunkGroup = {
   name: 'vue',
   test: /node_modules[\\/](?:vue|@vue)[\\/]/,
-  priority: 2,
+  priority: 3,
+}
+export const playground5ResetChunkGroup = {
+  name: 'reset',
+  test: /node_modules[\\/]@unocss[\\/]reset[\\/]/,
+  priority: 1,
 }
 export const playground5GranularityChunkGroup = {
   name: 'granularity',
   test: (id: string) => id.startsWith(playground5GranularityDistDir),
-  priority: 1,
+  priority: 2,
 }
 
 export default defineConfig({
@@ -24,6 +29,7 @@ export default defineConfig({
         codeSplitting: {
           groups: [
             playground5VueChunkGroup,
+            playground5ResetChunkGroup,
             playground5GranularityChunkGroup,
           ],
         },

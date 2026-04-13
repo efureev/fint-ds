@@ -5,7 +5,7 @@
 ## Что показывает приложение
 
 - JS для `DsButton` остаётся granular за счёт subpath import;
-- CSS не импортируется вручную из файлов пакета;
+- reset, CSS слоя `granularity` и app CSS грузятся через отдельные ленивые entry;
 - `presetGranularityNode()` сам подмешивает `tokens`, `base`, встроенную тему `light` и стили выбранного компонента.
 
 ## Как работает
@@ -22,5 +22,7 @@ presetGranularityNode({
 
 - `assets/index-*.js` — код demo-приложения;
 - `assets/vue-*.js` — runtime `vue`;
+- `assets/reset-*.css` — CSS из `@unocss/reset/tailwind-compat.css`;
 - `assets/granularity-*.js` — granular JS-код `DsButton`;
-- `assets/index-*.css` — CSS, сгенерированный `UnoCSS`, внутри которого уже есть foundation-слои и utility-стили `DsButton`.
+- `assets/granularity-*.css` — слой `granularity` из `presetGranularityNode` c foundation + стилями `DsButton`;
+- `assets/app-*.css` или `assets/index-*.css` — оставшийся app CSS из `virtual:uno.css`.

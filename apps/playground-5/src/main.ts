@@ -1,8 +1,11 @@
-import {createApp} from 'vue'
+import { createApp } from 'vue'
 
 import App from './App.vue'
 
-import '@unocss/reset/tailwind-compat.css'
-import 'virtual:uno.css'
+await Promise.all([
+  import('./reset'),
+  import('./granularity'),
+  import('./app-styles'),
+])
 
 createApp(App).mount('#app')

@@ -7,8 +7,7 @@ import UnoCSS from 'unocss/vite'
 
 export const playgroundGranularityEntry = fileURLToPath(new URL('../../packages/granularity/dist/index.js', import.meta.url))
 export const playgroundGranularityDistDir = fileURLToPath(new URL('../../packages/granularity/dist/', import.meta.url))
-export const playgroundGranularityBaseCssEntry = fileURLToPath(new URL('../../packages/granularity/dist/styles/base.css', import.meta.url))
-export const playgroundGranularityAllStylesCssEntry = fileURLToPath(new URL('../../packages/granularity/dist/styles.css', import.meta.url))
+export const playgroundGranularityFoundationCssEntry = fileURLToPath(new URL('../../packages/granularity/dist/foundation.css', import.meta.url))
 export const playgroundGranularityStylesCssEntry = fileURLToPath(new URL('../../packages/granularity/dist/styles.css', import.meta.url))
 export const playgroundGranularityButtonCssEntry = fileURLToPath(new URL('../../packages/granularity/dist/components/DsButton/styles.css', import.meta.url))
 export const playgroundBuildAnalyzeMode = 'analyze'
@@ -58,9 +57,8 @@ export default defineConfig(({ mode }) => ({
   resolve: {
     alias: {
       '@granularity': playgroundGranularityEntry,
-      '@granularity-base': playgroundGranularityBaseCssEntry,
-      '@granularity-styles': playgroundGranularityAllStylesCssEntry,
-      '@granularity-all-styles': playgroundGranularityStylesCssEntry,
+      '@granularity-foundation': playgroundGranularityFoundationCssEntry,
+      '@granularity-styles': playgroundGranularityStylesCssEntry,
       '@granularity-button-css': playgroundGranularityButtonCssEntry,
     },
   },

@@ -8,6 +8,7 @@ import {
 } from '../../uno.config'
 import {
   playground5GranularityChunkGroup,
+  playground5ResetChunkGroup,
   playground5VueChunkGroup,
 } from '../../vite.config'
 
@@ -27,10 +28,12 @@ const playground5UnoConfig = readFileSync(
 )
 
 describe('playground-5 config', () => {
-  it('выделяет vue и granularity в отдельные чанки', () => {
+  it('выделяет vue, reset и granularity в отдельные чанки', () => {
     expect(playground5VueChunkGroup.name).toBe('vue')
+    expect(playground5ResetChunkGroup.name).toBe('reset')
     expect(playground5GranularityChunkGroup.name).toBe('granularity')
     expect(playground5VueChunkGroup.priority).toBeGreaterThan(playground5GranularityChunkGroup.priority)
+    expect(playground5GranularityChunkGroup.priority).toBeGreaterThan(playground5ResetChunkGroup.priority)
   })
 
   it('подключает node-only preset и сканирует только свои исходники', () => {

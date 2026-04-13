@@ -1,4 +1,4 @@
-// import {fileURLToPath, URL} from 'node:url'
+import {fileURLToPath, URL} from 'node:url'
 import {
     defineConfig,
     presetAttributify,
@@ -15,16 +15,13 @@ export const distPlaygroundContentIncludes = [
     /apps\/playground\/src\/.*\.(vue|ts)($|\?)/,
 ]
 
-// const granularPresetComponents = ['DsButton'] as const
+const granularPresetComponents = ['DsButton'] as const
 // const granularPresetComponents = ['DsPromptDialog'] as const
-const granularPresetComponents = ['DsButton', 'DsDialog', 'DsFormField', 'DsInput', 'DsModal', 'DsPromptDialog', 'DsSelect'] as const
-// const granularPresetBaseFile = fileURLToPath(new URL('./src/styles/base.css', import.meta.url))
-// const granularPresetTokensFile = fileURLToPath(new URL('./src/styles/tokens.css', import.meta.url))
-// const granularPresetThemes = ['light'] as const
+// const granularPresetThemes = ['light', 'dark'] as const
 
-// const granularPresetThemeFiles = [
-// fileURLToPath(new URL('./src/styles/light-app.css', import.meta.url)),
-// ] as const
+const granularPresetThemeFiles = [
+    fileURLToPath(new URL('./src/styles/light-app.css', import.meta.url)),
+] as const
 
 export default defineConfig({
     content: {
@@ -38,10 +35,8 @@ export default defineConfig({
         presetGranularityNode({
             components: [...granularPresetComponents],
             // components: 'all',
-            // baseFile: granularPresetBaseFile,
-            // tokens: granularPresetTokensFile,
             // themes: [...granularPresetThemes],
-            // themeFiles: [...granularPresetThemeFiles],
+            themeFiles: [...granularPresetThemeFiles],
         }),
         presetAttributify(),
         presetIcons({

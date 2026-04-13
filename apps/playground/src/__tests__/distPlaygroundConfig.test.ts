@@ -7,8 +7,7 @@ import {
   playgroundBuildAnalyzeMode,
   playgroundBuildVisualizerConfig,
   playgroundGranularityChunkGroup,
-  playgroundGranularityAllStylesCssEntry,
-  playgroundGranularityBaseCssEntry,
+  playgroundGranularityFoundationCssEntry,
   playgroundGranularityStylesCssEntry,
   playgroundGranularityButtonCssEntry,
   playgroundGranularityEntry,
@@ -38,8 +37,7 @@ const distPlaygroundUnoConfig = readFileSync(
 describe('playground config', () => {
   it('подключает пакет из собранного dist', () => {
     expect(playgroundGranularityEntry).toMatch(/\/packages\/granularity\/dist\/index\.js$/)
-    expect(playgroundGranularityBaseCssEntry).toMatch(/\/packages\/granularity\/dist\/styles\/base\.css$/)
-    expect(playgroundGranularityAllStylesCssEntry).toMatch(/\/packages\/granularity\/dist\/styles\.css$/)
+    expect(playgroundGranularityFoundationCssEntry).toMatch(/\/packages\/granularity\/dist\/foundation\.css$/)
     expect(playgroundGranularityStylesCssEntry).toMatch(/\/packages\/granularity\/dist\/styles\.css$/)
     expect(playgroundGranularityButtonCssEntry).toMatch(/\/packages\/granularity\/dist\/components\/DsButton\/styles\.css$/)
   })
@@ -69,30 +67,29 @@ describe('playground config', () => {
     expect(distPlaygroundContentIncludes.some(re => re.test('/repo/dist/index.js'))).toBe(false)
   })
 
-  it('показывает в main.ts четыре сценария подключения и активирует preset-сценарий', () => {
+  it('показывает в main.ts четыре актуальных сценария подключения и активирует preset-сценарий', () => {
+    expect(distPlaygroundMainEntry).toContain("// import '@granularity-foundation'")
     expect(distPlaygroundMainEntry).toContain("// import '@granularity-styles'")
-    expect(distPlaygroundMainEntry).toContain("// import '@granularity-all-styles'")
     expect(distPlaygroundMainEntry).toContain("// import '@granularity-button-css'")
-    expect(distPlaygroundMainEntry).toContain("import './styles/light-app.css'")
-    expect(distPlaygroundMainEntry).toContain('// Вариант 4: granular-подключение через `presetGranularity`.')
+    expect(distPlaygroundMainEntry).toContain('// Вариант 4: granular-подключение через `presetGranularityNode`.')
     expect(distPlaygroundMainEntry).not.toContain('setThemes(')
     expect(distPlaygroundMainEntry).not.toContain('../../legacy/playground/src/App.vue')
   })
 
   it('импортирует DsButton через component subpath export', () => {
-    expect(distPlaygroundAppUnoEntry).toContain("import {DsButton} from '@feugene/granularity/components/DsButton'")
-    expect(distPlaygroundAppUnoEntry).not.toContain("import {DsButton} from '@feugene/granularity'")
+    expect(distPlaygroundAppUnoEntry).toContain("@feugene/granularity/components/DsButton")
+    expect(distPlaygroundAppUnoEntry).not.toContain("from '@feugene/granularity'")
   })
 
   it('подключает node-only uno adapter из package exports и задаёт темы на этапе сборки', () => {
     expect(distPlaygroundUnoConfig).toContain("import {presetGranularityNode} from '@feugene/granularity/uno-node'")
     expect(distPlaygroundUnoConfig).toContain("const granularPresetComponents = ['DsButton'] as const")
-    expect(distPlaygroundUnoConfig).not.toContain('fileURLToPath')
-    expect(distPlaygroundUnoConfig).not.toContain("new URL('./src/styles/base.css', import.meta.url)")
+    expect(distPlaygroundUnoConfig).toContain('fileURLToPath')
     expect(distPlaygroundUnoConfig).not.toContain('baseFile:')
     expect(distPlaygroundUnoConfig).not.toContain('tokens:')
-    expect(distPlaygroundUnoConfig).not.toContain('themeFiles:')
     expect(distPlaygroundUnoConfig).toContain('presetGranularityNode({')
     expect(distPlaygroundUnoConfig).toContain('components: [...granularPresetComponents]')
+    expect(distPlaygroundUnoConfig).toContain('themes: [...granularPresetThemes]')
+    expect(distPlaygroundUnoConfig).toContain('themeFiles: [...granularPresetThemeFiles]')
   })
 })
