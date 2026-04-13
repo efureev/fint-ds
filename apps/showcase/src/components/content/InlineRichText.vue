@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { computed } from 'vue'
+import {computed} from 'vue'
 
-import { DsBadge, DsLink } from '@feugene/granularity'
+import {DsBadge, DsLink} from '@feugene/granularity'
 
 type InlineRichTextPart = {
   type: 'text' | 'badge' | 'link'
@@ -68,7 +68,7 @@ function createParts(text: string) {
     })
   }
 
-  return parts.length ? parts : [{ type: 'text', content: text }]
+  return parts.length ? parts : [{type: 'text', content: text}]
 }
 
 const parts = computed(() => createParts(props.text))
@@ -79,18 +79,19 @@ const parts = computed(() => createParts(props.text))
     <template v-for="(part, index) in parts" :key="`${part.type}-${part.content}-${index}`">
       <span v-if="part.type === 'text'">{{ part.content }}</span>
       <DsBadge
-        v-else-if="part.type === 'badge'"
-        class="mx-1 inline-flex translate-y-[-0.05em] align-middle text-[0.78em] font-medium"
+          variant="primary"
+          v-else-if="part.type === 'badge'"
+          class="mx-1 inline-flex translate-y-[-0.05em] align-middle text-[0.78em] font-medium"
       >
         {{ part.content }}
       </DsBadge>
       <DsLink
-        v-else
-        :href="part.href"
-        variant="primary"
-        class="font-semibold"
-        target="_blank"
-        rel="noreferrer"
+          v-else
+          :href="part.href"
+          variant="primary"
+          class="font-semibold"
+          target="_blank"
+          rel="noreferrer"
       >
         {{ part.content }}
       </DsLink>

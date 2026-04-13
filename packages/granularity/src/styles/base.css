@@ -31,25 +31,3 @@ kbd {
 * {
     box-sizing: border-box;
 }
-
-/*
- * DS semantic helpers.
- *
- * These classes are used by exported DS components and must not depend on UnoCSS shortcuts
- * in consumer applications.
- */
-
-.ds-muted {
-    color: var(--muted-foreground);
-}
-
-.ds-card {
-    border-radius: var(--ds-radius-lg);
-    border: 1px solid var(--border);
-    background: var(--card);
-    color: var(--card-foreground);
-}
-
-.uppercase {
-    text-transform: uppercase;
-}

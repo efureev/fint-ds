@@ -125,13 +125,6 @@ body {
 
 :where(a, button) {
   background-color: transparent;
-}
-
-.ds-card {
-  border-radius: var(--ds-radius-lg);
-  border: 1px solid var(--border);
-  background: var(--card);
-  color: var(--card-foreground);
 }`
 
 const lightThemeCssExcerpt = `:root {
