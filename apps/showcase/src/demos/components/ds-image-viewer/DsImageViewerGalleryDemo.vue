@@ -44,7 +44,7 @@ function openAt(index: number) {
         <img :src="slide.url" :alt="slide.title" class="h-36 w-full object-cover" >
         <div class="flex items-center justify-between gap-3 p-3">
           <span class="text-sm font-600 text-[var(--foreground)]">{{ slide.title }}</span>
-          <DsBadge size="sm" variant="secondary">
+          <DsBadge size="sm" variant="neutral">
             Preview
           </DsBadge>
         </div>

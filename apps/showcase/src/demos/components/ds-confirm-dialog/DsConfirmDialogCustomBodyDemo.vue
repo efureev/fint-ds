@@ -13,7 +13,7 @@ const archived = ref(false)
       <DsButton class="justify-self-start" @click="open = true">
         Archive sprint
       </DsButton>
-      <DsBadge size="sm" :variant="archived ? 'success' : 'secondary'">
+      <DsBadge size="sm" :variant="archived ? 'success' : 'neutral'">
         {{ archived ? 'archived' : 'active' }}
       </DsBadge>
     </div>

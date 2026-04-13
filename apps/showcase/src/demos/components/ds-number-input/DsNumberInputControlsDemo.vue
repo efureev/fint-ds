@@ -10,7 +10,7 @@ const quantity = ref('3')
 <template>
   <div class="grid gap-4 lg:grid-cols-2">
     <DsFormField label="Vertical controls">
-      <DsNumberInput v-model="amount" controls precision="2" placeholder="0.00">
+      <DsNumberInput v-model="amount" controls :precision="2" placeholder="0.00">
         <template #prefix>$</template>
       </DsNumberInput>
     </DsFormField>
@@ -20,8 +20,8 @@ const quantity = ref('3')
         v-model="quantity"
         controls
         controls-direction="horizontal"
-        min="1"
-        max="10"
+        :min="1"
+        :max="10"
         placeholder="0"
       >
         <template #suffix>seats</template>

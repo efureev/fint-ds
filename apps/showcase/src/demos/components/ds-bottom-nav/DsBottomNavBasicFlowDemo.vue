@@ -28,7 +28,7 @@ const activeLabel = computed(() => {
           </div>
         </div>
 
-        <DsBadge variant="secondary">
+        <DsBadge variant="info">
           {{ currentSection }}
         </DsBadge>
       </div>

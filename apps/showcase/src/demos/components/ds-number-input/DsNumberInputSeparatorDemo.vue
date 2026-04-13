@@ -13,8 +13,8 @@ const percentage = ref('42,5')
       <DsNumberInput
         v-model="amountComma"
         decimal-separator="," 
-        precision="2"
-        step="0.25"
+        :precision="2"
+        :step="0.25"
         placeholder="0,00"
       >
         <template #suffix>kg</template>
@@ -25,10 +25,10 @@ const percentage = ref('42,5')
       <DsNumberInput
         v-model="percentage"
         decimal-separator="," 
-        min="0"
-        max="100"
-        step="0.5"
-        precision="1"
+        :min="0"
+        :max="100"
+        :step="0.5"
+        :precision="1"
         placeholder="0,0"
       >
         <template #suffix>%</template>

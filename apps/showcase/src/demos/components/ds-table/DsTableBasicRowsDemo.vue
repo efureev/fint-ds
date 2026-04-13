@@ -27,7 +27,7 @@ const rows = [
       <td class="px-4 py-3">{{ row.campaign }}</td>
       <td class="px-4 py-3 text-[var(--muted-foreground)]">{{ row.owner }}</td>
       <td class="px-4 py-3">
-        <DsBadge size="sm" variant="secondary">
+        <DsBadge size="sm" variant="neutral">
           {{ row.status }}
         </DsBadge>
       </td>

@@ -33,7 +33,7 @@ const sections = [
         <div class="text-base font-semibold capitalize">
           {{ currentSection }}
         </div>
-        <DsBadge variant="secondary">
+        <DsBadge variant="neutral">
           Inline layout
         </DsBadge>
       </div>

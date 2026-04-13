@@ -4,7 +4,7 @@ import { DsBadge, DsProgressBar } from '@feugene/granularity'
 const stages = [
   { label: 'Validation', value: 100, variant: 'success' as const },
   { label: 'Fraud screening', value: 72, variant: 'warning' as const },
-  { label: 'Settlement', value: 41, variant: 'secondary' as const },
+  { label: 'Settlement', value: 41, variant: 'neutral' as const },
 ]
 </script>
 

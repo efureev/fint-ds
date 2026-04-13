@@ -19,7 +19,7 @@ const remaining = computed(() => 4 - skills.value.length)
       :max="4"
       state="success"
       placeholder="Add skill tags"
-      tag-variant="secondary"
+      tag-variant="primary"
       tag-radius="round"
     />
 

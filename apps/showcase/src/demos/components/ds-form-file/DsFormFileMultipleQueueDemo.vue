@@ -14,8 +14,8 @@ const totalSizeLabel = computed(() => {
 <template>
   <div class="grid gap-4">
     <div class="flex flex-wrap items-center gap-2">
-      <DsBadge variant="neutral" radius="round">{{ attachments.length }} files</DsBadge>
-      <DsBadge variant="secondary" radius="round">{{ totalSizeLabel }}</DsBadge>
+      <DsBadge variant="info" radius="semi">{{ attachments.length }} files</DsBadge>
+      <DsBadge variant="info" radius="semi">{{ totalSizeLabel }}</DsBadge>
     </div>
 
     <DsFormFile

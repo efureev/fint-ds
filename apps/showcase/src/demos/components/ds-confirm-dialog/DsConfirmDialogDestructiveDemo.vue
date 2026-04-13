@@ -10,10 +10,10 @@ const lastAction = ref<'confirm' | 'cancel' | 'idle'>('idle')
 <template>
   <div class="grid gap-3">
     <div class="flex items-center gap-3">
-      <DsButton variant="danger" class="justify-self-start" @click="open = true">
+      <DsButton variant="destructive" class="justify-self-start" @click="open = true">
         Delete workspace
       </DsButton>
-      <DsBadge size="sm" :variant="lastAction === 'confirm' ? 'danger' : 'secondary'">
+      <DsBadge size="sm" :variant="lastAction === 'confirm' ? 'danger' : 'neutral'">
         {{ lastAction }}
       </DsBadge>
     </div>
@@ -23,7 +23,7 @@ const lastAction = ref<'confirm' | 'cancel' | 'idle'>('idle')
       title="Delete workspace?"
       description="This action revokes links, members and scheduled automations."
       confirm-text="Delete"
-      confirm-variant="danger"
+      confirm-variant="destructive"
       @confirm="lastAction = 'confirm'"
       @cancel="lastAction = 'cancel'"
     />

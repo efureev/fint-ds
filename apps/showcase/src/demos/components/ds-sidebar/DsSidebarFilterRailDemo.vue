@@ -31,13 +31,13 @@ const filters = reactive({
 
     <div class="rounded-xl border border-[var(--border)] bg-[var(--background)] p-4">
       <div class="flex flex-wrap gap-2">
-        <DsBadge :variant="filters.active ? 'primary' : 'secondary'">
+        <DsBadge :variant="filters.active ? 'primary' : 'neutral'">
           Active: {{ filters.active ? 'on' : 'off' }}
         </DsBadge>
-        <DsBadge :variant="filters.assigned ? 'primary' : 'secondary'">
+        <DsBadge :variant="filters.assigned ? 'primary' : 'neutral'">
           Assigned: {{ filters.assigned ? 'on' : 'off' }}
         </DsBadge>
-        <DsBadge :variant="filters.overdue ? 'primary' : 'secondary'">
+        <DsBadge :variant="filters.overdue ? 'primary' : 'neutral'">
           Overdue: {{ filters.overdue ? 'on' : 'off' }}
         </DsBadge>
       </div>

@@ -17,7 +17,7 @@ const rows = [
     >
       <div class="flex items-center justify-between gap-3 text-sm">
         <span>{{ row.label }}</span>
-        <DsBadge size="sm" variant="secondary">input: {{ row.raw }}%</DsBadge>
+        <DsBadge size="sm" variant="neutral">input: {{ row.raw }}%</DsBadge>
       </div>
 
       <DsProgressBar :value="row.raw" :aria-label="row.label" />

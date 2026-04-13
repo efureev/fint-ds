@@ -23,7 +23,7 @@ const activeLabel = computed(() => {
   <div class="grid gap-3">
     <div class="flex items-center gap-2 text-sm text-[var(--muted-foreground)]">
       <span>Open panel:</span>
-      <DsBadge variant="secondary">{{ activeLabel }}</DsBadge>
+      <DsBadge variant="neutral">{{ activeLabel }}</DsBadge>
     </div>
 
     <DsCollapse v-model="active" accordion>
