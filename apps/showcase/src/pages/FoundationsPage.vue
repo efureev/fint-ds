@@ -1,12 +1,18 @@
 <script setup lang="ts">
-import {DsBadge, DsCard, DsLink} from '@feugene/granularity'
+import {computed, ref} from 'vue'
+
+import {DsBadge, DsCard, DsLink, DsSwitch} from '@feugene/granularity'
 
 import InlineRichText from '../components/content/InlineRichText.vue'
 import CodeBlock from '../components/doc/CodeBlock.vue'
 import {
   showcaseFoundationGuides,
+  showcaseFoundationTokens,
   showcaseQuickStartCards,
+  showcaseThemeTokens,
 } from '../content/foundations'
+import IconChevronDown from '~icons/lucide/chevron-down'
+import IconChevronRight from '~icons/lucide/chevron-right'
 import IconHash from '~icons/lucide/hash'
 
 const preferredQuickStartCardId = 'quick-start-uno-node'
@@ -17,9 +23,63 @@ const guidesWithoutNarrativeDocs = new Set([
   'unocss',
   'localization',
 ])
+const foundationTokenSectionOrder = [...new Set(showcaseFoundationTokens.map(token => token.section))]
+const collapsedFoundationSections = ref<Record<string, boolean>>(
+  Object.fromEntries(foundationTokenSectionOrder.map(section => [section, true])),
+)
+const foundationTokenGroups = computed(() => foundationTokenSectionOrder.map(section => ({
+  section,
+  tokens: showcaseFoundationTokens.filter(token => token.section === section),
+})))
+const isDarkThemePreview = ref(false)
+const activeThemeName = computed(() => isDarkThemePreview.value ? 'dark' : 'light')
+const themeTokenSectionOrder = [...new Set(showcaseThemeTokens.map(token => token.section))]
+const collapsedThemeSections = ref<Record<string, boolean>>(
+  Object.fromEntries(themeTokenSectionOrder.map(section => [section, true])),
+)
+const themeTokenGroups = computed(() => themeTokenSectionOrder.map(section => ({
+  section,
+  tokens: showcaseThemeTokens.filter(token => token.section === section),
+})))
+const themePreviewContainerStyle = computed(() => {
+  if (activeThemeName.value === 'dark')
+    return undefined
+
+  const lightThemeTokenEntries = showcaseThemeTokens.map(token => {
+    const currentValue = token.values.light.value
+
+    return `${token.name}: ${currentValue}`
+  })
+
+  return lightThemeTokenEntries.join('; ')
+})
 
 function getVisibleCodeSamples(guide: (typeof showcaseFoundationGuides)[number]) {
-  return guide.codeSamples.filter(codeSample => codeSample.language !== 'md')
+  return guide.codeSamples.filter(codeSample => {
+    if (codeSample.language === 'md')
+      return false
+
+    if ((guide.id === 'themes' || guide.id === 'tokens') && codeSample.language === 'css')
+      return false
+
+    return true
+  })
+}
+
+function getTokenDisplayValue(value: string, hexValue: string | null) {
+  return hexValue ?? value
+}
+
+function getActiveThemeTokenValue(token: (typeof showcaseThemeTokens)[number]) {
+  return token.values[activeThemeName.value]
+}
+
+function toggleFoundationTokenSection(section: string) {
+  collapsedFoundationSections.value[section] = !collapsedFoundationSections.value[section]
+}
+
+function toggleThemeTokenSection(section: string) {
+  collapsedThemeSections.value[section] = !collapsedThemeSections.value[section]
 }
 </script>
 
@@ -138,6 +198,207 @@ function getVisibleCodeSamples(guide: (typeof showcaseFoundationGuides)[number])
 
           <div v-if="!guidesWithoutNarrativeDocs.has(guide.id) && guide.narrativeSource" class="space-y-4">
             <CodeBlock :code="guide.narrativeSource" language="md" title="Connected doc excerpt"/>
+          </div>
+
+          <div v-if="guide.id === 'tokens'" class="space-y-4">
+            <div class="space-y-2">
+              <h3 class="text-lg font-semibold">Current token registry</h3>
+              <p class="showcase-text-muted text-sm leading-6">
+                Таблица собирается из актуального `packages/granularity/src/styles/tokens.css`, поэтому отражает текущий
+                набор foundation tokens в пакете.
+              </p>
+            </div>
+
+            <div class="showcase-panel rounded-3xl border p-4">
+              <div class="space-y-4">
+                <section
+                    v-for="group in foundationTokenGroups"
+                    :key="group.section"
+                    class="showcase-panel-soft overflow-hidden rounded-3xl border"
+                >
+                  <div class="flex items-center justify-between gap-4 px-5 py-4">
+                    <div class="space-y-1">
+                      <h4 class="text-base font-semibold">{{ group.section }}</h4>
+                      <p class="showcase-text-subtle text-xs">
+                        {{ group.tokens.length }} token{{ group.tokens.length === 1 ? '' : 's' }}
+                      </p>
+                    </div>
+
+                    <button
+                        type="button"
+                        class="showcase-panel flex h-9 w-9 items-center justify-center rounded-full border transition-colors hover:bg-[var(--showcase-surface-muted)]"
+                        :aria-expanded="!collapsedFoundationSections[group.section]"
+                        :aria-label="`${collapsedFoundationSections[group.section] ? 'Expand' : 'Collapse'} ${group.section}`"
+                        @click="toggleFoundationTokenSection(group.section)"
+                    >
+                      <component
+                          :is="collapsedFoundationSections[group.section] ? IconChevronRight : IconChevronDown"
+                          class="h-4 w-4"
+                      />
+                    </button>
+                  </div>
+
+                  <div v-if="!collapsedFoundationSections[group.section]" class="overflow-x-auto border-t showcase-border-strong">
+                    <table class="min-w-full border-collapse text-left text-sm">
+                      <thead class="showcase-table-head">
+                      <tr>
+                        <th class="min-w-[200px] px-5 py-3 font-semibold">Token</th>
+                        <th class="px-5 py-3 font-semibold">Color / value</th>
+                        <th class="px-5 py-3 font-semibold">Description</th>
+                      </tr>
+                      </thead>
+
+                      <tbody>
+                      <tr
+                          v-for="token in group.tokens"
+                          :key="token.name"
+                          class="showcase-border-strong border-t align-top"
+                      >
+                        <td class="min-w-[200px] px-5 py-4 font-semibold">
+                          <code>{{ token.name }}</code>
+                        </td>
+
+                        <td class="px-5 py-4">
+                          <div class="flex min-w-[220px] items-center gap-3">
+                              <span
+                                  class="h-8 w-8 shrink-0 rounded-xl border"
+                                  :style="{
+                                    backgroundColor: token.hexValue ?? 'var(--showcase-surface-muted)',
+                                    borderColor: token.hexValue
+                                      ? 'color-mix(in srgb, var(--foreground) 12%, transparent)'
+                                      : 'var(--showcase-border-strong)',
+                                  }"
+                              />
+
+                            <code class="showcase-text-muted text-xs leading-5">
+                              {{ getTokenDisplayValue(token.value, token.hexValue) }}
+                            </code>
+                          </div>
+                        </td>
+
+                        <td class="showcase-text-muted px-5 py-4">
+                          <div class="space-y-1">
+                            <p>{{ token.description }}</p>
+                            <p class="showcase-text-subtle text-xs">
+                              Source: `tokens.css`
+                            </p>
+                          </div>
+                        </td>
+                      </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </section>
+              </div>
+            </div>
+          </div>
+
+          <div v-if="guide.id === 'themes'" class="space-y-4">
+            <div class="flex flex-col gap-4 xl:flex-row xl:items-end xl:justify-between">
+              <div class="space-y-2">
+                <h3 class="text-lg font-semibold">Current Theme token registry</h3>
+                <p class="showcase-text-muted max-w-3xl text-sm leading-6">
+                  Таблица показывает semantic theme tokens из актуальных <kbd>light.css</kbd> и <kbd>dark.css</kbd>.
+                </p>
+              </div>
+
+              <DsCard class="showcase-panel-soft min-w-[220px] rounded-3xl border px-4 py-3">
+                <div class="flex items-center justify-between gap-4">
+                  <div class="text-sm font-semibold">Theme:</div>
+                  <div class="text-sm">{{ activeThemeName }}</div>
+                  <DsSwitch v-model="isDarkThemePreview" size="sm"/>
+                </div>
+              </DsCard>
+            </div>
+
+            <div
+                :data-theme="activeThemeName === 'dark' ? 'dark' : undefined"
+                :style="themePreviewContainerStyle"
+                class="showcase-panel rounded-3xl border p-4"
+            >
+              <div class="space-y-4">
+                <section
+                    v-for="group in themeTokenGroups"
+                    :key="group.section"
+                    class="showcase-panel-soft overflow-hidden rounded-3xl border"
+                >
+                  <div class="flex items-center justify-between gap-4 px-5 py-4">
+                    <div class="space-y-1">
+                      <h4 class="text-base font-semibold">{{ group.section }}</h4>
+                      <p class="showcase-text-subtle text-xs">
+                        {{ group.tokens.length }} token{{ group.tokens.length === 1 ? '' : 's' }}
+                      </p>
+                    </div>
+
+                    <button
+                        type="button"
+                        class="showcase-panel flex h-9 w-9 items-center justify-center rounded-full border transition-colors hover:bg-[var(--showcase-surface-muted)]"
+                        :aria-expanded="!collapsedThemeSections[group.section]"
+                        :aria-label="`${collapsedThemeSections[group.section] ? 'Expand' : 'Collapse'} ${group.section}`"
+                        @click="toggleThemeTokenSection(group.section)"
+                    >
+                      <component
+                          :is="collapsedThemeSections[group.section] ? IconChevronRight : IconChevronDown"
+                          class="h-4 w-4"
+                      />
+                    </button>
+                  </div>
+
+                  <div v-if="!collapsedThemeSections[group.section]" class="overflow-x-auto border-t showcase-border-strong">
+                    <table class="min-w-full border-collapse text-left text-sm">
+                      <thead class="showcase-table-head">
+                      <tr>
+                        <th class="min-w-[200px] px-5 py-3 font-semibold">Token</th>
+                        <th class="px-5 py-3 font-semibold">Color / value</th>
+                        <th class="px-5 py-3 font-semibold">Description</th>
+                      </tr>
+                      </thead>
+
+                      <tbody>
+                      <tr
+                          v-for="token in group.tokens"
+                          :key="token.name"
+                          class="showcase-border-strong border-t align-top"
+                      >
+                        <td class="min-w-[200px] px-5 py-4 font-semibold">
+                          <code>{{ token.name }}</code>
+                        </td>
+
+                        <td class="px-5 py-4">
+                          <div class="flex min-w-[220px] items-center gap-3">
+                              <span
+                                  class="h-8 w-8 shrink-0 rounded-xl border"
+                                  :style="{
+                                    backgroundColor: getActiveThemeTokenValue(token).hexValue ?? 'var(--showcase-surface-muted)',
+                                    borderColor: getActiveThemeTokenValue(token).hexValue
+                                      ? 'color-mix(in srgb, var(--foreground) 12%, transparent)'
+                                      : 'var(--showcase-border-strong)',
+                                  }"
+                              />
+
+                            <code class="showcase-text-muted text-xs leading-5">
+                              {{
+                                getTokenDisplayValue(getActiveThemeTokenValue(token).value, getActiveThemeTokenValue(token).hexValue)
+                              }}
+                            </code>
+                          </div>
+                        </td>
+
+                        <td class="showcase-text-muted px-5 py-4">
+                          <div class="space-y-1">
+                            <p>{{ token.description }}</p>
+                            <p class="showcase-text-subtle text-xs">
+                              Source: <code>{{ activeThemeName }}.css</code>
+                            </p>
+                          </div>
+                        </td>
+                      </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </section>
+              </div>
+            </div>
           </div>
         </div>
 

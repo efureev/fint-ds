@@ -31,6 +31,26 @@ export type ShowcaseFoundationGuide = {
   codeSamples: ShowcaseCodeSample[]
 }
 
+export type ShowcaseFoundationToken = {
+  name: string
+  value: string
+  hexValue: string | null
+  description: string
+  section: string
+}
+
+export type ShowcaseThemeToken = {
+  name: string
+  section: string
+  description: string
+  values: Record<ShowcaseThemeName, {
+    value: string
+    hexValue: string | null
+  }>
+}
+
+type ShowcaseThemeName = (typeof granularityThemeNames)[number]
+
 function takeLeadingBlock(source: string, linesCount = 48) {
   return source
     .trim()
@@ -58,6 +78,284 @@ function takeHeadingBlock(source: string, heading: string) {
   }
 
   return block.join('\n').trim()
+}
+
+function extractHexValue(value: string) {
+  return value.match(/#(?:[\da-f]{3}|[\da-f]{6})\b/i)?.[0] ?? null
+}
+
+function normalizeFoundationTokenSection(section: string) {
+  switch (section) {
+    case 'Foundations: neutral palette':
+      return 'Palette scale'
+    case 'Typography: font families':
+      return 'Typography / font families'
+    case 'Typography: font sizes':
+      return 'Typography / font sizes'
+    case 'Typography: line heights':
+      return 'Typography / line heights'
+    case 'Typography: font weights':
+      return 'Typography / font weights'
+    case 'Layout: spacing scale':
+      return 'Layout / spacing scale'
+    case 'Layout: containers':
+      return 'Layout / containers'
+    case 'Layout: breakpoints':
+      return 'Layout / breakpoints'
+    case 'Shapes: radii and compatibility aliases':
+      return 'Shapes / radii'
+    case 'Derived interaction formulas: action roles':
+      return 'Derived interaction / action roles'
+    case 'Derived interaction formulas: status roles':
+      return 'Derived interaction / status roles'
+    default:
+      return section
+  }
+}
+
+function normalizeThemeTokenSection(section: string) {
+  switch (section) {
+    case 'Action role fallbacks':
+      return 'Fallbacks / action roles'
+    case 'Status role fallbacks':
+      return 'Fallbacks / status roles'
+    case 'Component semantic fallbacks':
+      return 'Fallbacks / component semantics'
+    default:
+      return section
+  }
+}
+
+function getFoundationTokenDescription(name: string, section: string) {
+  if (name.startsWith('--ds-slate-')) {
+    const shade = name.split('-').at(-1)
+    return `Нейтральный оттенок slate ${shade} для базовой palette scale, поверхностей и бордеров.`
+  }
+
+  if (name === '--ds-font-ui')
+    return 'Основной стек шрифта для интерфейсного текста и большинства компонентных подписей.'
+
+  if (name === '--ds-font-mono')
+    return 'Моноширинный стек для кода, числовых значений и технических подписей.'
+
+  if (name.startsWith('--ds-text-')) {
+    const size = name.replace('--ds-text-', '')
+    return `Размер шрифта \`${size}\` из типографической шкалы foundation tokens.`
+  }
+
+  if (name.startsWith('--ds-leading-')) {
+    const density = name.replace('--ds-leading-', '')
+    return `Коэффициент межстрочного интервала \`${density}\` для текстовых блоков и подписей.`
+  }
+
+  if (name.startsWith('--ds-font-')) {
+    const weight = name.replace('--ds-font-', '')
+    return `Вес шрифта \`${weight}\` для типографической иерархии интерфейса.`
+  }
+
+  if (name.startsWith('--ds-space-')) {
+    const step = name.replace('--ds-space-', '')
+    return `Шаг spacing scale \`${step}\` для отступов, gap и внутренних paddings.`
+  }
+
+  if (name.startsWith('--ds-container-')) {
+    if (name.includes('padding'))
+      return 'Горизонтальный контейнерный отступ для соответствующего breakpoint-сценария.'
+
+    return 'Максимальная ширина layout-контейнера для контентных страниц и shell-структур.'
+  }
+
+  if (name.startsWith('--ds-bp-')) {
+    const breakpoint = name.replace('--ds-bp-', '')
+    return `Foundation breakpoint \`${breakpoint}\` для адаптивных layout-решений.`
+  }
+
+  if (name === '--radius')
+    return 'Совместимый alias базового радиуса для интеграций, ожидающих shadcn-style token contract.'
+
+  if (name.startsWith('--ds-radius-')) {
+    const radius = name.replace('--ds-radius-', '')
+    return `Радиус скругления \`${radius}\` для углов компонентов и поверхностей.`
+  }
+
+  if (name.startsWith('--ds-shadow-')) {
+    const level = name.replace('--ds-shadow-', '')
+    return `Уровень elevation \`${level}\` для карточек, popover-слоёв и акцентных поверхностей.`
+  }
+
+  if (name.startsWith('--ds-duration-')) {
+    const speed = name.replace('--ds-duration-', '')
+    return `Базовая длительность анимации \`${speed}\` для transitions и state changes.`
+  }
+
+  if (name.startsWith('--ds-ease-')) {
+    const easing = name.replace('--ds-ease-', '')
+    return `Кривая ускорения \`${easing}\` для motion-паттернов дизайн-системы.`
+  }
+
+  if (name.startsWith('--primary-') || name.startsWith('--secondary-') || name.startsWith('--border-') || name.startsWith('--destructive-'))
+    return 'Производное interaction-состояние, вычисляемое из semantic theme roles для hover/active поведения.'
+
+  if (name.startsWith('--ds-success-') || name.startsWith('--ds-warning-') || name.startsWith('--ds-danger-') || name.startsWith('--ds-info-'))
+    return 'Производное status-состояние, вычисляемое из semantic статусных цветов для hover/active сценариев.'
+
+  return `Токен из группы \`${section}\` в текущем foundation contract пакета.`
+}
+
+function getThemeTokenDescription(name: string, section: string) {
+  const descriptions: Record<string, string> = {
+    '--background': 'Базовый фон приложения и крупных layout-поверхностей текущей темы.',
+    '--foreground': 'Основной цвет текста и иконок поверх базового фона текущей темы.',
+    '--card': 'Фон карточек, панелей и других поднятых поверхностей.',
+    '--card-foreground': 'Цвет контента внутри карточек и raised surface-блоков.',
+    '--popover': 'Фон popover-, dropdown- и overlay-поверхностей.',
+    '--popover-foreground': 'Цвет текста и иконок внутри popover-слоёв.',
+    '--muted': 'Приглушённая поверхность для вторичных блоков, плашек и заполнений.',
+    '--muted-foreground': 'Вторичный текстовый цвет для helper-копии и менее важных подписей.',
+    '--secondary': 'Нейтральная secondary action/surface-подложка без сильного бренд-акцента.',
+    '--secondary-foreground': 'Контрастный текст для secondary-кнопок и поверхностей.',
+    '--border': 'Базовый цвет бордеров и разделителей текущей темы.',
+    '--input': 'Цвет рамки и фона input-like контролов в состоянии покоя.',
+    '--ring': 'Цвет focus-ring и акцентного outline для интерактивных компонентов.',
+    '--primary': 'Главный brand/action цвет темы для primary CTA и ключевых акцентов.',
+    '--primary-foreground': 'Контрастный текст и иконки поверх primary-заливки.',
+    '--accent': 'Мягкая акцентная поверхность для selected/hovered областей и подсветок.',
+    '--accent-foreground': 'Цвет текста поверх accent-подложек.',
+    '--destructive': 'Цвет destructive action-сценариев и критических состояний.',
+    '--destructive-foreground': 'Контрастный текст и иконки поверх destructive-заливки.',
+    '--ds-success': 'Основной semantic success-цвет для статусов, бейджей и уведомлений.',
+    '--ds-success-light': 'Облегчённая success-подложка для мягких статусов и подсветок.',
+    '--ds-warning': 'Основной semantic warning-цвет для предупреждений и промежуточных статусов.',
+    '--ds-warning-light': 'Облегчённая warning-подложка для мягких warning-состояний.',
+    '--ds-danger': 'Semantic danger-цвет для ошибок, рисков и критических сообщений.',
+    '--ds-danger-light': 'Облегчённая danger-подложка для мягких error-состояний.',
+    '--ds-info': 'Semantic info-цвет для нейтральных уведомлений и информационных акцентов.',
+    '--ds-info-light': 'Облегчённая info-подложка для спокойных информационных блоков.',
+    '--chart-1': 'Первый цвет серии для графиков и data-visualization элементов.',
+    '--chart-2': 'Второй цвет серии для графиков и data-visualization элементов.',
+    '--chart-3': 'Третий цвет серии для графиков и data-visualization элементов.',
+    '--chart-4': 'Четвёртый цвет серии для графиков и data-visualization элементов.',
+    '--chart-5': 'Пятый цвет серии для графиков и data-visualization элементов.',
+    '--sidebar': 'Фон sidebar/navigation rail области текущей темы.',
+    '--sidebar-foreground': 'Основной текст и иконки внутри sidebar.',
+    '--sidebar-primary': 'Акцентный цвет активных/ключевых элементов внутри sidebar.',
+    '--sidebar-primary-foreground': 'Контрастный текст поверх sidebar primary-акцентов.',
+    '--sidebar-accent': 'Мягкий accent-фон для hover/selected состояний в sidebar.',
+    '--sidebar-accent-foreground': 'Цвет текста поверх sidebar accent-подложек.',
+    '--sidebar-border': 'Бордеры и разделители sidebar-области.',
+    '--sidebar-ring': 'Focus-ring для интерактивных элементов внутри sidebar.',
+    '--ds-category-tree-branch-line-active-color': 'Semantic цвет активной ветки category tree и подобных композитных компонентов.',
+    '--primary-hover': 'Fallback-цвет hover-состояния для primary action без поддержки `color-mix`.',
+    '--primary-active': 'Fallback-цвет active-состояния для primary action без поддержки `color-mix`.',
+    '--secondary-hover': 'Fallback-цвет hover-состояния для secondary action без поддержки `color-mix`.',
+    '--secondary-active': 'Fallback-цвет active-состояния для secondary action без поддержки `color-mix`.',
+    '--border-hover': 'Fallback-цвет hover-состояния для border/outline-элементов без поддержки `color-mix`.',
+    '--border-active': 'Fallback-цвет active-состояния для border/outline-элементов без поддержки `color-mix`.',
+    '--destructive-hover': 'Fallback-цвет hover-состояния для destructive action без поддержки `color-mix`.',
+    '--destructive-active': 'Fallback-цвет active-состояния для destructive action без поддержки `color-mix`.',
+    '--ds-success-hover': 'Fallback-цвет hover-состояния для success-ролей без поддержки `color-mix`.',
+    '--ds-success-active': 'Fallback-цвет active-состояния для success-ролей без поддержки `color-mix`.',
+    '--ds-warning-hover': 'Fallback-цвет hover-состояния для warning-ролей без поддержки `color-mix`.',
+    '--ds-warning-active': 'Fallback-цвет active-состояния для warning-ролей без поддержки `color-mix`.',
+    '--ds-danger-hover': 'Fallback-цвет hover-состояния для danger-ролей без поддержки `color-mix`.',
+    '--ds-danger-active': 'Fallback-цвет active-состояния для danger-ролей без поддержки `color-mix`.',
+    '--ds-info-hover': 'Fallback-цвет hover-состояния для info-ролей без поддержки `color-mix`.',
+    '--ds-info-active': 'Fallback-цвет active-состояния для info-ролей без поддержки `color-mix`.',
+  }
+
+  return descriptions[name] ?? `Theme token из группы \`${section}\`, задающий semantic цветовой контракт текущего режима.`
+}
+
+function parseFoundationTokens(source: string): ShowcaseFoundationToken[] {
+  const lines = source.trim().split('\n')
+  const tokens: ShowcaseFoundationToken[] = []
+  let currentSection = 'Foundation tokens'
+
+  for (const line of lines) {
+    const commentMatch = line.match(/\/\*\s*(.*?)\s*\*\//)
+
+    if (commentMatch) {
+      currentSection = normalizeFoundationTokenSection(commentMatch[1])
+      continue
+    }
+
+    const tokenMatch = line.match(/^\s*(--[\w-]+):\s*(.+);$/)
+
+    if (!tokenMatch)
+      continue
+
+    const [, name, rawValue] = tokenMatch
+    const value = rawValue.trim()
+
+    tokens.push({
+      name,
+      value,
+      hexValue: extractHexValue(value),
+      description: getFoundationTokenDescription(name, currentSection),
+      section: currentSection,
+    })
+  }
+
+  return tokens
+}
+
+function parseThemeTokens(sourceByTheme: Record<ShowcaseThemeName, string>): ShowcaseThemeToken[] {
+  const themeTokens = new Map<string, ShowcaseThemeToken>()
+
+  for (const themeName of granularityThemeNames) {
+    const lines = sourceByTheme[themeName].trim().split('\n')
+    let currentSection = 'Theme tokens'
+
+    for (const line of lines) {
+      const commentMatch = line.match(/\/\*\s*(.*?)\s*\*\//)
+
+      if (commentMatch) {
+        currentSection = normalizeThemeTokenSection(commentMatch[1])
+        continue
+      }
+
+      const tokenMatch = line.match(/^\s*(--[\w-]+):\s*(.+);$/)
+
+      if (!tokenMatch)
+        continue
+
+      const [, name, rawValue] = tokenMatch
+      const value = rawValue.trim()
+      const existingToken = themeTokens.get(name)
+
+      if (existingToken) {
+        existingToken.values[themeName] = {
+          value,
+          hexValue: extractHexValue(value),
+        }
+        continue
+      }
+
+      const tokenValues = Object.fromEntries(
+        granularityThemeNames.map(theme => [
+          theme,
+          {
+            value: '',
+            hexValue: null,
+          },
+        ]),
+      ) as ShowcaseThemeToken['values']
+
+      tokenValues[themeName] = {
+        value,
+        hexValue: extractHexValue(value),
+      }
+
+      themeTokens.set(name, {
+        name,
+        section: currentSection,
+        description: getThemeTokenDescription(name, currentSection),
+        values: tokenValues,
+      })
+    }
+  }
+
+  return [...themeTokens.values()]
 }
 
 const rootImportSnippet = `import {
@@ -114,7 +412,297 @@ const i18n = createFintI18n({
 i18n.registerBlocks([DS_I18N_BLOCK])
 await i18n.loadUsedBlocks('ru')`
 
-const foundationTokenCount = 82
+const tokensCssSource = `:root {
+  /* Foundations: neutral palette */
+  --ds-slate-0: #ffffff;
+  --ds-slate-50: #f8fafc;
+  --ds-slate-100: #f1f5f9;
+  --ds-slate-200: #e2e8f0;
+  --ds-slate-300: #cbd5e1;
+  --ds-slate-400: #94a3b8;
+  --ds-slate-500: #64748b;
+  --ds-slate-600: #475569;
+  --ds-slate-700: #334155;
+  --ds-slate-800: #1e293b;
+  --ds-slate-900: #0f172a;
+
+  /* Typography: font families */
+  --ds-font-ui: Inter, Roboto, system-ui, -apple-system, Segoe UI, Arial, sans-serif;
+  --ds-font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', monospace;
+
+  /* Typography: font sizes */
+  --ds-text-xs: 12px;
+  --ds-text-sm: 14px;
+  --ds-text-base: 16px;
+  --ds-text-lg: 18px;
+  --ds-text-xl: 20px;
+  --ds-text-2xl: 24px;
+  --ds-text-3xl: 30px;
+  --ds-text-4xl: 36px;
+
+  /* Typography: line heights */
+  --ds-leading-tight: 1.25;
+  --ds-leading-normal: 1.5;
+  --ds-leading-relaxed: 1.625;
+
+  /* Typography: font weights */
+  --ds-font-regular: 400;
+  --ds-font-medium: 500;
+  --ds-font-semibold: 600;
+  --ds-font-bold: 700;
+
+  /* Layout: spacing scale */
+  --ds-space-0: 0px;
+  --ds-space-1: 4px;
+  --ds-space-2: 8px;
+  --ds-space-3: 12px;
+  --ds-space-4: 16px;
+  --ds-space-5: 20px;
+  --ds-space-6: 24px;
+  --ds-space-8: 32px;
+  --ds-space-10: 40px;
+  --ds-space-12: 48px;
+  --ds-space-16: 64px;
+  --ds-space-20: 80px;
+  --ds-space-24: 96px;
+  --ds-space-32: 128px;
+  --ds-space-40: 160px;
+  --ds-space-48: 192px;
+  --ds-space-64: 256px;
+
+  /* Layout: containers */
+  --ds-container-max: 1280px;
+  --ds-container-max-2xl: 1440px;
+  --ds-container-padding-mobile: 16px;
+  --ds-container-padding-tablet: 24px;
+  --ds-container-padding-desktop: 32px;
+
+  /* Layout: breakpoints */
+  --ds-bp-sm: 640px;
+  --ds-bp-md: 768px;
+  --ds-bp-lg: 1024px;
+  --ds-bp-xl: 1280px;
+  --ds-bp-2xl: 1536px;
+
+  /* Shapes: radii and compatibility aliases */
+  --radius: 0.5rem;
+  --ds-radius-none: 0px;
+  --ds-radius-sm: 4px;
+  --ds-radius-md: 8px;
+  --ds-radius-lg: 12px;
+  --ds-radius-xl: 16px;
+  --ds-radius-full: 9999px;
+
+  /* Elevation */
+  --ds-shadow-0: none;
+  --ds-shadow-1: 0 1px 2px rgba(15, 23, 42, 0.08);
+  --ds-shadow-2: 0 8px 24px rgba(15, 23, 42, 0.14);
+  --ds-shadow-3: 0 16px 48px rgba(15, 23, 42, 0.20);
+
+  /* Motion */
+  --ds-duration-fast: 150ms;
+  --ds-duration-base: 200ms;
+  --ds-duration-slow: 300ms;
+  --ds-ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ds-ease-in: cubic-bezier(0.7, 0, 0.84, 0);
+
+  /* Derived interaction formulas: action roles */
+  --primary-hover: color-mix(in srgb, var(--primary) 92%, var(--foreground));
+  --primary-active: color-mix(in srgb, var(--primary) 84%, var(--foreground));
+  --secondary-hover: color-mix(in srgb, var(--secondary) 92%, var(--foreground));
+  --secondary-active: color-mix(in srgb, var(--secondary) 84%, var(--foreground));
+  --border-hover: color-mix(in srgb, var(--border) 70%, var(--foreground));
+  --border-active: color-mix(in srgb, var(--border) 55%, var(--foreground));
+  --destructive-hover: color-mix(in srgb, var(--destructive) 92%, var(--foreground));
+  --destructive-active: color-mix(in srgb, var(--destructive) 84%, var(--foreground));
+
+  /* Derived interaction formulas: status roles */
+  --ds-success-hover: color-mix(in srgb, var(--ds-success) 92%, var(--foreground));
+  --ds-success-active: color-mix(in srgb, var(--ds-success) 84%, var(--foreground));
+  --ds-warning-hover: color-mix(in srgb, var(--ds-warning) 92%, var(--foreground));
+  --ds-warning-active: color-mix(in srgb, var(--ds-warning) 84%, var(--foreground));
+  --ds-danger-hover: color-mix(in srgb, var(--ds-danger) 92%, var(--foreground));
+  --ds-danger-active: color-mix(in srgb, var(--ds-danger) 84%, var(--foreground));
+  --ds-info-hover: color-mix(in srgb, var(--ds-info) 92%, var(--foreground));
+  --ds-info-active: color-mix(in srgb, var(--ds-info) 84%, var(--foreground));
+}`
+
+const lightThemeCssSource = `:root {
+  /* Surface roles */
+  --background: #f8fafc;
+  --foreground: #0f172a;
+  --card: #ffffff;
+  --card-foreground: #0f172a;
+  --popover: #ffffff;
+  --popover-foreground: #0f172a;
+  --muted: #f1f5f9;
+  --muted-foreground: #64748b;
+  --secondary: #e2e8f0;
+  --secondary-foreground: #1e293b;
+  --border: #e2e8f0;
+  --input: #e2e8f0;
+  --ring: #6366f1;
+
+  /* Action roles */
+  --primary: #4f46e5;
+  --primary-foreground: #ffffff;
+  --accent: #eef2ff;
+  --accent-foreground: #3730a3;
+  --destructive: #dc2626;
+  --destructive-foreground: #ffffff;
+
+  /* Status roles */
+  --ds-success: #10b981;
+  --ds-success-light: #d1fae5;
+  --ds-warning: #f97316;
+  --ds-warning-light: #ffedd5;
+  --ds-danger: #dc2626;
+  --ds-danger-light: #fee2e2;
+  --ds-info: #6366f1;
+  --ds-info-light: #e0e7ff;
+
+  /* Data visualization roles */
+  --chart-1: #4f46e5;
+  --chart-2: #10b981;
+  --chart-3: #f97316;
+  --chart-4: #6366f1;
+  --chart-5: #8b5cf6;
+
+  /* Navigation roles */
+  --sidebar: #ffffff;
+  --sidebar-foreground: #0f172a;
+  --sidebar-primary: #4f46e5;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #f1f5f9;
+  --sidebar-accent-foreground: #1e293b;
+  --sidebar-border: #e2e8f0;
+  --sidebar-ring: #6366f1;
+
+  /* Component semantic roles */
+  --ds-category-tree-branch-line-active-color: color-mix(in srgb, var(--primary) 20%, var(--border));
+}
+
+@supports not (color: color-mix(in srgb, #000 50%, #fff)) {
+  :root {
+    /* Action role fallbacks */
+    --primary-hover: #4a42d6;
+    --primary-active: #453ec7;
+    --secondary-hover: #d1d7e0;
+    --secondary-active: #c0c7d0;
+    --border-hover: #a3a9b5;
+    --border-active: #838a97;
+    --destructive-hover: #cc2526;
+    --destructive-active: #bb2427;
+
+    /* Status role fallbacks */
+    --ds-success-hover: #10ac7a;
+    --ds-success-active: #109f73;
+    --ds-warning-hover: #e66c18;
+    --ds-warning-active: #d46419;
+    --ds-danger-hover: #cc2526;
+    --ds-danger-active: #bb2427;
+    --ds-info-hover: #5c60e1;
+    --ds-info-active: #5659d1;
+
+    /* Component semantic fallbacks */
+    --ds-category-tree-branch-line-active-color: #c4cdf7;
+  }
+}`
+
+const darkThemeCssSource = `.theme-dark,
+.dark,
+[data-theme='dark'] {
+  /* Surface roles */
+  --background: #0f172a;
+  --foreground: #f8fafc;
+  --card: #1e293b;
+  --card-foreground: #f8fafc;
+  --popover: #1e293b;
+  --popover-foreground: #f8fafc;
+  --muted: #334155;
+  --muted-foreground: #94a3b8;
+  --secondary: #334155;
+  --secondary-foreground: #f1f5f9;
+  --border: #334155;
+  --input: #334155;
+  --ring: #818cf8;
+
+  /* Action roles */
+  --primary: #6366f1;
+  --primary-foreground: #ffffff;
+  --accent: #1e1b4b;
+  --accent-foreground: #c7d2fe;
+  --destructive: #ef4444;
+  --destructive-foreground: #ffffff;
+
+  /* Status roles */
+  --ds-success: #34d399;
+  --ds-success-light: #064e3b;
+  --ds-warning: #fb923c;
+  --ds-warning-light: #7c2d12;
+  --ds-danger: #f87171;
+  --ds-danger-light: #7f1d1d;
+  --ds-info: #818cf8;
+  --ds-info-light: #312e81;
+
+  /* Data visualization roles */
+  --chart-1: #6366f1;
+  --chart-2: #34d399;
+  --chart-3: #fb923c;
+  --chart-4: #818cf8;
+  --chart-5: #a78bfa;
+
+  /* Navigation roles */
+  --sidebar: #1e293b;
+  --sidebar-foreground: #f8fafc;
+  --sidebar-primary: #6366f1;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #334155;
+  --sidebar-accent-foreground: #f1f5f9;
+  --sidebar-border: #334155;
+  --sidebar-ring: #818cf8;
+
+  /* Component semantic roles */
+  --ds-category-tree-branch-line-active-color: color-mix(in srgb, var(--primary) 38%, var(--border));
+}
+
+@supports not (color: color-mix(in srgb, #000 50%, #fff)) {
+  .theme-dark,
+  .dark,
+  [data-theme='dark'] {
+    /* Action role fallbacks */
+    --primary-hover: #6f72f2;
+    --primary-active: #7b7ef3;
+    --secondary-hover: #435062;
+    --secondary-active: #535f70;
+    --border-hover: #6e7987;
+    --border-active: #8c94a0;
+    --destructive-hover: #f05353;
+    --destructive-active: #f06161;
+
+    /* Status role fallbacks */
+    --ds-success-hover: #44d6a1;
+    --ds-success-active: #53d9a9;
+    --ds-warning-hover: #fb9a4b;
+    --ds-warning-active: #fba35b;
+    --ds-danger-hover: #f87c7c;
+    --ds-danger-active: #f88787;
+    --ds-info-hover: #8b95f8;
+    --ds-info-active: #949ef9;
+
+    /* Component semantic fallbacks */
+    --ds-category-tree-branch-line-active-color: #505b8c;
+  }
+}`
+
+export const showcaseFoundationTokens = parseFoundationTokens(tokensCssSource)
+
+export const showcaseThemeTokens = parseThemeTokens({
+  light: lightThemeCssSource,
+  dark: darkThemeCssSource,
+})
+
+const foundationTokenCount = showcaseFoundationTokens.length
 
 const foundationBaseCssExcerpt = `html,
 body {
@@ -164,26 +752,7 @@ const darkThemeCssExcerpt = `.theme-dark,
   --ds-info: #818cf8;
 }`
 
-const tokensCssExcerpt = `:root {
-  --ds-slate-0: #ffffff;
-  --ds-slate-50: #f8fafc;
-  --ds-font-ui: Inter, Roboto, system-ui, sans-serif;
-  --ds-font-mono: 'JetBrains Mono', ui-monospace, monospace;
-  --ds-text-sm: 14px;
-  --ds-text-base: 16px;
-  --ds-leading-normal: 1.5;
-  --ds-font-semibold: 600;
-  --ds-space-2: 8px;
-  --ds-space-4: 16px;
-  --ds-space-8: 32px;
-  --ds-space-16: 64px;
-  --ds-radius-md: 8px;
-  --ds-radius-lg: 12px;
-  --ds-shadow-1: 0 1px 2px rgba(15, 23, 42, 0.08);
-  --ds-duration-fast: 150ms;
-  --ds-ease-out: cubic-bezier(0.16, 1, 0.3, 1);
-  --ds-success-hover: color-mix(in srgb, var(--ds-success) 92%, var(--foreground));
-}`
+const tokensCssExcerpt = takeLeadingBlock(tokensCssSource, 46)
 
 export const showcaseQuickStartCards: ShowcaseQuickStartCard[] = [
   {
