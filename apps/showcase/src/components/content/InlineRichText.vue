@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 
-import { DsBadge } from '@feugene/granularity'
+import { DsBadge, DsLink } from '@feugene/granularity'
 
 type InlineRichTextPart = {
   type: 'text' | 'badge' | 'link'
@@ -84,15 +84,16 @@ const parts = computed(() => createParts(props.text))
       >
         {{ part.content }}
       </DsBadge>
-      <a
+      <DsLink
         v-else
         :href="part.href"
-        class="showcase-text-primary mx-1 inline-flex align-middle font-semibold transition-colors"
+        variant="primary"
+        class="font-semibold"
         target="_blank"
         rel="noreferrer"
       >
         {{ part.content }}
-      </a>
+      </DsLink>
     </template>
   </component>
 </template>

@@ -2,7 +2,6 @@
 import {
   DsButton,
   DsCard,
-  DsLink
 } from '@feugene/granularity'
 
 import CodeBlock from '../components/doc/CodeBlock.vue'
@@ -10,6 +9,7 @@ import {
   showcaseInstallationNarrative,
   showcaseQuickStartCards,
 } from '../content/foundations'
+import InlineRichText from "../components/content/InlineRichText.vue";
 
 const overviewFeatureList = [
   {
@@ -40,15 +40,13 @@ const overviewFeatureList = [
     <DsCard class="showcase-panel rounded-[32px] border p-6 lg:p-7">
       <div class="space-y-5">
         <div class="max-w-3xl space-y-3">
-          <h1 class="text-3xl font-semibold leading-tight lg:text-4xl">
+          <h1 class="text-3xl font-semibold leading-tight lg:text-4xl mb-3">
             Granularity
           </h1>
-          <p class="showcase-text-muted text-sm leading-6 lg:text-base">
-            Витрина дизайн-системы для Vue 3: готовые компоненты, понятные слои стилей, granular imports и аккуратная
-            интеграция с
-            <DsLink variant="primary" href="https://unocss.dev">UnoCSS</DsLink>
-            .
-          </p>
+          <InlineRichText
+              text="Витрина дизайн-системы для Vue 3: готовые компоненты, понятные слои стилей, granular imports и аккуратная
+            интеграция с `UnoCSS`."
+          />
         </div>
 
         <div class="flex flex-wrap gap-3">

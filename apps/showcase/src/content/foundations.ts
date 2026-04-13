@@ -214,7 +214,7 @@ export const showcaseQuickStartCards: ShowcaseQuickStartCard[] = [
   },
   {
     id: 'quick-start-uno-node',
-    title: 'Предпочтительный путь: UnoCSS + `uno-node`',
+    title: 'Предпочтительный путь: `UnoCSS` + `uno-node`',
     description: 'Рекомендуемый production-сценарий, если приложение уже использует UnoCSS и хочет тонко управлять foundation-слоями, темами и component CSS.',
     code: unoNodeSnippet,
     language: 'ts',
