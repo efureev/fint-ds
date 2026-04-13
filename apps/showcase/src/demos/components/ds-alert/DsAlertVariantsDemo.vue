@@ -1,3 +1,6 @@
+<script setup lang="ts">
+import {DsAlert} from "@feugene/granularity";
+</script>
 <template>
   <div class="grid gap-3">
     <DsAlert title="Info" variant="info">

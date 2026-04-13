@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import {DsAvatar, DsCard} from "@feugene/granularity";
+
 const avatarSvg = encodeURIComponent(`
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96" fill="none">
     <rect width="96" height="96" rx="24" fill="#dbeafe" />
@@ -20,7 +22,7 @@ const avatarImageSrc = `data:image/svg+xml;charset=UTF-8,${avatarSvg}`
     </div>
 
     <DsCard class="grid gap-2 p-4 text-sm text-[var(--muted-foreground)]">
-      <div class="font-semibold text-slate-900 dark:text-slate-100">
+      <div class="font-semibold text-[var(--foreground)]">
         Fallback contract
       </div>
       <div>

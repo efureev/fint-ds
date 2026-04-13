@@ -50,7 +50,7 @@ function statusVariant(status: unknown): 'success' | 'warning' | 'danger' {
       </template>
     </DsDataTable>
 
-    <div class="text-sm text-slate-500 dark:text-slate-400">
+    <div class="text-sm text-[var(--muted-foreground)]">
       {{ lastAction }}
     </div>
   </div>

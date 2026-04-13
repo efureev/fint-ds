@@ -31,6 +31,6 @@ function onSubmit(event: SubmitEvent): void {
       </div>
     </form>
 
-    <pre class="overflow-x-auto rounded-2xl border border-[var(--border)] bg-slate-950 p-4 text-xs text-slate-100">{{ submission }}</pre>
+    <pre class="overflow-x-auto rounded-2xl border border-[var(--border)] bg-[var(--foreground)] p-4 text-xs text-[var(--background)]">{{ submission }}</pre>
   </div>
 </template>

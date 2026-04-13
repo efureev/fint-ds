@@ -29,7 +29,7 @@ const selectedTeams = ref<string[]>(['design', 'platform'])
       <DsBadge v-for="team in selectedTeams" :key="team">
         {{ team }}
       </DsBadge>
-      <span v-if="selectedTeams.length === 0" class="text-sm text-slate-500 dark:text-slate-400">
+      <span v-if="selectedTeams.length === 0" class="text-sm text-[var(--muted-foreground)]">
         Nothing selected yet
       </span>
     </div>

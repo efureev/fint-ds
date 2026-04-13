@@ -26,7 +26,7 @@ const enabledCount = computed(() => [weeklyDigest.value, incidentAlerts.value].f
 
     <div class="grid gap-3 rounded-2xl border border-[var(--border)] bg-[var(--card)] p-4">
       <div>
-        <div class="text-sm font-semibold text-slate-900 dark:text-slate-100">
+        <div class="text-sm font-semibold text-[var(--foreground)]">
           Selection summary
         </div>
         <div class="text-sm text-[var(--muted-foreground)]">

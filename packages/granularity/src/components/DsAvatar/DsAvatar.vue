@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 
-export type DsAvatarShape = 'circle' | 'square'
+import { dsAvatarClass } from './dsAvatarStyles'
+import type { DsAvatarShape } from './dsAvatarStyles'
 
 const props = withDefaults(defineProps<{
   size?: number
@@ -25,15 +26,12 @@ const style = computed(() => {
 })
 
 const className = computed(() => {
-  return [
-    'inline-flex items-center justify-center overflow-hidden border border-[var(--border)] bg-[var(--muted)] text-[var(--muted-foreground)] font-700',
-    props.shape === 'square' ? 'rounded-[10px]' : 'rounded-full',
-  ].join(' ')
+  return dsAvatarClass(props.shape)
 })
 </script>
 
 <template>
-  <span :style="style" :class="className">
+  <span :style="style" class="inline-flex items-center justify-center overflow-hidden border border-[var(--border)] bg-[var(--muted)] text-[var(--muted-foreground)] font-700" :class="className">
     <img v-if="props.src" :src="props.src" :alt="props.alt" class="h-full w-full object-cover">
     <slot v-else />
   </span>

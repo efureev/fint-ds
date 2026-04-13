@@ -32,7 +32,7 @@ const selectedLabel = computed(() => {
 
     <div class="rounded-2xl border border-[var(--border)] bg-[var(--card)] p-4 text-sm text-[var(--muted-foreground)]">
       Current delivery cadence:
-      <div class="mt-2 text-base font-semibold text-slate-900 dark:text-slate-100">
+      <div class="mt-2 text-base font-semibold text-[var(--foreground)]">
         {{ selectedLabel }}
       </div>
     </div>

@@ -32,7 +32,7 @@ const previewOpens = ref(0)
     </DsCheckbox>
 
     <div class="rounded-2xl border border-dashed border-[var(--border)] bg-[var(--muted)]/35 p-4 text-sm text-[var(--muted-foreground)]">
-      Checkbox value: <span class="font-semibold text-slate-900 dark:text-slate-100">{{ accepted ? 'accepted' : 'pending' }}</span> ·
+      Checkbox value: <span class="font-semibold text-[var(--foreground)]">{{ accepted ? 'accepted' : 'pending' }}</span> ·
       Preview clicked {{ previewOpens }} times.
     </div>
   </div>

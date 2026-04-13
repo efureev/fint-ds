@@ -46,7 +46,7 @@ const value = ref<number | null>(11)
       <template #value="{ displayValue, labels }">
         <div class="flex flex-wrap items-center gap-2 text-sm">
           <span class="font-600">{{ displayValue || 'Nothing selected' }}</span>
-          <span v-if="labels.length" class="rounded-full bg-slate-100 px-2 py-1 text-xs text-slate-600 dark:bg-slate-800 dark:text-slate-300">
+          <span v-if="labels.length" class="rounded-full bg-[var(--accent)] px-2 py-1 text-xs text-[var(--accent-foreground)]">
             {{ labels.length }} label(s)
           </span>
         </div>
@@ -55,7 +55,7 @@ const value = ref<number | null>(11)
       <template #node="{ data, selected }">
         <div class="flex w-full items-center justify-between gap-3">
           <span>{{ data.label }}</span>
-          <span class="text-xs text-slate-500 dark:text-slate-400">
+          <span class="text-xs text-[var(--muted-foreground)]">
             {{ selected ? 'Selected' : data.owner }}
           </span>
         </div>

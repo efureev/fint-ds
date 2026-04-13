@@ -16,7 +16,7 @@ const tags = ref(['critical', 'backend'])
     />
 
     <div class="rounded-2xl border border-[var(--border)] bg-[var(--card)] p-4 text-sm text-[var(--muted-foreground)]">
-      Current tags: <span class="font-semibold text-slate-900 dark:text-slate-100">{{ tags.join(', ') || 'none' }}</span>
+      Current tags: <span class="font-semibold text-[var(--foreground)]">{{ tags.join(', ') || 'none' }}</span>
     </div>
   </div>
 </template>

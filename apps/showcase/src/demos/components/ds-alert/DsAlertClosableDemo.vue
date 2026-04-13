@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 
-import { DsAlert, DsButton } from '@feugene/granularity'
+import { DsAlert, DsButton, DsCard } from '@feugene/granularity'
 
 const visible = ref(true)
 </script>
@@ -24,7 +24,7 @@ const visible = ref(true)
 
     <DsCard class="grid gap-3 p-4">
       <div>
-        <div class="text-sm font-semibold text-slate-900 dark:text-slate-100">
+        <div class="text-sm font-semibold text-[var(--foreground)]">
           Close event
         </div>
         <div class="text-sm text-[var(--muted-foreground)]">

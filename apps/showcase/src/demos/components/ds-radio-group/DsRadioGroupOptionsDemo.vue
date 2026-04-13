@@ -20,7 +20,7 @@ const selectedOption = computed(() => options.find(option => option.value === st
 
     <div class="rounded-2xl border border-[var(--border)] bg-[var(--card)] p-4 text-sm text-[var(--muted-foreground)]">
       Selected state:
-      <div class="mt-2 text-base font-semibold text-slate-900 dark:text-slate-100">
+      <div class="mt-2 text-base font-semibold text-[var(--foreground)]">
         {{ selectedOption }}
       </div>
     </div>

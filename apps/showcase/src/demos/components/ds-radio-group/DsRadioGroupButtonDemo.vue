@@ -22,7 +22,7 @@ const viewOptions = [
 <template>
   <div class="grid gap-4">
     <div class="grid gap-3 md:max-w-[220px]">
-      <div class="text-sm font-semibold text-slate-900 dark:text-slate-100">
+      <div class="text-sm font-semibold text-[var(--foreground)]">
         Button size
       </div>
       <DsSelect v-model="size" :options="sizeOptions" />

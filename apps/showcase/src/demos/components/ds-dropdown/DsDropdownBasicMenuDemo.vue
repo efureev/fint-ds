@@ -21,13 +21,13 @@ function select(action: string) {
 
       <template #content>
         <div class="grid gap-1">
-          <button type="button" class="rounded-xl px-3 py-2 text-left text-sm transition-colors hover:bg-slate-100 dark:hover:bg-slate-800" @click="select('Preview')">
+          <button type="button" class="rounded-xl px-3 py-2 text-left text-sm transition-colors hover:bg-[var(--accent)]" @click="select('Preview')">
             Preview
           </button>
-          <button type="button" class="rounded-xl px-3 py-2 text-left text-sm transition-colors hover:bg-slate-100 dark:hover:bg-slate-800" @click="select('Duplicate')">
+          <button type="button" class="rounded-xl px-3 py-2 text-left text-sm transition-colors hover:bg-[var(--accent)]" @click="select('Duplicate')">
             Duplicate
           </button>
-          <button type="button" class="rounded-xl px-3 py-2 text-left text-sm transition-colors hover:bg-slate-100 dark:hover:bg-slate-800" @click="select('Archive')">
+          <button type="button" class="rounded-xl px-3 py-2 text-left text-sm transition-colors hover:bg-[var(--accent)]" @click="select('Archive')">
             Archive
           </button>
         </div>

@@ -11,11 +11,15 @@ describe('DsAvatar', () => {
       },
     })
 
+    const root = wrapper.get('span')
+
     expect(wrapper.text()).toContain('AB')
     expect(wrapper.find('img').exists()).toBe(false)
-    expect(wrapper.attributes('class')).toContain('rounded-full')
-    expect(wrapper.attributes('style')).toContain('width: 40px;')
-    expect(wrapper.attributes('style')).toContain('height: 40px;')
+    expect(root.attributes('class')).toContain('inline-flex')
+    expect(root.attributes('class')).toContain('overflow-hidden')
+    expect(root.attributes('class')).toContain('rounded-full')
+    expect(root.attributes('style')).toContain('width: 40px;')
+    expect(root.attributes('style')).toContain('height: 40px;')
   })
 
   it('рендерит изображение и square-форму, когда передан src', () => {
@@ -34,6 +38,7 @@ describe('DsAvatar', () => {
 
     expect(image.attributes('src')).toBe('/avatar.png')
     expect(image.attributes('alt')).toBe('Avatar')
+    expect(image.attributes('class')).toContain('object-cover')
     expect(wrapper.attributes('class')).toContain('rounded-[10px]')
     expect(wrapper.text()).not.toContain('AB')
   })

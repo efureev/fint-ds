@@ -16,7 +16,7 @@ import { DsButton, DsButtonGroup } from '@feugene/granularity'
       </DsButton>
     </DsButtonGroup>
 
-    <p class="text-sm leading-6 text-slate-600 dark:text-slate-300">
+    <p class="text-sm leading-6 text-[var(--muted-foreground)]">
       `DsButtonGroup` показывает реальный composition-case для базовой кнопки и помогает проверить совместимость размеров и variant-контракта.
     </p>
   </div>

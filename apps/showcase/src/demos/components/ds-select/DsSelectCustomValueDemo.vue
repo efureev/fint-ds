@@ -31,7 +31,7 @@ const region = ref('')
       </template>
     </DsSelect>
 
-    <div class="text-sm text-slate-500 dark:text-slate-400">
+    <div class="text-sm text-[var(--muted-foreground)]">
       current value: {{ region || '—' }}
     </div>
   </div>

@@ -26,7 +26,7 @@ const invalid = ref(false)
     </div>
 
     <div class="grid gap-3 rounded-2xl border border-[var(--border)] bg-[var(--card)] p-4">
-      <div class="text-sm font-semibold text-slate-900 dark:text-slate-100">
+      <div class="text-sm font-semibold text-[var(--foreground)]">
         Validation toggle
       </div>
       <DsSwitch v-model="invalid" size="sm">

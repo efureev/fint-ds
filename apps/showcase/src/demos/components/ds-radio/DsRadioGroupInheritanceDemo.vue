@@ -20,7 +20,7 @@ const disabled = ref(false)
         Disable full group
       </DsSwitch>
       <div class="text-sm text-[var(--muted-foreground)]">
-        Active target: <span class="font-semibold text-slate-900 dark:text-slate-100">{{ environment }}</span>
+        Active target: <span class="font-semibold text-[var(--foreground)]">{{ environment }}</span>
       </div>
     </div>
   </div>

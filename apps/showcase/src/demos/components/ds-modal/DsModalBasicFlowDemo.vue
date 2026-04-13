@@ -14,10 +14,10 @@ const open = ref(false)
 
     <DsModal v-model="open" size="sm">
       <div class="grid gap-3">
-        <div class="text-sm font-semibold text-slate-900 dark:text-slate-100">
+        <div class="text-sm font-semibold text-[var(--foreground)]">
           Bare modal shell
         </div>
-        <div class="text-sm text-slate-500 dark:text-slate-400">
+        <div class="text-sm text-[var(--muted-foreground)]">
           `DsModal` отвечает за overlay, focus trap и panel sizing — содержимое вы собираете сами.
         </div>
         <DsButton class="justify-self-start" @click="open = false">

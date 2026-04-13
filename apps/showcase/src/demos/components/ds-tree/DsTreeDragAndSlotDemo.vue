@@ -35,12 +35,12 @@ const lastDrop = ref('Drag a row handle to reorder or nest nodes')
 
 function resolveTone(status: TreeItem['status']) {
   if (status === 'critical')
-    return 'bg-rose-100 text-rose-700 dark:bg-rose-500/15 dark:text-rose-200'
+    return 'bg-[color-mix(in_srgb,var(--destructive)_14%,transparent)] text-[var(--destructive)]'
 
   if (status === 'warning')
-    return 'bg-amber-100 text-amber-700 dark:bg-amber-500/15 dark:text-amber-200'
+    return 'bg-[var(--ds-warning-light)] text-[var(--ds-warning)]'
 
-  return 'bg-emerald-100 text-emerald-700 dark:bg-emerald-500/15 dark:text-emerald-200'
+  return 'bg-[var(--ds-success-light)] text-[var(--ds-success)]'
 }
 </script>
 

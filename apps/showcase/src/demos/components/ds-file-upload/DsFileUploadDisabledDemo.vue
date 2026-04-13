@@ -18,7 +18,7 @@ function onExceed(files: File[], limit: number) {
 <template>
   <div class="grid gap-4 lg:grid-cols-2">
     <div class="grid gap-2">
-      <div class="text-sm font-semibold text-slate-900 dark:text-slate-100">
+      <div class="text-sm font-semibold text-[var(--foreground)]">
         Limit guard
       </div>
       <DsFileUpload
@@ -34,7 +34,7 @@ function onExceed(files: File[], limit: number) {
     </div>
 
     <div class="grid gap-2">
-      <div class="text-sm font-semibold text-slate-900 dark:text-slate-100">
+      <div class="text-sm font-semibold text-[var(--foreground)]">
         Disabled state
       </div>
       <DsFileUpload disabled :request="request">
@@ -44,7 +44,7 @@ function onExceed(files: File[], limit: number) {
       </DsFileUpload>
     </div>
 
-    <div class="lg:col-span-2 text-sm text-slate-500 dark:text-slate-400">
+    <div class="lg:col-span-2 text-sm text-[var(--muted-foreground)]">
       {{ message }}
     </div>
   </div>

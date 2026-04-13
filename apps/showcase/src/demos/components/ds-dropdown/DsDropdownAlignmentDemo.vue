@@ -12,7 +12,7 @@ import { DsButton, DsDropdown } from '@feugene/granularity'
       <template #content>
         <div class="grid gap-1 px-3 py-2 text-sm">
           <div class="font-semibold">Left aligned</div>
-          <div class="text-slate-500 dark:text-slate-400">
+          <div class="text-[var(--muted-foreground)]">
             Привязка к левому краю toolbar или list item.
           </div>
         </div>
@@ -27,7 +27,7 @@ import { DsButton, DsDropdown } from '@feugene/granularity'
       <template #content>
         <div class="grid gap-1 px-3 py-2 text-sm">
           <div class="font-semibold">Center aligned</div>
-          <div class="text-slate-500 dark:text-slate-400">
+          <div class="text-[var(--muted-foreground)]">
             Хорошо подходит для компактных pickers.
           </div>
         </div>

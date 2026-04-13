@@ -1,16 +1,1 @@
-export const dsAvatarSafelist = [
-  'inline-flex',
-  'items-center',
-  'justify-center',
-  'overflow-hidden',
-  'border',
-  'border-[var(--border)]',
-  'bg-[var(--muted)]',
-  'text-[var(--muted-foreground)]',
-  'font-700',
-  'rounded-[10px]',
-  'rounded-full',
-  'h-full',
-  'w-full',
-  'object-cover',
-] as const
+export { dsAvatarSafelist } from './dsAvatarStyles'

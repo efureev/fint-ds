@@ -36,13 +36,13 @@ const invalid = ref(false)
     </div>
 
     <div class="grid gap-3 rounded-2xl border border-[var(--border)] bg-[var(--card)] p-4">
-      <div class="text-sm font-semibold text-slate-900 dark:text-slate-100">
+      <div class="text-sm font-semibold text-[var(--foreground)]">
         Validation toggle
       </div>
       <DsSwitch v-model="invalid" size="sm">
         Show invalid email state
       </DsSwitch>
-      <div class="text-sm text-slate-500 dark:text-slate-400">
+      <div class="text-sm text-[var(--muted-foreground)]">
         Search query: {{ search || '—' }}
       </div>
     </div>

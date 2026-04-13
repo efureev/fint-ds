@@ -33,7 +33,7 @@ const budget = ref('240000')
         <template #suffix>Monthly recurring revenue</template>
       </DsNumberInput>
 
-      <div class="rounded-2xl border border-dashed border-[var(--border)] bg-[var(--muted)]/40 p-4 text-sm text-slate-500 dark:text-slate-400">
+      <div class="rounded-2xl border border-dashed border-[var(--border)] bg-[var(--muted)]/40 p-4 text-sm text-[var(--muted-foreground)]">
         `textAlign` помогает согласовать числовые поля с табличными layout и формами с денежными значениями.
       </div>
     </div>

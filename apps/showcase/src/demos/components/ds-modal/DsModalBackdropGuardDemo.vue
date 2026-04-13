@@ -8,7 +8,7 @@ const open = ref(false)
 
 <template>
   <div class="grid gap-3">
-    <div class="text-sm text-slate-500 dark:text-slate-400">
+    <div class="text-sm text-[var(--muted-foreground)]">
       Попробуйте кликнуть по backdrop: модалка останется открытой, пока пользователь не выберет явное действие.
     </div>
 
@@ -19,15 +19,15 @@ const open = ref(false)
     <DsModal v-model="open" :close-on-backdrop="false" size="md">
       <div class="grid gap-4">
         <div class="grid gap-1">
-          <div class="text-sm font-semibold text-slate-900 dark:text-slate-100">
+          <div class="text-sm font-semibold text-[var(--foreground)]">
             Draft protection
           </div>
-          <div class="text-sm text-slate-500 dark:text-slate-400">
+          <div class="text-sm text-[var(--muted-foreground)]">
             Используйте этот режим для wizard/confirm flow, где нельзя случайно потерять черновик.
           </div>
         </div>
 
-        <div class="rounded-2xl border border-slate-200/70 bg-slate-50 p-3 text-sm text-slate-600 dark:border-slate-700 dark:bg-slate-900/60 dark:text-slate-300">
+        <div class="rounded-2xl border border-[var(--border)] bg-[var(--muted)]/40 p-3 text-sm text-[var(--muted-foreground)]">
           Unsaved changes: pricing rules, SLA exceptions, recipients.
         </div>
 
