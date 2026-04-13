@@ -42,13 +42,13 @@ const open = ref(false)
       :show-zoom-value="false"
     >
       <template #toolbar="{ displayIndex, total, scale, rotation, actions }">
-        <div class="flex items-center gap-2 rounded-full border border-white/20 bg-black/45 px-2 py-1 text-white backdrop-blur-sm">
+        <div class="flex items-center gap-2 rounded-full border border-[color-mix(in_srgb,var(--background)_20%,transparent)] bg-[color-mix(in_srgb,var(--foreground)_45%,transparent)] px-2 py-1 text-[var(--background)] backdrop-blur-sm">
           <span class="px-2 text-xs font-600">{{ displayIndex }} / {{ total }}</span>
-          <button type="button" class="rounded-full px-3 py-1 text-xs transition-colors hover:bg-white/10" @click="actions.prev">Prev</button>
-          <button type="button" class="rounded-full px-3 py-1 text-xs transition-colors hover:bg-white/10" @click="actions.next">Next</button>
-          <button type="button" class="rounded-full px-3 py-1 text-xs transition-colors hover:bg-white/10" @click="actions.zoomIn">+</button>
-          <button type="button" class="rounded-full px-3 py-1 text-xs transition-colors hover:bg-white/10" @click="actions.reset">Reset</button>
-          <span class="px-2 text-xs text-white/75">{{ Math.round(scale * 100) }}% / {{ rotation }}°</span>
+          <button type="button" class="rounded-full px-3 py-1 text-xs transition-colors hover:bg-[color-mix(in_srgb,var(--background)_10%,transparent)]" @click="actions.prev">Prev</button>
+          <button type="button" class="rounded-full px-3 py-1 text-xs transition-colors hover:bg-[color-mix(in_srgb,var(--background)_10%,transparent)]" @click="actions.next">Next</button>
+          <button type="button" class="rounded-full px-3 py-1 text-xs transition-colors hover:bg-[color-mix(in_srgb,var(--background)_10%,transparent)]" @click="actions.zoomIn">+</button>
+          <button type="button" class="rounded-full px-3 py-1 text-xs transition-colors hover:bg-[color-mix(in_srgb,var(--background)_10%,transparent)]" @click="actions.reset">Reset</button>
+          <span class="px-2 text-xs text-[color-mix(in_srgb,var(--background)_75%,transparent)]">{{ Math.round(scale * 100) }}% / {{ rotation }}°</span>
         </div>
       </template>
     </DsImageViewer>

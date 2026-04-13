@@ -80,7 +80,7 @@ function actionLabel(status: string) {
       </template>
     </DsDataTable>
 
-    <div class="text-sm text-slate-500">
+    <div class="text-sm text-[var(--muted-foreground)]">
       {{ lastAction }}
     </div>
   </div>

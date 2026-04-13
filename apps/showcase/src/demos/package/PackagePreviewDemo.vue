@@ -196,7 +196,7 @@ function handleUploadValidationError(error: unknown) {
         :rows="2"
         placeholder="Type a long note to see autosize in action"
       />
-      <p class="text-xs text-slate-500 dark:text-slate-400">
+      <p class="text-xs text-[var(--muted-foreground)]">
         Контейнер ограничен только шириной, а высота textarea растёт по содержимому.
       </p>
     </template>
@@ -212,9 +212,9 @@ function handleUploadValidationError(error: unknown) {
         <div
           v-if="dropdownOpen"
           v-click-outside="{ handler: () => dropdownOpen = false, exclude: [() => excludeRef] }"
-          class="absolute left-0 top-12 z-10 w-72 rounded-2xl border border-slate-200 bg-white p-4 shadow-xl dark:border-slate-800 dark:bg-slate-950"
+          class="absolute left-0 top-12 z-10 w-72 rounded-2xl border border-[var(--border)] bg-[var(--background)] p-4 shadow-xl"
         >
-          <p class="text-sm leading-6 text-slate-600 dark:text-slate-300">
+          <p class="text-sm leading-6 text-[var(--muted-foreground)]">
             Клик вне панели закроет dropdown, но клики по exclude-зоне будут считаться внутренними.
           </p>
         </div>
@@ -224,11 +224,11 @@ function handleUploadValidationError(error: unknown) {
     <template v-else-if="previewKey === 'v-dropzone-validation'">
       <div
         v-dropzone="dropzoneBinding"
-        class="rounded-3xl border border-dashed border-slate-300 bg-slate-50 p-6 transition dark:border-slate-700 dark:bg-slate-950/60"
+        class="rounded-3xl border border-dashed border-[var(--border)] bg-[var(--muted)]/40 p-6 transition"
       >
         <div class="flex items-center gap-3">
           <DsBadge>{{ isDropOver ? 'drag-over' : 'idle' }}</DsBadge>
-          <span class="text-sm text-slate-600 dark:text-slate-300">
+          <span class="text-sm text-[var(--muted-foreground)]">
             {{ dropzoneState }}
           </span>
         </div>
@@ -245,7 +245,7 @@ function handleUploadValidationError(error: unknown) {
         class="grid gap-3"
       >
         <DsInput placeholder="Focus here and press Escape" />
-        <p class="text-sm text-slate-600 dark:text-slate-300">
+        <p class="text-sm text-[var(--muted-foreground)]">
           {{ hotkeyLog }}
         </p>
       </div>
@@ -258,12 +258,12 @@ function handleUploadValidationError(error: unknown) {
         </DsButton>
         <DsCard
           v-loading="{ loading: cardLoading, text: 'Refreshing segment metrics…' }"
-          class="rounded-3xl border border-slate-200/80 bg-white/90 p-5 shadow-sm dark:border-slate-800 dark:bg-slate-900/90"
+          class="rounded-3xl border border-[var(--border)] bg-[var(--card)]/90 p-5 shadow-sm"
         >
           <h4 class="text-base font-semibold">
             Revenue snapshot
           </h4>
-          <p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-300">
+          <p class="mt-2 text-sm leading-6 text-[var(--muted-foreground)]">
             Overlay таргетится в текущую карточку и не блокирует весь экран.
           </p>
         </DsCard>
@@ -274,7 +274,7 @@ function handleUploadValidationError(error: unknown) {
       <DsButton class="justify-self-start" @click="startImperativeLoading">
         Run imperative overlay
       </DsButton>
-      <p class="text-sm text-slate-600 dark:text-slate-300">
+      <p class="text-sm text-[var(--muted-foreground)]">
         {{ imperativeStatus }}
       </p>
     </template>
@@ -286,7 +286,7 @@ function handleUploadValidationError(error: unknown) {
         </DsButton>
         <DsBadge>{{ runtimeTheme.isDark.value ? 'dark' : 'light' }}</DsBadge>
       </div>
-      <p class="text-sm text-slate-600 dark:text-slate-300">
+      <p class="text-sm text-[var(--muted-foreground)]">
         Demo использует `persist: false`, поэтому не пишет состояние в localStorage и подходит для embedded flows.
       </p>
     </template>
@@ -306,7 +306,7 @@ function handleUploadValidationError(error: unknown) {
           Clear all
         </DsButton>
       </div>
-      <p class="text-sm text-slate-600 dark:text-slate-300">
+      <p class="text-sm text-[var(--muted-foreground)]">
         {{ toastStatus }} Сейчас в очереди: {{ toasts.list.value.length }}.
       </p>
     </template>
@@ -316,7 +316,7 @@ function handleUploadValidationError(error: unknown) {
         <DsButton class="justify-self-start" @click="runFileValidationDemo">
           Run validator pipeline
         </DsButton>
-        <p class="text-sm text-slate-600 dark:text-slate-300">
+        <p class="text-sm text-[var(--muted-foreground)]">
           {{ fileValidationStatus }}
         </p>
       </div>
@@ -335,7 +335,7 @@ function handleUploadValidationError(error: unknown) {
             mime
           </DsButton>
         </div>
-        <p class="text-sm text-slate-600 dark:text-slate-300">
+        <p class="text-sm text-[var(--muted-foreground)]">
           {{ validatorPreviewStatus }}
         </p>
       </div>
@@ -356,14 +356,14 @@ function handleUploadValidationError(error: unknown) {
           @change="handleUploadSelection"
           @error="handleUploadValidationError"
         />
-        <p class="text-sm text-slate-600 dark:text-slate-300">
+        <p class="text-sm text-[var(--muted-foreground)]">
           {{ uploadBridgeStatus }}
         </p>
       </div>
     </template>
 
     <template v-else>
-      <p class="text-sm text-slate-500 dark:text-slate-400">
+      <p class="text-sm text-[var(--muted-foreground)]">
         Preview for `{{ previewKey }}` is not connected yet.
       </p>
     </template>

@@ -95,7 +95,7 @@ function validateFiles(files: File[]) {
 
     <div class="text-sm text-[var(--muted-foreground)]">
       Latest validation status:
-      <span class="font-semibold text-slate-900 dark:text-slate-100">
+      <span class="font-semibold text-[var(--foreground)]">
         {{ validationMessages[0] ?? 'Ready for upload review' }}
       </span>
     </div>

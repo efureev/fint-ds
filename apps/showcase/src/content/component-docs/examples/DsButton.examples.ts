@@ -38,7 +38,7 @@ const sizeOptions = ['xs', 'sm', 'md', 'lg']
       :key="item.value"
       class="flex flex-wrap items-center gap-3"
     >
-      <span class="w-28 text-sm text-slate-500">{{ item.label }}</span>
+      <span class="w-28 text-sm text-[var(--muted-foreground)]">{{ item.label }}</span>
       <DsButton
         v-for="size in sizeOptions"
         :key="item.value + '-' + size"

@@ -71,7 +71,7 @@ const open = ref(false)
   </DsButton>
 
   <DsConfirmDialog v-model="open" title="Archive sprint" confirm-text="Archive">
-    <ul class="list-disc pl-5 text-sm text-slate-500">
+    <ul class="list-disc pl-5 text-sm text-[var(--muted-foreground)]">
       <li>18 tasks will move to history</li>
       <li>2 blocked items will stay pinned</li>
     </ul>

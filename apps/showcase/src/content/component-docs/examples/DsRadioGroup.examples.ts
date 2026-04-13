@@ -29,7 +29,7 @@ const selectedOption = computed(() => options.find(option => option.value === st
 
     <div class="rounded-2xl border border-[var(--border)] bg-[var(--card)] p-4 text-sm text-[var(--muted-foreground)]">
       Selected state:
-      <div class="mt-2 text-base font-semibold text-slate-900 dark:text-slate-100">
+      <div class="mt-2 text-base font-semibold text-[var(--foreground)]">
         {{ selectedOption }}
       </div>
     </div>
@@ -66,7 +66,7 @@ const viewOptions = [
 <template>
   <div class="grid gap-4">
     <div class="grid gap-3 md:max-w-[220px]">
-      <div class="text-sm font-semibold text-slate-900 dark:text-slate-100">
+      <div class="text-sm font-semibold text-[var(--foreground)]">
         Button size
       </div>
       <DsSelect v-model="size" :options="sizeOptions" />
@@ -114,7 +114,7 @@ const channel = ref('slack')
     </DsRadioGroup>
 
     <div class="rounded-2xl border border-[var(--border)] bg-[var(--card)] p-4 text-sm text-[var(--muted-foreground)]">
-      Routed through: <span class="font-semibold text-slate-900 dark:text-slate-100">{{ channel }}</span>
+      Routed through: <span class="font-semibold text-[var(--foreground)]">{{ channel }}</span>
     </div>
   </div>
 </template>`,

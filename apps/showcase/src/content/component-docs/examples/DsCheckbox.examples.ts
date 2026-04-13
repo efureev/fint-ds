@@ -35,7 +35,7 @@ const enabledCount = computed(() => [weeklyDigest.value, incidentAlerts.value].f
 
     <div class="grid gap-3 rounded-2xl border border-[var(--border)] bg-[var(--card)] p-4">
       <div>
-        <div class="text-sm font-semibold text-slate-900 dark:text-slate-100">
+        <div class="text-sm font-semibold text-[var(--foreground)]">
           Selection summary
         </div>
         <div class="text-sm text-[var(--muted-foreground)]">
@@ -90,7 +90,7 @@ const previewOpens = ref(0)
     </DsCheckbox>
 
     <div class="rounded-2xl border border-dashed border-[var(--border)] bg-[var(--muted)]/35 p-4 text-sm text-[var(--muted-foreground)]">
-      Checkbox value: <span class="font-semibold text-slate-900 dark:text-slate-100">{{ accepted ? 'accepted' : 'pending' }}</span> ·
+      Checkbox value: <span class="font-semibold text-[var(--foreground)]">{{ accepted ? 'accepted' : 'pending' }}</span> ·
       Preview clicked {{ previewOpens }} times.
     </div>
   </div>
@@ -135,7 +135,7 @@ function onSubmit(event: SubmitEvent): void {
       </div>
     </form>
 
-    <pre class="overflow-x-auto rounded-2xl border border-[var(--border)] bg-slate-950 p-4 text-xs text-slate-100">{{ submission }}</pre>
+    <pre class="overflow-x-auto rounded-2xl border border-[var(--border)] bg-[var(--foreground)] p-4 text-xs text-[var(--background)]">{{ submission }}</pre>
   </div>
 </template>`,
   },

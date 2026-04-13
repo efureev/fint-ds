@@ -21,8 +21,8 @@ const loading = ref(false)
       <DsLoading
         v-if="loading"
         text="Preparing migration plan..."
-        background="rgba(15, 23, 42, 0.78)"
-        spinner-class="text-white h-8 w-8"
+        background="color-mix(in srgb, var(--foreground) 78%, transparent)"
+        spinner-class="text-[var(--background)] h-8 w-8"
         custom-class="rounded-xl"
         :animated="false"
         :z-index="20"

@@ -21,7 +21,7 @@ const open = ref(false)
   </DsButton>
 
   <DsDrawer v-model="open" title="Report filters" size="sm">
-    <div class="grid gap-3 text-sm text-slate-500">
+    <div class="grid gap-3 text-sm text-[var(--muted-foreground)]">
       <div>Owner</div>
       <div>Date range</div>
     </div>

@@ -25,7 +25,7 @@ const open = ref(false)
       <div class="text-sm font-semibold">
         Bare modal
       </div>
-      <div class="text-sm text-slate-500">
+      <div class="text-sm text-[var(--muted-foreground)]">
         <code>DsModal</code> даёт только overlay, panel и focus management — остальную структуру вы собираете сами.
       </div>
       <DsButton class="justify-self-start" @click="open = false">
@@ -59,7 +59,7 @@ const open = ref(false)
       <div class="text-sm font-semibold">
         Draft protection
       </div>
-      <div class="text-sm text-slate-500">
+      <div class="text-sm text-[var(--muted-foreground)]">
         Клик по backdrop не закрывает окно — закройте его явной кнопкой.
       </div>
       <div class="flex flex-wrap gap-3">
@@ -110,7 +110,7 @@ function openWithSize(size: 'sm' | 'lg') {
       <div class="text-sm font-semibold">
         Active size: {{ activeSize }}
       </div>
-      <div class="grid gap-2 text-sm text-slate-500">
+      <div class="grid gap-2 text-sm text-[var(--muted-foreground)]">
         <div>Используйте <code>sm</code> для коротких решений и <code>lg</code> для review/panel-потока.</div>
         <div>Контент внутри полностью ваш — компонент отвечает только за modal-shell.</div>
       </div>
