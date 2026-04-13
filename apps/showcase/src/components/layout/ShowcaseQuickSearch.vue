@@ -57,15 +57,15 @@ function closeSearch() {
 
     <div
       v-if="isOpen"
-      class="absolute right-0 top-[calc(100%+0.75rem)] z-50 w-[min(92vw,30rem)] rounded-[28px] border border-slate-200/80 bg-white p-4 shadow-[0_24px_80px_rgba(15,23,42,0.18)] dark:border-slate-800 dark:bg-slate-900"
+      class="showcase-overlay absolute right-0 top-[calc(100%+0.75rem)] z-50 w-[min(92vw,30rem)] rounded-[28px] border p-4"
     >
       <div class="space-y-3">
         <div class="flex items-center justify-between gap-3">
           <div>
-            <p class="text-xs font-semibold uppercase tracking-[0.18em] text-slate-500 dark:text-slate-400">
+            <p class="showcase-kicker text-xs font-semibold tracking-[0.18em]">
               Quick search
             </p>
-            <p class="text-sm leading-6 text-slate-600 dark:text-slate-300">
+            <p class="showcase-text-muted text-sm leading-6">
               Ищите страницы, сущности и section anchors по названию, alias и контексту использования.
             </p>
           </div>
@@ -79,24 +79,24 @@ function closeSearch() {
           v-model="query"
           type="search"
           placeholder="Например: DsButton, file validation, useTheme"
-          class="w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-950 outline-none transition-colors placeholder:text-slate-400 focus:border-primary dark:border-slate-700 dark:bg-slate-950/60 dark:text-slate-50 dark:placeholder:text-slate-500"
+          class="showcase-input w-full rounded-2xl border px-4 py-3 text-sm outline-none transition-colors"
         >
 
-        <div v-if="hasNoResults" class="space-y-3 rounded-2xl border border-dashed border-slate-200 px-4 py-4 dark:border-slate-700">
-          <p class="text-sm leading-6 text-slate-600 dark:text-slate-300">
+        <div v-if="hasNoResults" class="showcase-empty-state space-y-3 rounded-2xl border border-dashed px-4 py-4">
+          <p class="text-sm leading-6">
             Ничего не найдено. Попробуйте имя сущности, export name, тип (`component`, `utility`) или section-title.
           </p>
           <div class="flex flex-wrap gap-2">
             <RouterLink
               to="/components"
-              class="inline-flex rounded-full border border-slate-200 px-3 py-2 text-xs font-semibold uppercase tracking-[0.16em] text-slate-500 transition-colors hover:border-slate-300 hover:text-slate-950 dark:border-slate-700 dark:text-slate-400 dark:hover:border-slate-500 dark:hover:text-slate-100"
+              class="showcase-link-chip inline-flex rounded-full border px-3 py-2 text-xs font-semibold uppercase tracking-[0.16em] transition-colors"
               @click="closeSearch()"
             >
               Открыть components
             </RouterLink>
             <RouterLink
               to="/utilities"
-              class="inline-flex rounded-full border border-slate-200 px-3 py-2 text-xs font-semibold uppercase tracking-[0.16em] text-slate-500 transition-colors hover:border-slate-300 hover:text-slate-950 dark:border-slate-700 dark:text-slate-400 dark:hover:border-slate-500 dark:hover:text-slate-100"
+              class="showcase-link-chip inline-flex rounded-full border px-3 py-2 text-xs font-semibold uppercase tracking-[0.16em] transition-colors"
               @click="closeSearch()"
             >
               Открыть utilities
@@ -109,18 +109,18 @@ function closeSearch() {
             v-for="result in results"
             :key="result.id"
             :to="result.href"
-            class="rounded-2xl border border-transparent px-4 py-3 transition-colors hover:border-slate-200 hover:bg-slate-50 dark:hover:border-slate-800 dark:hover:bg-slate-950/60"
+            class="showcase-sidebar-item-inactive rounded-2xl border border-transparent px-4 py-3 transition-colors"
             @click="closeSearch()"
           >
             <div class="flex items-start justify-between gap-3">
               <div class="min-w-0">
-                <p class="truncate text-sm font-semibold text-slate-950 dark:text-slate-50">
+                <p class="truncate text-sm font-semibold">
                   {{ result.title }}
                 </p>
-                <p class="mt-1 text-xs leading-5 text-slate-500 dark:text-slate-400">
+                <p class="showcase-text-muted mt-1 text-xs leading-5">
                   {{ result.description }}
                 </p>
-                <p class="mt-2 text-[11px] uppercase tracking-[0.16em] text-slate-400 dark:text-slate-500">
+                <p class="showcase-kicker mt-2 text-[11px]">
                   {{ result.context }}
                 </p>
               </div>

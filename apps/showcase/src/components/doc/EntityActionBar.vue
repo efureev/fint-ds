@@ -30,7 +30,7 @@ async function copyText(value: string, label: string) {
 </script>
 
 <template>
-  <div class="mt-6 rounded-3xl border border-slate-200/80 bg-slate-50/80 p-4 dark:border-slate-800 dark:bg-slate-950/60">
+  <div class="showcase-inline-surface mt-6 rounded-3xl border p-4">
     <div class="flex flex-wrap items-center gap-3">
       <DsButton variant="outline" @click="copyText(props.importCode, 'Import snippet')">
         Copy import
@@ -43,7 +43,7 @@ async function copyText(value: string, label: string) {
         v-for="link in props.links"
         :key="`${link.label}-${link.href}`"
         :href="link.href"
-        class="inline-flex rounded-full border border-slate-200 px-3 py-2 text-xs font-semibold uppercase tracking-[0.16em] text-slate-500 transition-colors hover:border-slate-300 hover:text-slate-950 dark:border-slate-700 dark:text-slate-400 dark:hover:border-slate-500 dark:hover:text-slate-100"
+        class="showcase-link-chip inline-flex rounded-full border px-3 py-2 text-xs font-semibold uppercase tracking-[0.16em] transition-colors"
         target="_blank"
         rel="noreferrer"
       >
@@ -51,7 +51,7 @@ async function copyText(value: string, label: string) {
       </a>
     </div>
 
-    <p class="mt-3 text-xs leading-5 text-slate-500 dark:text-slate-400">
+    <p class="showcase-text-subtle mt-3 text-xs leading-5">
       {{ copyStatus || 'Быстрые действия: скопируйте canonical import/usage или перейдите к исходникам и metadata.' }}
     </p>
   </div>

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { DsBadge, DsCard } from '@feugene/granularity'
+import { DsCard } from '@feugene/granularity'
 
 import type { ShowcaseApiSectionMeta, ShowcaseExampleMeta } from '../../content/model'
 import type { ShowcaseRelatedLink } from './entityPageHelpers'
@@ -28,9 +28,9 @@ defineProps<{
 
 <template>
   <div class="space-y-8">
-    <DsCard class="rounded-3xl border border-slate-200/80 bg-white/90 p-8 shadow-sm dark:border-slate-800 dark:bg-slate-900/90">
+    <DsCard class="showcase-panel rounded-3xl border p-8">
       <div class="flex flex-wrap items-center gap-3">
-        <span class="text-xs font-semibold uppercase tracking-[0.18em] text-slate-500 dark:text-slate-400">
+        <span class="showcase-kicker text-xs font-semibold tracking-[0.18em]">
           {{ eyebrow }}
         </span>
       </div>
@@ -39,7 +39,7 @@ defineProps<{
         <h1 class="max-w-4xl text-4xl font-semibold leading-tight lg:text-5xl">
           {{ title }}
         </h1>
-        <p class="max-w-3xl text-base leading-7 text-slate-600 dark:text-slate-300">
+        <p class="showcase-text-muted max-w-3xl text-base leading-7">
           {{ description }}
         </p>
       </div>
@@ -50,25 +50,25 @@ defineProps<{
         v-for="section in sections"
         :id="section.id"
         :key="section.id"
-        class="scroll-mt-28 rounded-3xl border border-slate-200/80 bg-white/90 p-6 shadow-sm dark:border-slate-800 dark:bg-slate-900/90"
+        class="showcase-panel scroll-mt-28 rounded-3xl border p-6"
       >
         <div class="space-y-3">
           <div class="flex items-center gap-3">
             <h2 class="text-2xl font-semibold leading-tight">
               {{ section.title }}
             </h2>
-            <a :href="`#${section.id}`" class="inline-flex items-center rounded-full border border-slate-200 px-3 py-1 text-xs font-semibold uppercase tracking-[0.16em] text-slate-500 transition-colors hover:border-slate-300 hover:text-slate-900 dark:border-slate-700 dark:text-slate-400 dark:hover:border-slate-500 dark:hover:text-slate-100">
+            <a :href="`#${section.id}`" class="showcase-link-chip inline-flex items-center rounded-full border px-3 py-1 text-xs font-semibold uppercase tracking-[0.16em] transition-colors">
               link
             </a>
           </div>
 
-          <p class="max-w-3xl text-sm leading-6 text-slate-600 dark:text-slate-300">
+          <p class="showcase-text-muted max-w-3xl text-sm leading-6">
             {{ section.description }}
           </p>
         </div>
 
         <ul class="mt-6 grid gap-3">
-          <li v-for="bullet in section.bullets" :key="bullet" class="rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm leading-6 text-slate-700 dark:border-slate-800 dark:bg-slate-950/60 dark:text-slate-200">
+          <li v-for="bullet in section.bullets" :key="bullet" class="showcase-inline-surface rounded-2xl border px-4 py-3 text-sm leading-6">
             {{ bullet }}
           </li>
         </ul>
@@ -78,7 +78,7 @@ defineProps<{
     <section v-if="examples?.length" class="space-y-4">
       <div class="space-y-2">
         <h2 class="text-2xl font-semibold">Live examples</h2>
-        <p class="text-sm leading-6 text-slate-600 dark:text-slate-300">
+        <p class="showcase-text-muted text-sm leading-6">
           Блоки примеров уже собраны в reusable primitive-формате и готовы к подключению реальных live demo.
         </p>
       </div>
@@ -95,28 +95,33 @@ defineProps<{
       </div>
     </section>
 
-    <section class="grid gap-6 xl:grid-cols-[minmax(0,1.4fr)_minmax(320px,0.9fr)]">
-      <div class="space-y-6">
-        <div class="space-y-4">
-          <h2 class="text-2xl font-semibold">API</h2>
-          <div class="grid gap-4">
-            <PropsTable :items="apiSections?.find(section => section.key === 'props')?.items ?? []" />
-            <SlotsTable :items="apiSections?.find(section => section.key === 'slots')?.items ?? []" />
-            <EventsTable :items="apiSections?.find(section => section.key === 'events')?.items ?? apiSections?.find(section => section.key === 'parameters')?.items ?? []" />
-            <MethodsTable :items="apiSections?.find(section => section.key === 'methods')?.items ?? apiSections?.find(section => section.key === 'returns')?.items ?? []" />
-          </div>
-        </div>
+    <section id="api" class="space-y-4">
+      <h2 class="text-2xl font-semibold">API</h2>
+      <div class="grid gap-4">
+        <PropsTable :items="apiSections?.find(section => section.key === 'props')?.items ?? []" />
+        <SlotsTable :items="apiSections?.find(section => section.key === 'slots')?.items ?? []" />
+        <EventsTable :items="apiSections?.find(section => section.key === 'events')?.items ?? apiSections?.find(section => section.key === 'parameters')?.items ?? []" />
+        <MethodsTable :items="apiSections?.find(section => section.key === 'methods')?.items ?? apiSections?.find(section => section.key === 'returns')?.items ?? []" />
+      </div>
+    </section>
 
-        <div v-if="usageCode" class="space-y-4">
-          <h2 class="text-2xl font-semibold">Usage</h2>
-          <CodeBlock :code="usageCode" language="ts" title="Usage snippet" />
-        </div>
+    <section v-if="usageCode" id="usage" class="space-y-4">
+      <h2 class="text-2xl font-semibold">Usage</h2>
+      <CodeBlock :code="usageCode" language="ts" title="Usage snippet" />
+    </section>
+
+    <section class="space-y-4">
+      <div class="space-y-2">
+        <h2 class="text-2xl font-semibold">Implementation notes</h2>
+        <p class="showcase-text-muted max-w-3xl text-sm leading-6">
+          Дополнительные подсказки по accessibility, зависимостям и связанным материалам собраны отдельно, чтобы не конкурировать с основными API и usage-блоками.
+        </p>
       </div>
 
-      <div class="space-y-4">
-        <InfoSectionCard title="Accessibility" :items="accessibilityItems" />
-        <InfoSectionCard title="Dependencies" :items="dependencyItems" />
-        <InfoSectionCard title="Related links" :links="relatedLinks" />
+      <div class="grid gap-4 lg:grid-cols-3">
+        <InfoSectionCard title="Accessibility" :items="accessibilityItems" variant="list" />
+        <InfoSectionCard title="Dependencies" :items="dependencyItems" variant="chips" />
+        <InfoSectionCard title="Related links" :links="relatedLinks" variant="links" />
       </div>
     </section>
   </div>

@@ -2,7 +2,11 @@ import { readFileSync } from 'node:fs'
 import { fileURLToPath, URL } from 'node:url'
 import { describe, expect, it } from 'vitest'
 
-import { showcaseContentIncludes, showcasePresetComponents } from '../../uno.config'
+import {
+  showcaseContentIncludes,
+  showcasePresetComponents,
+  showcasePresetThemes,
+} from '../../uno.config'
 import {
   showcaseBuildAnalyzeMode,
   showcaseBuildVisualizerConfig,
@@ -51,13 +55,13 @@ describe('showcase bootstrap config', () => {
   })
 
   it('подключает reset, uno runtime и раннюю инициализацию темы без legacy-зависимостей', () => {
-    expect(showcaseMainEntry).toContain("import '@feugene/granularity/styles.css'")
     expect(showcaseMainEntry).toContain("import '@unocss/reset/tailwind-compat.css'")
     expect(showcaseMainEntry).toContain("import 'virtual:uno.css'")
     expect(showcaseMainEntry).toContain("import { initThemeEarly } from '@feugene/granularity'")
     expect(showcaseMainEntry).toContain("import { router } from './app/router'")
     expect(showcaseMainEntry).toContain('initThemeEarly()')
     expect(showcaseMainEntry).toContain('.use(router)')
+    expect(showcaseMainEntry).not.toContain("@feugene/granularity/styles.css")
     expect(showcaseMainEntry).not.toContain('legacy')
   })
 
@@ -72,7 +76,9 @@ describe('showcase bootstrap config', () => {
     expect(showcaseContentIncludes.some(re => re.test('/repo/apps/playground/src/main.ts'))).toBe(false)
     expect(showcaseContentIncludes.some(re => re.test('/repo/packages/granularity/dist/index.js'))).toBe(false)
     expect(showcasePresetComponents).toEqual(['DsBadge', 'DsButton', 'DsCard'])
-    expect(showcaseUnoConfig).toContain("import { presetGranularity } from '@feugene/granularity/uno'")
+    expect(showcasePresetThemes).toEqual(['light', 'dark'])
+    expect(showcaseUnoConfig).toContain("import { presetGranularityNode } from '@feugene/granularity/uno-node'")
     expect(showcaseUnoConfig).toContain('components: [...showcasePresetComponents]')
+    expect(showcaseUnoConfig).toContain('themes: [...showcasePresetThemes]')
   })
 })

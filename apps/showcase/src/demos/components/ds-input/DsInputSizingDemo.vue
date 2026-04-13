@@ -21,7 +21,7 @@ const sizeValues = {
 <template>
   <div class="grid gap-4">
     <div class="grid gap-2 rounded-2xl border border-[var(--border)] bg-[var(--card)] p-4">
-      <div class="text-sm font-semibold text-slate-900 dark:text-slate-100">
+      <div class="showcase-demo-title text-sm font-semibold">
         Text alignment
       </div>
       <DsRadioGroup
@@ -39,19 +39,19 @@ const sizeValues = {
 
     <div class="grid gap-3 md:grid-cols-2 xl:grid-cols-4">
       <div class="grid gap-2">
-        <div class="text-xs uppercase tracking-[0.16em] text-slate-500 dark:text-slate-400">xs</div>
+        <div class="showcase-demo-caption text-xs">xs</div>
         <DsInput v-model="sizeValues.xs.value" size="xs" placeholder="Extra small" />
       </div>
       <div class="grid gap-2">
-        <div class="text-xs uppercase tracking-[0.16em] text-slate-500 dark:text-slate-400">sm</div>
+        <div class="showcase-demo-caption text-xs">sm</div>
         <DsInput v-model="sizeValues.sm.value" size="sm" placeholder="Small" />
       </div>
       <div class="grid gap-2">
-        <div class="text-xs uppercase tracking-[0.16em] text-slate-500 dark:text-slate-400">md</div>
+        <div class="showcase-demo-caption text-xs">md</div>
         <DsInput v-model="sizeValues.md.value" size="md" placeholder="Medium" />
       </div>
       <div class="grid gap-2">
-        <div class="text-xs uppercase tracking-[0.16em] text-slate-500 dark:text-slate-400">lg</div>
+        <div class="showcase-demo-caption text-xs">lg</div>
         <DsInput v-model="sizeValues.lg.value" size="lg" placeholder="Large" />
       </div>
     </div>

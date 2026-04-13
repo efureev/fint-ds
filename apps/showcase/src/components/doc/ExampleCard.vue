@@ -13,17 +13,17 @@ defineProps<{
 </script>
 
 <template>
-  <DsCard class="rounded-3xl border border-slate-200/80 bg-white/90 p-6 shadow-sm dark:border-slate-800 dark:bg-slate-900/90">
+  <DsCard class="showcase-panel min-w-0 rounded-3xl border p-6">
     <div class="space-y-2">
       <h3 class="text-xl font-semibold">
         {{ title }}
       </h3>
-      <p class="text-sm leading-6 text-slate-600 dark:text-slate-300">
+      <p class="showcase-text-muted text-sm leading-6">
         {{ description }}
       </p>
     </div>
 
-    <div class="mt-5 rounded-2xl border border-dashed border-slate-200 bg-slate-50 px-4 py-6 text-sm text-slate-600 dark:border-slate-800 dark:bg-slate-950/60 dark:text-slate-300">
+    <div class="showcase-empty-state mt-5 rounded-2xl border border-dashed px-4 py-6 text-sm">
       <slot name="preview">
         Preview area зарезервирован под live demo следующего этапа.
       </slot>
@@ -39,7 +39,7 @@ defineProps<{
 
     <p
       v-if="note"
-      class="mt-4 text-sm leading-6 text-slate-500 dark:text-slate-400"
+      class="showcase-text-subtle mt-4 text-sm leading-6"
     >
       {{ note }}
     </p>

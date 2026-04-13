@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import { RouterLink, useRoute } from 'vue-router'
+import IconArrowLeft from '~icons/lucide/arrow-left'
 
 import { DsBadge, DsCard } from '@feugene/granularity'
 
@@ -45,17 +46,18 @@ const pageEyebrow = computed(() => page.value?.eyebrow ?? showcasePageRecord.ove
 
 <template>
   <div v-if="entity && entityDoc && page" class="space-y-8">
-    <div class="flex items-center gap-3 text-sm text-slate-500 dark:text-slate-400">
-      <RouterLink :to="page.path" class="font-medium transition-colors hover:text-slate-950 dark:hover:text-slate-100">
-        ← Back to {{ page.shortTitle.toLowerCase() }}
+    <div class="showcase-text-subtle flex items-center gap-3 text-sm">
+      <RouterLink :to="page.path" class="inline-flex items-center gap-2 font-medium transition-colors hover:text-[var(--foreground)]">
+        <IconArrowLeft class="h-4 w-4 shrink-0" />
+        <span>Back to {{ page.shortTitle.toLowerCase() }}</span>
       </RouterLink>
       <span>/</span>
       <span>{{ entity.title }}</span>
     </div>
 
-    <DsCard class="rounded-3xl border border-slate-200/80 bg-white/90 p-8 shadow-sm dark:border-slate-800 dark:bg-slate-900/90">
+    <DsCard class="showcase-panel rounded-3xl border p-8">
       <div class="flex flex-wrap items-center gap-3">
-        <span class="text-xs font-semibold uppercase tracking-[0.18em] text-slate-500 dark:text-slate-400">
+        <span class="showcase-kicker text-xs font-semibold tracking-[0.18em]">
           {{ pageEyebrow }} / {{ entity.group }}
         </span>
       </div>
@@ -64,7 +66,7 @@ const pageEyebrow = computed(() => page.value?.eyebrow ?? showcasePageRecord.ove
         <h1 class="max-w-4xl text-4xl font-semibold leading-tight lg:text-5xl">
           {{ entity.title }}
         </h1>
-        <p class="max-w-3xl text-base leading-7 text-slate-600 dark:text-slate-300">
+        <p class="showcase-text-muted max-w-3xl text-base leading-7">
           {{ entity.summary }}
         </p>
       </div>
@@ -83,11 +85,11 @@ const pageEyebrow = computed(() => page.value?.eyebrow ?? showcasePageRecord.ove
     </DsCard>
 
     <section id="overview" class="scroll-mt-28">
-      <DsCard class="rounded-3xl border border-slate-200/80 bg-white/90 p-6 shadow-sm dark:border-slate-800 dark:bg-slate-900/90">
+      <DsCard class="showcase-panel rounded-3xl border p-6">
         <h2 class="text-2xl font-semibold">
           Package overview
         </h2>
-        <ul class="mt-6 grid gap-3 text-sm leading-6 text-slate-600 dark:text-slate-300">
+        <ul class="showcase-text-muted mt-6 grid gap-3 text-sm leading-6">
           <li v-for="item in entityDoc.overview" :key="item">
             {{ item }}
           </li>
@@ -100,7 +102,7 @@ const pageEyebrow = computed(() => page.value?.eyebrow ?? showcasePageRecord.ove
         <h2 class="text-2xl font-semibold">
           Live examples
         </h2>
-        <p class="mt-2 max-w-3xl text-sm leading-6 text-slate-600 dark:text-slate-300">
+        <p class="showcase-text-muted mt-2 max-w-3xl text-sm leading-6">
           Каждая demo-карта показывает отдельный integration pattern, а snippet рядом остаётся canonical starting point.
         </p>
       </div>
@@ -119,7 +121,7 @@ const pageEyebrow = computed(() => page.value?.eyebrow ?? showcasePageRecord.ove
               v-if="example.previewKey"
               :preview-key="example.previewKey"
             />
-            <div v-else class="text-sm text-slate-500 dark:text-slate-400">
+            <div v-else class="showcase-text-subtle text-sm">
               Preview area reserved for the next iteration.
             </div>
           </template>
@@ -132,7 +134,7 @@ const pageEyebrow = computed(() => page.value?.eyebrow ?? showcasePageRecord.ove
         <h2 class="text-2xl font-semibold">
           API
         </h2>
-        <p class="mt-2 max-w-3xl text-sm leading-6 text-slate-600 dark:text-slate-300">
+        <p class="showcase-text-muted mt-2 max-w-3xl text-sm leading-6">
           Package-level APIs документируются вручную, потому что для directives, composables и utilities важнее shape binding/return contract, чем component props.
         </p>
       </div>
@@ -172,22 +174,22 @@ const pageEyebrow = computed(() => page.value?.eyebrow ?? showcasePageRecord.ove
 
   <DsCard
     v-else
-    class="rounded-3xl border border-dashed border-slate-300/80 bg-white/70 p-8 text-sm leading-6 text-slate-500 shadow-sm dark:border-slate-700 dark:bg-slate-900/70 dark:text-slate-400"
+    class="showcase-empty-state rounded-3xl border border-dashed p-8 text-sm leading-6 shadow-sm"
   >
-    <h1 class="text-3xl font-semibold text-slate-950 dark:text-slate-50">
+    <h1 class="text-3xl font-semibold">
       Package entity not found
     </h1>
-    <p class="mt-4 max-w-2xl text-sm leading-6 text-slate-600 dark:text-slate-300">
+    <p class="mt-4 max-w-2xl text-sm leading-6">
       Похоже, detail route не совпал с текущим registry пакета. Вернитесь в один из package-level разделов и выберите существующую сущность.
     </p>
     <div class="mt-6 flex flex-wrap gap-2">
-      <RouterLink to="/directives" class="inline-flex rounded-full border border-slate-200 px-4 py-2 text-sm font-semibold text-slate-700 transition-colors hover:border-slate-300 hover:text-slate-950 dark:border-slate-700 dark:text-slate-200 dark:hover:border-slate-500 dark:hover:text-slate-50">
+      <RouterLink to="/directives" class="showcase-link-chip inline-flex rounded-full border px-4 py-2 text-sm font-semibold transition-colors">
         Перейти в directives
       </RouterLink>
-      <RouterLink to="/composables" class="inline-flex rounded-full border border-slate-200 px-4 py-2 text-sm font-semibold text-slate-700 transition-colors hover:border-slate-300 hover:text-slate-950 dark:border-slate-700 dark:text-slate-200 dark:hover:border-slate-500 dark:hover:text-slate-50">
+      <RouterLink to="/composables" class="showcase-link-chip inline-flex rounded-full border px-4 py-2 text-sm font-semibold transition-colors">
         Перейти в composables
       </RouterLink>
-      <RouterLink to="/utilities" class="inline-flex rounded-full border border-slate-200 px-4 py-2 text-sm font-semibold text-slate-700 transition-colors hover:border-slate-300 hover:text-slate-950 dark:border-slate-700 dark:text-slate-200 dark:hover:border-slate-500 dark:hover:text-slate-50">
+      <RouterLink to="/utilities" class="showcase-link-chip inline-flex rounded-full border px-4 py-2 text-sm font-semibold transition-colors">
         Перейти в utilities
       </RouterLink>
     </div>

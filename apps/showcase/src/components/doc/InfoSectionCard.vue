@@ -1,31 +1,81 @@
 <script setup lang="ts">
+import { computed } from 'vue'
+
 import type { ShowcaseRelatedLink } from './entityPageHelpers'
 
-defineProps<{
+const props = defineProps<{
   title: string
   items?: string[]
   links?: ShowcaseRelatedLink[]
+  variant?: 'list' | 'chips' | 'links'
 }>()
+
+const resolvedVariant = computed(() => {
+  if (props.variant)
+    return props.variant
+
+  if (props.links?.length)
+    return 'links'
+
+  return 'list'
+})
 </script>
 
 <template>
-  <div class="rounded-3xl border border-slate-200/80 bg-white/90 p-5 shadow-sm dark:border-slate-800 dark:bg-slate-900/90">
-    <h3 class="text-lg font-semibold">
-      {{ title }}
-    </h3>
+  <article class="showcase-panel-soft rounded-3xl border p-5">
+    <div class="flex items-center justify-between gap-3">
+      <h3 class="text-sm font-semibold uppercase tracking-[0.16em] showcase-text-subtle">
+        {{ title }}
+      </h3>
+      <span
+        v-if="items?.length || links?.length"
+        class="showcase-text-subtle text-xs font-medium"
+      >
+        {{ links?.length ?? items?.length }}
+      </span>
+    </div>
 
-    <ul v-if="items?.length" class="mt-4 grid gap-3 text-sm leading-6 text-slate-600 dark:text-slate-300">
-      <li v-for="item in items" :key="item">
+    <ul
+      v-if="resolvedVariant === 'list' && items?.length"
+      class="mt-4 grid gap-3"
+    >
+      <li
+        v-for="item in items"
+        :key="item"
+        class="showcase-inline-surface rounded-2xl border px-4 py-3 showcase-text-muted text-sm leading-6"
+      >
         {{ item }}
       </li>
     </ul>
 
-    <ul v-else-if="links?.length" class="mt-4 grid gap-3 text-sm leading-6 text-slate-600 dark:text-slate-300">
+    <ul
+      v-else-if="resolvedVariant === 'chips' && items?.length"
+      class="mt-4 flex flex-wrap gap-2"
+    >
+      <li v-for="item in items" :key="item">
+        <span class="showcase-pill inline-flex items-center rounded-full border px-3 py-1.5 text-sm font-medium">
+          {{ item }}
+        </span>
+      </li>
+    </ul>
+
+    <ul
+      v-else-if="links?.length"
+      class="mt-4 grid gap-2"
+    >
       <li v-for="link in links" :key="`${link.label}-${link.href}`">
-        <a :href="link.href" class="font-medium text-primary hover:underline" target="_blank" rel="noreferrer">
-          {{ link.label }}
+        <a
+          :href="link.href"
+          class="showcase-inline-surface flex items-center justify-between gap-3 rounded-2xl border px-4 py-3 text-sm font-medium transition-colors hover:border-primary/40 hover:text-primary"
+          target="_blank"
+          rel="noreferrer"
+        >
+          <span>{{ link.label }}</span>
+          <span class="showcase-text-subtle text-xs uppercase tracking-[0.16em]">
+            open
+          </span>
         </a>
       </li>
     </ul>
-  </div>
+  </article>
 </template>

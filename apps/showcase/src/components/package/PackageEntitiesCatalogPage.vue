@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue'
 import { RouterLink } from 'vue-router'
+import IconArrowRight from '~icons/lucide/arrow-right'
 
 import { DsBadge, DsCard } from '@feugene/granularity'
 
@@ -75,10 +76,10 @@ const kindLabel = computed(() => {
 
 <template>
   <div class="space-y-8">
-    <DsCard class="rounded-3xl border border-slate-200/80 bg-white/90 p-8 shadow-sm dark:border-slate-800 dark:bg-slate-900/90">
+    <DsCard class="showcase-panel rounded-3xl border p-8">
       <div class="flex flex-wrap items-center gap-3">
         <DsBadge>{{ page.status }}</DsBadge>
-        <span class="text-xs font-semibold uppercase tracking-[0.18em] text-slate-500 dark:text-slate-400">
+        <span class="showcase-kicker text-xs font-semibold tracking-[0.18em]">
           {{ page.eyebrow }}
         </span>
       </div>
@@ -87,7 +88,7 @@ const kindLabel = computed(() => {
         <h1 class="max-w-4xl text-4xl font-semibold leading-tight lg:text-5xl">
           {{ page.title }} catalog
         </h1>
-        <p class="max-w-3xl text-base leading-7 text-slate-600 dark:text-slate-300">
+        <p class="showcase-text-muted max-w-3xl text-base leading-7">
           {{ page.description }} Каталог группирует public API по сущностям, ведёт на detail pages
           и показывает, где уже есть runnable coverage, а где пока остаётся metadata fallback.
         </p>
@@ -96,51 +97,51 @@ const kindLabel = computed(() => {
 
     <section id="catalog" class="scroll-mt-28 space-y-5">
       <div class="grid gap-4 md:grid-cols-3">
-        <DsCard class="rounded-3xl border border-slate-200/80 bg-white/90 p-5 shadow-sm dark:border-slate-800 dark:bg-slate-900/90">
-          <p class="text-xs font-semibold uppercase tracking-[0.18em] text-slate-500 dark:text-slate-400">
+        <DsCard class="showcase-panel rounded-3xl border p-5">
+          <p class="showcase-kicker text-xs font-semibold tracking-[0.18em]">
             Public {{ page.shortTitle.toLowerCase() }}
           </p>
           <p class="mt-3 text-3xl font-semibold">
             {{ entities.length }}
           </p>
-          <p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-300">
+          <p class="showcase-text-muted mt-2 text-sm leading-6">
             Список собирается напрямую из публичных exports пакета и hand-authored metadata слоя.
           </p>
         </DsCard>
 
-        <DsCard class="rounded-3xl border border-slate-200/80 bg-white/90 p-5 shadow-sm dark:border-slate-800 dark:bg-slate-900/90">
-          <p class="text-xs font-semibold uppercase tracking-[0.18em] text-slate-500 dark:text-slate-400">
+        <DsCard class="showcase-panel rounded-3xl border p-5">
+          <p class="showcase-kicker text-xs font-semibold tracking-[0.18em]">
             Featured focus
           </p>
           <p class="mt-3 text-3xl font-semibold">
             {{ featuredEntities.length }}
           </p>
-          <p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-300">
+          <p class="showcase-text-muted mt-2 text-sm leading-6">
             Именно на них в первую очередь появляются runnable demos и более глубокие integration notes.
           </p>
         </DsCard>
 
-        <DsCard class="rounded-3xl border border-slate-200/80 bg-white/90 p-5 shadow-sm dark:border-slate-800 dark:bg-slate-900/90">
-          <p class="text-xs font-semibold uppercase tracking-[0.18em] text-slate-500 dark:text-slate-400">
+        <DsCard class="showcase-panel rounded-3xl border p-5">
+          <p class="showcase-kicker text-xs font-semibold tracking-[0.18em]">
             API docs ready
           </p>
           <p class="mt-3 text-3xl font-semibold">
             {{ manualApiCoverage }}
           </p>
-          <p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-300">
+          <p class="showcase-text-muted mt-2 text-sm leading-6">
             Detail pages уже используют ручные API-таблицы там, где автогенерации для package-level API недостаточно.
           </p>
         </DsCard>
       </div>
 
-      <div class="rounded-3xl border border-slate-200/80 bg-white/90 p-4 shadow-sm dark:border-slate-800 dark:bg-slate-900/90">
-        <label class="grid gap-2 text-sm font-medium text-slate-700 dark:text-slate-200">
+      <div class="showcase-panel rounded-3xl border p-4">
+        <label class="grid gap-2 text-sm font-medium">
           Search {{ page.shortTitle.toLowerCase() }}
           <input
             v-model="searchQuery"
             type="search"
             :placeholder="`Filter ${page.shortTitle.toLowerCase()} by name, tags or summary`"
-            class="w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm outline-none transition focus:border-primary dark:border-slate-800 dark:bg-slate-950/70"
+            class="showcase-input w-full rounded-2xl border px-4 py-3 text-sm outline-none transition"
           >
         </label>
       </div>
@@ -156,7 +157,7 @@ const kindLabel = computed(() => {
               <h2 class="text-2xl font-semibold">
                 {{ bucket.label }}
               </h2>
-              <p class="text-sm text-slate-500 dark:text-slate-400">
+              <p class="showcase-text-subtle text-sm">
                 {{ bucket.entities.length }} {{ kindLabel }}<span v-if="bucket.entities.length !== 1">s</span>
               </p>
             </div>
@@ -169,7 +170,7 @@ const kindLabel = computed(() => {
               :to="entity.path"
               class="block"
             >
-              <DsCard class="h-full rounded-3xl border border-slate-200/80 bg-white/90 p-6 shadow-sm transition-transform hover:-translate-y-0.5 dark:border-slate-800 dark:bg-slate-900/90">
+              <DsCard class="showcase-card-link h-full rounded-3xl border p-6 shadow-sm transition-transform hover:-translate-y-0.5">
                 <div class="flex flex-wrap items-center gap-2">
                   <DsBadge>{{ entity.kind }}</DsBadge>
                   <DsBadge v-for="tag in entity.tags.slice(0, 3)" :key="tag">
@@ -177,15 +178,16 @@ const kindLabel = computed(() => {
                   </DsBadge>
                 </div>
 
-                <h3 class="mt-4 text-xl font-semibold">
+                <h3 class="showcase-card-link-title mt-4 text-xl font-semibold">
                   {{ entity.title }}
                 </h3>
-                <p class="mt-3 text-sm leading-6 text-slate-600 dark:text-slate-300">
+                <p class="showcase-text-muted mt-3 text-sm leading-6">
                   {{ entity.summary }}
                 </p>
 
-                <div class="mt-5 text-sm font-medium text-primary">
-                  Open detail page →
+                <div class="mt-5 inline-flex items-center gap-2 text-sm font-medium text-primary">
+                  <span>Open detail page</span>
+                  <IconArrowRight class="h-4 w-4 shrink-0" />
                 </div>
               </DsCard>
             </RouterLink>
@@ -194,7 +196,7 @@ const kindLabel = computed(() => {
 
         <DsCard
           v-if="groupedEntities.length === 0"
-          class="rounded-3xl border border-dashed border-slate-300/80 bg-white/70 p-8 text-sm leading-6 text-slate-500 shadow-sm dark:border-slate-700 dark:bg-slate-900/70 dark:text-slate-400"
+          class="showcase-empty-state rounded-3xl border border-dashed p-8 text-sm leading-6 shadow-sm"
         >
           Nothing matched the current query. Try searching by export name, tag or group.
         </DsCard>

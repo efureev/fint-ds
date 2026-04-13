@@ -28,8 +28,8 @@ async function copyCode() {
 </script>
 
 <template>
-  <div class="overflow-hidden rounded-3xl border border-slate-200 bg-slate-950 text-slate-50 dark:border-slate-800">
-    <div class="flex items-center justify-between gap-3 border-b border-white/10 px-4 py-3">
+  <div class="showcase-code-surface min-w-0 max-w-full overflow-hidden rounded-3xl border">
+    <div class="showcase-code-divider flex items-center justify-between gap-3 border-b px-4 py-3">
       <div class="min-w-0">
         <p
           v-if="title"
@@ -37,7 +37,7 @@ async function copyCode() {
         >
           {{ title }}
         </p>
-        <p class="text-xs uppercase tracking-[0.16em] text-slate-400">
+        <p class="showcase-code-muted text-xs uppercase tracking-[0.16em]">
           {{ language }}
         </p>
       </div>
@@ -51,6 +51,6 @@ async function copyCode() {
       </DsButton>
     </div>
 
-    <pre class="overflow-x-auto px-4 py-4 text-sm leading-6"><code>{{ code }}</code></pre>
+    <pre class="max-w-full overflow-x-auto px-4 py-4 text-sm leading-6"><code>{{ code }}</code></pre>
   </div>
 </template>

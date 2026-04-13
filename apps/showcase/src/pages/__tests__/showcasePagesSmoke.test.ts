@@ -4,6 +4,11 @@ import { describe, expect, it } from 'vitest'
 
 import { showcaseChildRoutes } from '../../app/routeDefinitions'
 
+const docPageSource = readFileSync(
+  fileURLToPath(new URL('../../components/doc/DocPage.vue', import.meta.url)),
+  'utf8',
+)
+
 const componentDetailPageSource = readFileSync(
   fileURLToPath(new URL('../ComponentDetailPage.vue', import.meta.url)),
   'utf8',
@@ -11,6 +16,16 @@ const componentDetailPageSource = readFileSync(
 
 const packageEntityDetailPageSource = readFileSync(
   fileURLToPath(new URL('../PackageEntityDetailPage.vue', import.meta.url)),
+  'utf8',
+)
+
+const exampleCardSource = readFileSync(
+  fileURLToPath(new URL('../../components/doc/ExampleCard.vue', import.meta.url)),
+  'utf8',
+)
+
+const codeBlockSource = readFileSync(
+  fileURLToPath(new URL('../../components/doc/CodeBlock.vue', import.meta.url)),
   'utf8',
 )
 
@@ -36,8 +51,23 @@ describe('showcase page smoke coverage', () => {
     expect(componentDetailPageSource).toContain('import SlotsTable from')
     expect(componentDetailPageSource).toContain('import EventsTable from')
     expect(componentDetailPageSource).toContain('import MethodsTable from')
-    expect(componentDetailPageSource).toContain('← Back to components')
+    expect(componentDetailPageSource).toContain('Back to components')
     expect(componentDetailPageSource).toContain('Component not found')
+  })
+
+  it('делает основные doc-секции full-width и переносит meta-блоки после Usage', () => {
+    expect(componentDetailPageSource).not.toContain('xl:grid-cols-[minmax(0,1.4fr)_minmax(320px,0.9fr)]')
+    expect(componentDetailPageSource).toContain('<section id="usage" class="scroll-mt-28 space-y-4">')
+    expect(componentDetailPageSource).toContain('<section id="integration-notes" class="scroll-mt-28 space-y-4">')
+    expect(componentDetailPageSource.indexOf('<section id="usage"')).toBeLessThan(componentDetailPageSource.indexOf('<section id="integration-notes"'))
+
+    expect(docPageSource).not.toContain('xl:grid-cols-[minmax(0,1.4fr)_minmax(320px,0.9fr)]')
+    expect(docPageSource).toContain('<section v-if="usageCode" id="usage" class="space-y-4">')
+    expect(docPageSource).toContain('<section class="space-y-4">')
+
+    expect(exampleCardSource).toContain('class="showcase-panel min-w-0 rounded-3xl border p-6"')
+    expect(codeBlockSource).toContain('class="showcase-code-surface min-w-0 max-w-full overflow-hidden rounded-3xl border"')
+    expect(codeBlockSource).toContain('<pre class="max-w-full overflow-x-auto px-4 py-4 text-sm leading-6"><code>{{ code }}</code></pre>')
   })
 
   it('рендерит package-level api/actions и сохраняет fallback для missing entity', () => {

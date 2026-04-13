@@ -58,9 +58,9 @@ const featuredComponents = computed(() => showcaseComponentEntities.filter(entit
 
 <template>
   <div class="space-y-8">
-    <DsCard class="rounded-3xl border border-slate-200/80 bg-white/90 p-8 shadow-sm dark:border-slate-800 dark:bg-slate-900/90">
+    <DsCard class="showcase-panel rounded-3xl border p-8">
       <div class="flex flex-wrap items-center gap-3">
-        <span class="text-xs font-semibold uppercase tracking-[0.18em] text-slate-500 dark:text-slate-400">
+        <span class="showcase-kicker text-xs font-semibold tracking-[0.18em]">
           {{ page.eyebrow }}
         </span>
       </div>
@@ -69,7 +69,7 @@ const featuredComponents = computed(() => showcaseComponentEntities.filter(entit
         <h1 class="max-w-4xl text-4xl font-semibold leading-tight lg:text-5xl">
           Каталог компонентов
         </h1>
-        <p class="max-w-3xl text-base leading-7 text-slate-600 dark:text-slate-300">
+        <p class="showcase-text-muted max-w-3xl text-base leading-7">
           Здесь удобно искать компоненты по названию и группе, а затем переходить к detail pages без технического шума и служебных метрик.
         </p>
       </div>
@@ -77,52 +77,52 @@ const featuredComponents = computed(() => showcaseComponentEntities.filter(entit
 
     <section id="catalog" class="scroll-mt-28 space-y-5">
       <div class="grid gap-4 md:grid-cols-2">
-        <DsCard class="rounded-3xl border border-slate-200/80 bg-white/90 p-5 shadow-sm dark:border-slate-800 dark:bg-slate-900/90">
-          <p class="text-xs font-semibold uppercase tracking-[0.18em] text-slate-500 dark:text-slate-400">
+        <DsCard class="showcase-panel rounded-3xl border p-5">
+          <p class="showcase-kicker text-xs font-semibold tracking-[0.18em]">
             Public components
           </p>
           <p class="mt-3 text-3xl font-semibold">
             {{ showcaseComponentEntities.length }}
           </p>
-          <p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-300">
+          <p class="showcase-text-muted mt-2 text-sm leading-6">
             Каталог собирается напрямую из registry пакета и не требует ручного списка страниц.
           </p>
         </DsCard>
 
-        <DsCard class="rounded-3xl border border-slate-200/80 bg-white/90 p-5 shadow-sm dark:border-slate-800 dark:bg-slate-900/90">
-          <p class="text-xs font-semibold uppercase tracking-[0.18em] text-slate-500 dark:text-slate-400">
+        <DsCard class="showcase-panel rounded-3xl border p-5">
+          <p class="showcase-kicker text-xs font-semibold tracking-[0.18em]">
             Featured focus
           </p>
           <p class="mt-3 text-3xl font-semibold">
             {{ featuredComponents.length }}
           </p>
-          <p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-300">
+          <p class="showcase-text-muted mt-2 text-sm leading-6">
             На этих компонентах в первую очередь собираем живые сценарии и showcase-grade detail pages.
           </p>
         </DsCard>
 
       </div>
 
-      <DsCard class="rounded-3xl border border-slate-200/80 bg-white/90 p-6 shadow-sm dark:border-slate-800 dark:bg-slate-900/90">
+      <DsCard class="showcase-panel rounded-3xl border p-6">
         <div class="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
           <div class="space-y-2">
             <h2 class="text-2xl font-semibold">
               Component catalog
             </h2>
-            <p class="max-w-3xl text-sm leading-6 text-slate-600 dark:text-slate-300">
+            <p class="showcase-text-muted max-w-3xl text-sm leading-6">
               Поиск работает по имени, summary, группе и tags. Это уже достаточно, чтобы быстро прыгать к нужной странице компонента.
             </p>
           </div>
 
           <label class="block w-full max-w-md">
-            <span class="mb-2 block text-xs font-semibold uppercase tracking-[0.16em] text-slate-500 dark:text-slate-400">
+            <span class="showcase-kicker mb-2 block text-xs font-semibold">
               Search components
             </span>
             <input
               v-model="searchQuery"
               type="search"
               placeholder="Например: button, form, overlay"
-              class="w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-950 outline-none transition-colors placeholder:text-slate-400 focus:border-primary dark:border-slate-800 dark:bg-slate-950/60 dark:text-slate-50 dark:placeholder:text-slate-500"
+              class="showcase-input w-full rounded-2xl border px-4 py-3 text-sm outline-none transition-colors"
             >
           </label>
         </div>
@@ -145,14 +145,14 @@ const featuredComponents = computed(() => showcaseComponentEntities.filter(entit
                 v-for="component in group.entities"
                 :key="component.id"
                 :to="component.path"
-                class="group block rounded-3xl border border-slate-200/80 bg-slate-50 p-5 transition-colors hover:border-primary/40 hover:bg-white dark:border-slate-800 dark:bg-slate-950/60 dark:hover:border-primary/40 dark:hover:bg-slate-900"
+                class="showcase-card-link group block rounded-3xl border p-5 transition-colors"
               >
                 <div class="flex items-start justify-between gap-3">
                   <div>
-                    <p class="text-lg font-semibold text-slate-950 transition-colors group-hover:text-primary dark:text-slate-50">
+                    <p class="showcase-card-link-title text-lg font-semibold transition-colors">
                       {{ component.title }}
                     </p>
-                    <p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-300">
+                    <p class="showcase-text-muted mt-2 text-sm leading-6">
                       {{ component.summary }}
                     </p>
                   </div>
@@ -162,14 +162,14 @@ const featuredComponents = computed(() => showcaseComponentEntities.filter(entit
                   </DsBadge>
                 </div>
 
-                <div class="mt-4 flex flex-wrap gap-2 text-xs text-slate-500 dark:text-slate-400">
-                  <span class="rounded-full border border-slate-200 px-3 py-1 dark:border-slate-700">
+                <div class="showcase-text-subtle mt-4 flex flex-wrap gap-2 text-xs">
+                  <span class="showcase-link-chip rounded-full border px-3 py-1">
                     {{ component.group }}
                   </span>
-                  <span class="rounded-full border border-slate-200 px-3 py-1 dark:border-slate-700">
+                  <span class="showcase-link-chip rounded-full border px-3 py-1">
                     props: {{ component.apiSections.find(section => section.key === 'props')?.items.length ?? 0 }}
                   </span>
-                  <span class="rounded-full border border-slate-200 px-3 py-1 dark:border-slate-700">
+                  <span class="showcase-link-chip rounded-full border px-3 py-1">
                     examples: {{ component.examples.length }}
                   </span>
                 </div>
@@ -179,7 +179,7 @@ const featuredComponents = computed(() => showcaseComponentEntities.filter(entit
 
           <div
             v-if="groupedComponents.length === 0"
-            class="rounded-3xl border border-dashed border-slate-200 bg-slate-50 px-5 py-8 text-sm leading-6 text-slate-600 dark:border-slate-800 dark:bg-slate-950/60 dark:text-slate-300"
+            class="showcase-empty-state rounded-3xl border border-dashed px-5 py-8 text-sm leading-6"
           >
             По текущему запросу компоненты не найдены. Попробуй искать по имени (`DsButton`) или группе (`forms`, `overlays`).
           </div>
@@ -188,11 +188,11 @@ const featuredComponents = computed(() => showcaseComponentEntities.filter(entit
     </section>
 
     <section id="live-demos" class="scroll-mt-28 grid gap-4 lg:grid-cols-2">
-      <DsCard class="rounded-3xl border border-slate-200/80 bg-white/90 p-6 shadow-sm dark:border-slate-800 dark:bg-slate-900/90">
+      <DsCard class="showcase-panel rounded-3xl border p-6">
         <h2 class="text-2xl font-semibold">
           С чего начать
         </h2>
-        <p class="mt-3 text-sm leading-6 text-slate-600 dark:text-slate-300">
+        <p class="showcase-text-muted mt-3 text-sm leading-6">
           Если нужен быстрый вход, начните с самых востребованных компонентов — для них уже проще всего оценить API и сценарии использования.
         </p>
         <div class="mt-5 flex flex-wrap gap-2">
@@ -205,15 +205,15 @@ const featuredComponents = computed(() => showcaseComponentEntities.filter(entit
         </div>
       </DsCard>
 
-      <DsCard class="rounded-3xl border border-slate-200/80 bg-white/90 p-6 shadow-sm dark:border-slate-800 dark:bg-slate-900/90">
+      <DsCard class="showcase-panel rounded-3xl border p-6">
         <h2 class="text-2xl font-semibold">
           Как пользоваться каталогом
         </h2>
-        <ul class="mt-4 grid gap-3 text-sm leading-6 text-slate-600 dark:text-slate-300">
-          <li class="rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 dark:border-slate-800 dark:bg-slate-950/60">
+        <ul class="showcase-text-muted mt-4 grid gap-3 text-sm leading-6">
+          <li class="showcase-inline-surface rounded-2xl border px-4 py-3">
             Ищите по названию, summary или категории — фильтр сразу сокращает список до релевантных элементов.
           </li>
-          <li class="rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 dark:border-slate-800 dark:bg-slate-950/60">
+          <li class="showcase-inline-surface rounded-2xl border px-4 py-3">
             На карточке компонента сразу видно категорию и объём примеров, поэтому проще выбрать нужную detail page.
           </li>
         </ul>

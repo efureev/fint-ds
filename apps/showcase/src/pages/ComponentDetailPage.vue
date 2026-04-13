@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { computed, defineAsyncComponent } from 'vue'
 import { RouterLink, useRoute } from 'vue-router'
+import IconArrowLeft from '~icons/lucide/arrow-left'
 
 import { DsBadge, DsCard } from '@feugene/granularity'
 
@@ -216,17 +217,18 @@ function resolvePreviewComponent(previewKey?: string) {
 
 <template>
   <div v-if="componentEntity && componentDoc" class="space-y-8">
-    <div class="flex items-center gap-3 text-sm text-slate-500 dark:text-slate-400">
-      <RouterLink to="/components" class="font-medium transition-colors hover:text-slate-950 dark:hover:text-slate-100">
-        ← Back to components
+    <div class="showcase-text-subtle flex items-center gap-3 text-sm">
+      <RouterLink to="/components" class="inline-flex items-center gap-2 font-medium transition-colors hover:text-[var(--foreground)]">
+        <IconArrowLeft class="h-4 w-4 shrink-0" />
+        <span>Back to components</span>
       </RouterLink>
       <span>/</span>
       <span>{{ componentEntity.title }}</span>
     </div>
 
-    <DsCard class="rounded-3xl border border-slate-200/80 bg-white/90 p-8 shadow-sm dark:border-slate-800 dark:bg-slate-900/90">
+    <DsCard class="showcase-panel rounded-3xl border p-8">
       <div class="flex flex-wrap items-center gap-3">
-        <span class="text-xs font-semibold uppercase tracking-[0.18em] text-slate-500 dark:text-slate-400">
+        <span class="showcase-kicker text-xs font-semibold tracking-[0.18em]">
           {{ showcasePageRecord.components.eyebrow }} / {{ componentEntity.group }}
         </span>
       </div>
@@ -235,7 +237,7 @@ function resolvePreviewComponent(previewKey?: string) {
         <h1 class="max-w-4xl text-4xl font-semibold leading-tight lg:text-5xl">
           {{ componentEntity.title }}
         </h1>
-        <p class="max-w-3xl text-base leading-7 text-slate-600 dark:text-slate-300">
+        <p class="showcase-text-muted max-w-3xl text-base leading-7">
           {{ componentEntity.summary }}
         </p>
       </div>
@@ -257,12 +259,12 @@ function resolvePreviewComponent(previewKey?: string) {
     </DsCard>
 
     <section id="overview" class="scroll-mt-28">
-      <DsCard class="rounded-3xl border border-slate-200/80 bg-white/90 p-6 shadow-sm dark:border-slate-800 dark:bg-slate-900/90">
+      <DsCard class="showcase-panel rounded-3xl border p-6">
         <div class="space-y-3">
           <h2 class="text-2xl font-semibold">
             Component overview
           </h2>
-          <p class="max-w-3xl text-sm leading-6 text-slate-600 dark:text-slate-300">
+          <p class="showcase-text-muted max-w-3xl text-sm leading-6">
             Эта detail page строится поверх registry + generated API и показывает, как будет выглядеть каждая отдельная страница компонента в новой витрине.
           </p>
         </div>
@@ -271,7 +273,7 @@ function resolvePreviewComponent(previewKey?: string) {
           <li
             v-for="item in overviewItems"
             :key="item"
-            class="rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm leading-6 text-slate-700 dark:border-slate-800 dark:bg-slate-950/60 dark:text-slate-200"
+            class="showcase-inline-surface rounded-2xl border px-4 py-3 text-sm leading-6"
           >
             {{ item }}
           </li>
@@ -284,7 +286,7 @@ function resolvePreviewComponent(previewKey?: string) {
         <h2 class="text-2xl font-semibold">
           Live examples
         </h2>
-        <p class="text-sm leading-6 text-slate-600 dark:text-slate-300">
+        <p class="showcase-text-muted text-sm leading-6">
           Сценарии разбиты по конкретным capability-блокам: базовые варианты, state management и composition-case.
         </p>
       </div>
@@ -305,47 +307,54 @@ function resolvePreviewComponent(previewKey?: string) {
       </div>
     </section>
 
-    <section id="api" class="scroll-mt-28 grid gap-6 xl:grid-cols-[minmax(0,1.4fr)_minmax(320px,0.9fr)]">
-      <div class="space-y-6">
-        <div class="space-y-4">
-          <h2 class="text-2xl font-semibold">
-            API
-          </h2>
-          <div class="grid gap-4">
-            <PropsTable :items="componentEntity.apiSections.find(section => section.key === 'props')?.items ?? []" />
-            <SlotsTable :items="componentEntity.apiSections.find(section => section.key === 'slots')?.items ?? []" />
-            <EventsTable :items="componentEntity.apiSections.find(section => section.key === 'events')?.items ?? []" />
-            <MethodsTable :items="componentEntity.apiSections.find(section => section.key === 'methods')?.items ?? []" />
-          </div>
-        </div>
+    <section id="api" class="scroll-mt-28 space-y-4">
+      <h2 class="text-2xl font-semibold">
+        API
+      </h2>
+      <div class="grid gap-4">
+        <PropsTable :items="componentEntity.apiSections.find(section => section.key === 'props')?.items ?? []" />
+        <SlotsTable :items="componentEntity.apiSections.find(section => section.key === 'slots')?.items ?? []" />
+        <EventsTable :items="componentEntity.apiSections.find(section => section.key === 'events')?.items ?? []" />
+        <MethodsTable :items="componentEntity.apiSections.find(section => section.key === 'methods')?.items ?? []" />
+      </div>
+    </section>
 
-        <div class="space-y-4">
-          <h2 class="text-2xl font-semibold">
-            Usage
-          </h2>
-          <CodeBlock :code="usageCode" language="vue" title="Usage snippet" />
-        </div>
+    <section id="usage" class="scroll-mt-28 space-y-4">
+      <h2 class="text-2xl font-semibold">
+        Usage
+      </h2>
+      <CodeBlock :code="usageCode" language="vue" title="Usage snippet" />
+    </section>
+
+    <section id="integration-notes" class="scroll-mt-28 space-y-4">
+      <div class="space-y-2">
+        <h2 class="text-2xl font-semibold">
+          Implementation notes
+        </h2>
+        <p class="showcase-text-muted max-w-3xl text-sm leading-6">
+          Вспомогательные материалы собраны после основных API и usage-блоков, чтобы не отнимать у них ширину и оставаться компактными.
+        </p>
       </div>
 
-      <div id="integration-notes" class="scroll-mt-28 space-y-4">
-        <InfoSectionCard title="Accessibility" :items="accessibilityItems" />
-        <InfoSectionCard title="Dependencies" :items="dependencyItems" />
-        <InfoSectionCard title="Related links" :links="relatedLinks" />
+      <div class="grid gap-4 lg:grid-cols-3">
+        <InfoSectionCard title="Accessibility" :items="accessibilityItems" variant="list" />
+        <InfoSectionCard title="Dependencies" :items="dependencyItems" variant="chips" />
+        <InfoSectionCard title="Related links" :links="relatedLinks" variant="links" />
       </div>
     </section>
   </div>
 
   <DsCard
     v-else
-    class="rounded-3xl border border-slate-200/80 bg-white/90 p-8 shadow-sm dark:border-slate-800 dark:bg-slate-900/90"
+    class="showcase-panel rounded-3xl border p-8"
   >
     <h1 class="text-3xl font-semibold">
       Component not found
     </h1>
-    <p class="mt-4 max-w-2xl text-sm leading-6 text-slate-600 dark:text-slate-300">
+    <p class="showcase-text-muted mt-4 max-w-2xl text-sm leading-6">
       Компонент по этому маршруту не найден в публичном registry пакета. Вернись в каталог и выбери существующую сущность.
     </p>
-    <RouterLink to="/components" class="mt-6 inline-flex rounded-full border border-slate-200 px-4 py-2 text-sm font-semibold text-slate-700 transition-colors hover:border-slate-300 hover:text-slate-950 dark:border-slate-700 dark:text-slate-200 dark:hover:border-slate-500 dark:hover:text-slate-50">
+    <RouterLink to="/components" class="showcase-link-chip mt-6 inline-flex rounded-full border px-4 py-2 text-sm font-semibold transition-colors">
       Перейти в каталог компонентов
     </RouterLink>
   </DsCard>

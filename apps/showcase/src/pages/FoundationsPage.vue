@@ -12,26 +12,26 @@ import {
 
 <template>
   <div class="space-y-8">
-    <DsCard class="rounded-3xl border border-slate-200/80 bg-white/90 p-8 shadow-sm dark:border-slate-800 dark:bg-slate-900/90">
+    <DsCard class="showcase-panel rounded-3xl border p-8">
       <div class="space-y-4">
-        <span class="inline-flex rounded-full border border-slate-200 bg-slate-50 px-3 py-1 text-xs font-semibold uppercase tracking-[0.16em] text-slate-500 dark:border-slate-800 dark:bg-slate-950/60 dark:text-slate-400">
+        <span class="showcase-pill inline-flex rounded-full border px-3 py-1 text-xs font-semibold uppercase tracking-[0.16em]">
           Foundations
         </span>
         <h1 class="max-w-4xl text-4xl font-semibold leading-tight lg:text-5xl">
           Foundations собирает установку, темы, токены и локализацию в одной понятной onboarding-странице.
         </h1>
-        <p class="max-w-3xl text-base leading-7 text-slate-600 dark:text-slate-300">
+        <p class="showcase-text-muted max-w-3xl text-base leading-7">
           Здесь нет лишних декоративных блоков: только ключевые guides, выдержки из документации и практические snippets для подключения пакета в приложение.
         </p>
       </div>
     </DsCard>
 
     <section id="installation" class="grid gap-6 xl:grid-cols-[minmax(0,1.25fr)_minmax(320px,0.85fr)] scroll-mt-28">
-      <DsCard class="rounded-3xl border border-slate-200/80 bg-white/90 p-6 shadow-sm dark:border-slate-800 dark:bg-slate-900/90">
+      <DsCard class="showcase-panel rounded-3xl border p-6">
         <div class="space-y-4">
           <div class="space-y-2">
             <h2 class="text-2xl font-semibold">Quick-start map</h2>
-            <p class="text-sm leading-6 text-slate-600 dark:text-slate-300">
+            <p class="showcase-text-muted text-sm leading-6">
               Foundations сразу показывает выбор стратегии подключения: от простого root import до `UnoCSS` preset path.
             </p>
           </div>
@@ -40,13 +40,13 @@ import {
             <DsCard
               v-for="card in showcaseQuickStartCards"
               :key="card.id"
-              class="rounded-3xl border border-slate-200/80 bg-slate-50/80 p-5 shadow-sm dark:border-slate-800 dark:bg-slate-950/60"
+              class="showcase-panel-soft rounded-3xl border p-5"
             >
               <div class="space-y-3">
                 <h3 class="text-lg font-semibold">
                   {{ card.title }}
                 </h3>
-                <p class="text-sm leading-6 text-slate-600 dark:text-slate-300">
+                <p class="showcase-text-muted text-sm leading-6">
                   {{ card.description }}
                 </p>
                 <CodeBlock :code="card.code" :language="card.language" :title="card.title" />
@@ -57,7 +57,7 @@ import {
       </DsCard>
 
       <div class="space-y-4">
-        <DsCard class="rounded-3xl border border-slate-200/80 bg-white/90 p-6 shadow-sm dark:border-slate-800 dark:bg-slate-900/90">
+        <DsCard class="showcase-panel rounded-3xl border p-6">
           <div class="space-y-3">
             <h2 class="text-2xl font-semibold">Installation narrative</h2>
             <CodeBlock code="yarn add @feugene/granularity vue" language="bash" title="Install package" />
@@ -65,14 +65,14 @@ import {
           </div>
         </DsCard>
 
-        <DsCard class="rounded-3xl border border-slate-200/80 bg-white/90 p-6 shadow-sm dark:border-slate-800 dark:bg-slate-900/90">
+        <DsCard class="showcase-panel rounded-3xl border p-6">
           <div class="space-y-3">
             <h2 class="text-2xl font-semibold">Что должен закрывать foundations-раздел</h2>
             <ul class="grid gap-3">
               <li
                 v-for="item in showcaseFoundationsChecklist"
                 :key="item"
-                class="rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm leading-6 text-slate-700 dark:border-slate-800 dark:bg-slate-950/60 dark:text-slate-200"
+                class="showcase-inline-surface rounded-2xl border px-4 py-3 text-sm leading-6"
               >
                 {{ item }}
               </li>
@@ -88,7 +88,7 @@ import {
       :key="guide.id"
       class="scroll-mt-28"
     >
-      <DsCard class="rounded-3xl border border-slate-200/80 bg-white/90 p-6 shadow-sm dark:border-slate-800 dark:bg-slate-900/90">
+      <DsCard class="showcase-panel rounded-3xl border p-6">
         <div class="grid gap-6 xl:grid-cols-[minmax(0,1.15fr)_minmax(320px,0.85fr)]">
           <div class="space-y-5">
             <div class="space-y-3">
@@ -98,15 +98,15 @@ import {
                 </h2>
                 <a
                   :href="`#${guide.id}`"
-                  class="inline-flex items-center rounded-full border border-slate-200 px-3 py-1 text-xs font-semibold uppercase tracking-[0.16em] text-slate-500 transition-colors hover:border-slate-300 hover:text-slate-900 dark:border-slate-700 dark:text-slate-400 dark:hover:border-slate-500 dark:hover:text-slate-100"
+                  class="showcase-link-chip inline-flex items-center rounded-full border px-3 py-1 text-xs font-semibold uppercase tracking-[0.16em] transition-colors"
                 >
                   link
                 </a>
               </div>
-              <p class="text-base leading-7 text-slate-600 dark:text-slate-300">
+              <p class="showcase-text-muted text-base leading-7">
                 {{ guide.summary }}
               </p>
-              <p class="text-sm leading-6 text-slate-600 dark:text-slate-300">
+              <p class="showcase-text-muted text-sm leading-6">
                 {{ guide.description }}
               </p>
             </div>
@@ -118,7 +118,7 @@ import {
                   <li
                     v-for="item in guide.keyPoints"
                     :key="item"
-                    class="rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm leading-6 text-slate-700 dark:border-slate-800 dark:bg-slate-950/60 dark:text-slate-200"
+                    class="showcase-inline-surface rounded-2xl border px-4 py-3 text-sm leading-6"
                   >
                     {{ item }}
                   </li>
@@ -131,7 +131,7 @@ import {
                   <li
                     v-for="item in guide.recommendations"
                     :key="item"
-                    class="rounded-2xl border border-primary/15 bg-primary/5 px-4 py-3 text-sm leading-6 text-slate-700 dark:text-slate-200"
+                    class="showcase-panel-emphasis rounded-2xl border px-4 py-3 text-sm leading-6"
                   >
                     {{ item }}
                   </li>
@@ -141,12 +141,12 @@ import {
           </div>
 
           <div class="space-y-4">
-            <DsCard class="rounded-3xl border border-slate-200/80 bg-slate-50/80 p-5 shadow-sm dark:border-slate-800 dark:bg-slate-950/60">
+            <DsCard class="showcase-panel-soft rounded-3xl border p-5">
               <div class="space-y-2">
-                <p class="text-xs font-semibold uppercase tracking-[0.16em] text-slate-500 dark:text-slate-400">
+                <p class="showcase-kicker text-xs font-semibold">
                   Narrative source
                 </p>
-                <p class="text-sm leading-6 text-slate-600 dark:text-slate-300">
+                <p class="showcase-text-muted text-sm leading-6">
                   {{ guide.sourcePath }}
                 </p>
               </div>

@@ -37,6 +37,8 @@ import { DsButton } from '@feugene/granularity'
 import { ref } from 'vue'
 
 import { DsButton } from '@feugene/granularity'
+import IconPlus from '~icons/lucide/plus'
+import IconSettings from '~icons/lucide/settings'
 
 const isLoading = ref(false)
 </script>
@@ -52,7 +54,11 @@ const isLoading = ref(false)
     </DsButton>
 
     <DsButton square aria-label="Open settings">
-      ⚙
+      <IconSettings class="h-4 w-4" aria-hidden="true" />
+    </DsButton>
+
+    <DsButton variant="ghost-border" square aria-label="Create item">
+      <IconPlus class="h-4 w-4" aria-hidden="true" />
     </DsButton>
   </div>
 </template>`,
