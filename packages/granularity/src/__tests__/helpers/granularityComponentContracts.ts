@@ -34,12 +34,16 @@ import { dsEmptyStateConfig } from '../../components/DsEmptyState/config'
 import { dsEmptyStateSafelist } from '../../components/DsEmptyState/safelist'
 import { dsFileUploadConfig } from '../../components/DsFileUpload/config'
 import { dsFileUploadSafelist } from '../../components/DsFileUpload/safelist'
+import { dsFormFileConfig } from '../../components/DsFormFile/config'
+import { dsFormFileSafelist } from '../../components/DsFormFile/safelist'
 import { dsFormFieldConfig } from '../../components/DsFormField/config'
 import { dsFormFieldSafelist } from '../../components/DsFormField/dsFormFieldStyles'
 import { dsFormSectionConfig } from '../../components/DsFormSection/config'
 import { dsFormSectionSafelist } from '../../components/DsFormSection/safelist'
 import { dsIconConfig } from '../../components/DsIcon/config'
 import { dsIconSafelist } from '../../components/DsIcon/safelist'
+import { dsImageViewerConfig } from '../../components/DsImageViewer/config'
+import { dsImageViewerSafelist } from '../../components/DsImageViewer/safelist'
 import { dsInputConfig } from '../../components/DsInput/config'
 import { dsInputSafelist } from '../../components/DsInput/dsInputStyles'
 import { dsNumberInputConfig } from '../../components/DsNumberInput/config'
@@ -137,9 +141,11 @@ export const granularityComponentContracts = [
   { name: 'DsDialog', config: dsDialogConfig, safelist: dsDialogSafelist, dependencies: ['DsButton', 'DsModal'] },
   { name: 'DsEmptyState', config: dsEmptyStateConfig, safelist: dsEmptyStateSafelist, dependencies: [] },
   { name: 'DsFileUpload', config: dsFileUploadConfig, safelist: dsFileUploadSafelist, dependencies: [] },
+  { name: 'DsFormFile', config: dsFormFileConfig, safelist: dsFormFileSafelist, dependencies: ['DsButton'] },
   { name: 'DsFormField', config: dsFormFieldConfig, safelist: dsFormFieldSafelist, dependencies: [] },
   { name: 'DsFormSection', config: dsFormSectionConfig, safelist: dsFormSectionSafelist, dependencies: [] },
   { name: 'DsIcon', config: dsIconConfig, safelist: dsIconSafelist, dependencies: [] },
+  { name: 'DsImageViewer', config: dsImageViewerConfig, safelist: dsImageViewerSafelist, dependencies: [] },
   { name: 'DsInput', config: dsInputConfig, safelist: dsInputSafelist, dependencies: [] },
   { name: 'DsNumberInput', config: dsNumberInputConfig, safelist: dsNumberInputSafelist, dependencies: [] },
   { name: 'DsInputTag', config: dsInputTagConfig, safelist: dsInputTagSafelist, dependencies: ['DsBadge', 'DsInput'] },

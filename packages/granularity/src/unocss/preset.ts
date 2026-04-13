@@ -19,6 +19,7 @@ import {
 } from '../theming/themeRegistry'
 import { animationPreflights, animationRules } from './rules/animation'
 import { colorOpacityRules } from './rules/colorOpacity'
+import { filterRules } from './rules/filters'
 import { spacingRules, spacingVariants } from './rules/spacing'
 
 export type {
@@ -118,6 +119,7 @@ export function presetGranularity(options: PresetGranularityOptions = {}): Prese
       ...animationRules,
       ...spacingRules,
       ...colorOpacityRules,
+      ...filterRules,
     ],
   }
 }
