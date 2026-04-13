@@ -41,7 +41,6 @@ import { dsFormFieldSafelist } from '../../components/DsFormField/dsFormFieldSty
 import { dsFormSectionConfig } from '../../components/DsFormSection/config'
 import { dsFormSectionSafelist } from '../../components/DsFormSection/safelist'
 import { dsIconConfig } from '../../components/DsIcon/config'
-import { dsIconSafelist } from '../../components/DsIcon/safelist'
 import { dsImageViewerConfig } from '../../components/DsImageViewer/config'
 import { dsImageViewerSafelist } from '../../components/DsImageViewer/safelist'
 import { dsInputConfig } from '../../components/DsInput/config'
@@ -144,7 +143,7 @@ export const granularityComponentContracts = [
   { name: 'DsFormFile', config: dsFormFileConfig, safelist: dsFormFileSafelist, dependencies: ['DsButton'] },
   { name: 'DsFormField', config: dsFormFieldConfig, safelist: dsFormFieldSafelist, dependencies: [] },
   { name: 'DsFormSection', config: dsFormSectionConfig, safelist: dsFormSectionSafelist, dependencies: [] },
-  { name: 'DsIcon', config: dsIconConfig, safelist: dsIconSafelist, dependencies: [] },
+  { name: 'DsIcon', config: dsIconConfig, safelist: [], dependencies: [] },
   { name: 'DsImageViewer', config: dsImageViewerConfig, safelist: dsImageViewerSafelist, dependencies: [] },
   { name: 'DsInput', config: dsInputConfig, safelist: dsInputSafelist, dependencies: [] },
   { name: 'DsNumberInput', config: dsNumberInputConfig, safelist: dsNumberInputSafelist, dependencies: [] },

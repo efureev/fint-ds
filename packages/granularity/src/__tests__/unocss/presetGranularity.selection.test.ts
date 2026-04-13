@@ -3,7 +3,6 @@ import { describe, expect, it } from 'vitest'
 import { dsButtonSafelist } from '../../components/DsButton/safelist'
 import { dsDialogSafelist } from '../../components/DsDialog/dsDialogStyles'
 import { dsFormFieldSafelist } from '../../components/DsFormField/dsFormFieldStyles'
-import { dsIconSafelist } from '../../components/DsIcon/safelist'
 import { dsInputSafelist } from '../../components/DsInput/dsInputStyles'
 import { dsNumberInputSafelist } from '../../components/DsNumberInput/safelist'
 import { dsModalSafelist } from '../../components/DsModal/safelist'
@@ -41,8 +40,8 @@ describe('granularity safelist selection', () => {
     },
     {
       name: 'DsIcon',
-      expected: dsIconSafelist,
-      requiredTokens: ['inline-flex', 'items-center', 'justify-center', 'align-middle'],
+      expected: [],
+      requiredTokens: [],
     },
     {
       name: 'DsInput',

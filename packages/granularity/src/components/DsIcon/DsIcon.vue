@@ -3,7 +3,7 @@ import { computed } from 'vue'
 
 export type { DsIconSize } from './dsIconStyles'
 
-import { dsIconClass, resolveDsIconSizePx, type DsIconSize } from './dsIconStyles'
+import { resolveDsIconSizePx, type DsIconSize } from './dsIconStyles'
 
 const props = defineProps<{
   size?: DsIconSize | number
@@ -21,7 +21,7 @@ const iconStyle = computed(() => {
 <template>
   <span
     data-ds-icon
-    :class="dsIconClass"
+    class="ds-icon inline-flex items-center justify-center align-middle"
     :style="iconStyle"
     v-bind="$attrs"
   >
