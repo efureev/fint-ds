@@ -84,7 +84,8 @@ const {
   toggleTheme,
 } = useTheme()`
 
-const unoNodeSnippet = `import { defineConfig, presetMini } from 'unocss'
+const unoNodeSnippet = `import { fileURLToPath, URL } from 'node:url'
+import { defineConfig, presetMini } from 'unocss'
 
 import { presetGranularityNode } from '@feugene/granularity/uno-node'
 
@@ -93,6 +94,10 @@ export default defineConfig({
     presetMini(),
     presetGranularityNode({
       components: ['DsButton', 'DsCard'],
+      tokens: fileURLToPath(new URL('./src/styles/tokens.css', import.meta.url)),
+      baseFile: fileURLToPath(new URL('./src/styles/base.css', import.meta.url)),
+      themes: ['light', 'dark'],
+      themeFiles: [fileURLToPath(new URL('./src/styles/light-app.css', import.meta.url))],
     }),
   ],
 })`
@@ -208,10 +213,10 @@ export const showcaseQuickStartCards: ShowcaseQuickStartCard[] = [
   {
     id: 'quick-start-uno-node',
     title: 'Предпочтительный путь: `UnoCSS` + `uno-node`',
-    description: 'Рекомендуемый production-сценарий, если приложение уже использует UnoCSS и хочет тонко управлять foundation-слоями, темами и component CSS.',
+    description: 'Рекомендуемый production-сценарий для `UnoCSS`: кроме выбора компонентов здесь можно переопределять `tokens`, `base`, набор встроенных тем и подключать собственные `themeFiles`.',
     code: unoNodeSnippet,
     language: 'ts',
-    note: '`@feugene/granularity/uno-node` автоматически подтягивает foundation layers, темы и component CSS.',
+    note: '`@feugene/granularity/uno-node` автоматически подтягивает foundation layers, темы и component CSS, а preset остаётся гибким для кастомных токенов, base-слоя и theme files приложения.',
   },
   {
     id: 'quick-start-uno-pure',
