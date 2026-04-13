@@ -26,6 +26,7 @@ import type { ShowcaseEntityRegistryItem } from '../content/model'
 import ThemeSwitcher from '../components/ThemeSwitcher.vue'
 import ShowcaseHeader from '../components/layout/ShowcaseHeader.vue'
 import ShowcaseQuickSearch from '../components/layout/ShowcaseQuickSearch.vue'
+import ShowcaseSidebarNavigation from '../components/layout/ShowcaseSidebarNavigation.vue'
 import IconX from '~icons/lucide/x'
 
 const route = useRoute()
@@ -66,7 +67,6 @@ const componentGroupLabels: Record<string, string> = {
 type SidebarNavigationItem = {
   id: string
   label: string
-  description?: string
   to?: string
   href?: string
 }
@@ -116,7 +116,6 @@ const contextNavigationGroups = computed<SidebarNavigationGroup[]>(() => {
         items: currentSections.value.map(section => ({
           id: section.id,
           label: section.title,
-          description: section.description,
           href: `#${section.id}`,
         })),
       },
@@ -146,7 +145,6 @@ const contextNavigationGroups = computed<SidebarNavigationGroup[]>(() => {
         .map(entity => ({
           id: entity.id,
           label: entity.title,
-          description: entity.summary,
           to: entity.path,
         })),
     }))
@@ -191,58 +189,11 @@ function getSidebarItemClass(item: SidebarNavigationItem) {
     <ShowcaseHeader @open-mobile-navigation="isMobileNavigationOpen = true" />
 
     <div class="mx-auto grid max-w-7xl gap-6 px-4 py-6 lg:grid-cols-[290px_minmax(0,1fr)] lg:px-8">
-      <aside class="sticky top-28 hidden rounded-[28px] h-[calc(100vh-8rem)] overflow-y-auto lg:block">
-        <div class="showcase-panel space-y-6 rounded-[28px] border p-5">
-          <div class="space-y-2">
-            <p class="showcase-kicker text-xs font-semibold tracking-[0.18em]">
-              {{ currentPage.shortTitle }}
-            </p>
-            <h2 class="text-lg font-semibold">
-              {{ currentTitle }}
-            </h2>
-            <p class="showcase-text-muted text-sm leading-6">
-              {{ currentPage.description }}
-            </p>
-          </div>
-
-          <div class="space-y-5">
-            <section
-              v-for="group in contextNavigationGroups"
-              :key="group.id"
-              class="space-y-2"
-            >
-              <p class="showcase-kicker px-1 text-xs font-semibold">
-                {{ group.title }}
-              </p>
-              <div class="grid gap-1.5">
-                <template v-for="item in group.items" :key="item.id">
-                  <RouterLink
-                    v-if="item.to"
-                    :to="item.to"
-                    class="rounded-2xl border px-4 py-3 transition-colors"
-                    :class="getSidebarItemClass(item)"
-                  >
-                    <span class="block text-sm font-semibold">{{ item.label }}</span>
-                    <span v-if="item.description" class="mt-1 line-clamp-2 block text-xs leading-5 text-current/80">
-                      {{ item.description }}
-                    </span>
-                  </RouterLink>
-                  <a
-                    v-else-if="item.href"
-                    :href="item.href"
-                    class="showcase-sidebar-item-inactive rounded-2xl border border-transparent px-4 py-3 text-sm transition-colors"
-                  >
-                    <span class="block font-semibold">{{ item.label }}</span>
-                    <span v-if="item.description" class="mt-1 block text-xs leading-5 text-current/80">
-                      {{ item.description }}
-                    </span>
-                  </a>
-                </template>
-              </div>
-            </section>
-          </div>
-        </div>
-      </aside>
+      <ShowcaseSidebarNavigation
+        :eyebrow="currentPage.shortTitle"
+        :title="currentTitle"
+        :groups="contextNavigationGroups"
+      />
 
       <main class="min-w-0 space-y-6">
         <div class="showcase-panel flex flex-wrap items-center gap-2 rounded-[24px] border px-4 py-3 text-sm">
@@ -340,25 +291,19 @@ function getSidebarItemClass(item: SidebarNavigationItem) {
                 <RouterLink
                   v-if="item.to"
                   :to="item.to"
-                  class="rounded-2xl border px-3 py-3 text-sm transition-colors"
+                  class="rounded-2xl border px-3 py-3 text-sm font-semibold transition-colors"
                   :class="getSidebarItemClass(item)"
                   @click="isMobileNavigationOpen = false"
                 >
-                  <span class="block font-semibold">{{ item.label }}</span>
-                  <span v-if="item.description" class="mt-1 line-clamp-2 block text-xs leading-5 text-current/80">
-                    {{ item.description }}
-                  </span>
+                  {{ item.label }}
                 </RouterLink>
                 <a
                   v-else-if="item.href"
                   :href="item.href"
-                  class="showcase-sidebar-item-inactive rounded-2xl border border-transparent px-3 py-3 text-sm transition-colors"
+                  class="showcase-sidebar-item-inactive rounded-2xl border border-transparent px-3 py-3 text-sm font-semibold transition-colors"
                   @click="isMobileNavigationOpen = false"
                 >
-                  <span class="block font-semibold">{{ item.label }}</span>
-                  <span v-if="item.description" class="mt-1 block text-xs leading-5 text-current/80">
-                    {{ item.description }}
-                  </span>
+                  {{ item.label }}
                 </a>
               </template>
             </div>

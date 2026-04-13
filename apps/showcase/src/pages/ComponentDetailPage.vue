@@ -1,16 +1,15 @@
 <script setup lang="ts">
-import { computed, defineAsyncComponent } from 'vue'
-import { RouterLink, useRoute } from 'vue-router'
+import {computed, defineAsyncComponent} from 'vue'
+import {RouterLink, useRoute} from 'vue-router'
 import IconArrowLeft from '~icons/lucide/arrow-left'
 
-import { DsBadge, DsCard } from '@feugene/granularity'
+import {DsCard} from '@feugene/granularity'
 
 import {
   getShowcaseComponentBySlug,
   showcasePageRecord,
 } from '../app/showcase'
 import CodeBlock from '../components/doc/CodeBlock.vue'
-import EntityActionBar from '../components/doc/EntityActionBar.vue'
 import EventsTable from '../components/doc/EventsTable.vue'
 import ExampleCard from '../components/doc/ExampleCard.vue'
 import InfoSectionCard from '../components/doc/InfoSectionCard.vue'
@@ -20,11 +19,10 @@ import SlotsTable from '../components/doc/SlotsTable.vue'
 import {
   createAccessibilityItems,
   createDependencyItems,
-  createImportSnippet,
   createRelatedLinks,
   createUsageSnippet,
 } from '../components/doc/entityPageHelpers'
-import { getShowcaseComponentDoc } from '../content/componentDocs'
+import {getShowcaseComponentDoc} from '../content/componentDocs'
 
 const route = useRoute()
 
@@ -183,29 +181,10 @@ const componentDoc = computed(() => {
   return getShowcaseComponentDoc(componentEntity.value)
 })
 
-const importCode = computed(() => createImportSnippet(componentEntity.value))
 const usageCode = computed(() => createUsageSnippet(componentEntity.value))
 const accessibilityItems = computed(() => createAccessibilityItems(componentEntity.value))
 const dependencyItems = computed(() => createDependencyItems(componentEntity.value))
 const relatedLinks = computed(() => createRelatedLinks(componentEntity.value))
-
-const overviewItems = computed(() => {
-  if (!componentEntity.value)
-    return []
-
-  const propsCount = componentEntity.value.apiSections.find(section => section.key === 'props')?.items.length ?? 0
-  const slotsCount = componentEntity.value.apiSections.find(section => section.key === 'slots')?.items.length ?? 0
-  const eventsCount = componentEntity.value.apiSections.find(section => section.key === 'events')?.items.length ?? 0
-  const methodsCount = componentEntity.value.apiSections.find(section => section.key === 'methods')?.items.length ?? 0
-
-  return [
-    `Группа каталога: ${componentEntity.value.group}.`,
-    `API coverage сейчас включает ${propsCount} props, ${slotsCount} slots, ${eventsCount} events и ${methodsCount} methods/expose пунктов.`,
-    componentEntity.value.dependencies.length > 0
-      ? `Registry dependencies: ${componentEntity.value.dependencies.join(', ')}.`
-      : 'В registry не зафиксировано обязательных component-level зависимостей.',
-  ]
-})
 
 function resolvePreviewComponent(previewKey?: string) {
   if (!previewKey)
@@ -217,69 +196,21 @@ function resolvePreviewComponent(previewKey?: string) {
 
 <template>
   <div v-if="componentEntity && componentDoc" class="space-y-8">
-    <div class="showcase-text-subtle flex items-center gap-3 text-sm">
-      <RouterLink to="/components" class="inline-flex items-center gap-2 font-medium transition-colors hover:text-[var(--foreground)]">
-        <IconArrowLeft class="h-4 w-4 shrink-0" />
-        <span>Back to components</span>
-      </RouterLink>
-      <span>/</span>
-      <span>{{ componentEntity.title }}</span>
-    </div>
-
-    <DsCard class="showcase-panel rounded-3xl border p-8">
-      <div class="flex flex-wrap items-center gap-3">
+    <div>
+      <h1 class="max-w-4xl text-3xl font-semibold leading-tight lg:text-4xl">
+        {{ componentEntity.title }}
+      </h1>
+      <div class="flex flex-wrap items-center gap-3 mt-5">
         <span class="showcase-kicker text-xs font-semibold tracking-[0.18em]">
           {{ showcasePageRecord.components.eyebrow }} / {{ componentEntity.group }}
         </span>
       </div>
-
-      <div class="mt-5 space-y-4">
-        <h1 class="max-w-4xl text-4xl font-semibold leading-tight lg:text-5xl">
-          {{ componentEntity.title }}
-        </h1>
+      <div class="mt-2 space-y-4">
         <p class="showcase-text-muted max-w-3xl text-base leading-7">
           {{ componentEntity.summary }}
         </p>
       </div>
-
-      <div class="mt-5 flex flex-wrap gap-2">
-        <DsBadge
-          v-for="tag in componentEntity.tags"
-          :key="tag"
-        >
-          {{ tag }}
-        </DsBadge>
-      </div>
-
-      <EntityActionBar
-        :import-code="importCode"
-        :usage-code="usageCode"
-        :links="relatedLinks"
-      />
-    </DsCard>
-
-    <section id="overview" class="scroll-mt-28">
-      <DsCard class="showcase-panel rounded-3xl border p-6">
-        <div class="space-y-3">
-          <h2 class="text-2xl font-semibold">
-            Component overview
-          </h2>
-          <p class="showcase-text-muted max-w-3xl text-sm leading-6">
-            Эта detail page строится поверх registry + generated API и показывает, как будет выглядеть каждая отдельная страница компонента в новой витрине.
-          </p>
-        </div>
-
-        <ul class="mt-6 grid gap-3">
-          <li
-            v-for="item in overviewItems"
-            :key="item"
-            class="showcase-inline-surface rounded-2xl border px-4 py-3 text-sm leading-6"
-          >
-            {{ item }}
-          </li>
-        </ul>
-      </DsCard>
-    </section>
+    </div>
 
     <section id="live-examples" class="scroll-mt-28 space-y-4">
       <div class="space-y-2">
@@ -293,15 +224,15 @@ function resolvePreviewComponent(previewKey?: string) {
 
       <div class="grid gap-6">
         <ExampleCard
-          v-for="example in componentDoc.examples"
-          :key="example.id"
-          :title="example.title"
-          :description="example.description"
-          :code="example.code"
-          :note="example.note"
+            v-for="example in componentDoc.examples"
+            :key="example.id"
+            :title="example.title"
+            :description="example.description"
+            :code="example.code"
+            :note="example.note"
         >
           <template v-if="resolvePreviewComponent(example.previewKey)" #preview>
-            <component :is="resolvePreviewComponent(example.previewKey)" />
+            <component :is="resolvePreviewComponent(example.previewKey)"/>
           </template>
         </ExampleCard>
       </div>
@@ -312,10 +243,10 @@ function resolvePreviewComponent(previewKey?: string) {
         API
       </h2>
       <div class="grid gap-4">
-        <PropsTable :items="componentEntity.apiSections.find(section => section.key === 'props')?.items ?? []" />
-        <SlotsTable :items="componentEntity.apiSections.find(section => section.key === 'slots')?.items ?? []" />
-        <EventsTable :items="componentEntity.apiSections.find(section => section.key === 'events')?.items ?? []" />
-        <MethodsTable :items="componentEntity.apiSections.find(section => section.key === 'methods')?.items ?? []" />
+        <PropsTable :items="componentEntity.apiSections.find(section => section.key === 'props')?.items ?? []"/>
+        <SlotsTable :items="componentEntity.apiSections.find(section => section.key === 'slots')?.items ?? []"/>
+        <EventsTable :items="componentEntity.apiSections.find(section => section.key === 'events')?.items ?? []"/>
+        <MethodsTable :items="componentEntity.apiSections.find(section => section.key === 'methods')?.items ?? []"/>
       </div>
     </section>
 
@@ -323,7 +254,7 @@ function resolvePreviewComponent(previewKey?: string) {
       <h2 class="text-2xl font-semibold">
         Usage
       </h2>
-      <CodeBlock :code="usageCode" language="vue" title="Usage snippet" />
+      <CodeBlock :code="usageCode" language="vue" title="Usage snippet"/>
     </section>
 
     <section id="integration-notes" class="scroll-mt-28 space-y-4">
@@ -332,29 +263,32 @@ function resolvePreviewComponent(previewKey?: string) {
           Implementation notes
         </h2>
         <p class="showcase-text-muted max-w-3xl text-sm leading-6">
-          Вспомогательные материалы собраны после основных API и usage-блоков, чтобы не отнимать у них ширину и оставаться компактными.
+          Вспомогательные материалы собраны после основных API и usage-блоков, чтобы не отнимать у них ширину и
+          оставаться компактными.
         </p>
       </div>
 
       <div class="grid gap-4 lg:grid-cols-3">
-        <InfoSectionCard title="Accessibility" :items="accessibilityItems" variant="list" />
-        <InfoSectionCard title="Dependencies" :items="dependencyItems" variant="chips" />
-        <InfoSectionCard title="Related links" :links="relatedLinks" variant="links" />
+        <InfoSectionCard title="Accessibility" :items="accessibilityItems" variant="list"/>
+        <InfoSectionCard title="Dependencies" :items="dependencyItems" variant="chips"/>
+        <InfoSectionCard title="Related links" :links="relatedLinks" variant="links"/>
       </div>
     </section>
   </div>
 
   <DsCard
-    v-else
-    class="showcase-panel rounded-3xl border p-8"
+      v-else
+      class="showcase-panel rounded-3xl border p-8"
   >
     <h1 class="text-3xl font-semibold">
       Component not found
     </h1>
     <p class="showcase-text-muted mt-4 max-w-2xl text-sm leading-6">
-      Компонент по этому маршруту не найден в публичном registry пакета. Вернись в каталог и выбери существующую сущность.
+      Компонент по этому маршруту не найден в публичном registry пакета. Вернись в каталог и выбери существующую
+      сущность.
     </p>
-    <RouterLink to="/components" class="showcase-link-chip mt-6 inline-flex rounded-full border px-4 py-2 text-sm font-semibold transition-colors">
+    <RouterLink to="/components"
+                class="showcase-link-chip mt-6 inline-flex rounded-full border px-4 py-2 text-sm font-semibold transition-colors">
       Перейти в каталог компонентов
     </RouterLink>
   </DsCard>

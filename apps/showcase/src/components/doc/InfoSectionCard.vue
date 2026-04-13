@@ -42,7 +42,7 @@ const resolvedVariant = computed(() => {
       <li
         v-for="item in items"
         :key="item"
-        class="showcase-inline-surface rounded-2xl border px-4 py-3 showcase-text-muted text-sm leading-6"
+        class="showcase-inline-surface px-3 py-1.5 showcase-text-muted text-sm leading-6"
       >
         {{ item }}
       </li>
@@ -53,7 +53,7 @@ const resolvedVariant = computed(() => {
       class="mt-4 flex flex-wrap gap-2"
     >
       <li v-for="item in items" :key="item">
-        <span class="showcase-pill inline-flex items-center rounded-full border px-3 py-1.5 text-sm font-medium">
+        <span class="showcase-pill inline-flex items-center px-3 py-1.5 text-sm font-medium">
           {{ item }}
         </span>
       </li>
@@ -66,7 +66,7 @@ const resolvedVariant = computed(() => {
       <li v-for="link in links" :key="`${link.label}-${link.href}`">
         <a
           :href="link.href"
-          class="showcase-inline-surface flex items-center justify-between gap-3 rounded-2xl border px-4 py-3 text-sm font-medium transition-colors hover:border-primary/40 hover:text-primary"
+          class="showcase-inline-surface flex items-center justify-between gap-3 px-4 py-2 text-sm font-medium transition-colors hover:border-primary/40 hover:text-primary"
           target="_blank"
           rel="noreferrer"
         >

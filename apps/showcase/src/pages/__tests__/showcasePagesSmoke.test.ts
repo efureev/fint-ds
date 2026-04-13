@@ -14,6 +14,11 @@ const componentDetailPageSource = readFileSync(
   'utf8',
 )
 
+const componentsPageSource = readFileSync(
+  fileURLToPath(new URL('../ComponentsPage.vue', import.meta.url)),
+  'utf8',
+)
+
 const packageEntityDetailPageSource = readFileSync(
   fileURLToPath(new URL('../PackageEntityDetailPage.vue', import.meta.url)),
   'utf8',
@@ -53,6 +58,9 @@ describe('showcase page smoke coverage', () => {
     expect(componentDetailPageSource).toContain('import MethodsTable from')
     expect(componentDetailPageSource).toContain('Back to components')
     expect(componentDetailPageSource).toContain('Component not found')
+    expect(componentDetailPageSource).not.toContain('v-for="tag in componentEntity.tags"')
+    expect(componentDetailPageSource).not.toContain('Component overview')
+    expect(componentDetailPageSource).not.toContain('EntityActionBar')
   })
 
   it('делает основные doc-секции full-width и переносит meta-блоки после Usage', () => {
@@ -70,11 +78,19 @@ describe('showcase page smoke coverage', () => {
     expect(codeBlockSource).toContain('<pre class="max-w-full overflow-x-auto px-4 py-4 text-sm leading-6"><code>{{ code }}</code></pre>')
   })
 
-  it('рендерит package-level api/actions и сохраняет fallback для missing entity', () => {
+  it('рендерит package-level api и сохраняет fallback для missing entity', () => {
     expect(packageEntityDetailPageSource).toContain('import ApiTable from')
     expect(packageEntityDetailPageSource).toContain('import ExampleCard from')
-    expect(packageEntityDetailPageSource).toContain('<EntityActionBar')
+    expect(packageEntityDetailPageSource).not.toContain('EntityActionBar')
+    expect(packageEntityDetailPageSource).not.toContain('Related links')
     expect(packageEntityDetailPageSource).toContain('Package entity not found')
     expect(packageEntityDetailPageSource).toContain('Back to {{ page.shortTitle.toLowerCase() }}')
+  })
+
+  it('не использует tag-based metadata в component catalog page', () => {
+    expect(componentsPageSource).not.toContain("entity.tags.join(' ')")
+    expect(componentsPageSource).not.toContain("component.tags.includes('featured')")
+    expect(componentsPageSource).not.toContain('featuredComponents')
+    expect(componentsPageSource).toContain('componentsWithExamples')
   })
 })

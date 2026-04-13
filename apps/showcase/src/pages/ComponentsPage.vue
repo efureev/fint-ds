@@ -27,7 +27,7 @@ const filteredComponents = computed(() => {
     return showcaseComponentEntities
 
   return showcaseComponentEntities.filter((entity) => {
-    return [entity.name, entity.summary, entity.group, entity.tags.join(' ')]
+    return [entity.name, entity.summary, entity.group]
       .join(' ')
       .toLowerCase()
       .includes(query)
@@ -53,7 +53,7 @@ const groupedComponents = computed(() => {
     }))
 })
 
-const featuredComponents = computed(() => showcaseComponentEntities.filter(entity => entity.tags.includes('featured')))
+const componentsWithExamples = computed(() => showcaseComponentEntities.filter(entity => entity.examples.length > 0))
 </script>
 
 <template>
@@ -91,13 +91,13 @@ const featuredComponents = computed(() => showcaseComponentEntities.filter(entit
 
         <DsCard class="showcase-panel rounded-3xl border p-5">
           <p class="showcase-kicker text-xs font-semibold tracking-[0.18em]">
-            Featured focus
+            With examples
           </p>
           <p class="mt-3 text-3xl font-semibold">
-            {{ featuredComponents.length }}
+            {{ componentsWithExamples.length }}
           </p>
           <p class="showcase-text-muted mt-2 text-sm leading-6">
-            На этих компонентах в первую очередь собираем живые сценарии и showcase-grade detail pages.
+            Компоненты, для которых уже добавлены live examples и можно сразу посмотреть usage-сценарии.
           </p>
         </DsCard>
 
@@ -110,7 +110,7 @@ const featuredComponents = computed(() => showcaseComponentEntities.filter(entit
               Component catalog
             </h2>
             <p class="showcase-text-muted max-w-3xl text-sm leading-6">
-              Поиск работает по имени, summary, группе и tags. Это уже достаточно, чтобы быстро прыгать к нужной странице компонента.
+              Поиск работает по имени, summary и группе. Этого достаточно, чтобы быстро прыгать к нужной странице компонента.
             </p>
           </div>
 
@@ -147,7 +147,7 @@ const featuredComponents = computed(() => showcaseComponentEntities.filter(entit
                 :to="component.path"
                 class="showcase-card-link group block rounded-3xl border p-5 transition-colors"
               >
-                <div class="flex items-start justify-between gap-3">
+                <div class="flex items-start gap-3">
                   <div>
                     <p class="showcase-card-link-title text-lg font-semibold transition-colors">
                       {{ component.title }}
@@ -156,10 +156,6 @@ const featuredComponents = computed(() => showcaseComponentEntities.filter(entit
                       {{ component.summary }}
                     </p>
                   </div>
-
-                  <DsBadge v-if="component.tags.includes('featured')">
-                    featured
-                  </DsBadge>
                 </div>
 
                 <div class="showcase-text-subtle mt-4 flex flex-wrap gap-2 text-xs">
@@ -193,11 +189,11 @@ const featuredComponents = computed(() => showcaseComponentEntities.filter(entit
           С чего начать
         </h2>
         <p class="showcase-text-muted mt-3 text-sm leading-6">
-          Если нужен быстрый вход, начните с самых востребованных компонентов — для них уже проще всего оценить API и сценарии использования.
+          Если нужен быстрый вход, начните с компонентов, для которых уже есть live examples — по ним проще всего оценить API и сценарии использования.
         </p>
         <div class="mt-5 flex flex-wrap gap-2">
           <DsBadge
-            v-for="component in featuredComponents.slice(0, 6)"
+            v-for="component in componentsWithExamples.slice(0, 6)"
             :key="component.id"
           >
             {{ component.title }}

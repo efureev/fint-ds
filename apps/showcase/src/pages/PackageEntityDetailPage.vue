@@ -12,13 +12,10 @@ import {
 } from '../app/showcase'
 import CodeBlock from '../components/doc/CodeBlock.vue'
 import ApiTable from '../components/doc/ApiTable.vue'
-import EntityActionBar from '../components/doc/EntityActionBar.vue'
 import ExampleCard from '../components/doc/ExampleCard.vue'
 import InfoSectionCard from '../components/doc/InfoSectionCard.vue'
 import {
   createDependencyItems,
-  createImportSnippet,
-  createRelatedLinks,
   createUsageSnippet,
 } from '../components/doc/entityPageHelpers'
 import PackagePreviewDemo from '../demos/package/PackagePreviewDemo.vue'
@@ -36,10 +33,8 @@ const entity = computed(() => {
 
 const page = computed(() => getShowcasePageByPath(route.path))
 const entityDoc = computed(() => entity.value ? getShowcasePackageDoc(entity.value) : undefined)
-const importSnippet = computed(() => createImportSnippet(entity.value))
 const usageSnippet = computed(() => createUsageSnippet(entity.value))
 const dependencyItems = computed(() => createDependencyItems(entity.value))
-const relatedLinks = computed(() => createRelatedLinks(entity.value))
 
 const pageEyebrow = computed(() => page.value?.eyebrow ?? showcasePageRecord.overview.eyebrow)
 </script>
@@ -76,12 +71,6 @@ const pageEyebrow = computed(() => page.value?.eyebrow ?? showcasePageRecord.ove
           {{ tag }}
         </DsBadge>
       </div>
-
-      <EntityActionBar
-        :import-code="importSnippet"
-        :usage-code="usageSnippet"
-        :links="relatedLinks"
-      />
     </DsCard>
 
     <section id="overview" class="scroll-mt-28">
@@ -167,7 +156,6 @@ const pageEyebrow = computed(() => page.value?.eyebrow ?? showcasePageRecord.ove
       <div class="grid gap-4 xl:grid-cols-3">
         <InfoSectionCard title="Integration notes" :items="entityDoc.integrationNotes" />
         <InfoSectionCard title="Dependencies" :items="dependencyItems" />
-        <InfoSectionCard title="Related links" :links="relatedLinks" />
       </div>
     </section>
   </div>
