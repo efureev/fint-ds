@@ -2,64 +2,52 @@ import type { ShowcaseComponentExampleDoc } from '../types'
 
 export const dsButtonExamples: ShowcaseComponentExampleDoc[] = [
   {
+    id: 'button-builder',
+    title: 'Interactive button constructor',
+    description: 'Живой playground для всех пропсов `DsButton`: меняйте visual variant, size, type и состояния без переключения между отдельными demo-картами.',
+    status: 'ready',
+    previewKey: 'ds-button-builder',
+    code: '',
+    note: 'Лучший формат для дизайн-ревью и QA: один сценарий сразу покрывает все пропсы компонента и помогает быстро проверить доступность icon-only режима.',
+  },
+  {
     id: 'button-variants',
     title: 'Variants and sizes',
-    description: 'Сравниваем визуальные варианты и размеры `DsButton`, чтобы сразу увидеть диапазон базовых action-сценариев.',
+    description: 'Собираем полный visual matrix по всем вариантам и размерам `DsButton`, чтобы быстро выбрать правильный action-weight для интерфейса.',
     status: 'ready',
     previewKey: 'ds-button-variants',
     code: `<script setup lang="ts">
 import { DsButton } from '@feugene/granularity'
+
+const variantRows = [
+  { value: 'primary', label: 'Primary' },
+  { value: 'secondary', label: 'Secondary' },
+  { value: 'outline', label: 'Outline' },
+  { value: 'ghost', label: 'Ghost' },
+  { value: 'ghost-border', label: 'Ghost border' },
+  { value: 'destructive', label: 'Destructive' },
+]
+
+const sizeOptions = ['xs', 'sm', 'md', 'lg']
 </script>
 
 <template>
-  <div class="flex flex-wrap gap-3">
-    <DsButton variant="primary">Primary</DsButton>
-    <DsButton variant="secondary">Secondary</DsButton>
-    <DsButton variant="outline">Outline</DsButton>
-    <DsButton variant="ghost">Ghost</DsButton>
-  </div>
-
-  <div class="mt-3 flex flex-wrap gap-3">
-    <DsButton size="xs">XS</DsButton>
-    <DsButton size="sm">SM</DsButton>
-    <DsButton size="md">MD</DsButton>
-    <DsButton size="lg">LG</DsButton>
-  </div>
-</template>`,
-  },
-  {
-    id: 'button-loading',
-    title: 'Loading, disabled and icon-only',
-    description: 'Отдельно изолируем состояния, которые чаще всего ломают UX: loading, disabled и square/icon-only режимы.',
-    status: 'ready',
-    previewKey: 'ds-button-states',
-    code: `<script setup lang="ts">
-import { ref } from 'vue'
-
-import { DsButton } from '@feugene/granularity'
-import IconPlus from '~icons/lucide/plus'
-import IconSettings from '~icons/lucide/settings'
-
-const isLoading = ref(false)
-</script>
-
-<template>
-  <div class="flex flex-wrap gap-3">
-    <DsButton :loading="isLoading" @click="isLoading = !isLoading">
-      Toggle loading
-    </DsButton>
-
-    <DsButton variant="outline" disabled>
-      Disabled
-    </DsButton>
-
-    <DsButton square aria-label="Open settings">
-      <IconSettings class="h-4 w-4" aria-hidden="true" />
-    </DsButton>
-
-    <DsButton variant="ghost-border" square aria-label="Create item">
-      <IconPlus class="h-4 w-4" aria-hidden="true" />
-    </DsButton>
+  <div class="grid gap-3">
+    <div
+      v-for="item in variantRows"
+      :key="item.value"
+      class="flex flex-wrap items-center gap-3"
+    >
+      <span class="w-28 text-sm text-slate-500">{{ item.label }}</span>
+      <DsButton
+        v-for="size in sizeOptions"
+        :key="item.value + '-' + size"
+        :variant="item.value"
+        :size="size"
+      >
+        {{ size.toUpperCase() }}
+      </DsButton>
+    </div>
   </div>
 </template>`,
   },

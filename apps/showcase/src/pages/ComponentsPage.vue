@@ -64,7 +64,7 @@ const groupedComponents = computed(() => {
         <span class="showcase-kicker text-xs font-semibold tracking-[0.18em]">
           {{ page.eyebrow }}
         </span>
-        <h1 class="max-w-4xl text-4xl font-semibold leading-tight lg:text-5xl">
+        <h1 class="max-w-4xl text-3xl font-semibold leading-tight lg:text-4xl">
           Каталог компонентов
         </h1>
         <p class="showcase-text-muted max-w-3xl text-base leading-7">
@@ -81,8 +81,7 @@ const groupedComponents = computed(() => {
               Component catalog
             </h2>
             <p class="showcase-text-muted max-w-3xl text-sm leading-6">
-              Поиск работает по имени, summary и группе. Этого достаточно, чтобы быстро открыть нужный компонент.
-              Сейчас в каталоге {{ componentsWithExamples.length }} компонентов уже сопровождаются примерами.
+              Поиск работает по имени, summary и группе. Сейчас в каталоге {{ componentsWithExamples.length }} компонентов уже сопровождаются примерами.
             </p>
           </div>
 

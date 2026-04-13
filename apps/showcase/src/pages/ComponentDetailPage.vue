@@ -45,8 +45,8 @@ const previewRegistry = {
   'ds-button-group-filter-rail': defineAsyncComponent(() => import('../demos/components/ds-button-group/DsButtonGroupFilterRailDemo.vue')),
   'ds-button-group-segmented': defineAsyncComponent(() => import('../demos/components/ds-button-group/DsButtonGroupSegmentedDemo.vue')),
   'ds-button-group-toolbar': defineAsyncComponent(() => import('../demos/components/ds-button-group/DsButtonGroupToolbarDemo.vue')),
+  'ds-button-builder': defineAsyncComponent(() => import('../demos/components/ds-button/DsButtonBuilderDemo.vue')),
   'ds-button-group': defineAsyncComponent(() => import('../demos/components/ds-button/DsButtonGroupDemo.vue')),
-  'ds-button-states': defineAsyncComponent(() => import('../demos/components/ds-button/DsButtonStatesDemo.vue')),
   'ds-button-variants': defineAsyncComponent(() => import('../demos/components/ds-button/DsButtonVariantsDemo.vue')),
   'ds-card-action-panel': defineAsyncComponent(() => import('../demos/components/ds-card/DsCardActionPanelDemo.vue')),
   'ds-card-basic-surface': defineAsyncComponent(() => import('../demos/components/ds-card/DsCardBasicSurfaceDemo.vue')),
@@ -197,13 +197,6 @@ function resolvePreviewComponent(previewKey?: string) {
 <template>
   <div v-if="componentEntity && componentDoc" class="space-y-8">
     <div>
-      <RouterLink
-        to="/components"
-        class="showcase-link-chip inline-flex rounded-full border px-4 py-2 text-sm font-semibold transition-colors"
-      >
-        <IconArrowLeft class="mr-2 h-4 w-4" />
-        Back to components
-      </RouterLink>
       <h1 class="max-w-4xl text-3xl font-semibold leading-tight lg:text-4xl">
         {{ componentEntity.title }}
       </h1>
@@ -231,15 +224,15 @@ function resolvePreviewComponent(previewKey?: string) {
 
       <div class="grid gap-6">
         <ExampleCard
-          v-for="example in componentDoc.examples"
-          :key="example.id"
-          :title="example.title"
-          :description="example.description"
-          :code="example.code"
-          :note="example.note"
+            v-for="example in componentDoc.examples"
+            :key="example.id"
+            :title="example.title"
+            :description="example.description"
+            :code="example.code"
+            :note="example.note"
         >
           <template v-if="resolvePreviewComponent(example.previewKey)" #preview>
-            <component :is="resolvePreviewComponent(example.previewKey)" />
+            <component :is="resolvePreviewComponent(example.previewKey)"/>
           </template>
         </ExampleCard>
       </div>
@@ -261,7 +254,7 @@ function resolvePreviewComponent(previewKey?: string) {
       <h2 class="text-2xl font-semibold">
         Usage
       </h2>
-      <CodeBlock :code="usageCode" language="vue" title="Usage snippet" />
+      <CodeBlock :code="usageCode" language="vue" title="Usage snippet"/>
     </section>
 
     <section id="integration-notes" class="scroll-mt-28 space-y-4">
@@ -275,16 +268,16 @@ function resolvePreviewComponent(previewKey?: string) {
       </div>
 
       <div class="grid gap-4 lg:grid-cols-3">
-        <InfoSectionCard title="Accessibility" :items="accessibilityItems" variant="list" />
-        <InfoSectionCard title="Dependencies" :items="dependencyItems" variant="chips" />
-        <InfoSectionCard title="Related links" :links="relatedLinks" variant="links" />
+        <InfoSectionCard title="Accessibility" :items="accessibilityItems" variant="list"/>
+        <InfoSectionCard title="Dependencies" :items="dependencyItems" variant="chips"/>
+        <InfoSectionCard title="Related links" :links="relatedLinks" variant="links"/>
       </div>
     </section>
   </div>
 
   <DsCard
-    v-else
-    class="showcase-panel rounded-3xl border p-8"
+      v-else
+      class="showcase-panel rounded-3xl border p-8"
   >
     <h1 class="text-3xl font-semibold">
       Component not found
@@ -294,8 +287,8 @@ function resolvePreviewComponent(previewKey?: string) {
       сущность.
     </p>
     <RouterLink
-      to="/components"
-      class="showcase-link-chip mt-6 inline-flex rounded-full border px-4 py-2 text-sm font-semibold transition-colors"
+        to="/components"
+        class="showcase-link-chip mt-6 inline-flex rounded-full border px-4 py-2 text-sm font-semibold transition-colors"
     >
       Перейти в каталог компонентов
     </RouterLink>
