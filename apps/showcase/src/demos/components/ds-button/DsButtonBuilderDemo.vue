@@ -95,8 +95,8 @@ const previewCode = computed(() => {
 
     <div class="grid gap-4">
       <div
-          class="grid min-h-[280px] place-items-center rounded-[24px] border border-dashed border-[color:color-mix(in_srgb,var(--primary)_16%,var(--border)_84%)] bg-[linear-gradient(135deg,color-mix(in_srgb,var(--background)_68%,var(--primary)_6%)_0%,color-mix(in_srgb,var(--muted)_62%,var(--background)_38%)_100%)] p-6">
-        <div class="flex flex-col items-center gap-4 text-center">
+          class="relative grid min-h-[280px] rounded-[24px] border border-dashed border-[color:color-mix(in_srgb,var(--primary)_16%,var(--border)_84%)] bg-[linear-gradient(135deg,color-mix(in_srgb,var(--background)_68%,var(--primary)_6%)_0%,color-mix(in_srgb,var(--muted)_62%,var(--background)_38%)_100%)] p-6 pb-[72px]">
+        <div class="flex h-full flex-col items-center justify-center gap-4 text-center">
           <div class="showcase-demo-caption text-xs">
             Preview
           </div>
@@ -116,17 +116,19 @@ const previewCode = computed(() => {
             </template>
           </DsButton>
 
-          <div class="showcase-demo-text max-w-[40ch] text-sm">
-            <template v-if="square">
-              В square-режиме кнопка показывает только иконку, поэтому `aria-label` становится обязательным для screen
-              reader.
-            </template>
-            <template v-else-if="loading">
-              Loading делает кнопку недоступной автоматически — это полезно для защиты от повторного submit.
-            </template>
-            <template v-else>
-              Используйте конструктор, чтобы быстро выбрать правильную комбинацию варианта, размера и типа действия.
-            </template>
+          <div class="pointer-events-none absolute inset-x-6 bottom-6 flex justify-center border-t border-dashed border-[color:color-mix(in_srgb,var(--primary)_16%,var(--border)_84%)] pt-2">
+            <div class="showcase-demo-text max-w-[40ch] text-center text-sm">
+              <template v-if="square">
+                В square-режиме кнопка показывает только иконку, поэтому `aria-label` становится обязательным для screen
+                reader.
+              </template>
+              <template v-else-if="loading">
+                Loading делает кнопку недоступной автоматически — это полезно для защиты от повторного submit.
+              </template>
+              <template v-else>
+                Используйте конструктор, чтобы быстро выбрать правильную комбинацию варианта, размера и типа действия.
+              </template>
+            </div>
           </div>
         </div>
       </div>

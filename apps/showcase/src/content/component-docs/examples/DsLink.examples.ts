@@ -2,6 +2,14 @@ import type { ShowcaseComponentExampleDoc } from '../types'
 
 export const dsLinkExamples: ShowcaseComponentExampleDoc[] = [
   {
+    id: 'link-builder',
+    title: 'Interactive link constructor',
+    description: 'Соберите `DsLink` под ваш сценарий: переключайте variant, underline, size, навигационные атрибуты и сразу смотрите итоговый snippet.',
+    status: 'ready',
+    previewKey: 'ds-link-builder',
+    code: '',
+  },
+  {
     id: 'link-variants',
     title: 'Variants and underline modes',
     description: 'На витрине важно сравнить `variant`, `underline` и size contract, потому что `DsLink` часто используется как inline action вместо кнопки.',

@@ -4,6 +4,23 @@ export type ShowcaseComponentApiFallback = Partial<Record<'props' | 'slots' | 'e
 
 export const showcaseComponentApiFallbacks: Record<string, ShowcaseComponentApiFallback> = {
   DsButton: {
+    props: {
+      key: 'props',
+      title: 'Props',
+      origin: 'manual',
+      items: [
+        {
+          name: 'variant',
+          description: '',
+          type: 'DsButtonVariant: \"primary\" | \"secondary\" | \"outline\" | \"ghost\" | \"ghost-border\" | \"destructive\"',
+        },
+        {
+          name: 'size',
+          description: '',
+          type: 'DsButtonSize: \"xs\" | \"sm\" | \"md\" | \"lg\"',
+        },
+      ],
+    },
     slots: {
       key: 'slots',
       title: 'Slots',
@@ -27,6 +44,25 @@ export const showcaseComponentApiFallbacks: Record<string, ShowcaseComponentApiF
           name: 'default',
           description: 'Основное содержимое карточки.',
           type: '() => VNode[]',
+        },
+      ],
+    },
+  },
+  DsLink: {
+    props: {
+      key: 'props',
+      title: 'Props',
+      origin: 'manual',
+      items: [
+        {
+          name: 'variant',
+          description: '',
+          type: 'DsLinkVariant: \"primary\" | \"default\" | \"muted\" | \"danger\"',
+        },
+        {
+          name: 'size',
+          description: '',
+          type: 'DsLinkSize: \"sm\" | \"md\" | \"lg\"',
         },
       ],
     },

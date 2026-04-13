@@ -102,6 +102,7 @@ const previewRegistry = {
   'ds-input-tag-custom-slot': defineAsyncComponent(() => import('../demos/components/ds-input-tag/DsInputTagCustomTagDemo.vue')),
   'ds-input-tag-max-state': defineAsyncComponent(() => import('../demos/components/ds-input-tag/DsInputTagMaxStateDemo.vue')),
   'ds-input-validation-states': defineAsyncComponent(() => import('../demos/components/ds-input/DsInputStatesDemo.vue')),
+  'ds-link-builder': defineAsyncComponent(() => import('../demos/components/ds-link/DsLinkBuilderDemo.vue')),
   'ds-link-disabled-states': defineAsyncComponent(() => import('../demos/components/ds-link/DsLinkDisabledStatesDemo.vue')),
   'ds-link-external': defineAsyncComponent(() => import('../demos/components/ds-link/DsLinkExternalDemo.vue')),
   'ds-link-variants': defineAsyncComponent(() => import('../demos/components/ds-link/DsLinkVariantsDemo.vue')),

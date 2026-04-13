@@ -25,4 +25,25 @@ describe('showcase generated component API metadata', () => {
     expect(slotsSection?.origin).toBe('generated')
     expect(slotsSection?.items.find(item => item.name === 'default')?.description).toContain('Текст кнопки')
   })
+
+  it('раскрывает literal union значения для variant и size у DsButton и DsLink в API showcase', () => {
+    const buttonEntity = showcaseComponentEntities.find(entity => entity.name === 'DsButton')
+    const linkEntity = showcaseComponentEntities.find(entity => entity.name === 'DsLink')
+
+    const buttonProps = buttonEntity?.apiSections.find(section => section.key === 'props')
+    const linkProps = linkEntity?.apiSections.find(section => section.key === 'props')
+
+    expect(buttonProps?.items.find(item => item.name === 'variant')?.type).toBe(
+      'DsButtonVariant: "primary" | "secondary" | "outline" | "ghost" | "ghost-border" | "destructive"',
+    )
+    expect(buttonProps?.items.find(item => item.name === 'size')?.type).toBe(
+      'DsButtonSize: "xs" | "sm" | "md" | "lg"',
+    )
+    expect(linkProps?.items.find(item => item.name === 'variant')?.type).toBe(
+      'DsLinkVariant: "primary" | "default" | "muted" | "danger"',
+    )
+    expect(linkProps?.items.find(item => item.name === 'size')?.type).toBe(
+      'DsLinkSize: "sm" | "md" | "lg"',
+    )
+  })
 })
