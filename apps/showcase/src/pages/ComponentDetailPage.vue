@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import {computed, defineAsyncComponent} from 'vue'
 import {RouterLink, useRoute} from 'vue-router'
-import IconArrowLeft from '~icons/lucide/arrow-left'
 
 import {DsCard} from '@feugene/granularity'
 
@@ -9,7 +8,6 @@ import {
   getShowcaseComponentBySlug,
   showcasePageRecord,
 } from '../app/showcase'
-import CodeBlock from '../components/doc/CodeBlock.vue'
 import EventsTable from '../components/doc/EventsTable.vue'
 import ExampleCard from '../components/doc/ExampleCard.vue'
 import InfoSectionCard from '../components/doc/InfoSectionCard.vue'
@@ -20,7 +18,6 @@ import {
   createAccessibilityItems,
   createDependencyItems,
   createRelatedLinks,
-  createUsageSnippet,
 } from '../components/doc/entityPageHelpers'
 import {getShowcaseComponentDoc} from '../content/componentDocs'
 
@@ -183,7 +180,6 @@ const componentDoc = computed(() => {
   return getShowcaseComponentDoc(componentEntity.value)
 })
 
-const usageCode = computed(() => createUsageSnippet(componentEntity.value))
 const accessibilityItems = computed(() => createAccessibilityItems(componentEntity.value))
 const dependencyItems = computed(() => createDependencyItems(componentEntity.value))
 const relatedLinks = computed(() => createRelatedLinks(componentEntity.value))
@@ -250,13 +246,6 @@ function resolvePreviewComponent(previewKey?: string) {
         <EventsTable :items="componentEntity.apiSections.find(section => section.key === 'events')?.items ?? []"/>
         <MethodsTable :items="componentEntity.apiSections.find(section => section.key === 'methods')?.items ?? []"/>
       </div>
-    </section>
-
-    <section id="usage" class="scroll-mt-28 space-y-4">
-      <h2 class="text-2xl font-semibold">
-        Usage
-      </h2>
-      <CodeBlock :code="usageCode" language="vue" title="Usage snippet"/>
     </section>
 
     <section id="integration-notes" class="scroll-mt-28 space-y-4">

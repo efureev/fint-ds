@@ -56,21 +56,20 @@ describe('showcase page smoke coverage', () => {
     expect(componentDetailPageSource).toContain('import SlotsTable from')
     expect(componentDetailPageSource).toContain('import EventsTable from')
     expect(componentDetailPageSource).toContain('import MethodsTable from')
-    expect(componentDetailPageSource).toContain('Back to components')
+    expect(componentDetailPageSource).toContain('Перейти в каталог компонентов')
     expect(componentDetailPageSource).toContain('Component not found')
     expect(componentDetailPageSource).not.toContain('v-for="tag in componentEntity.tags"')
     expect(componentDetailPageSource).not.toContain('Component overview')
     expect(componentDetailPageSource).not.toContain('EntityActionBar')
   })
 
-  it('делает основные doc-секции full-width и переносит meta-блоки после Usage', () => {
+  it('делает основные doc-секции full-width и не рендерит отдельный Usage-блок на страницах компонентов', () => {
     expect(componentDetailPageSource).not.toContain('xl:grid-cols-[minmax(0,1.4fr)_minmax(320px,0.9fr)]')
-    expect(componentDetailPageSource).toContain('<section id="usage" class="scroll-mt-28 space-y-4">')
     expect(componentDetailPageSource).toContain('<section id="integration-notes" class="scroll-mt-28 space-y-4">')
-    expect(componentDetailPageSource.indexOf('<section id="usage"')).toBeLessThan(componentDetailPageSource.indexOf('<section id="integration-notes"'))
+    expect(componentDetailPageSource).not.toContain('<section id="usage" class="scroll-mt-28 space-y-4">')
 
     expect(docPageSource).not.toContain('xl:grid-cols-[minmax(0,1.4fr)_minmax(320px,0.9fr)]')
-    expect(docPageSource).toContain('<section v-if="usageCode" id="usage" class="space-y-4">')
+    expect(docPageSource).not.toContain('<section v-if="usageCode" id="usage" class="space-y-4">')
     expect(docPageSource).toContain('<section class="space-y-4">')
 
     expect(exampleCardSource).toContain('class="showcase-panel min-w-0 rounded-3xl border p-6"')

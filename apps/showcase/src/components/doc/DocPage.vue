@@ -4,7 +4,6 @@ import { DsCard } from '@feugene/granularity'
 import InlineRichText from '../content/InlineRichText.vue'
 import type { ShowcaseApiSectionMeta, ShowcaseExampleMeta } from '../../content/model'
 import type { ShowcaseRelatedLink } from './entityPageHelpers'
-import CodeBlock from './CodeBlock.vue'
 import EventsTable from './EventsTable.vue'
 import ExampleCard from './ExampleCard.vue'
 import InfoSectionCard from './InfoSectionCard.vue'
@@ -104,11 +103,6 @@ defineProps<{
         <EventsTable :items="apiSections?.find(section => section.key === 'events')?.items ?? apiSections?.find(section => section.key === 'parameters')?.items ?? []" />
         <MethodsTable :items="apiSections?.find(section => section.key === 'methods')?.items ?? apiSections?.find(section => section.key === 'returns')?.items ?? []" />
       </div>
-    </section>
-
-    <section v-if="usageCode" id="usage" class="space-y-4">
-      <h2 class="text-2xl font-semibold">Usage</h2>
-      <CodeBlock :code="usageCode" language="ts" title="Usage snippet" />
     </section>
 
     <section class="space-y-4">

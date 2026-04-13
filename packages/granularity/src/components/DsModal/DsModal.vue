@@ -41,36 +41,36 @@ function onDialogClose(): void {
     <TransitionRoot :show="open" as="template">
       <Dialog
         as="div"
-        class=":uno: fixed inset-0 z-50"
+        class="fixed inset-0 z-50"
         @close="onDialogClose"
         @keydown.esc.stop.prevent="close"
       >
-        <div class=":uno: fixed inset-0 overflow-y-auto p-4 sm:p-6">
-          <div class=":uno: min-h-full flex items-center justify-center">
+        <div class="fixed inset-0 overflow-y-auto p-4 sm:p-6">
+          <div class="min-h-full flex items-center justify-center">
             <TransitionChild
               as="template"
-              enter=":uno: duration-200 ease-out"
-              enter-from=":uno: opacity-0"
-              enter-to=":uno: opacity-100"
-              leave=":uno: duration-150 ease-in"
-              leave-from=":uno: opacity-100"
-              leave-to=":uno: opacity-0"
+              enter="duration-200 ease-out"
+              enter-from="opacity-0"
+              enter-to="opacity-100"
+              leave="duration-150 ease-in"
+              leave-from="opacity-100"
+              leave-to="opacity-0"
             >
               <div
                 data-ds-modal-overlay
-                class=":uno: fixed inset-0 z-0 bg-black/40"
+                class="fixed inset-0 z-0 bg-black/40"
                 aria-hidden="true"
               />
             </TransitionChild>
 
             <TransitionChild
               as="template"
-              enter=":uno: duration-200 ease-out"
-              enter-from=":uno: opacity-0 translate-y-2 sm:translate-y-0 sm:scale-95"
-              enter-to=":uno: opacity-100 translate-y-0 sm:scale-100"
-              leave=":uno: duration-150 ease-in"
-              leave-from=":uno: opacity-100 translate-y-0 sm:scale-100"
-              leave-to=":uno: opacity-0 translate-y-2 sm:translate-y-0 sm:scale-95"
+              enter="duration-200 ease-out"
+              enter-from="opacity-0 translate-y-2 sm:translate-y-0 sm:scale-95"
+              enter-to="opacity-100 translate-y-0 sm:scale-100"
+              leave="duration-150 ease-in"
+              leave-from="opacity-100 translate-y-0 sm:scale-100"
+              leave-to="opacity-0 translate-y-2 sm:translate-y-0 sm:scale-95"
             >
               <DialogPanel
                 data-ds-modal-panel
