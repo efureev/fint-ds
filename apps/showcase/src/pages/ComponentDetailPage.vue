@@ -145,6 +145,7 @@ const previewRegistry = {
   'ds-skeleton-dashboard-layout': defineAsyncComponent(() => import('../demos/components/ds-skeleton/DsSkeletonDashboardDemo.vue')),
   'ds-skeleton-list-placeholder': defineAsyncComponent(() => import('../demos/components/ds-skeleton/DsSkeletonListDemo.vue')),
   'ds-skeleton-text-card': defineAsyncComponent(() => import('../demos/components/ds-skeleton/DsSkeletonTextCardDemo.vue')),
+  'ds-switch-builder': defineAsyncComponent(() => import('../demos/components/ds-switch/DsSwitchBuilderDemo.vue')),
   'ds-switch-custom-colors': defineAsyncComponent(() => import('../demos/components/ds-switch/DsSwitchColorsDemo.vue')),
   'ds-switch-disabled-labeled': defineAsyncComponent(() => import('../demos/components/ds-switch/DsSwitchDisabledDemo.vue')),
   'ds-switch-size-scale': defineAsyncComponent(() => import('../demos/components/ds-switch/DsSwitchSizesDemo.vue')),

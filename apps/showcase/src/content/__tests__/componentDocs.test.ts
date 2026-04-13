@@ -114,6 +114,23 @@ describe('component docs metadata', () => {
     expect(treeSelectDoc.examples.every(example => example.previewKey?.startsWith('ds-tree-select'))).toBe(true)
   })
 
+  it('выводит интерактивный builder первым live-example для `DsSwitch`', () => {
+    const switchEntity = showcaseComponentEntities.find(entity => entity.name === 'DsSwitch')
+
+    expect(switchEntity).toBeDefined()
+
+    const doc = getShowcaseComponentDoc(switchEntity!)
+
+    expect(doc.examples).toHaveLength(4)
+    expect(doc.examples[0]).toMatchObject({
+      id: 'switch-builder',
+      previewKey: 'ds-switch-builder',
+      code: '',
+      status: 'ready',
+    })
+    expect(doc.examples.every(example => example.previewKey?.startsWith('ds-switch'))).toBe(true)
+  })
+
   it('возвращает live-scenarios для form-controls `DsInput`, `DsNumberInput`, `DsTextarea` и `DsSwitch`', () => {
     const inputEntity = showcaseComponentEntities.find(entity => entity.name === 'DsInput')
     const numberInputEntity = showcaseComponentEntities.find(entity => entity.name === 'DsNumberInput')
@@ -142,7 +159,7 @@ describe('component docs metadata', () => {
     expect(textareaDoc.examples.every(example => example.status === 'ready')).toBe(true)
     expect(textareaDoc.examples.every(example => example.previewKey?.startsWith('ds-textarea'))).toBe(true)
 
-    expect(switchDoc.examples).toHaveLength(3)
+    expect(switchDoc.examples).toHaveLength(4)
     expect(switchDoc.examples.every(example => example.status === 'ready')).toBe(true)
     expect(switchDoc.examples.every(example => example.previewKey?.startsWith('ds-switch'))).toBe(true)
   })
@@ -313,7 +330,7 @@ describe('component docs metadata', () => {
     expect(iconDoc.examples.every(example => example.status === 'ready')).toBe(true)
     expect(iconDoc.examples.every(example => example.previewKey?.startsWith('ds-icon'))).toBe(true)
 
-    expect(linkDoc.examples).toHaveLength(3)
+    expect(linkDoc.examples).toHaveLength(4)
     expect(linkDoc.examples.every(example => example.status === 'ready')).toBe(true)
     expect(linkDoc.examples.every(example => example.previewKey?.startsWith('ds-link'))).toBe(true)
 

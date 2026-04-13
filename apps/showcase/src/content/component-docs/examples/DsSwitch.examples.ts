@@ -2,6 +2,14 @@ import type { ShowcaseComponentExampleDoc } from '../types'
 
 export const dsSwitchExamples: ShowcaseComponentExampleDoc[] = [
   {
+    id: 'switch-builder',
+    title: 'Interactive switch constructor',
+    description: 'Соберите `DsSwitch` под ваш сценарий: меняйте состояние, size, подпись и локальные color overrides, сразу получая итоговый snippet.',
+    status: 'ready',
+    previewKey: 'ds-switch-builder',
+    code: '',
+  },
+  {
     id: 'switch-size-scale',
     title: 'Size scale from compact to prominent',
     description: 'Один сценарий показывает, как переключатель масштабируется от компактных control bars до больших form-sections без изменения поведения.',
