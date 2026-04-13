@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { DsCard } from '@feugene/granularity'
 
+import InlineRichText from '../content/InlineRichText.vue'
 import CodeBlock from './CodeBlock.vue'
 
 defineProps<{
@@ -14,16 +15,16 @@ defineProps<{
 
 <template>
   <DsCard class="showcase-panel min-w-0 rounded-3xl border p-6">
-    <div class="space-y-2">
+    <div class="min-w-0 space-y-2">
       <h3 class="text-xl font-semibold">
         {{ title }}
       </h3>
-      <p class="showcase-text-muted text-sm leading-6">
-        {{ description }}
+      <p class="showcase-text-muted min-w-0 text-sm leading-6">
+        <InlineRichText :text="description" />
       </p>
     </div>
 
-    <div class="showcase-empty-state mt-5 rounded-2xl border border-dashed px-4 py-6 text-sm">
+    <div class="showcase-empty-state mt-5 min-w-0 overflow-hidden rounded-2xl border border-dashed px-4 py-6 text-sm">
       <slot name="preview">
         Preview area зарезервирован под live demo следующего этапа.
       </slot>
@@ -39,9 +40,9 @@ defineProps<{
 
     <p
       v-if="note"
-      class="showcase-text-subtle mt-4 text-sm leading-6"
+      class="showcase-text-subtle mt-4 min-w-0 text-sm leading-6"
     >
-      {{ note }}
+      <InlineRichText :text="note" />
     </p>
   </DsCard>
 </template>

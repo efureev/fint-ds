@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { DsCard } from '@feugene/granularity'
 
+import InlineRichText from '../content/InlineRichText.vue'
 import type { ShowcaseApiSectionMeta, ShowcaseExampleMeta } from '../../content/model'
 import type { ShowcaseRelatedLink } from './entityPageHelpers'
 import CodeBlock from './CodeBlock.vue'
@@ -40,7 +41,7 @@ defineProps<{
           {{ title }}
         </h1>
         <p class="showcase-text-muted max-w-3xl text-base leading-7">
-          {{ description }}
+          <InlineRichText :text="description" />
         </p>
       </div>
     </DsCard>
@@ -63,13 +64,13 @@ defineProps<{
           </div>
 
           <p class="showcase-text-muted max-w-3xl text-sm leading-6">
-            {{ section.description }}
+            <InlineRichText :text="section.description" />
           </p>
         </div>
 
         <ul class="mt-6 grid gap-3">
           <li v-for="bullet in section.bullets" :key="bullet" class="showcase-inline-surface rounded-2xl border px-4 py-3 text-sm leading-6">
-            {{ bullet }}
+            <InlineRichText :text="bullet" />
           </li>
         </ul>
       </DsCard>
@@ -79,7 +80,7 @@ defineProps<{
       <div class="space-y-2">
         <h2 class="text-2xl font-semibold">Live examples</h2>
         <p class="showcase-text-muted text-sm leading-6">
-          Блоки примеров уже собраны в reusable primitive-формате и готовы к подключению реальных live demo.
+          Наглядные сценарии использования без лишних пояснений.
         </p>
       </div>
 
@@ -114,7 +115,7 @@ defineProps<{
       <div class="space-y-2">
         <h2 class="text-2xl font-semibold">Implementation notes</h2>
         <p class="showcase-text-muted max-w-3xl text-sm leading-6">
-          Дополнительные подсказки по accessibility, зависимостям и связанным материалам собраны отдельно, чтобы не конкурировать с основными API и usage-блоками.
+          Дополнительные заметки по доступности, зависимостям и связанным материалам.
         </p>
       </div>
 

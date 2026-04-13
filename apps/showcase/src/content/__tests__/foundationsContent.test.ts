@@ -29,12 +29,18 @@ describe('showcase foundations content', () => {
   })
 
   it('даёт quick-start snippets и обзорные метрики для landing/foundations страниц', () => {
-    expect(showcaseQuickStartCards).toHaveLength(3)
+    expect(showcaseQuickStartCards).toHaveLength(5)
     expect(showcaseQuickStartCards.map(card => card.id)).toEqual([
       'quick-start-root',
-      'quick-start-granular',
-      'quick-start-uno',
+      'quick-start-subpath-js',
+      'quick-start-component-css',
+      'quick-start-uno-node',
+      'quick-start-uno-pure',
     ])
+    expect(showcaseQuickStartCards.find(card => card.id === 'quick-start-root')?.code).toContain("import '@feugene/granularity/styles.css'")
+    expect(showcaseQuickStartCards.find(card => card.id === 'quick-start-root')?.code).not.toContain("@feugene/granularity/styles/tokens.css")
+    expect(showcaseQuickStartCards.find(card => card.id === 'quick-start-component-css')?.code).toContain("@feugene/granularity/components/DsButton/styles.css")
+    expect(showcaseQuickStartCards.find(card => card.id === 'quick-start-component-css')?.code).not.toContain("@feugene/granularity/styles/base.css")
     expect(showcaseInstallationNarrative).toContain('@feugene/granularity/uno-node')
     expect(showcaseFoundationStats).toHaveLength(3)
     expect(showcaseFoundationsChecklist).toHaveLength(3)

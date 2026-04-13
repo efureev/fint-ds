@@ -65,16 +65,14 @@ const rootImportSnippet = `import {
   DsCard,
 } from '@feugene/granularity'
 
-import '@feugene/granularity/styles/tokens.css'
-import '@feugene/granularity/styles/base.css'
-import '@feugene/granularity/styles/themes/light.css'
 import '@feugene/granularity/styles.css'`
 
 const granularImportSnippet = `import { DsButton } from '@feugene/granularity/components/DsButton'
 
-import '@feugene/granularity/styles/tokens.css'
-import '@feugene/granularity/styles/base.css'
-import '@feugene/granularity/styles/themes/light.css'
+import '@feugene/granularity/styles.css'`
+
+const granularComponentCssSnippet = `import { DsButton } from '@feugene/granularity/components/DsButton'
+
 import '@feugene/granularity/components/DsButton/styles.css'`
 
 const useThemeSnippet = `import { initThemeEarly, useTheme } from '@feugene/granularity'
@@ -192,27 +190,53 @@ const tokensCssExcerpt = `:root {
 export const showcaseQuickStartCards: ShowcaseQuickStartCard[] = [
   {
     id: 'quick-start-root',
-    title: 'Quick start через root API',
-    description: 'Самый простой onboarding для витрины, внутреннего backoffice и быстрых прототипов.',
+    title: 'Быстрый старт: root import + `styles.css`',
+    description: 'Самый прямой сценарий из документации: root API даёт простой вход, а `styles.css` сразу подключает foundation и стили всех компонентов.',
     code: rootImportSnippet,
     language: 'ts',
-    note: 'Подходит, когда важнее DX и нужно быстро поднять несколько компонентов без granular-оптимизации.',
+    note: 'Подходит для первого подключения, прототипов и экранов, где важнее быстрый старт, чем точная настройка bundle.',
   },
   {
-    id: 'quick-start-granular',
-    title: 'Granular import для точечного bundle',
-    description: 'Минимальный JS/CSS путь без обязательного перехода на `UnoCSS` preset.',
+    id: 'quick-start-subpath-js',
+    title: 'Granular JS: subpath import + `styles.css`',
     code: granularImportSnippet,
     language: 'ts',
-    note: 'Используйте subpath exports, если хотите контролировать bundle на уровне конкретных компонентов.',
+    description: 'Сценарий для более точного `JS` bundle: компоненты импортируются через subpath exports, а CSS остаётся в общем пакетном entrypoint-е.',
+    note: 'Удобный переходный вариант, если хочется уменьшить `JS`-граф без ручной сборки component-level CSS.',
   },
   {
-    id: 'quick-start-uno',
-    title: 'Production путь через `UnoCSS` preset',
-    description: 'Предпочтительный сценарий, когда приложение уже живёт на `UnoCSS` и хочет собирать только нужные стили.',
+    id: 'quick-start-component-css',
+    title: 'Минимальный CSS для 1–2 компонентов',
+    description: 'Если нужен точечный CSS без UnoCSS, используйте component-level bundle: он уже включает foundation и зависимости выбранного компонента.',
+    code: granularComponentCssSnippet,
+    language: 'ts',
+    note: 'Лучше всего работает для 1–2 компонентов; при большем масштабе удобнее общий `styles.css` или preset-подход.',
+  },
+  {
+    id: 'quick-start-uno-node',
+    title: 'Предпочтительный путь: UnoCSS + `uno-node`',
+    description: 'Рекомендуемый production-сценарий, если приложение уже использует UnoCSS и хочет тонко управлять foundation-слоями, темами и component CSS.',
     code: unoNodeSnippet,
     language: 'ts',
-    note: '`@feugene/granularity/uno-node` остаётся основным рекомендованным preset-путём для production-сборок.',
+    note: '`@feugene/granularity/uno-node` автоматически подтягивает foundation layers, темы и component CSS.',
+  },
+  {
+    id: 'quick-start-uno-pure',
+    title: 'Pure/browser-safe preset: UnoCSS + `uno`',
+    description: 'Специальный вариант для интеграций без node-only API и без чтения файлов с диска.',
+    code: `import {
+  createGranularityCssPreflights,
+  presetGranularity,
+} from '@feugene/granularity/uno'
+
+presetGranularity({
+  components: ['DsButton'],
+  preflights: createGranularityCssPreflights([
+    ':root { --primary: hotpink; --primary-foreground: white; }',
+  ]),
+})`,
+    language: 'ts',
+    note: '`@feugene/granularity/uno` используйте только когда нужен именно pure/browser-safe preset и CSS preflight-ы надо передавать явно.',
   },
 ]
 
@@ -332,7 +356,7 @@ export const showcaseFoundationGuides: ShowcaseFoundationGuide[] = [
     id: 'unocss',
     title: 'UnoCSS integration',
     summary: '`uno-node` остаётся предпочтительным preset-путём, а pure/browser-safe `uno` нужен для специальных интеграционных сценариев.',
-    description: 'Если приложение уже использует `UnoCSS`, пакет даёт два preset-а. Foundations должен чётко объяснять, когда нужен node-aware preset с автоподмешиванием CSS preflight-ов, а когда — pure preset без чтения файлов с диска.',
+    description: 'Если приложение уже использует UnoCSS, пакет даёт два preset-а. Foundations должен чётко объяснять, когда нужен node-aware preset с автоподмешиванием CSS preflight-ов, а когда — pure preset без чтения файлов с диска.',
     narrativeSource: takeLeadingBlock(unocssDocSource, 92),
     sourcePath: 'packages/granularity/docs/unocss.md',
     keyPoints: [

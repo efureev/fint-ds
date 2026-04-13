@@ -92,7 +92,7 @@ const pageEyebrow = computed(() => page.value?.eyebrow ?? showcasePageRecord.ove
           Live examples
         </h2>
         <p class="showcase-text-muted mt-2 max-w-3xl text-sm leading-6">
-          Каждая demo-карта показывает отдельный integration pattern, а snippet рядом остаётся canonical starting point.
+          Отдельные сценарии помогают быстро понять, как использовать сущность в интерфейсе.
         </p>
       </div>
 
@@ -124,7 +124,7 @@ const pageEyebrow = computed(() => page.value?.eyebrow ?? showcasePageRecord.ove
           API
         </h2>
         <p class="showcase-text-muted mt-2 max-w-3xl text-sm leading-6">
-          Package-level APIs документируются вручную, потому что для directives, composables и utilities важнее shape binding/return contract, чем component props.
+          Главное по параметрам и контракту использования собрано в одном месте.
         </p>
       </div>
 

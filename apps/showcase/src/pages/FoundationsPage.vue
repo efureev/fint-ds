@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import { DsCard } from '@feugene/granularity'
 
+import InlineRichText from '../components/content/InlineRichText.vue'
 import CodeBlock from '../components/doc/CodeBlock.vue'
 import {
   showcaseFoundationGuides,
-  showcaseFoundationsChecklist,
   showcaseInstallationNarrative,
   showcaseQuickStartCards,
 } from '../content/foundations'
@@ -14,14 +14,11 @@ import {
   <div class="space-y-8">
     <DsCard class="showcase-panel rounded-3xl border p-8">
       <div class="space-y-4">
-        <span class="showcase-pill inline-flex rounded-full border px-3 py-1 text-xs font-semibold uppercase tracking-[0.16em]">
-          Foundations
-        </span>
-        <h1 class="max-w-4xl text-4xl font-semibold leading-tight lg:text-5xl">
-          Foundations собирает установку, темы, токены и локализацию в одной понятной onboarding-странице.
+        <h1 class="max-w-4xl text-2xl font-semibold leading-tight lg:text-3xl">
+          Foundations собирает установку, темы и базовые настройки в одном понятном разделе.
         </h1>
         <p class="showcase-text-muted max-w-3xl text-base leading-7">
-          Здесь нет лишних декоративных блоков: только ключевые guides, выдержки из документации и практические snippets для подключения пакета в приложение.
+          Здесь собраны только полезные шаги для старта: установка, подключение стилей и ключевые рекомендации по интеграции.
         </p>
       </div>
     </DsCard>
@@ -32,11 +29,11 @@ import {
           <div class="space-y-2">
             <h2 class="text-2xl font-semibold">Quick-start map</h2>
             <p class="showcase-text-muted text-sm leading-6">
-              Foundations сразу показывает выбор стратегии подключения: от простого root import до `UnoCSS` preset path.
+              <InlineRichText text="Выберите подходящий сценарий подключения: от простого импорта до `UnoCSS` preset." />
             </p>
           </div>
 
-          <div class="grid gap-4">
+          <div class="grid gap-4 md:grid-cols-2">
             <DsCard
               v-for="card in showcaseQuickStartCards"
               :key="card.id"
@@ -44,12 +41,15 @@ import {
             >
               <div class="space-y-3">
                 <h3 class="text-lg font-semibold">
-                  {{ card.title }}
+                  <InlineRichText :text="card.title" />
                 </h3>
                 <p class="showcase-text-muted text-sm leading-6">
-                  {{ card.description }}
+                  <InlineRichText :text="card.description" />
                 </p>
                 <CodeBlock :code="card.code" :language="card.language" :title="card.title" />
+                <p class="showcase-text-subtle text-sm leading-6">
+                  <InlineRichText :text="card.note" />
+                </p>
               </div>
             </DsCard>
           </div>
@@ -59,24 +59,9 @@ import {
       <div class="space-y-4">
         <DsCard class="showcase-panel rounded-3xl border p-6">
           <div class="space-y-3">
-            <h2 class="text-2xl font-semibold">Installation narrative</h2>
+            <h2 class="text-2xl font-semibold">Установка</h2>
             <CodeBlock code="yarn add @feugene/granularity vue" language="bash" title="Install package" />
             <CodeBlock :code="showcaseInstallationNarrative" language="md" title="Source doc excerpt" />
-          </div>
-        </DsCard>
-
-        <DsCard class="showcase-panel rounded-3xl border p-6">
-          <div class="space-y-3">
-            <h2 class="text-2xl font-semibold">Что должен закрывать foundations-раздел</h2>
-            <ul class="grid gap-3">
-              <li
-                v-for="item in showcaseFoundationsChecklist"
-                :key="item"
-                class="showcase-inline-surface rounded-2xl border px-4 py-3 text-sm leading-6"
-              >
-                {{ item }}
-              </li>
-            </ul>
           </div>
         </DsCard>
       </div>
@@ -104,10 +89,7 @@ import {
                 </a>
               </div>
               <p class="showcase-text-muted text-base leading-7">
-                {{ guide.summary }}
-              </p>
-              <p class="showcase-text-muted text-sm leading-6">
-                {{ guide.description }}
+                <InlineRichText :text="guide.summary" />
               </p>
             </div>
 
@@ -120,7 +102,7 @@ import {
                     :key="item"
                     class="showcase-inline-surface rounded-2xl border px-4 py-3 text-sm leading-6"
                   >
-                    {{ item }}
+                    <InlineRichText :text="item" />
                   </li>
                 </ul>
               </div>
@@ -133,7 +115,7 @@ import {
                     :key="item"
                     class="showcase-panel-emphasis rounded-2xl border px-4 py-3 text-sm leading-6"
                   >
-                    {{ item }}
+                    <InlineRichText :text="item" />
                   </li>
                 </ul>
               </div>
@@ -141,16 +123,6 @@ import {
           </div>
 
           <div class="space-y-4">
-            <DsCard class="showcase-panel-soft rounded-3xl border p-5">
-              <div class="space-y-2">
-                <p class="showcase-kicker text-xs font-semibold">
-                  Narrative source
-                </p>
-                <p class="showcase-text-muted text-sm leading-6">
-                  {{ guide.sourcePath }}
-                </p>
-              </div>
-            </DsCard>
             <CodeBlock :code="guide.narrativeSource" language="md" title="Connected doc excerpt" />
           </div>
         </div>

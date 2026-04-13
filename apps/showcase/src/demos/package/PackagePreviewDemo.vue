@@ -62,7 +62,7 @@ const dropzoneBinding = computed(() => ({
   onError: (error: unknown) => {
     dropzoneState.value = error instanceof Error ? error.message : String(error)
   },
-  overClass: 'ring-2 ring-primary/50',
+  overClass: 'ring-2 showcase-ring-primary',
 }))
 
 async function startCardLoading() {

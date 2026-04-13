@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 
+import InlineRichText from '../content/InlineRichText.vue'
 import type { ShowcaseRelatedLink } from './entityPageHelpers'
 
 const props = defineProps<{
@@ -44,7 +45,7 @@ const resolvedVariant = computed(() => {
         :key="item"
         class="showcase-inline-surface px-3 py-1.5 showcase-text-muted text-sm leading-6"
       >
-        {{ item }}
+        <InlineRichText :text="item" />
       </li>
     </ul>
 
@@ -54,7 +55,7 @@ const resolvedVariant = computed(() => {
     >
       <li v-for="item in items" :key="item">
         <span class="showcase-pill inline-flex items-center px-3 py-1.5 text-sm font-medium">
-          {{ item }}
+          <InlineRichText :text="item" />
         </span>
       </li>
     </ul>
@@ -66,7 +67,7 @@ const resolvedVariant = computed(() => {
       <li v-for="link in links" :key="`${link.label}-${link.href}`">
         <a
           :href="link.href"
-          class="showcase-inline-surface flex items-center justify-between gap-3 px-4 py-2 text-sm font-medium transition-colors hover:border-primary/40 hover:text-primary"
+          class="showcase-inline-surface showcase-interactive-accent flex items-center justify-between gap-3 px-4 py-2 text-sm font-medium transition-colors"
           target="_blank"
           rel="noreferrer"
         >

@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import InlineRichText from '../content/InlineRichText.vue'
+
 import type { ShowcaseApiItemMeta } from '../../content/model'
 
 defineProps<{
@@ -44,13 +46,13 @@ defineProps<{
             <td class="showcase-text-muted px-5 py-4">
               <div class="space-y-1">
                 <p v-if="item.description">
-                  {{ item.description }}
+                  <InlineRichText :text="item.description" />
                 </p>
                 <p v-if="typeof item.required === 'boolean'" class="showcase-kicker text-xs">
                   {{ item.required ? 'required' : 'optional' }}
                 </p>
                 <p v-if="item.default" class="showcase-text-subtle text-xs">
-                  default: {{ item.default }}
+                  <InlineRichText :text="`default: ${item.default}`" />
                 </p>
               </div>
             </td>

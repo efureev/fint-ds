@@ -2,7 +2,7 @@
 import { computed, ref } from 'vue'
 import { RouterLink } from 'vue-router'
 
-import { DsBadge, DsCard } from '@feugene/granularity'
+import { DsCard } from '@feugene/granularity'
 
 import { showcaseComponentEntities, showcasePageRecord } from '../app/showcase'
 
@@ -34,6 +34,8 @@ const filteredComponents = computed(() => {
   })
 })
 
+const componentsWithExamples = computed(() => showcaseComponentEntities.filter(entity => entity.examples.length > 0))
+
 const groupedComponents = computed(() => {
   const buckets = new Map<string, typeof showcaseComponentEntities>()
 
@@ -53,56 +55,25 @@ const groupedComponents = computed(() => {
     }))
 })
 
-const componentsWithExamples = computed(() => showcaseComponentEntities.filter(entity => entity.examples.length > 0))
 </script>
 
 <template>
   <div class="space-y-8">
     <DsCard class="showcase-panel rounded-3xl border p-8">
-      <div class="flex flex-wrap items-center gap-3">
+      <div class="space-y-4">
         <span class="showcase-kicker text-xs font-semibold tracking-[0.18em]">
           {{ page.eyebrow }}
         </span>
-      </div>
-
-      <div class="mt-5 space-y-4">
         <h1 class="max-w-4xl text-4xl font-semibold leading-tight lg:text-5xl">
           Каталог компонентов
         </h1>
         <p class="showcase-text-muted max-w-3xl text-base leading-7">
-          Здесь удобно искать компоненты по названию и группе, а затем переходить к detail pages без технического шума и служебных метрик.
+          Ищите компоненты по названию и группе, а затем переходите к detail page без лишних метрик и служебного шума.
         </p>
       </div>
     </DsCard>
 
     <section id="catalog" class="scroll-mt-28 space-y-5">
-      <div class="grid gap-4 md:grid-cols-2">
-        <DsCard class="showcase-panel rounded-3xl border p-5">
-          <p class="showcase-kicker text-xs font-semibold tracking-[0.18em]">
-            Public components
-          </p>
-          <p class="mt-3 text-3xl font-semibold">
-            {{ showcaseComponentEntities.length }}
-          </p>
-          <p class="showcase-text-muted mt-2 text-sm leading-6">
-            Каталог собирается напрямую из registry пакета и не требует ручного списка страниц.
-          </p>
-        </DsCard>
-
-        <DsCard class="showcase-panel rounded-3xl border p-5">
-          <p class="showcase-kicker text-xs font-semibold tracking-[0.18em]">
-            With examples
-          </p>
-          <p class="mt-3 text-3xl font-semibold">
-            {{ componentsWithExamples.length }}
-          </p>
-          <p class="showcase-text-muted mt-2 text-sm leading-6">
-            Компоненты, для которых уже добавлены live examples и можно сразу посмотреть usage-сценарии.
-          </p>
-        </DsCard>
-
-      </div>
-
       <DsCard class="showcase-panel rounded-3xl border p-6">
         <div class="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
           <div class="space-y-2">
@@ -110,7 +81,8 @@ const componentsWithExamples = computed(() => showcaseComponentEntities.filter(e
               Component catalog
             </h2>
             <p class="showcase-text-muted max-w-3xl text-sm leading-6">
-              Поиск работает по имени, summary и группе. Этого достаточно, чтобы быстро прыгать к нужной странице компонента.
+              Поиск работает по имени, summary и группе. Этого достаточно, чтобы быстро открыть нужный компонент.
+              Сейчас в каталоге {{ componentsWithExamples.length }} компонентов уже сопровождаются примерами.
             </p>
           </div>
 
@@ -137,7 +109,9 @@ const componentsWithExamples = computed(() => showcaseComponentEntities.filter(e
               <h3 class="text-xl font-semibold">
                 {{ group.label }}
               </h3>
-              <DsBadge>{{ group.entities.length }}</DsBadge>
+              <span class="showcase-text-subtle text-sm">
+                {{ group.entities.length }}
+              </span>
             </div>
 
             <div class="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
@@ -162,12 +136,6 @@ const componentsWithExamples = computed(() => showcaseComponentEntities.filter(e
                   <span class="showcase-link-chip rounded-full border px-3 py-1">
                     {{ component.group }}
                   </span>
-                  <span class="showcase-link-chip rounded-full border px-3 py-1">
-                    props: {{ component.apiSections.find(section => section.key === 'props')?.items.length ?? 0 }}
-                  </span>
-                  <span class="showcase-link-chip rounded-full border px-3 py-1">
-                    examples: {{ component.examples.length }}
-                  </span>
                 </div>
               </RouterLink>
             </div>
@@ -180,39 +148,6 @@ const componentsWithExamples = computed(() => showcaseComponentEntities.filter(e
             По текущему запросу компоненты не найдены. Попробуй искать по имени (`DsButton`) или группе (`forms`, `overlays`).
           </div>
         </div>
-      </DsCard>
-    </section>
-
-    <section id="live-demos" class="scroll-mt-28 grid gap-4 lg:grid-cols-2">
-      <DsCard class="showcase-panel rounded-3xl border p-6">
-        <h2 class="text-2xl font-semibold">
-          С чего начать
-        </h2>
-        <p class="showcase-text-muted mt-3 text-sm leading-6">
-          Если нужен быстрый вход, начните с компонентов, для которых уже есть live examples — по ним проще всего оценить API и сценарии использования.
-        </p>
-        <div class="mt-5 flex flex-wrap gap-2">
-          <DsBadge
-            v-for="component in componentsWithExamples.slice(0, 6)"
-            :key="component.id"
-          >
-            {{ component.title }}
-          </DsBadge>
-        </div>
-      </DsCard>
-
-      <DsCard class="showcase-panel rounded-3xl border p-6">
-        <h2 class="text-2xl font-semibold">
-          Как пользоваться каталогом
-        </h2>
-        <ul class="showcase-text-muted mt-4 grid gap-3 text-sm leading-6">
-          <li class="showcase-inline-surface rounded-2xl border px-4 py-3">
-            Ищите по названию, summary или категории — фильтр сразу сокращает список до релевантных элементов.
-          </li>
-          <li class="showcase-inline-surface rounded-2xl border px-4 py-3">
-            На карточке компонента сразу видно категорию и объём примеров, поэтому проще выбрать нужную detail page.
-          </li>
-        </ul>
       </DsCard>
     </section>
   </div>

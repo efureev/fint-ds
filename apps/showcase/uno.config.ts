@@ -7,11 +7,15 @@ import {
     transformerVariantGroup,
 } from 'unocss'
 
-import {presetGranularityNode} from '@feugene/granularity/uno-node'
+import { presetGranularityNode } from '@feugene/granularity/uno-node'
 
 export const showcaseContentIncludes = [
     /apps\/showcase\/src\/.*\.(vue|ts)($|\?)/,
 ]
+
+export const showcasePresetComponents = ['DsBadge', 'DsButton', 'DsCard']
+
+export const showcasePresetThemes = ['light', 'dark']
 
 export default defineConfig({
     content: {
@@ -22,7 +26,8 @@ export default defineConfig({
     presets: [
         presetMini(),
         presetGranularityNode({
-            themes: ['light', 'dark'],
+            components: [...showcasePresetComponents],
+            themes: [...showcasePresetThemes],
         }),
         presetAttributify(),
         presetIcons({

@@ -197,6 +197,13 @@ function resolvePreviewComponent(previewKey?: string) {
 <template>
   <div v-if="componentEntity && componentDoc" class="space-y-8">
     <div>
+      <RouterLink
+        to="/components"
+        class="showcase-link-chip inline-flex rounded-full border px-4 py-2 text-sm font-semibold transition-colors"
+      >
+        <IconArrowLeft class="mr-2 h-4 w-4" />
+        Back to components
+      </RouterLink>
       <h1 class="max-w-4xl text-3xl font-semibold leading-tight lg:text-4xl">
         {{ componentEntity.title }}
       </h1>
@@ -218,21 +225,21 @@ function resolvePreviewComponent(previewKey?: string) {
           Live examples
         </h2>
         <p class="showcase-text-muted text-sm leading-6">
-          Сценарии разбиты по конкретным capability-блокам: базовые варианты, state management и composition-case.
+          Короткие сценарии использования компонента в реальном интерфейсе.
         </p>
       </div>
 
       <div class="grid gap-6">
         <ExampleCard
-            v-for="example in componentDoc.examples"
-            :key="example.id"
-            :title="example.title"
-            :description="example.description"
-            :code="example.code"
-            :note="example.note"
+          v-for="example in componentDoc.examples"
+          :key="example.id"
+          :title="example.title"
+          :description="example.description"
+          :code="example.code"
+          :note="example.note"
         >
           <template v-if="resolvePreviewComponent(example.previewKey)" #preview>
-            <component :is="resolvePreviewComponent(example.previewKey)"/>
+            <component :is="resolvePreviewComponent(example.previewKey)" />
           </template>
         </ExampleCard>
       </div>
@@ -254,7 +261,7 @@ function resolvePreviewComponent(previewKey?: string) {
       <h2 class="text-2xl font-semibold">
         Usage
       </h2>
-      <CodeBlock :code="usageCode" language="vue" title="Usage snippet"/>
+      <CodeBlock :code="usageCode" language="vue" title="Usage snippet" />
     </section>
 
     <section id="integration-notes" class="scroll-mt-28 space-y-4">
@@ -263,22 +270,21 @@ function resolvePreviewComponent(previewKey?: string) {
           Implementation notes
         </h2>
         <p class="showcase-text-muted max-w-3xl text-sm leading-6">
-          Вспомогательные материалы собраны после основных API и usage-блоков, чтобы не отнимать у них ширину и
-          оставаться компактными.
+          Дополнительные заметки по доступности, зависимостям и связанным материалам.
         </p>
       </div>
 
       <div class="grid gap-4 lg:grid-cols-3">
-        <InfoSectionCard title="Accessibility" :items="accessibilityItems" variant="list"/>
-        <InfoSectionCard title="Dependencies" :items="dependencyItems" variant="chips"/>
-        <InfoSectionCard title="Related links" :links="relatedLinks" variant="links"/>
+        <InfoSectionCard title="Accessibility" :items="accessibilityItems" variant="list" />
+        <InfoSectionCard title="Dependencies" :items="dependencyItems" variant="chips" />
+        <InfoSectionCard title="Related links" :links="relatedLinks" variant="links" />
       </div>
     </section>
   </div>
 
   <DsCard
-      v-else
-      class="showcase-panel rounded-3xl border p-8"
+    v-else
+    class="showcase-panel rounded-3xl border p-8"
   >
     <h1 class="text-3xl font-semibold">
       Component not found
@@ -287,8 +293,10 @@ function resolvePreviewComponent(previewKey?: string) {
       Компонент по этому маршруту не найден в публичном registry пакета. Вернись в каталог и выбери существующую
       сущность.
     </p>
-    <RouterLink to="/components"
-                class="showcase-link-chip mt-6 inline-flex rounded-full border px-4 py-2 text-sm font-semibold transition-colors">
+    <RouterLink
+      to="/components"
+      class="showcase-link-chip mt-6 inline-flex rounded-full border px-4 py-2 text-sm font-semibold transition-colors"
+    >
       Перейти в каталог компонентов
     </RouterLink>
   </DsCard>
