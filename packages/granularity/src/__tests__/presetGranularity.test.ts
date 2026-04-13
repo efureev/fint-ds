@@ -1,3 +1,6 @@
+import { readFileSync } from 'node:fs'
+import { join } from 'node:path'
+
 import { createGenerator } from '@unocss/core'
 import { presetMini } from 'unocss'
 import { describe, expect, it } from 'vitest'
@@ -33,6 +36,7 @@ import { normalizeCss } from './helpers/granularityTestUtils'
 import { getGranularityComponentCssUrls } from '../registry/componentCss'
 import { getGranularityComponentCss } from '../registry/componentCss.node'
 import { resolveGranularityComponentNames } from '../registry/components'
+import { granularityThemeNames } from '../theming/themeRegistry'
 import { getGranularitySafelist, presetGranularity } from '../unocss/preset'
 import { presetGranularityNode, resolvePresetGranularityNodePreflights } from '../unocss/preset.node'
 
@@ -195,5 +199,37 @@ describe('granularity preset integration', () => {
     expect(normalizedCss).toContain('--primary:#4f46e5')
     expect(normalizedCss).toContain('--ds-icon-size:18px')
     expect(normalizedCss).toContain(':where(.ds-icon){width:var(--ds-icon-size);min-width:var(--ds-icon-size);height:var(--ds-icon-size);line-height:0;flex:none;}')
+  })
+
+  it('собирает foundation-only и full package CSS через uno-node preset', async () => {
+    const foundationStylesSource = readFileSync('src/styles/index.css', 'utf8')
+    const generator = await createGenerator({
+      presets: [presetMini(), presetGranularityNode({ components: 'all', themes: granularityThemeNames })],
+    })
+    const extracted = new Set(getGranularitySafelist('all'))
+
+    await generator.applyExtractors(
+      readFileSync(join('src', 'components', 'DsButton', 'DsButton.vue'), 'utf8'),
+      join('src', 'components', 'DsButton', 'DsButton.vue'),
+      extracted,
+    )
+
+    const foundationOnlyGenerator = await createGenerator({
+      presets: [presetMini(), presetGranularityNode({ components: [], themes: granularityThemeNames })],
+    })
+    const foundationCss = normalizeCss((await foundationOnlyGenerator.generate(new Set())).css)
+    const fullCss = normalizeCss((await generator.generate(extracted)).css)
+
+    expect(foundationStylesSource).toContain("@import './tokens.css';")
+    expect(foundationStylesSource).toContain("@import './themes/light.css';")
+    expect(foundationStylesSource).toContain("@import './themes/dark.css';")
+    expect(foundationStylesSource).toContain("@import './base.css';")
+    expect(foundationCss).toContain('--ds-shadow-1:01px2pxrgba(15,23,42,0.08)')
+    expect(foundationCss).toContain('--primary:#4f46e5')
+    expect(fullCss).toContain('--ds-shadow-1:01px2pxrgba(15,23,42,0.08)')
+    expect(fullCss).toContain("[data-theme='dark']")
+    expect(fullCss).toContain('.inline-flex{display:inline-flex;}')
+    expect(fullCss).toContain('[data-ds-button-group][data-ds-button]{border-radius:0!important;position:relative;}')
+    expect(fullCss).toContain(':where(.ds-icon){width:var(--ds-icon-size);min-width:var(--ds-icon-size);height:var(--ds-icon-size);line-height:0;flex:none;}')
   })
 })

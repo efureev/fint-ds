@@ -6,15 +6,12 @@
 
 - `DsButton` импортируется только из `@feugene/granularity/components/DsButton`;
 - фокус demo — минимизация JS-графа, поэтому в `granularity`-chunk попадает только код кнопки и её общих внутренних зависимостей;
-- для рабочего UI здесь намеренно оставлен общий `styles.css`, чтобы пример был максимально простым и запускаемым.
+- для рабочего UI здесь намеренно оставлен общий `styles.css`, чтобы пример был максимально простым и запускаемым без ручной композиции foundation-слоёв.
 
 ## Как работает
 
 ```ts
 import { DsButton } from '@feugene/granularity/components/DsButton'
-import '@feugene/granularity/styles/tokens.css'
-import '@feugene/granularity/styles/base.css'
-import '@feugene/granularity/styles/themes/light.css'
 import '@feugene/granularity/styles.css'
 ```
 
@@ -23,5 +20,5 @@ import '@feugene/granularity/styles.css'
 - `assets/index-*.js` — код demo-приложения;
 - `assets/vue-*.js` — runtime `vue`;
 - `assets/granularity-*.js` — отдельный чанк только с кодом `DsButton` subpath entry;
-- `assets/granularity-*.css` — foundation-слои и общий utility CSS пакета;
+- `assets/granularity-*.css` — полный CSS bundle пакета: foundation-слой и стили зарегистрированных компонентов;
 - `assets/index-*.css` — локальный shell CSS приложения.

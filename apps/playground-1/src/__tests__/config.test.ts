@@ -30,10 +30,10 @@ describe('playground-1 config', () => {
   it('подключает root barrel и общий CSS пакета', () => {
     expect(playground1AppEntry).toContain("import {DsButton, DsInput} from '@feugene/granularity'")
     expect(playground1MainEntry).toContain("import '@unocss/reset/tailwind-compat.css'")
-    expect(playground1MainEntry).toContain("import '@feugene/granularity/styles/tokens.css'")
-    expect(playground1MainEntry).toContain("import '@feugene/granularity/styles/base.css'")
-    expect(playground1MainEntry).toContain("import '@feugene/granularity/styles/themes/light.css'")
     expect(playground1MainEntry).toContain("import '@feugene/granularity/styles.css'")
+    expect(playground1MainEntry).not.toContain("import '@feugene/granularity/styles/tokens.css'")
+    expect(playground1MainEntry).not.toContain("import '@feugene/granularity/styles/base.css'")
+    expect(playground1MainEntry).not.toContain("import '@feugene/granularity/styles/themes/light.css'")
   })
 
   it('показывает на странице примерные размеры bundle', () => {

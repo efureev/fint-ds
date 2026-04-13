@@ -13,9 +13,6 @@
 ```ts
 import { DsButton } from '@feugene/granularity/components/DsButton'
 import { DsInput } from '@feugene/granularity/components/DsInput'
-import '@feugene/granularity/styles/tokens.css'
-import '@feugene/granularity/styles/base.css'
-import '@feugene/granularity/styles/themes/light.css'
 import '@feugene/granularity/styles.css'
 ```
 
@@ -24,5 +21,5 @@ import '@feugene/granularity/styles.css'
 - `assets/index-*.js` — код demo-приложения;
 - `assets/vue-*.js` — runtime `vue`;
 - `assets/granularity-*.js` — granular JS для реально импортированных subpath entrypoint-ов;
-- `assets/granularity-*.css` — foundation-слои пакета и общий utility CSS;
+- `assets/granularity-*.css` — полный CSS bundle пакета: foundation-слой и стили всех зарегистрированных компонентов;
 - `assets/index-*.css` — локальный shell CSS приложения.

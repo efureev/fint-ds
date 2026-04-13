@@ -230,6 +230,7 @@
       "import": "./dist/uno-node.js"
     },
     "./styles.css": "./dist/styles.css",
+    "./foundation.css": "./dist/foundation.css",
     "./styles/base.css": "./dist/styles/base.css",
     "./styles/tokens.css": "./dist/styles/tokens.css",
     "./styles/themes/light.css": "./dist/styles/themes/light.css",

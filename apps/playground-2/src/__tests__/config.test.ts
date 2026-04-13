@@ -31,6 +31,9 @@ describe('playground-2 config', () => {
     expect(playground2AppEntry).not.toContain("from '@feugene/granularity'")
     expect(playground2MainEntry).toContain("import '@unocss/reset/tailwind-compat.css'")
     expect(playground2MainEntry).toContain("import '@feugene/granularity/styles.css'")
+    expect(playground2MainEntry).not.toContain("import '@feugene/granularity/styles/tokens.css'")
+    expect(playground2MainEntry).not.toContain("import '@feugene/granularity/styles/base.css'")
+    expect(playground2MainEntry).not.toContain("import '@feugene/granularity/styles/themes/light.css'")
   })
 
   it('показывает на странице примерные размеры bundle', () => {

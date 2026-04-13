@@ -76,14 +76,15 @@
 import '@feugene/granularity/components/DsButton/styles.css'
 ```
 
-Важно помнить, что такие стили обычно используются вместе с foundation layers:
+Важно помнить, что `components/<Name>/styles.css` — это уже собранный публичный bundle компонента. Обычно он сам содержит foundation-слой пакета, поэтому его можно подключать самостоятельно:
 
 ```ts
-import '@feugene/granularity/styles/tokens.css'
-import '@feugene/granularity/styles/base.css'
-import '@feugene/granularity/styles/themes/light.css'
 import '@feugene/granularity/components/DsButton/styles.css'
 ```
+
+Если приложение собирает несколько component bundle-ов и хочет централизованно управлять foundation-слоем, можно отдельно подключить `foundation.css` или уйти в `UnoCSS` preset.
+
+Ручные импорты `styles/tokens.css`, `styles/themes/*.css` и `styles/base.css` нужны только для низкоуровневых кастомных сценариев.
 
 ## Как работать с каталогом
 

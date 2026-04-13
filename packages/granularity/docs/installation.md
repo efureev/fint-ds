@@ -35,9 +35,9 @@ yarn add -D unocss
 
 | Способ | Когда подходит лучше всего | Плюсы | Компромиссы | Пример |
 |--------|----------------------------|-------|-------------|--------|
-| 1. Root import + foundation layers + `styles.css` | Нужен самый простой старт | Самый понятный onboarding, минимум ручной настройки | Меньше контроля над итоговым `JS` и `CSS`, чем у granular/preset-подходов | [`playground-1`](../../../apps/playground-1/README.md) |
+| 1. Root import + общий `styles.css` | Нужен самый простой старт | Самый понятный onboarding, минимум ручной настройки | Меньше контроля над итоговым `JS` и `CSS`, чем у granular/preset-подходов | [`playground-1`](../../../apps/playground-1/README.md) |
 | 2. Один компонент через subpath + общий `styles.css` | Нужен минимальный `JS`, но без усложнения CSS | Точечный `JS` import, простой CSS-сценарий | `styles.css` всё ещё тянет общий пакетный CSS | [`playground-2`](../../../apps/playground-2/README.md) |
-| 3. Один компонент через subpath + component CSS | Нужен минимальный bundle без `UnoCSS` | Точный контроль и над `JS`, и над `CSS` | Больше ручных импортов, сложнее масштабировать на большой набор компонентов | [`playground-3`](../../../apps/playground-3/README.md) |
+| 3. Один компонент через subpath + component CSS bundle | Нужен минимальный bundle без `UnoCSS` | Точный контроль и над `JS`, и над `CSS` | При нескольких component bundle-ах foundation-слой может дублироваться, сложнее масштабировать | [`playground-3`](../../../apps/playground-3/README.md) |
 | 4. Несколько компонентов через subpath + общий `styles.css` | Нужен granular `JS` для нескольких компонентов | Баланс между контролем `JS` и простотой CSS-подключения | CSS всё ещё подключается общим файлом | [`playground-4`](../../../apps/playground-4/README.md) |
 | 5. `UnoCSS` + `@feugene/granularity/uno-node` | Нужна предпочтительная production-интеграция с тонкой настройкой | Лучший контроль над итоговой сборкой, удобно выбирать компоненты/темы/слои | Требует `UnoCSS` и node-конфиг сборки | [`playground-5`](../../../apps/playground-5/README.md) |
 | 6. `UnoCSS` + `@feugene/granularity/uno` | Нужен pure/browser-safe preset | Даёт preset API без чтения файлов с диска | Foundation/theme CSS надо передавать вручную | [`playground-6`](../../../apps/playground-6/README.md) |
@@ -66,8 +66,9 @@ yarn add -D unocss
 
 ### CSS entrypoint-ы
 
-- общий utility CSS: `@feugene/granularity/styles.css`
-- foundation layers:
+- foundation bundle: `@feugene/granularity/foundation.css`
+- полный пакетный CSS: `@feugene/granularity/styles.css`
+- low-level foundation layers:
   - `@feugene/granularity/styles/tokens.css`
   - `@feugene/granularity/styles/base.css`
   - `@feugene/granularity/styles/themes/light.css`
@@ -85,13 +86,10 @@ yarn add -D unocss
 
 ## Рекомендуемые стратегии подключения
 
-### 1. Быстрый старт: root import + foundation layers + общий `styles.css`
+### 1. Быстрый старт: root import + общий `styles.css`
 
 ```ts
 
-import '@feugene/granularity/styles/tokens.css'
-import '@feugene/granularity/styles/base.css'
-import '@feugene/granularity/styles/themes/light.css'
 import '@feugene/granularity/styles.css'
 ```
 
@@ -104,7 +102,7 @@ import '@feugene/granularity/styles.css'
 Особенности:
 
 - компоненты берутся из root API;
-- foundation-слои и общий CSS пакета подключаются готовыми файлами;
+- `styles.css` уже включает `foundation.css` (`tokens`, `base`, встроенные темы `light`/`dark`) и стили всех компонентов;
 - сценарий почти не требует дополнительной инфраструктуры.
 
 Плюсы:
@@ -124,9 +122,6 @@ import '@feugene/granularity/styles.css'
 
 ```ts
 
-import '@feugene/granularity/styles/tokens.css'
-import '@feugene/granularity/styles/base.css'
-import '@feugene/granularity/styles/themes/light.css'
 import '@feugene/granularity/styles.css'
 ```
 
@@ -154,13 +149,10 @@ import '@feugene/granularity/styles.css'
 
 Пример: [`apps/playground-2`](../../../apps/playground-2/README.md)
 
-### 3. Один компонент: subpath import + component-level CSS
+### 3. Один компонент: subpath import + component-level CSS bundle
 
 ```ts
 
-import '@feugene/granularity/styles/tokens.css'
-import '@feugene/granularity/styles/base.css'
-import '@feugene/granularity/styles/themes/light.css'
 import '@feugene/granularity/components/DsButton/styles.css'
 ```
 
@@ -171,19 +163,20 @@ import '@feugene/granularity/components/DsButton/styles.css'
 
 Особенности:
 
-- подключаются только foundation-слои и CSS конкретного компонента;
+- bundle компонента обычно уже включает foundation-слой (`tokens`, `base`, встроенные темы `light`/`dark`);
+- приложение подключает только CSS нужного компонента;
 - этот путь не требует `UnoCSS`, но уже даёт точный контроль над составом CSS.
 
 Плюсы:
 
-- самый компактный сценарий среди вариантов с готовыми CSS-файлами пакета;
+- один из самых компактных сценариев среди вариантов с готовыми CSS-файлами пакета для одного компонента;
 - прозрачно видно, какой CSS попадает в приложение;
 - хорошо подходит для очень точечных интеграций.
 
 Минусы:
 
-- импортов становится больше;
-- при росте числа компонентов такой сценарий сложнее сопровождать вручную.
+- при росте числа компонентов такой сценарий сложнее сопровождать вручную;
+- если импортировать несколько component bundle-ов, foundation-часть может дублироваться.
 
 Пример: [`apps/playground-3`](../../../apps/playground-3/README.md)
 
@@ -191,9 +184,6 @@ import '@feugene/granularity/components/DsButton/styles.css'
 
 ```ts
 
-import '@feugene/granularity/styles/tokens.css'
-import '@feugene/granularity/styles/base.css'
-import '@feugene/granularity/styles/themes/light.css'
 import '@feugene/granularity/styles.css'
 ```
 
@@ -205,7 +195,7 @@ import '@feugene/granularity/styles.css'
 Особенности:
 
 - несколько компонентов импортируются через subpath export-ы;
-- foundation layers и utility CSS пакета подключаются один раз общими файлами.
+- `styles.css` подключается один раз и уже включает foundation-слой пакета.
 
 Плюсы:
 

@@ -1,5 +1,6 @@
-import { fileURLToPath, URL } from 'node:url'
+import { extname } from 'node:path'
 import { readdirSync, readFileSync } from 'node:fs'
+import { fileURLToPath, URL } from 'node:url'
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import { createGenerator, presetMini } from 'unocss'
@@ -7,13 +8,15 @@ import Icons from 'unplugin-icons/vite'
 import UnoCSS from 'unocss/vite'
 
 import { isTestArtifactPath } from './scripts/distArtifacts.mjs'
-import type { GranularityComponentName } from './src/registry/components'
-import { granularityComponentConfigs } from './src/registry/components'
+import type { GranularityComponentName, GranularityComponentSelection } from './src/registry/components'
+import { granularityComponentConfigs, resolveGranularityComponentNames } from './src/registry/components'
 import { granularityStyleAssets, getGranularitySafelist } from './src/registry/safelist'
-import { presetGranularity } from './src/unocss/preset'
+import { granularityThemeNames } from './src/theming/themeRegistry'
+import { presetGranularityNode } from './src/unocss/preset.node'
 
 const DIST_PREFIX_RE = /^\.\/dist\//
-
+const GRANULARITY_FOUNDATION_FILE_NAME = 'foundation.css'
+const GRANULARITY_SOURCE_EXTENSIONS = new Set(['.ts', '.vue'])
 export const granularityInternalChunkFileName = 'chunks/[name]-[hash].js'
 
 function stripDistPrefix(path: string) {
@@ -51,6 +54,38 @@ function getDistPackageJson() {
     peerDependencies: pkg.peerDependencies,
     dependencies: pkg.dependencies,
   }
+}
+
+function isGranularitySourceEntry(entryName: string): boolean {
+  if (!GRANULARITY_SOURCE_EXTENSIONS.has(extname(entryName)))
+    return false
+
+  return !entryName.endsWith('.d.ts')
+    && !entryName.endsWith('.test.ts')
+    && !entryName.endsWith('.spec.ts')
+}
+
+function collectGranularitySourceFiles(dirUrl: URL): string[] {
+  return readdirSync(fileURLToPath(dirUrl), { withFileTypes: true })
+    .flatMap((entry) => {
+      const entryUrl = new URL(`./${entry.name}`, dirUrl)
+
+      if (entry.isDirectory())
+        return collectGranularitySourceFiles(new URL(`./${entry.name}/`, dirUrl))
+
+      return isGranularitySourceEntry(entry.name)
+        ? [fileURLToPath(entryUrl)]
+        : []
+    })
+    .sort((left, right) => left.localeCompare(right))
+}
+
+function getGranularityComponentSourceFiles(selection: GranularityComponentSelection = 'all'): string[] {
+  const componentNames = selection === 'all'
+    ? Object.keys(granularityComponentConfigs) as GranularityComponentName[]
+    : resolveGranularityComponentNames([...selection] as GranularityComponentName[])
+
+  return componentNames.flatMap(componentName => collectGranularitySourceFiles(new URL(`./src/components/${componentName}/`, import.meta.url)))
 }
 
 const granularityComponentEntries = Object.fromEntries(
@@ -94,20 +129,46 @@ const granularityDirectiveEntries = Object.fromEntries(
     ]),
 )
 
-async function generateGranularityCss(selection: 'all' | readonly GranularityComponentName[]): Promise<string> {
+async function createGranularityCssGenerator(selection: GranularityComponentSelection = 'all') {
   const components = selection === 'all'
     ? 'all'
     : [...selection] as GranularityComponentName[]
 
-  const uno = await createGenerator({
+  return await createGenerator({
     presets: [
       presetMini(),
-      presetGranularity({ components }),
+      presetGranularityNode({
+        components,
+        themes: granularityThemeNames,
+      }),
     ],
   })
+}
 
-  const safelist = getGranularitySafelist(components)
-  const { css } = await uno.generate(safelist.join(' '))
+async function generateGranularityCss(selection: GranularityComponentSelection = 'all'): Promise<string> {
+  const components = selection === 'all'
+    ? 'all'
+    : [...selection] as GranularityComponentName[]
+  const uno = await createGranularityCssGenerator(components)
+  const extracted = new Set(getGranularitySafelist(components))
+
+  for (const sourceFile of getGranularityComponentSourceFiles(components))
+    await uno.applyExtractors(readFileSync(sourceFile, 'utf8'), sourceFile, extracted)
+
+  const { css } = await uno.generate(extracted)
+
+  return css
+}
+
+async function generateGranularityPackageCss(
+  selection: GranularityComponentSelection = 'all',
+): Promise<string> {
+  return await generateGranularityCss(selection)
+}
+
+async function generateGranularityFoundationLayerCss(): Promise<string> {
+  const uno = await createGranularityCssGenerator([])
+  const { css } = await uno.generate(new Set())
 
   return css
 }
@@ -126,55 +187,43 @@ export default defineConfig({
       name: 'granularity:emit-extra-css-assets',
       apply: 'build',
       async generateBundle() {
-        const granularityBaseCss = readFileSync(
-          fileURLToPath(new URL('./src/styles/base.css', import.meta.url)),
-          'utf8',
-        )
-
-        const granularityTokensCss = readFileSync(
-          fileURLToPath(new URL('./src/styles/tokens.css', import.meta.url)),
-          'utf8',
-        )
-
-        const granularityLightThemeCss = readFileSync(
-          fileURLToPath(new URL('./src/styles/themes/light.css', import.meta.url)),
-          'utf8',
-        )
-
-        const granularityDarkThemeCss = readFileSync(
-          fileURLToPath(new URL('./src/styles/themes/dark.css', import.meta.url)),
-          'utf8',
-        )
+        const granularityFoundationLayerCss = await generateGranularityFoundationLayerCss()
 
         this.emitFile({
           type: 'asset',
           fileName: 'styles/base.css',
-          source: granularityBaseCss,
+          source: readFileSync(fileURLToPath(new URL('./src/styles/base.css', import.meta.url)), 'utf8'),
         })
 
         this.emitFile({
           type: 'asset',
           fileName: 'styles/tokens.css',
-          source: granularityTokensCss,
+          source: readFileSync(fileURLToPath(new URL('./src/styles/tokens.css', import.meta.url)), 'utf8'),
         })
 
         this.emitFile({
           type: 'asset',
           fileName: 'styles/themes/light.css',
-          source: granularityLightThemeCss,
+          source: readFileSync(fileURLToPath(new URL('./src/styles/themes/light.css', import.meta.url)), 'utf8'),
         })
 
         this.emitFile({
           type: 'asset',
           fileName: 'styles/themes/dark.css',
-          source: granularityDarkThemeCss,
+          source: readFileSync(fileURLToPath(new URL('./src/styles/themes/dark.css', import.meta.url)), 'utf8'),
+        })
+
+        this.emitFile({
+          type: 'asset',
+          fileName: GRANULARITY_FOUNDATION_FILE_NAME,
+          source: granularityFoundationLayerCss,
         })
 
         for (const styleAsset of granularityStyleAssets) {
           this.emitFile({
             type: 'asset',
             fileName: styleAsset.fileName,
-            source: await generateGranularityCss(styleAsset.components),
+            source: await generateGranularityPackageCss(styleAsset.components),
           })
         }
 
@@ -218,7 +267,6 @@ export default defineConfig({
         directives: fileURLToPath(new URL('./src/directives/index.ts', import.meta.url)),
         fileValidation: fileURLToPath(new URL('./src/fileValidation/index.ts', import.meta.url)),
         i18n: fileURLToPath(new URL('./src/i18n/index.ts', import.meta.url)),
-        styles: fileURLToPath(new URL('./src/styles.css.ts', import.meta.url)),
         uno: fileURLToPath(new URL('./src/unocss/preset.ts', import.meta.url)),
         'uno-node': fileURLToPath(new URL('./src/unocss/preset.node.ts', import.meta.url)),
         ...granularityComponentEntries,
@@ -237,7 +285,7 @@ export default defineConfig({
         chunkFileNames: granularityInternalChunkFileName,
         assetFileNames: (assetInfo) => {
           if (assetInfo.name?.endsWith('.css'))
-            return 'styles.css'
+            return 'assets/[name]-[hash][extname]'
 
           return assetInfo.name ?? '[name][extname]'
         },

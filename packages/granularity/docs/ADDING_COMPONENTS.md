@@ -33,14 +33,12 @@ src/components/<ComponentName>/
 
 - `ds<ComponentName>Styles.ts` — helper с utility-классами, вариантами, размерами и safelist;
 - `safelist.ts` — если safelist удобно держать отдельно;
-- `styles.css.ts` — если компонент нужно подхватить общим `src/styles.css.ts` через `import.meta.glob('./components/*/styles.css.ts', { eager: true })`;
 - `styles.css` — если у компонента есть собственные глобальные CSS-правила;
 - `tokens.css` — если у компонента есть собственные CSS custom properties;
 - другие локальные helper-файлы — только внутри папки компонента.
 
 Важно: эти файлы **не обязательны сами по себе**. Например, сейчас:
 
-- у `DsDialog`, `DsFormField` и `DsInput` нет `styles.css.ts`;
 - у `DsDialog`, `DsFormField` и `DsInput` нет отдельного `safelist.ts`, safelist экспортируется из style-helper;
 - только `DsIcon` использует `cssFiles` в `config.ts` и хранит локальные `tokens.css` / `styles.css`.
 
@@ -90,7 +88,7 @@ src/components/<ComponentName>/
 
 - если CSS нужен только этому компоненту и это обычный CSS-файл, положите его в папку компонента;
 - если это component-specific custom properties, используйте локальный `tokens.css`;
-- если ничего такого нет, не добавляйте лишние `styles.css`, `tokens.css` и `styles.css.ts`.
+- если ничего такого нет, не добавляйте лишние `styles.css` и `tokens.css`.
 
 ### 4. Создать `config.ts`
 
@@ -158,22 +156,17 @@ export { default as DsIcon } from './DsIcon.vue'
 
 Если наружу должны торчать типы, safelist или helper'ы, экспортируйте их здесь же.
 
-### 6. Добавить `styles.css.ts`, только если он реально нужен
+### 6. Убедиться, что utility-классы компонента видны preset-сборке
 
-`src/styles.css.ts` автоматически подтягивает все файлы `./components/*/styles.css.ts`.
+Полный пакетный `styles.css` больше не собирается через `src/styles.css.ts`.
 
-Поэтому `styles.css.ts` стоит создавать только если компонент действительно должен участвовать в этом общем entrypoint'е. Типичный пример:
+Теперь build прогоняет `presetGranularityNode` по исходникам компонентов и извлекает utility-классы прямо из `*.vue` / `*.ts` файлов внутри `src/components/*`.
 
-```ts
-import './DsIcon.vue'
-import './dsIconStyles'
-import './styles.css'
-import './tokens.css'
+Практическое правило:
 
-export { }
-```
-
-Если у компонента нет локальных CSS-файлов и отдельного component-level entrypoint не требуется, этот файл можно не создавать.
+- держите реальные UnoCSS-классы в component source или в локальных helper-файлах рядом с компонентом;
+- если нужны обычные CSS-файлы, перечисляйте их через `cssFiles` в `config.ts`;
+- не добавляйте отдельные `styles.css.ts`-entrypoint'ы ради package bundle.
 
 ## Что обязательно обновить вне папки компонента
 
@@ -218,9 +211,11 @@ Subpath exports пакета задаются вручную в `packages/granul
 "./components/DsIcon/styles.css": "./dist/components/DsIcon/styles.css"
 ```
 
-### 4. `src/styles.css.ts`
+### 4. `package` CSS-exports
 
-Этот файл вручную обновлять не нужно, если новый компонент уже следует шаблону `components/*/styles.css.ts` и такой файл вообще был создан.
+Foundation-only слой публикуется как `@feugene/granularity/foundation.css`, а полный пакетный bundle — как `@feugene/granularity/styles.css`.
+
+Оба артефакта собираются из Uno preset, поэтому отдельно править общий source-entrypoint для CSS не нужно.
 
 ## Как понять, нужны ли `styles.css`, `tokens.css` и `safelist.ts`
 
@@ -291,7 +286,7 @@ Subpath exports пакета задаются вручную в `packages/granul
 1. Создать `src/components/<ComponentName>/`.
 2. Добавить `<ComponentName>.vue`, `config.ts` и `index.ts`.
 3. При необходимости вынести style/helper-логику в локальные `ds*.ts` и/или `safelist.ts`.
-4. При необходимости добавить `styles.css`, `tokens.css`, `styles.css.ts` и перечислить нужные файлы в `config.ts`.
+4. При необходимости добавить `styles.css`, `tokens.css` и перечислить нужные файлы в `config.ts`.
 5. Подключить компонент в `src/registry/components.ts`.
 6. Обновить `src/index.ts` и `packages/granularity/package.json`, если нужен публичный subpath export.
 7. Обновить `src/__tests__/presetGranularity.test.ts` и сопутствующие тесты.

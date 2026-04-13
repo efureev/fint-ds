@@ -33,8 +33,11 @@
 
 - root export: `@feugene/granularity`;
 - component subpath exports: `@feugene/granularity/components/<ComponentName>`;
-- style entrypoint-ы для foundation layers и тем;
-- component-specific CSS assets: `@feugene/granularity/components/<ComponentName>/styles.css`;
+- готовые CSS entrypoint-ы:
+  - `@feugene/granularity/foundation.css` — `tokens` + встроенные темы `light`/`dark` + `base`;
+  - `@feugene/granularity/styles.css` — `foundation` плюс стили всех компонентов;
+  - `@feugene/granularity/components/<ComponentName>/styles.css` — `foundation` плюс стили конкретного компонента и его зависимостей;
+- low-level foundation exports: `@feugene/granularity/styles/tokens.css`, `@feugene/granularity/styles/base.css`, `@feugene/granularity/styles/themes/light.css`, `@feugene/granularity/styles/themes/dark.css`;
 - package-level API: `@feugene/granularity/directives`, `@feugene/granularity/fileValidation`;
 - два сценария интеграции с `UnoCSS`:
     - `@feugene/granularity/uno` — browser-safe preset;
@@ -54,14 +57,14 @@ yarn add -D unocss
 
 ```ts
 
-import '@feugene/granularity/styles/tokens.css'
-import '@feugene/granularity/styles/base.css'
-import '@feugene/granularity/styles/themes/light.css'
 import '@feugene/granularity/styles.css'
 ```
 
-Этого достаточно, чтобы быстро получить рабочую базу. А если нужна более точная стратегия подключения — по компонентам,
-по CSS-слоям или через `UnoCSS` preset — всё это уже вынесено в отдельную документацию.
+Этого достаточно, чтобы быстро получить рабочую базу: `styles.css` уже включает `foundation.css` (`tokens`, `base`,
+встроенные темы `light`/`dark`) и стили всех компонентов.
+
+Если нужен более точный CSS-сценарий, используйте `@feugene/granularity/foundation.css` вместе с
+`@feugene/granularity/components/<ComponentName>/styles.css` или собирайте стили через `UnoCSS` preset.
 
 ## Документация
 

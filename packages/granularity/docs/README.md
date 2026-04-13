@@ -19,7 +19,7 @@
 ## Карта документации
 
 - [`installation.md`](./installation.md) — установка, public entrypoint-ы, quick start и выбор стратегии подключения.
-- [`styling.md`](./styling.md) — `tokens`, `base`, темы, порядок импортов и готовые CSS entrypoint-ы.
+- [`styling.md`](./styling.md) — `foundation.css`, `styles.css`, `tokens`, `base`, темы и порядок импортов.
 - [`unocss.md`](./unocss.md) — `@feugene/granularity/uno-node`, `@feugene/granularity/uno`, preflight-ы и практические
   сценарии.
 - [`localization.md`](./localization.md) — как `granularity` работает с локализацией приложения и fallback-текстами.
@@ -30,28 +30,28 @@
 
 ## Как выбрать подход
 
-| Сценарий                                                  | Что подключать                                                                                                          |
-|-----------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------|
-| Нужно быстро начать и использовать несколько компонентов  | root import из `@feugene/granularity` + `styles/tokens.css`, `styles/base.css`, `styles/themes/light.css`, `styles.css` |
-| Нужен минимальный JS bundle                               | subpath import из `@feugene/granularity/components/<Name>`                                                              |
-| Нужен минимальный CSS для 1–2 компонентов                 | foundation layers + `components/<Name>/styles.css`                                                                      |
-| Приложение уже собирает CSS через `UnoCSS` в node-конфиге | `@feugene/granularity/uno-node`                                                                                         |
-| Нужен pure/browser-safe preset без чтения файлов с диска  | `@feugene/granularity/uno`                                                                                              |
+| Сценарий                                                  | Что подключать                                                       |
+|-----------------------------------------------------------|----------------------------------------------------------------------|
+| Нужно быстро начать и использовать несколько компонентов  | root import из `@feugene/granularity` + `styles.css`                |
+| Нужен минимальный JS bundle                               | subpath import из `@feugene/granularity/components/<Name>`          |
+| Нужен минимальный CSS для 1–2 компонентов                 | `components/<Name>/styles.css` (при необходимости отдельно `foundation.css`) |
+| Приложение уже собирает CSS через `UnoCSS` в node-конфиге | `@feugene/granularity/uno-node`                                     |
+| Нужен pure/browser-safe preset без чтения файлов с диска  | `@feugene/granularity/uno`                                          |
 
 ## Базовый quick start
 
 ```ts
 
-import '@feugene/granularity/styles/tokens.css'
-import '@feugene/granularity/styles/base.css'
-import '@feugene/granularity/styles/themes/light.css'
 import '@feugene/granularity/styles.css'
 ```
+
+`styles.css` — это готовый полный пакетный bundle: он уже включает `foundation.css` (`tokens`, темы `light`/`dark`,
+`base`) и стили всех компонентов.
 
 ## Что публикует пакет
 
 - `Vue`-компоненты через root barrel и component subpath exports.
-- готовые CSS entrypoint-ы: foundation layers, встроенные темы и component-level стили.
+- готовые CSS entrypoint-ы: `foundation.css`, полный `styles.css`, low-level foundation files и component-level стили.
 - package-level API для директив и file validation.
 - `UnoCSS` preset-ы для двух режимов интеграции: node-aware и pure/browser-safe.
 - внутреннюю инженерную документацию по развитию пакета.

@@ -29,6 +29,9 @@ describe('playground-3 config', () => {
     expect(playground3MainEntry).toContain("import '@unocss/reset/tailwind-compat.css'")
     expect(playground3MainEntry).toContain("import '@feugene/granularity/components/DsButton/styles.css'")
     expect(playground3MainEntry).not.toContain("import '@feugene/granularity/styles.css'")
+    expect(playground3MainEntry).not.toContain("import '@feugene/granularity/styles/tokens.css'")
+    expect(playground3MainEntry).not.toContain("import '@feugene/granularity/styles/base.css'")
+    expect(playground3MainEntry).not.toContain("import '@feugene/granularity/styles/themes/light.css'")
   })
 
   it('показывает на странице примерные размеры bundle', () => {

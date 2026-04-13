@@ -57,6 +57,8 @@ describe('granularity package contracts', () => {
       types: './dist/types/src/unocss/preset.node.d.ts',
       import: './dist/uno-node.js',
     })
+    expect(pkg.exports['./styles.css']).toBe('./dist/styles.css')
+    expect(pkg.exports['./foundation.css']).toBe('./dist/foundation.css')
     expect(pkg.exports['./styles/base.css']).toBe('./dist/styles/base.css')
     expect(pkg.exports['./styles/tokens.css']).toBe('./dist/styles/tokens.css')
     expect(pkg.exports['./styles/themes/light.css']).toBe('./dist/styles/themes/light.css')
