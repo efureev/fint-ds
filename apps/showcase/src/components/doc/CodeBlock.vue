@@ -2,6 +2,8 @@
 import { ref } from 'vue'
 
 import { DsButton } from '@feugene/granularity'
+import IconCheck from '~icons/lucide/check'
+import IconCopy from '~icons/lucide/copy'
 
 const props = withDefaults(defineProps<{
   code: string
@@ -43,11 +45,22 @@ async function copyCode() {
       </div>
 
       <DsButton
-        variant="ghost-border"
+        :aria-label="isCopied ? 'Код скопирован' : 'Скопировать код'"
+        :title="isCopied ? 'Код скопирован' : 'Скопировать код'"
+        variant="primary"
         size="sm"
+        square
+        class="shadow-sm"
         @click="copyCode"
       >
-        {{ isCopied ? 'Скопировано' : 'Скопировать' }}
+        <IconCheck
+          v-if="isCopied"
+          class="h-4 w-4"
+        />
+        <IconCopy
+          v-else
+          class="h-4 w-4"
+        />
       </DsButton>
     </div>
 
