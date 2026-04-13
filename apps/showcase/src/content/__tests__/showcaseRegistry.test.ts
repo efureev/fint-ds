@@ -35,6 +35,19 @@ describe('showcase content registry', () => {
     expect(themeEntity?.tags).toContain('shell')
   })
 
+  it('даёт каждому UI-компоненту краткое пользовательское summary без generated-заглушек', () => {
+    expect(showcaseComponentEntities.length).toBeGreaterThan(20)
+    expect(
+      showcaseComponentEntities.every(entity => entity.summary.length >= 30),
+    ).toBe(true)
+    expect(
+      showcaseComponentEntities.every(entity => !entity.summary.includes('Публичный компонент')),
+    ).toBe(true)
+    expect(
+      showcaseComponentEntities.every(entity => !entity.summary.includes('registry пакета')),
+    ).toBe(true)
+  })
+
   it('формирует единый registry-слой для навигации и будущих doc/detail pages', () => {
     expect(showcaseEntityRegistry.length).toBe(
       showcaseComponentEntities.length
