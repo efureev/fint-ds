@@ -144,26 +144,29 @@ describe('granularity preset integration', () => {
 
     expect(getGranularityComponentCssUrls(['DsSelect'])).toEqual([])
     expect(getGranularityComponentCssUrls(['DsCollapse'])).toEqual([])
-    expect(getGranularityComponentCssUrls(['DsConfirmDialog'])).toEqual([])
+    expect(getGranularityComponentCssUrls(['DsConfirmDialog'])).toEqual(dsButtonSafelist.length > 0 ? getGranularityComponentCssUrls(['DsButton']) : [])
     expect(getGranularityComponentCssUrls(['DsDataTable'])).toEqual([])
     expect(getGranularityComponentCssUrls(['DsDropdown'])).toEqual([])
     expect(getGranularityComponentCssUrls(['DsList'])).toEqual([])
-    expect(getGranularityComponentCssUrls(['DsNavbar'])).toEqual([])
-    expect(getGranularityComponentCssUrls(['DsPagination'])).toEqual([])
-    expect(getGranularityComponentCssUrls(['DsPromptDialog'])).toEqual([])
+    expect(getGranularityComponentCssUrls(['DsNavbar'])).toEqual(getGranularityComponentCssUrls(['DsButton']))
+    expect(getGranularityComponentCssUrls(['DsPagination'])).toEqual(getGranularityComponentCssUrls(['DsButton']))
+    expect(getGranularityComponentCssUrls(['DsPromptDialog'])).toEqual(getGranularityComponentCssUrls(['DsButton']))
     expect(getGranularityComponentCssUrls(['DsSwitch'])).toEqual([])
-    expect(getGranularityComponentCssUrls(['DsToaster'])).toEqual([])
+    expect(getGranularityComponentCssUrls(['DsToaster'])).toEqual(getGranularityComponentCssUrls(['DsButton']))
     expect(getGranularityComponentCssUrls(['DsTabs'])).toEqual([])
     expect(getGranularityComponentCssUrls(['DsTree'])).toEqual([])
     expect(getGranularityComponentCssUrls(['DsTooltip'])).toEqual([])
     expect(getGranularityComponentCssUrls(['DsTreeSelect'])).toEqual([])
-    expect(getGranularityComponentCssUrls(['DsFormFile'])).toEqual([])
+    expect(getGranularityComponentCssUrls(['DsFormFile'])).toEqual(getGranularityComponentCssUrls(['DsButton']))
     expect(getGranularityComponentCssUrls(['DsFormSection'])).toEqual([])
     expect(getGranularityComponentCssUrls(['DsImageViewer'])).toEqual([])
     expect(getGranularityComponentCssUrls(['DsSidebar'])).toEqual([])
     expect(getGranularityComponentCssUrls(['DsTable'])).toEqual([])
     expect(getGranularityComponentCssUrls(['DsIcon'])).toEqual(dsIconConfig.cssFiles)
-    expect(getGranularityComponentCssUrls(['DsIcon', 'DsPromptDialog'])).toEqual(dsIconConfig.cssFiles)
+    expect(getGranularityComponentCssUrls(['DsIcon', 'DsPromptDialog'])).toEqual([
+      ...dsIconConfig.cssFiles,
+      ...getGranularityComponentCssUrls(['DsButton']),
+    ])
 
     await expect(getGranularityComponentCss(['DsIcon', 'DsPromptDialog'])).resolves.toContain('--ds-icon-size: 18px;')
   })
@@ -177,7 +180,7 @@ describe('granularity preset integration', () => {
     const { css } = await uno.generate(safelist.join(' '))
     const normalizedCss = normalizeCss(css)
 
-    expect(css).toContain('.bg-\\[var\\(--primary\\)\\]')
+    expect(css).toContain('.bg-\\[var\\(--ds-button-primary-background\\,var\\(--primary\\)\\)\\]')
     expect(css).toContain('.focus-visible\\:ring-\\[var\\(--ring\\)\\]')
     expect(css).toContain('.animate-spin')
     expect(css).toContain('@keyframes granularity-spin')
@@ -185,6 +188,43 @@ describe('granularity preset integration', () => {
     expect(normalizedCss).toContain('border-color:transparent')
     expect(normalizedCss).not.toContain('--ds-space-4:16px')
     expect(normalizedCss).not.toContain('--primary:#4f46e5')
+  })
+
+  it('публикует DsButton semantic tone utilities и локальные button tokens', async () => {
+    const safelist = getGranularitySafelist(['DsButton'])
+    const generator = await createGenerator({
+      presets: [presetMini(), presetGranularity({ components: ['DsButton'] })],
+    })
+
+    expect(safelist).toContain('bg-[var(--ds-button-success-background,var(--ds-success))]')
+    expect(safelist).toContain('hover:bg-[var(--ds-button-success-background-hover,var(--ds-success-hover))]')
+    expect(safelist).toContain('hover:active:bg-[var(--ds-button-success-background-active,var(--ds-success-active))]')
+    expect(safelist).toContain('text-[var(--ds-button-success-foreground,var(--ds-success-foreground,var(--foreground)))]')
+    expect(safelist).toContain('hover:bg-[var(--ds-button-success-soft-background-hover)]')
+    expect(safelist).toContain('hover:active:bg-[var(--ds-button-success-soft-background-active)]')
+    expect(safelist).toContain('bg-[var(--ds-button-warning-background,var(--ds-warning))]')
+    expect(safelist).toContain('text-[var(--ds-button-warning-foreground,var(--ds-warning-foreground,var(--foreground)))]')
+
+    const generatedCss = normalizeCss((await generator.generate(safelist.join(' '))).css)
+    const dsButtonComponentCss = normalizeCss(await getGranularityComponentCss(['DsButton']))
+
+    expect(generatedCss).toContain('background-color:var(--ds-button-success-background,var(--ds-success))')
+    expect(generatedCss).toContain('background-color:var(--ds-button-success-background-hover,var(--ds-success-hover))')
+    expect(generatedCss).toContain(':active:hover{background-color:var(--ds-button-success-background-active,var(--ds-success-active));}')
+    expect(generatedCss).toContain('background-color:var(--ds-button-success-soft-background-hover)')
+    expect(generatedCss).toContain(':active:hover{background-color:var(--ds-button-success-soft-background-active);}')
+    expect(dsButtonComponentCss).toContain('--ds-button-success-background:#047857;')
+    expect(dsButtonComponentCss).toContain('--ds-button-success-background-hover:#036c4d;')
+    expect(dsButtonComponentCss).toContain('--ds-button-success-background-active:#025f44;')
+    expect(dsButtonComponentCss).toContain('--ds-button-success-foreground:var(--ds-success-foreground);')
+    expect(dsButtonComponentCss).toContain('--ds-button-success-soft-background-hover:color-mix(insrgb,var(--ds-success)20%,var(--background));')
+    expect(dsButtonComponentCss).toContain('--ds-button-success-soft-background-active:color-mix(insrgb,var(--ds-success)26%,var(--background));')
+    expect(dsButtonComponentCss).toContain('--ds-button-warning-background:#c2410c;')
+    expect(dsButtonComponentCss).toContain('--ds-button-warning-background-hover:#b53b0a;')
+    expect(dsButtonComponentCss).toContain('--ds-button-warning-background-active:#9f3307;')
+    expect(dsButtonComponentCss).toContain('--ds-button-warning-foreground:var(--ds-warning-foreground);')
+    expect(dsButtonComponentCss).toContain('.theme-dark,')
+    expect(dsButtonComponentCss).toContain('--ds-button-success-background:#047857;')
   })
 
   it('подмешивает node-only preflights через uno-node preset', async () => {

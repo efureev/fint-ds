@@ -175,11 +175,9 @@ export const granularityComponentCssContracts = {
   DsButton: {
     files: [
       { pattern: /packages\/granularity\/src\/components\/DsButton\/tokens\.css$/, mustBeFileUrl: true },
-      { pattern: /packages\/granularity\/src\/components\/DsButton\/styles\.css$/, mustBeFileUrl: true },
     ],
     assetNames: [
       'components/DsButton/tokens.css',
-      'components/DsButton/styles.css',
     ],
   },
   DsButtonGroup: {

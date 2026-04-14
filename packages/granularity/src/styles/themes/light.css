@@ -25,11 +25,11 @@
   /* Status roles */
   --ds-success: #10b981;
   --ds-success-light: #d1fae5;
-  --ds-success-foreground: #03261d;
+  --ds-success-foreground: #ffffff;
   --ds-success-text: #065f46;
   --ds-warning: #f97316;
   --ds-warning-light: #ffedd5;
-  --ds-warning-foreground: #2b1305;
+  --ds-warning-foreground: #ffffff;
   --ds-warning-text: #7c2d12;
   --ds-danger: #dc2626;
   --ds-danger-light: #fee2e2;

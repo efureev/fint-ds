@@ -53,9 +53,9 @@ const tones: Record<DsButtonTone, DsButtonToneTokens> = {
     solidBackgroundActive: 'var(--ds-button-primary-background-active,var(--primary-active))',
     solidForeground: 'var(--ds-button-primary-foreground,var(--primary-foreground))',
     accentText: 'var(--accent-foreground)',
-    softBackground: 'color-mix(in srgb, var(--primary) 14%, var(--background))',
-    softBackgroundHover: 'color-mix(in srgb, var(--primary) 18%, var(--background))',
-    softBackgroundActive: 'color-mix(in srgb, var(--primary) 24%, var(--background))',
+    softBackground: 'var(--ds-button-primary-soft-background)',
+    softBackgroundHover: 'var(--ds-button-primary-soft-background-hover)',
+    softBackgroundActive: 'var(--ds-button-primary-soft-background-active)',
     softForeground: 'var(--accent-foreground)',
     border: 'var(--primary)',
     borderHover: 'var(--primary-hover)',
@@ -81,9 +81,9 @@ const tones: Record<DsButtonTone, DsButtonToneTokens> = {
     solidBackgroundActive: 'var(--ds-button-success-background-active,var(--ds-success-active))',
     solidForeground: 'var(--ds-button-success-foreground,var(--ds-success-foreground,var(--foreground)))',
     accentText: 'var(--ds-success-text,var(--ds-success))',
-    softBackground: 'var(--ds-success-light)',
-    softBackgroundHover: 'color-mix(in srgb, var(--ds-success) 20%, var(--background))',
-    softBackgroundActive: 'color-mix(in srgb, var(--ds-success) 26%, var(--background))',
+    softBackground: 'var(--ds-button-success-soft-background)',
+    softBackgroundHover: 'var(--ds-button-success-soft-background-hover)',
+    softBackgroundActive: 'var(--ds-button-success-soft-background-active)',
     softForeground: 'var(--ds-success-text,var(--ds-success))',
     border: 'var(--ds-success)',
     borderHover: 'var(--ds-success-hover)',
@@ -95,9 +95,9 @@ const tones: Record<DsButtonTone, DsButtonToneTokens> = {
     solidBackgroundActive: 'var(--ds-button-warning-background-active,var(--ds-warning-active))',
     solidForeground: 'var(--ds-button-warning-foreground,var(--ds-warning-foreground,var(--foreground)))',
     accentText: 'var(--ds-warning-text,var(--ds-warning))',
-    softBackground: 'var(--ds-warning-light)',
-    softBackgroundHover: 'color-mix(in srgb, var(--ds-warning) 20%, var(--background))',
-    softBackgroundActive: 'color-mix(in srgb, var(--ds-warning) 26%, var(--background))',
+    softBackground: 'var(--ds-button-warning-soft-background)',
+    softBackgroundHover: 'var(--ds-button-warning-soft-background-hover)',
+    softBackgroundActive: 'var(--ds-button-warning-soft-background-active)',
     softForeground: 'var(--ds-warning-text,var(--ds-warning))',
     border: 'var(--ds-warning)',
     borderHover: 'var(--ds-warning-hover)',
@@ -109,9 +109,9 @@ const tones: Record<DsButtonTone, DsButtonToneTokens> = {
     solidBackgroundActive: 'var(--ds-button-danger-background-active,var(--ds-danger-active))',
     solidForeground: 'var(--ds-button-danger-foreground,var(--ds-danger-foreground,var(--foreground)))',
     accentText: 'var(--ds-danger-text,var(--ds-danger))',
-    softBackground: 'var(--ds-danger-light)',
-    softBackgroundHover: 'color-mix(in srgb, var(--ds-danger) 20%, var(--background))',
-    softBackgroundActive: 'color-mix(in srgb, var(--ds-danger) 26%, var(--background))',
+    softBackground: 'var(--ds-button-danger-soft-background)',
+    softBackgroundHover: 'var(--ds-button-danger-soft-background-hover)',
+    softBackgroundActive: 'var(--ds-button-danger-soft-background-active)',
     softForeground: 'var(--ds-danger-text,var(--ds-danger))',
     border: 'var(--ds-danger)',
     borderHover: 'var(--ds-danger-hover)',
@@ -123,9 +123,9 @@ const tones: Record<DsButtonTone, DsButtonToneTokens> = {
     solidBackgroundActive: 'var(--ds-button-info-background-active,var(--ds-info-active))',
     solidForeground: 'var(--ds-button-info-foreground,var(--ds-info-foreground,var(--foreground)))',
     accentText: 'var(--ds-info-text,var(--ds-info))',
-    softBackground: 'var(--ds-info-light)',
-    softBackgroundHover: 'color-mix(in srgb, var(--ds-info) 20%, var(--background))',
-    softBackgroundActive: 'color-mix(in srgb, var(--ds-info) 26%, var(--background))',
+    softBackground: 'var(--ds-button-info-soft-background)',
+    softBackgroundHover: 'var(--ds-button-info-soft-background-hover)',
+    softBackgroundActive: 'var(--ds-button-info-soft-background-active)',
     softForeground: 'var(--ds-info-text,var(--ds-info))',
     border: 'var(--ds-info)',
     borderHover: 'var(--ds-info-hover)',
@@ -148,7 +148,9 @@ function variantClass(variant: DsButtonVariant, tone: DsButtonTone): string {
       `hover:bg-${withVar(tokens.solidBackgroundHover)}`,
       `hover:border-${withVar(tokens.solidBackgroundHover)}`,
       `active:bg-${withVar(tokens.solidBackgroundActive)}`,
+      `hover:active:bg-${withVar(tokens.solidBackgroundActive)}`,
       `active:border-${withVar(tokens.solidBackgroundActive)}`,
+      `hover:active:border-${withVar(tokens.solidBackgroundActive)}`,
     ].join(' ')
   }
 
@@ -160,7 +162,9 @@ function variantClass(variant: DsButtonVariant, tone: DsButtonTone): string {
       `hover:bg-${withVar(tokens.softBackgroundHover)}`,
       `hover:border-${withVar(tokens.borderHover)}`,
       `active:bg-${withVar(tokens.softBackgroundActive)}`,
+      `hover:active:bg-${withVar(tokens.softBackgroundActive)}`,
       `active:border-${withVar(tokens.borderActive)}`,
+      `hover:active:border-${withVar(tokens.borderActive)}`,
     ].join(' ')
   }
 
@@ -169,10 +173,12 @@ function variantClass(variant: DsButtonVariant, tone: DsButtonTone): string {
       'bg-transparent',
       `text-${withVar(tokens.accentText)}`,
       `border border-${withVar(tokens.border)}`,
-      `hover:bg-${withVar(tokens.softBackground)}`,
+      `hover:bg-${withVar(tokens.softBackgroundHover)}`,
       `hover:border-${withVar(tokens.borderHover)}`,
-      `active:bg-${withVar(tokens.softBackgroundHover)}`,
+      `active:bg-${withVar(tokens.softBackgroundActive)}`,
+      `hover:active:bg-${withVar(tokens.softBackgroundActive)}`,
       `active:border-${withVar(tokens.borderActive)}`,
+      `hover:active:border-${withVar(tokens.borderActive)}`,
     ].join(' ')
   }
 
@@ -180,8 +186,9 @@ function variantClass(variant: DsButtonVariant, tone: DsButtonTone): string {
     return [
       'bg-transparent',
       `text-${withVar(tokens.accentText)}`,
-      `hover:bg-${withVar(tokens.softBackground)}`,
-      `active:bg-${withVar(tokens.softBackgroundHover)}`,
+      `hover:bg-${withVar(tokens.softBackgroundHover)}`,
+      `active:bg-${withVar(tokens.softBackgroundActive)}`,
+      `hover:active:bg-${withVar(tokens.softBackgroundActive)}`,
     ].join(' ')
   }
 
@@ -189,10 +196,12 @@ function variantClass(variant: DsButtonVariant, tone: DsButtonTone): string {
     'bg-transparent',
     `text-${withVar(tokens.accentText)}`,
     'border border-transparent',
-    `hover:bg-${withVar(tokens.softBackground)}`,
+    `hover:bg-${withVar(tokens.softBackgroundHover)}`,
     `hover:border-${withVar(tokens.borderHover)}`,
-    `active:bg-${withVar(tokens.softBackgroundHover)}`,
+    `active:bg-${withVar(tokens.softBackgroundActive)}`,
+    `hover:active:bg-${withVar(tokens.softBackgroundActive)}`,
     `active:border-${withVar(tokens.borderActive)}`,
+    `hover:active:border-${withVar(tokens.borderActive)}`,
   ].join(' ')
 }
 

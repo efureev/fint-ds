@@ -3,26 +3,41 @@
   --ds-button-primary-background-hover: var(--primary-hover);
   --ds-button-primary-background-active: var(--primary-active);
   --ds-button-primary-foreground: var(--primary-foreground);
+  --ds-button-primary-soft-background: color-mix(in srgb, var(--primary) 14%, var(--background));
+  --ds-button-primary-soft-background-hover: color-mix(in srgb, var(--primary) 18%, var(--background));
+  --ds-button-primary-soft-background-active: color-mix(in srgb, var(--primary) 24%, var(--background));
 
   --ds-button-success-background: var(--ds-success);
   --ds-button-success-background-hover: var(--ds-success-hover);
   --ds-button-success-background-active: var(--ds-success-active);
   --ds-button-success-foreground: var(--ds-success-foreground);
+  --ds-button-success-soft-background: var(--ds-success-light);
+  --ds-button-success-soft-background-hover: color-mix(in srgb, var(--ds-success) 20%, var(--background));
+  --ds-button-success-soft-background-active: color-mix(in srgb, var(--ds-success) 26%, var(--background));
 
   --ds-button-warning-background: var(--ds-warning);
   --ds-button-warning-background-hover: var(--ds-warning-hover);
   --ds-button-warning-background-active: var(--ds-warning-active);
   --ds-button-warning-foreground: var(--ds-warning-foreground);
+  --ds-button-warning-soft-background: var(--ds-warning-light);
+  --ds-button-warning-soft-background-hover: color-mix(in srgb, var(--ds-warning) 20%, var(--background));
+  --ds-button-warning-soft-background-active: color-mix(in srgb, var(--ds-warning) 26%, var(--background));
 
   --ds-button-danger-background: var(--ds-danger);
   --ds-button-danger-background-hover: var(--ds-danger-hover);
   --ds-button-danger-background-active: var(--ds-danger-active);
   --ds-button-danger-foreground: var(--ds-danger-foreground);
+  --ds-button-danger-soft-background: var(--ds-danger-light);
+  --ds-button-danger-soft-background-hover: color-mix(in srgb, var(--ds-danger) 20%, var(--background));
+  --ds-button-danger-soft-background-active: color-mix(in srgb, var(--ds-danger) 26%, var(--background));
 
   --ds-button-info-background: var(--ds-info);
   --ds-button-info-background-hover: var(--ds-info-hover);
   --ds-button-info-background-active: var(--ds-info-active);
   --ds-button-info-foreground: var(--ds-info-foreground);
+  --ds-button-info-soft-background: var(--ds-info-light);
+  --ds-button-info-soft-background-hover: color-mix(in srgb, var(--ds-info) 20%, var(--background));
+  --ds-button-info-soft-background-active: color-mix(in srgb, var(--ds-info) 26%, var(--background));
 }
 
 .theme-dark,

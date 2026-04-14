@@ -269,12 +269,46 @@ describe('DsButton', () => {
     })
 
     const button = wrapper.get('[data-ds-button]')
+    const className = button.attributes('class') ?? ''
 
     expect(button.attributes('data-ds-variant')).toBe('outline')
     expect(button.attributes('data-ds-tone')).toBe('warning')
     expect(button.classes()).toContain('text-[var(--ds-warning-text,var(--ds-warning))]')
     expect(button.classes()).toContain('border-[var(--ds-warning)]')
-    expect(button.classes()).toContain('hover:bg-[var(--ds-warning-light)]')
+    expect(className).toContain('hover:bg-[var(--ds-button-warning-soft-background-hover)]')
+    expect(className).toContain('active:bg-[var(--ds-button-warning-soft-background-active)]')
+    expect(className).toContain('hover:active:bg-[var(--ds-button-warning-soft-background-active)]')
+  })
+
+  it('добавляет hover:active правила, чтобы pressed-состояние не терялось под hover', () => {
+    const filled = dsButtonClass({
+      variant: 'primary',
+      tone: 'info',
+      size: 'md',
+      square: false,
+    })
+    const ghost = dsButtonClass({
+      variant: 'ghost',
+      tone: 'info',
+      size: 'md',
+      square: false,
+    })
+    const ghostBorder = dsButtonClass({
+      variant: 'ghost-border',
+      tone: 'success',
+      size: 'md',
+      square: false,
+    })
+
+    expect(filled).toContain('hover:active:bg-[var(--ds-button-info-background-active,var(--ds-info-active))]')
+    expect(filled).toContain('hover:active:border-[var(--ds-button-info-background-active,var(--ds-info-active))]')
+
+    expect(ghost).toContain('hover:bg-[var(--ds-button-info-soft-background-hover)]')
+    expect(ghost).toContain('active:bg-[var(--ds-button-info-soft-background-active)]')
+    expect(ghost).toContain('hover:active:bg-[var(--ds-button-info-soft-background-active)]')
+
+    expect(ghostBorder).toContain('hover:active:bg-[var(--ds-button-success-soft-background-active)]')
+    expect(ghostBorder).toContain('hover:active:border-[var(--ds-success-active)]')
   })
 
   it('сохраняет обратную совместимость для legacy destructive alias', () => {
@@ -293,6 +327,25 @@ describe('DsButton', () => {
     expect(button.attributes('data-ds-tone')).toBe('danger')
     expect(button.classes()).toContain('bg-[var(--ds-button-danger-background,var(--ds-danger))]')
     expect(button.classes()).toContain('text-[var(--ds-button-danger-foreground,var(--ds-danger-foreground,var(--foreground)))]')
+  })
+
+  it('в light theme filled success и warning кнопки используют светлый foreground с достаточным контрастом', () => {
+    const failures: string[] = []
+
+    for (const tone of ['success', 'warning'] as const) {
+      for (const state of states) {
+        const colors = getButtonColors('primary', tone, state)
+        const text = resolveColorExpression(colors.text, { ...lightThemeVars, ...dsButtonLightThemeVars }, derivedThemeVars)
+        const background = resolveColorExpression(colors.background, { ...lightThemeVars, ...dsButtonLightThemeVars }, derivedThemeVars)
+        const contrast = getContrastRatio(text, background)
+
+        if (getLuminance(text) <= getLuminance(background) || contrast < 4.5) {
+          failures.push(`${tone}:${state}:${contrast.toFixed(2)}`)
+        }
+      }
+    }
+
+    expect(failures).toEqual([])
   })
 
   it('в dark theme filled-кнопки используют светлый foreground для primary и semantic tones', () => {
@@ -318,7 +371,7 @@ describe('DsButton', () => {
 
     for (const [themeName, themeVars] of Object.entries({
       light: { ...lightThemeVars, ...dsButtonLightThemeVars },
-      dark: { ...darkThemeVars, ...dsButtonDarkThemeVars },
+      dark: { ...darkThemeVars, ...dsButtonLightThemeVars, ...dsButtonDarkThemeVars },
     })) {
       for (const variant of variants) {
         for (const tone of tones) {
