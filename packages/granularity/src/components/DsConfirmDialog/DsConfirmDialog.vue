@@ -3,8 +3,8 @@ import { computed } from 'vue'
 
 import DsButton from '../DsButton/DsButton.vue'
 import DsDialog from '../DsDialog/DsDialog.vue'
-import type { DsButtonLegacyVariant, DsButtonSize, DsButtonTone } from '../DsButton/dsButtonStyles'
-import type { DsDialogSectionConfig, DsDialogSize } from '../DsDialog/dialogShared'
+import type { DsButtonSize, DsButtonTone, DsButtonVariant } from '../DsButton'
+import type { DsDialogSectionConfig, DsDialogSize } from '../DsDialog'
 
 const props = withDefaults(
   defineProps<{
@@ -18,7 +18,7 @@ const props = withDefaults(
     buttonSize?: DsButtonSize
     confirmText?: string
     cancelText?: string
-    confirmVariant?: DsButtonLegacyVariant
+    confirmVariant?: DsButtonVariant
     confirmTone?: DsButtonTone
   }>(),
   {

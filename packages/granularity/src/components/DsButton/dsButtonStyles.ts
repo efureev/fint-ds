@@ -1,5 +1,4 @@
 export type DsButtonVariant = 'primary' | 'secondary' | 'outline' | 'ghost' | 'ghost-border'
-export type DsButtonLegacyVariant = DsButtonVariant | 'destructive'
 export type DsButtonTone = 'primary' | 'neutral' | 'success' | 'warning' | 'danger' | 'info' | 'slate' | 'azure'
 export type DsButtonSize = 'xs' | 'sm' | 'md' | 'lg'
 
@@ -231,23 +230,6 @@ function variantClass(variant: DsButtonVariant, tone: DsButtonTone): string {
     `active:border-${withVar(tokens.borderActive)}`,
     `hover:active:border-${withVar(tokens.borderActive)}`,
   ].join(' ')
-}
-
-export function resolveDsButtonVariant(options: {
-  variant: DsButtonLegacyVariant
-  tone: DsButtonTone
-}): { variant: DsButtonVariant, tone: DsButtonTone } {
-  if (options.variant === 'destructive') {
-    return {
-      variant: 'primary',
-      tone: 'danger',
-    }
-  }
-
-  return {
-    variant: options.variant,
-    tone: options.tone,
-  }
 }
 
 const variantTokens = (Object.keys(tones) as DsButtonTone[]).flatMap(tone =>

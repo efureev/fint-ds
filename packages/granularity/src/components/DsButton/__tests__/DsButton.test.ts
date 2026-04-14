@@ -344,24 +344,6 @@ describe('DsButton', () => {
     expect(ghostBorder).toContain('hover:active:border-[var(--ds-success-active)]')
   })
 
-  it('сохраняет обратную совместимость для legacy destructive alias', () => {
-    const wrapper = mount(DsButton, {
-      props: {
-        variant: 'destructive',
-      },
-      slots: {
-        default: 'Delete',
-      },
-    })
-
-    const button = wrapper.get('[data-ds-button]')
-
-    expect(button.attributes('data-ds-variant')).toBe('primary')
-    expect(button.attributes('data-ds-tone')).toBe('danger')
-    expect(button.classes()).toContain('bg-[var(--ds-button-danger-bg,var(--ds-danger))]')
-    expect(button.classes()).toContain('text-[var(--ds-button-danger-fg,var(--ds-danger-fg,var(--fg)))]')
-  })
-
   it('в light theme filled success, warning, slate и azure кнопки используют светлый foreground с достаточным контрастом', () => {
     const failures: string[] = []
 

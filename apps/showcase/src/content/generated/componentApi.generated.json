@@ -342,7 +342,7 @@
           {
             "name": "variant",
             "description": "",
-            "type": "DsButtonLegacyVariant | undefined",
+            "type": "DsButtonVariant | undefined",
             "required": false,
             "default": "\"primary\""
           },
@@ -649,7 +649,7 @@
           {
             "name": "confirmVariant",
             "description": "",
-            "type": "DsButtonLegacyVariant | undefined",
+            "type": "DsButtonVariant | undefined",
             "required": false,
             "default": "\"primary\""
           },
@@ -3032,7 +3032,7 @@
           {
             "name": "confirmVariant",
             "description": "",
-            "type": "DsButtonLegacyVariant | undefined",
+            "type": "DsButtonVariant | undefined",
             "required": false,
             "default": "\"primary\""
           },

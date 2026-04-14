@@ -34,7 +34,7 @@ describe('showcase generated component API metadata', () => {
     const linkProps = linkEntity?.apiSections.find(section => section.key === 'props')
 
     expect(buttonProps?.items.find(item => item.name === 'variant')?.type).toBe(
-      'DsButtonLegacyVariant: "primary" | "secondary" | "outline" | "ghost" | "ghost-border" | "destructive"',
+      'DsButtonVariant: "primary" | "secondary" | "outline" | "ghost" | "ghost-border"',
     )
     expect(buttonProps?.items.find(item => item.name === 'tone')?.type).toBe(
       'DsButtonTone: "primary" | "neutral" | "success" | "warning" | "danger" | "info"',

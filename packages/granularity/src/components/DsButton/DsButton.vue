@@ -3,19 +3,18 @@ import { computed } from 'vue'
 
 import IconLoader from '~icons/lucide/loader-circle'
 
-export type { DsButtonLegacyVariant, DsButtonSize, DsButtonTone, DsButtonVariant } from './dsButtonStyles'
+export type { DsButtonSize, DsButtonTone, DsButtonVariant } from './dsButtonStyles'
 
 import {
   dsButtonClass,
-  resolveDsButtonVariant,
-  type DsButtonLegacyVariant,
   type DsButtonSize,
   type DsButtonTone,
+  type DsButtonVariant,
 } from './dsButtonStyles'
 
 const props = withDefaults(
   defineProps<{
-    variant?: DsButtonLegacyVariant
+    variant?: DsButtonVariant
     tone?: DsButtonTone
     size?: DsButtonSize
     loading?: boolean
@@ -38,12 +37,6 @@ const props = withDefaults(
 
 const isDisabled = computed(() => props.disabled || props.loading)
 const isSquare = computed(() => props.square)
-const resolvedVariantAndTone = computed(() => {
-  return resolveDsButtonVariant({
-    variant: props.variant,
-    tone: props.tone,
-  })
-})
 
 const squareStyle = computed(() => {
   if (!isSquare.value) return undefined
@@ -66,8 +59,8 @@ const squareStyle = computed(() => {
 
 const className = computed(() => {
   return dsButtonClass({
-    variant: resolvedVariantAndTone.value.variant,
-    tone: resolvedVariantAndTone.value.tone,
+    variant: props.variant,
+    tone: props.tone,
     size: props.size,
     square: isSquare.value,
   })
@@ -77,8 +70,8 @@ const className = computed(() => {
 <template>
   <button
     data-ds-button
-    :data-ds-variant="resolvedVariantAndTone.variant"
-    :data-ds-tone="resolvedVariantAndTone.tone"
+    :data-ds-variant="props.variant"
+    :data-ds-tone="props.tone"
     :type="props.type"
     :disabled="isDisabled"
     :aria-busy="props.loading ? 'true' : undefined"
