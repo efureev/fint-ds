@@ -12,7 +12,12 @@ export const showcaseComponentApiFallbacks: Record<string, ShowcaseComponentApiF
         {
           name: 'variant',
           description: '',
-          type: 'DsButtonVariant: \"primary\" | \"secondary\" | \"outline\" | \"ghost\" | \"ghost-border\" | \"destructive\"',
+          type: 'DsButtonLegacyVariant: \"primary\" | \"secondary\" | \"outline\" | \"ghost\" | \"ghost-border\" | \"destructive\"',
+        },
+        {
+          name: 'tone',
+          description: '',
+          type: 'DsButtonTone: \"primary\" | \"neutral\" | \"success\" | \"warning\" | \"danger\" | \"info\"',
         },
         {
           name: 'size',

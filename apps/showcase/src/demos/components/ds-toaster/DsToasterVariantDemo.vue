@@ -26,10 +26,10 @@ function notify(variant: 'info' | 'success' | 'warning' | 'danger') {
       <DsButton size="sm" variant="primary" @click="notify('success')">
         Primary
       </DsButton>
-      <DsButton size="sm" variant="warning" @click="notify('warning')">
+      <DsButton size="sm" variant="primary" tone="warning" @click="notify('warning')">
         Warning
       </DsButton>
-      <DsButton size="sm" variant="destructive" @click="notify('danger')">
+      <DsButton size="sm" variant="primary" tone="danger" @click="notify('danger')">
         Danger
       </DsButton>
     </div>

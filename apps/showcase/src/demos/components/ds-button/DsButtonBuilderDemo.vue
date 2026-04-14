@@ -9,6 +9,7 @@ import {
   DsSelect,
   DsSwitch,
   type DsButtonSize,
+  type DsButtonTone,
   type DsButtonVariant,
 } from '@feugene/granularity'
 import IconSparkles from '~icons/lucide/sparkles'
@@ -18,6 +19,7 @@ import CodeBlock from '../../../components/doc/CodeBlock.vue'
 type DsButtonType = 'button' | 'submit' | 'reset'
 
 const variant = ref<DsButtonVariant>('primary')
+const tone = ref<DsButtonTone>('primary')
 const size = ref<DsButtonSize>('md')
 const type = ref<DsButtonType>('button')
 const label = ref('Create workspace')
@@ -32,8 +34,16 @@ const variantOptions = [
   {value: 'outline', label: 'Outline'},
   {value: 'ghost', label: 'Ghost'},
   {value: 'ghost-border', label: 'Ghost border'},
-  {value: 'destructive', label: 'Destructive'},
 ] satisfies Array<{ value: DsButtonVariant, label: string }>
+
+const toneOptions = [
+  {value: 'primary', label: 'Primary'},
+  {value: 'neutral', label: 'Neutral'},
+  {value: 'success', label: 'Success'},
+  {value: 'warning', label: 'Warning'},
+  {value: 'danger', label: 'Danger'},
+  {value: 'info', label: 'Info'},
+] satisfies Array<{ value: DsButtonTone, label: string }>
 
 const sizeOptions = [
   {value: 'xs', label: 'XS'},
@@ -66,6 +76,7 @@ function escapeAttribute(value: string) {
 const previewCode = computed(() => {
   const attributes = [
     `variant="${variant.value}"`,
+    `tone="${tone.value}"`,
     `size="${size.value}"`,
     `type="${type.value}"`,
   ]
@@ -103,6 +114,7 @@ const previewCode = computed(() => {
 
           <DsButton
               :variant="variant"
+              :tone="tone"
               :size="size"
               :type="type"
               :loading="loading"
@@ -144,6 +156,10 @@ const previewCode = computed(() => {
       <div class="grid gap-4">
         <DsFormField label="Variant">
           <DsSelect v-model="variant" :options="variantOptions" aria-label="Button variant"/>
+        </DsFormField>
+
+        <DsFormField label="Tone">
+          <DsSelect v-model="tone" :options="toneOptions" aria-label="Button tone"/>
         </DsFormField>
 
         <DsFormField label="Size">

@@ -3,7 +3,7 @@ import { computed } from 'vue'
 
 import DsButton from '../DsButton/DsButton.vue'
 import DsDialog from '../DsDialog/DsDialog.vue'
-import type { DsButtonSize, DsButtonVariant } from '../DsButton/dsButtonStyles'
+import type { DsButtonLegacyVariant, DsButtonSize, DsButtonTone } from '../DsButton/dsButtonStyles'
 import type { DsDialogSectionConfig, DsDialogSize } from '../DsDialog/dialogShared'
 
 const props = withDefaults(
@@ -18,7 +18,8 @@ const props = withDefaults(
     buttonSize?: DsButtonSize
     confirmText?: string
     cancelText?: string
-    confirmVariant?: DsButtonVariant
+    confirmVariant?: DsButtonLegacyVariant
+    confirmTone?: DsButtonTone
   }>(),
   {
     title: undefined,
@@ -31,6 +32,7 @@ const props = withDefaults(
     confirmText: undefined,
     cancelText: undefined,
     confirmVariant: 'primary',
+    confirmTone: 'primary',
   },
 )
 
@@ -84,6 +86,7 @@ function onConfirm(): void {
           <DsButton
             data-testid="ds-confirm-confirm"
             :variant="props.confirmVariant"
+            :tone="props.confirmTone"
             :size="props.buttonSize"
             @click="onConfirm"
           >

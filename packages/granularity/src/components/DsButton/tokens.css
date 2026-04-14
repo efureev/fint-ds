@@ -1,0 +1,55 @@
+:root {
+  --ds-button-primary-background: var(--primary);
+  --ds-button-primary-background-hover: var(--primary-hover);
+  --ds-button-primary-background-active: var(--primary-active);
+  --ds-button-primary-foreground: var(--primary-foreground);
+
+  --ds-button-success-background: var(--ds-success);
+  --ds-button-success-background-hover: var(--ds-success-hover);
+  --ds-button-success-background-active: var(--ds-success-active);
+  --ds-button-success-foreground: var(--ds-success-foreground);
+
+  --ds-button-warning-background: var(--ds-warning);
+  --ds-button-warning-background-hover: var(--ds-warning-hover);
+  --ds-button-warning-background-active: var(--ds-warning-active);
+  --ds-button-warning-foreground: var(--ds-warning-foreground);
+
+  --ds-button-danger-background: var(--ds-danger);
+  --ds-button-danger-background-hover: var(--ds-danger-hover);
+  --ds-button-danger-background-active: var(--ds-danger-active);
+  --ds-button-danger-foreground: var(--ds-danger-foreground);
+
+  --ds-button-info-background: var(--ds-info);
+  --ds-button-info-background-hover: var(--ds-info-hover);
+  --ds-button-info-background-active: var(--ds-info-active);
+  --ds-button-info-foreground: var(--ds-info-foreground);
+}
+
+.theme-dark,
+.dark,
+[data-theme='dark'] {
+  --ds-button-primary-background: #595ce6;
+  --ds-button-primary-background-hover: #5053dd;
+  --ds-button-primary-background-active: #474acf;
+  --ds-button-primary-foreground: #ffffff;
+
+  --ds-button-success-background: #047857;
+  --ds-button-success-background-hover: #036c4d;
+  --ds-button-success-background-active: #025f44;
+  --ds-button-success-foreground: #f8fafc;
+
+  --ds-button-warning-background: #c2410c;
+  --ds-button-warning-background-hover: #b53b0a;
+  --ds-button-warning-background-active: #9f3307;
+  --ds-button-warning-foreground: #f8fafc;
+
+  --ds-button-danger-background: #b91c1c;
+  --ds-button-danger-background-hover: #a91919;
+  --ds-button-danger-background-active: #931515;
+  --ds-button-danger-foreground: #f8fafc;
+
+  --ds-button-info-background: #4338ca;
+  --ds-button-info-background-hover: #3d33bb;
+  --ds-button-info-background-active: #362da8;
+  --ds-button-info-foreground: #f8fafc;
+}

@@ -25,12 +25,20 @@
   /* Status roles */
   --ds-success: #10b981;
   --ds-success-light: #d1fae5;
+  --ds-success-foreground: #03261d;
+  --ds-success-text: #065f46;
   --ds-warning: #f97316;
   --ds-warning-light: #ffedd5;
+  --ds-warning-foreground: #2b1305;
+  --ds-warning-text: #7c2d12;
   --ds-danger: #dc2626;
   --ds-danger-light: #fee2e2;
-  --ds-info: #6366f1;
+  --ds-danger-foreground: #ffffff;
+  --ds-danger-text: #991b1b;
+  --ds-info: #5850ec;
   --ds-info-light: #e0e7ff;
+  --ds-info-foreground: #ffffff;
+  --ds-info-text: #3730a3;
 
   /* Data visualization roles */
   --chart-1: #4f46e5;

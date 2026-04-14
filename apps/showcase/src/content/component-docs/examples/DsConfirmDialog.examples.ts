@@ -4,7 +4,7 @@ export const dsConfirmDialogExamples: ShowcaseComponentExampleDoc[] = [
   {
     id: 'confirm-dialog-destructive',
     title: 'Destructive confirmation',
-    description: 'Главный сценарий для `DsConfirmDialog`: destructive action с кастомным текстом и variant у confirm-кнопки.',
+    description: 'Главный сценарий для `DsConfirmDialog`: destructive action с кастомным текстом и semantic `confirmTone` у confirm-кнопки.',
     status: 'ready',
     previewKey: 'ds-confirm-dialog-destructive',
     code: `<script setup lang="ts">
@@ -16,7 +16,7 @@ const open = ref(false)
 </script>
 
 <template>
-  <DsButton variant="danger" @click="open = true">
+  <DsButton variant="primary" tone="danger" @click="open = true">
     Delete workspace
   </DsButton>
 
@@ -25,7 +25,7 @@ const open = ref(false)
     title="Delete workspace?"
     description="This action revokes links and automations."
     confirm-text="Delete"
-    confirm-variant="danger"
+    confirm-tone="danger"
   />
 </template>`,
   },

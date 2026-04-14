@@ -26,7 +26,7 @@ describe('showcase generated component API metadata', () => {
     expect(slotsSection?.items.find(item => item.name === 'default')?.description).toContain('Текст кнопки')
   })
 
-  it('раскрывает literal union значения для variant и size у DsButton и DsLink в API showcase', () => {
+  it('раскрывает literal union значения для variant, tone и size у DsButton и DsLink в API showcase', () => {
     const buttonEntity = showcaseComponentEntities.find(entity => entity.name === 'DsButton')
     const linkEntity = showcaseComponentEntities.find(entity => entity.name === 'DsLink')
 
@@ -34,7 +34,10 @@ describe('showcase generated component API metadata', () => {
     const linkProps = linkEntity?.apiSections.find(section => section.key === 'props')
 
     expect(buttonProps?.items.find(item => item.name === 'variant')?.type).toBe(
-      'DsButtonVariant: "primary" | "secondary" | "outline" | "ghost" | "ghost-border" | "destructive"',
+      'DsButtonLegacyVariant: "primary" | "secondary" | "outline" | "ghost" | "ghost-border" | "destructive"',
+    )
+    expect(buttonProps?.items.find(item => item.name === 'tone')?.type).toBe(
+      'DsButtonTone: "primary" | "neutral" | "success" | "warning" | "danger" | "info"',
     )
     expect(buttonProps?.items.find(item => item.name === 'size')?.type).toBe(
       'DsButtonSize: "xs" | "sm" | "md" | "lg"',

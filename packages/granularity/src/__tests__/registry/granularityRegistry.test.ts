@@ -53,6 +53,11 @@ describe('granularity registry contracts', () => {
   })
 
   it('строит component css urls и style assets из component contracts', async () => {
+    expect(getGranularityComponentCssUrls(['DsButton'])).toEqual(granularityComponentConfigs.DsButton.cssFiles)
+    await expect(getGranularityComponentCssFiles(['DsButton'])).resolves.toEqual([
+      expect.stringMatching(/packages\/granularity\/src\/components\/DsButton\/tokens\.css$/),
+      expect.stringMatching(/packages\/granularity\/src\/components\/DsButton\/styles\.css$/),
+    ])
     expect(getGranularityComponentCssUrls(['DsIcon'])).toEqual(granularityComponentConfigs.DsIcon.cssFiles)
     await expect(getGranularityComponentCssFiles(['DsIcon'])).resolves.toEqual([
       expect.stringMatching(/packages\/granularity\/src\/components\/DsIcon\/tokens\.css$/),

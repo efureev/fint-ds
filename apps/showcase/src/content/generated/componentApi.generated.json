@@ -328,7 +328,7 @@
           {
             "name": "variant",
             "description": "",
-            "type": "DsButtonVariant | undefined",
+            "type": "DsButtonLegacyVariant | undefined",
             "required": false,
             "default": "\"primary\""
           },
@@ -352,6 +352,13 @@
             "type": "boolean | undefined",
             "required": false,
             "default": "false"
+          },
+          {
+            "name": "tone",
+            "description": "",
+            "type": "DsButtonTone | undefined",
+            "required": false,
+            "default": "\"primary\""
           },
           {
             "name": "loading",
@@ -635,7 +642,14 @@
           {
             "name": "confirmVariant",
             "description": "",
-            "type": "DsButtonVariant | undefined",
+            "type": "DsButtonLegacyVariant | undefined",
+            "required": false,
+            "default": "\"primary\""
+          },
+          {
+            "name": "confirmTone",
+            "description": "",
+            "type": "DsButtonTone | undefined",
             "required": false,
             "default": "\"primary\""
           },
@@ -3011,7 +3025,14 @@
           {
             "name": "confirmVariant",
             "description": "",
-            "type": "DsButtonVariant | undefined",
+            "type": "DsButtonLegacyVariant | undefined",
+            "required": false,
+            "default": "\"primary\""
+          },
+          {
+            "name": "confirmTone",
+            "description": "",
+            "type": "DsButtonTone | undefined",
             "required": false,
             "default": "\"primary\""
           },
@@ -3172,9 +3193,23 @@
             "default": "\"outline\""
           },
           {
+            "name": "buttonTone",
+            "description": "",
+            "type": "DsButtonTone | undefined",
+            "required": false,
+            "default": "\"neutral\""
+          },
+          {
             "name": "selectedButtonVariant",
             "description": "",
             "type": "DsButtonVariant | undefined",
+            "required": false,
+            "default": "\"primary\""
+          },
+          {
+            "name": "selectedButtonTone",
+            "description": "",
+            "type": "DsButtonTone | undefined",
             "required": false,
             "default": "\"primary\""
           },

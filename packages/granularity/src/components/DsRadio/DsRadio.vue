@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed, inject } from 'vue'
 
-import { dsButtonClass, type DsButtonSize, type DsButtonVariant } from '../DsButton/dsButtonStyles'
+import { dsButtonClass, type DsButtonSize, type DsButtonTone, type DsButtonVariant } from '../DsButton/dsButtonStyles'
 
 import { DS_RADIO_GROUP_CONTEXT } from './dsRadioGroupContext'
 
@@ -26,7 +26,9 @@ const props = withDefaults(
     size?: DsButtonSize
     variant?: DsRadioVariant
     buttonVariant?: DsButtonVariant
+    buttonTone?: DsButtonTone
     selectedButtonVariant?: DsButtonVariant
+    selectedButtonTone?: DsButtonTone
     ariaLabel?: string
   }>(),
   {
@@ -38,7 +40,9 @@ const props = withDefaults(
     size: undefined,
     variant: 'radiobox',
     buttonVariant: 'outline',
+    buttonTone: 'neutral',
     selectedButtonVariant: 'primary',
+    selectedButtonTone: 'primary',
     ariaLabel: undefined,
   },
 )
@@ -81,9 +85,11 @@ const checked = computed(() => resolvedModelValue.value === props.value)
 
 const buttonClassName = computed(() => {
   const variant = checked.value ? props.selectedButtonVariant : props.buttonVariant
+  const tone = checked.value ? props.selectedButtonTone : props.buttonTone
 
   return dsButtonClass({
     variant,
+    tone,
     size: resolvedSize.value,
     square: false,
   })
