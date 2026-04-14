@@ -48,8 +48,8 @@ const remaining = computed(() => 4 - skills.value.length)
 <template>
   <div class="grid gap-4">
     <div class="flex flex-wrap gap-2">
-      <DsBadge variant="neutral" radius="round">{{ skills.length }}/4 selected</DsBadge>
-      <DsBadge variant="secondary" radius="round">{{ remaining }} slots left</DsBadge>
+      <DsBadge tone="neutral" radius="round">{{ skills.length }}/4 selected</DsBadge>
+      <DsBadge tone="secondary" radius="round">{{ remaining }} slots left</DsBadge>
     </div>
 
     <DsInputTag
@@ -57,7 +57,7 @@ const remaining = computed(() => 4 - skills.value.length)
       :max="4"
       state="success"
       placeholder="Add skill tags"
-      tag-variant="secondary"
+      tag-tone="secondary"
       tag-radius="round"
     />
 
@@ -86,7 +86,7 @@ const environments = ref(['production', 'staging'])
     <DsInputTag
       v-model="environments"
       placeholder="Environment alias"
-      tag-variant="warning"
+      tag-tone="warning"
       tag-dark
     >
       <template #tag="{ tag, index }">

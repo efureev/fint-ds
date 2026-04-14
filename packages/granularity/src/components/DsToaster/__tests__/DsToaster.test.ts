@@ -65,7 +65,7 @@ afterEach(() => {
 })
 
 describe('DsToaster', () => {
-  it('рендерит toast из useToast и показывает variant-иконку с цветом', () => {
+  it('рендерит toast из useToast и показывает tone-иконку с цветом', () => {
     const toast = useToast()
     toast.clear()
     toast.push({

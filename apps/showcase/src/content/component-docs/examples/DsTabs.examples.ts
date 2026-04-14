@@ -64,7 +64,7 @@ const tabs = [
     <DsTabs v-model="currentTab" :tabs="tabs" />
 
     <div class="flex flex-wrap gap-2">
-      <DsBadge v-for="tab in tabs" :key="tab.value" :variant="tab.value === currentTab ? 'primary' : 'secondary'">
+      <DsBadge v-for="tab in tabs" :key="tab.value" :tone="tab.value === currentTab ? 'primary' : 'secondary'">
         {{ tab.label }}: {{ tab.badge }}
       </DsBadge>
     </div>
@@ -118,7 +118,7 @@ const sectionTitle = computed(() => {
 
       <div class="flex flex-wrap gap-2">
         <DsBadge v-if="currentTab === 'summary'">Uptime 99.96%</DsBadge>
-        <DsBadge v-else-if="currentTab === 'incidents'" variant="warning">3 incidents require follow-up</DsBadge>
+        <DsBadge v-else-if="currentTab === 'incidents'" tone="warning">3 incidents require follow-up</DsBadge>
         <DsBadge v-else>5 contacts in rotation</DsBadge>
       </div>
     </div>

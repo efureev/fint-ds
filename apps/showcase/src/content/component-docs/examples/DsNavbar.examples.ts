@@ -13,7 +13,7 @@ import { DsBadge, DsButton, DsNavbar } from '@feugene/granularity'
 
 <template>
   <DsNavbar title="Workspace">
-    <DsBadge size="sm" variant="secondary">
+    <DsBadge size="sm" tone="secondary">
       3 updates
     </DsBadge>
 
@@ -44,7 +44,7 @@ const isMenuOpen = ref(false)
     menu-button-class="sm:hidden"
     @menu="isMenuOpen = !isMenuOpen"
   >
-    <DsBadge size="sm" :variant="isMenuOpen ? 'primary' : 'secondary'">
+    <DsBadge size="sm" :tone="isMenuOpen ? 'primary' : 'secondary'">
       {{ isMenuOpen ? 'Drawer open' : 'Drawer closed' }}
     </DsBadge>
   </DsNavbar>
@@ -65,7 +65,7 @@ import { DsBadge, DsNavbar } from '@feugene/granularity'
     <template #title>
       <div class="flex items-center gap-2">
         <span class="text-sm font-semibold">Release dashboard</span>
-        <DsBadge size="sm" variant="info">
+        <DsBadge size="sm" tone="info">
           Beta
         </DsBadge>
       </div>

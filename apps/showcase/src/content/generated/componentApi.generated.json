@@ -9,11 +9,18 @@
         "origin": "generated",
         "items": [
           {
+            "name": "tone",
+            "description": "",
+            "type": "DsAlertTone | undefined",
+            "required": false,
+            "default": "\"info\""
+          },
+          {
             "name": "variant",
             "description": "",
             "type": "DsAlertVariant | undefined",
             "required": false,
-            "default": "\"info\""
+            "default": "\"soft\""
           },
           {
             "name": "title",
@@ -160,9 +167,9 @@
         "origin": "generated",
         "items": [
           {
-            "name": "variant",
+            "name": "tone",
             "description": "",
-            "type": "DsBadgeVariant | undefined",
+            "type": "DsBadgeTone | undefined",
             "required": false,
             "default": "\"neutral\""
           },
@@ -326,6 +333,13 @@
         "origin": "generated",
         "items": [
           {
+            "name": "tone",
+            "description": "",
+            "type": "DsButtonTone | undefined",
+            "required": false,
+            "default": "\"primary\""
+          },
+          {
             "name": "variant",
             "description": "",
             "type": "DsButtonLegacyVariant | undefined",
@@ -352,13 +366,6 @@
             "type": "boolean | undefined",
             "required": false,
             "default": "false"
-          },
-          {
-            "name": "tone",
-            "description": "",
-            "type": "DsButtonTone | undefined",
-            "required": false,
-            "default": "\"primary\""
           },
           {
             "name": "loading",
@@ -2373,9 +2380,9 @@
             "default": "true"
           },
           {
-            "name": "tagVariant",
+            "name": "tagTone",
             "description": "",
-            "type": "DsBadgeVariant | undefined",
+            "type": "DsBadgeTone | undefined",
             "required": false,
             "default": "\"neutral\""
           },

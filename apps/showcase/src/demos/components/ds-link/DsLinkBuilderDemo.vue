@@ -106,7 +106,7 @@ const previewSummary = computed(() => {
   if (underline.value === 'always')
     return 'Always underline подходит для важных inline-actions, которые должны быть заметны даже без hover.'
 
-  return 'Настройте variant, size, underline и навигационные атрибуты, чтобы быстро собрать нужный contract ссылки.'
+  return 'Настройте tone, size, underline и навигационные атрибуты, чтобы быстро собрать нужный contract ссылки.'
 })
 
 function escapeAttribute(value: string) {

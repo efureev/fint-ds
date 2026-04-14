@@ -204,6 +204,10 @@ describe('granularity preset integration', () => {
     expect(safelist).toContain('hover:active:bg-[var(--ds-button-success-soft-background-active)]')
     expect(safelist).toContain('bg-[var(--ds-button-warning-background,var(--ds-warning))]')
     expect(safelist).toContain('text-[var(--ds-button-warning-foreground,var(--ds-warning-foreground,var(--foreground)))]')
+    expect(safelist).toContain('bg-[var(--ds-button-slate-background,var(--ds-slate))]')
+    expect(safelist).toContain('text-[var(--ds-button-slate-foreground,var(--ds-slate-foreground,var(--foreground)))]')
+    expect(safelist).toContain('bg-[var(--ds-button-azure-background,var(--ds-azure))]')
+    expect(safelist).toContain('hover:active:bg-[var(--ds-button-azure-soft-background-active)]')
 
     const generatedCss = normalizeCss((await generator.generate(safelist.join(' '))).css)
     const dsButtonComponentCss = normalizeCss(await getGranularityComponentCss(['DsButton']))
@@ -223,8 +227,15 @@ describe('granularity preset integration', () => {
     expect(dsButtonComponentCss).toContain('--ds-button-warning-background-hover:#b53b0a;')
     expect(dsButtonComponentCss).toContain('--ds-button-warning-background-active:#9f3307;')
     expect(dsButtonComponentCss).toContain('--ds-button-warning-foreground:var(--ds-warning-foreground);')
+    expect(dsButtonComponentCss).toContain('--ds-button-slate-background:var(--ds-slate);')
+    expect(dsButtonComponentCss).toContain('--ds-button-slate-soft-background-active:color-mix(insrgb,var(--ds-slate)26%,var(--background));')
+    expect(dsButtonComponentCss).toContain('--ds-button-azure-background:#0369a1;')
+    expect(dsButtonComponentCss).toContain('--ds-button-azure-background-active:#0c4a6e;')
+    expect(dsButtonComponentCss).toContain('--ds-button-azure-soft-background-hover:color-mix(insrgb,var(--ds-azure)20%,var(--background));')
     expect(dsButtonComponentCss).toContain('.theme-dark,')
     expect(dsButtonComponentCss).toContain('--ds-button-success-background:#047857;')
+    expect(dsButtonComponentCss).toContain('--ds-button-slate-background:#475569;')
+    expect(dsButtonComponentCss).toContain('--ds-button-azure-background:#0369a1;')
   })
 
   it('подмешивает node-only preflights через uno-node preset', async () => {

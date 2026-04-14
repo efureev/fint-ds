@@ -7,7 +7,8 @@ import IconInfo from '~icons/lucide/info'
 import IconClose from '~icons/lucide/x'
 import IconError from '~icons/lucide/x-circle'
 
-export type DsAlertVariant = 'info' | 'success' | 'warning' | 'warning-light' | 'danger'
+export type DsAlertTone = 'info' | 'success' | 'warning' | 'danger' | 'slate' | 'azure'
+export type DsAlertVariant = 'soft' | 'light'
 
 type DsAlertResolvedStyles = {
   bg: string
@@ -34,6 +35,7 @@ const emit = defineEmits<{
 }>()
 
 const props = withDefaults(defineProps<{
+  tone?: DsAlertTone
   variant?: DsAlertVariant
   title?: string
   closable?: boolean
@@ -41,7 +43,8 @@ const props = withDefaults(defineProps<{
   textColor?: string
   borderColor?: string
 }>(), {
-  variant: 'info',
+  tone: 'info',
+  variant: 'soft',
   title: undefined,
   closable: false,
   backgroundColor: undefined,
@@ -51,49 +54,66 @@ const props = withDefaults(defineProps<{
 
 const getCustomColor = (value?: string) => value?.trim() || undefined
 
-const styles = computed<DsAlertResolvedStyles>(() => {
-  const map: Record<DsAlertVariant, DsAlertResolvedStyles> = {
-    info: {
-      bg: 'var(--ds-info-light)',
-      border: 'color-mix(in srgb, var(--ds-info) 22%, var(--border))',
-      icon: 'var(--ds-info)',
-      ...DEFAULT_TEXT_COLORS,
-      Icon: IconInfo,
-    },
-    success: {
-      bg: 'var(--ds-success-light)',
-      border: 'color-mix(in srgb, var(--ds-success) 22%, var(--border))',
-      icon: 'var(--ds-success)',
-      ...DEFAULT_TEXT_COLORS,
-      Icon: IconCheck,
-    },
-    warning: {
-      bg: 'var(--ds-warning-light)',
-      border: 'color-mix(in srgb, var(--ds-warning) 22%, var(--border))',
-      icon: 'var(--ds-warning)',
-      ...DEFAULT_TEXT_COLORS,
-      Icon: IconWarning,
-    },
-    'warning-light': {
-      bg: '#fffbeb',
-      border: '#fcd34d',
-      icon: WARNING_LIGHT_TEXT_COLOR,
-      title: WARNING_LIGHT_TEXT_COLOR,
-      text: WARNING_LIGHT_TEXT_COLOR,
-      close: WARNING_LIGHT_TEXT_COLOR,
-      closeHover: WARNING_LIGHT_TEXT_COLOR,
-      Icon: IconWarning,
-    },
-    danger: {
-      bg: 'var(--ds-danger-light)',
-      border: 'color-mix(in srgb, var(--ds-danger) 22%, var(--border))',
-      icon: 'var(--ds-danger)',
-      ...DEFAULT_TEXT_COLORS,
-      Icon: IconError,
-    },
-  }
+const SOFT_TONE_STYLES: Record<DsAlertTone, DsAlertResolvedStyles> = {
+  info: {
+    bg: 'var(--ds-info-light)',
+    border: 'color-mix(in srgb, var(--ds-info) 22%, var(--border))',
+    icon: 'var(--ds-info)',
+    ...DEFAULT_TEXT_COLORS,
+    Icon: IconInfo,
+  },
+  success: {
+    bg: 'var(--ds-success-light)',
+    border: 'color-mix(in srgb, var(--ds-success) 22%, var(--border))',
+    icon: 'var(--ds-success)',
+    ...DEFAULT_TEXT_COLORS,
+    Icon: IconCheck,
+  },
+  warning: {
+    bg: 'var(--ds-warning-light)',
+    border: 'color-mix(in srgb, var(--ds-warning) 22%, var(--border))',
+    icon: 'var(--ds-warning)',
+    ...DEFAULT_TEXT_COLORS,
+    Icon: IconWarning,
+  },
+  danger: {
+    bg: 'var(--ds-danger-light)',
+    border: 'color-mix(in srgb, var(--ds-danger) 22%, var(--border))',
+    icon: 'var(--ds-danger)',
+    ...DEFAULT_TEXT_COLORS,
+    Icon: IconError,
+  },
+  slate: {
+    bg: 'var(--ds-slate-light)',
+    border: 'color-mix(in srgb, var(--ds-slate) 22%, var(--border))',
+    icon: 'var(--ds-slate)',
+    ...DEFAULT_TEXT_COLORS,
+    Icon: IconInfo,
+  },
+  azure: {
+    bg: 'var(--ds-azure-light)',
+    border: 'color-mix(in srgb, var(--ds-azure) 22%, var(--border))',
+    icon: 'var(--ds-azure)',
+    ...DEFAULT_TEXT_COLORS,
+    Icon: IconInfo,
+  },
+}
 
-  const base = map[props.variant]
+const LIGHT_TONE_STYLES: Partial<Record<DsAlertTone, DsAlertResolvedStyles>> = {
+  warning: {
+    bg: '#fffbeb',
+    border: '#fcd34d',
+    icon: WARNING_LIGHT_TEXT_COLOR,
+    title: WARNING_LIGHT_TEXT_COLOR,
+    text: WARNING_LIGHT_TEXT_COLOR,
+    close: WARNING_LIGHT_TEXT_COLOR,
+    closeHover: WARNING_LIGHT_TEXT_COLOR,
+    Icon: IconWarning,
+  },
+}
+
+const styles = computed<DsAlertResolvedStyles>(() => {
+  const base = (props.variant === 'light' ? LIGHT_TONE_STYLES[props.tone] : undefined) ?? SOFT_TONE_STYLES[props.tone]
   const customTextColor = getCustomColor(props.textColor)
 
   return {

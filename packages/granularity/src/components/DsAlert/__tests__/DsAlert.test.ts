@@ -54,7 +54,7 @@ describe('DsAlert', () => {
     const wrapper = mount(DsAlert, {
       props: {
         title: 'Title',
-        variant: 'info',
+        tone: 'info',
       },
       slots: {
         default: 'Body',
@@ -81,10 +81,11 @@ describe('DsAlert', () => {
     expect(wrapper.emitted('close')?.length).toBe(1)
   })
 
-  it('применяет amber-цвета для варианта warning-light', () => {
+  it('применяет amber-цвета для tone warning с variant light', () => {
     const wrapper = mount(DsAlert, {
       props: {
-        variant: 'warning-light',
+        tone: 'warning',
+        variant: 'light',
         title: 'Warning light',
         closable: true,
       },
@@ -106,7 +107,7 @@ describe('DsAlert', () => {
   it('позволяет переопределить цвета через пропсы', () => {
     const wrapper = mount(DsAlert, {
       props: {
-        variant: 'success',
+        tone: 'success',
         title: 'Custom colors',
         closable: true,
         backgroundColor: '#111827',
@@ -126,5 +127,33 @@ describe('DsAlert', () => {
     expect(alert.style.getPropertyValue('--ds-alert-title-color')).toBe('#f9fafb')
     expect(alert.style.getPropertyValue('--ds-alert-text-color')).toBe('#f9fafb')
     expect(alert.style.getPropertyValue('--ds-alert-close-color')).toBe('#f9fafb')
+  })
+
+  it('поддерживает tones slate и azure', () => {
+    const slate = mount(DsAlert, {
+      props: {
+        tone: 'slate',
+      },
+      slots: {
+        default: 'Slate body',
+      },
+    })
+
+    const azure = mount(DsAlert, {
+      props: {
+        tone: 'azure',
+      },
+      slots: {
+        default: 'Azure body',
+      },
+    })
+
+    const slateAlert = slate.get('[role="alert"]').element as HTMLDivElement
+    const azureAlert = azure.get('[role="alert"]').element as HTMLDivElement
+
+    expect(slateAlert.style.getPropertyValue('--ds-alert-bg')).toBe('var(--ds-slate-light)')
+    expect(slateAlert.style.getPropertyValue('--ds-alert-icon-color')).toBe('var(--ds-slate)')
+    expect(azureAlert.style.getPropertyValue('--ds-alert-bg')).toBe('var(--ds-azure-light)')
+    expect(azureAlert.style.getPropertyValue('--ds-alert-icon-color')).toBe('var(--ds-azure)')
   })
 })

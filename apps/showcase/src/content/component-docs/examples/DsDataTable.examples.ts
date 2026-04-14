@@ -67,7 +67,7 @@ function actionLabel(status: string) {
   <div class="grid gap-3">
     <DsDataTable :rows="rows" :columns="columns" row-key="id">
       <template #cell-status="{ row }">
-        <DsBadge :variant="actionLabel(String(row.status)) as 'success' | 'warning' | 'danger'">
+        <DsBadge :tone="actionLabel(String(row.status)) as 'success' | 'warning' | 'danger'">
           {{ row.status }}
         </DsBadge>
       </template>

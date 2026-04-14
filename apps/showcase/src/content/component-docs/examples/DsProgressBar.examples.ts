@@ -40,7 +40,7 @@ const rows = [
 <template>
   <div class="grid gap-3">
     <div v-for="row in rows" :key="row.label" class="grid gap-2">
-      <DsBadge size="sm" variant="secondary">input: {{ row.raw }}%</DsBadge>
+      <DsBadge size="sm" tone="secondary">input: {{ row.raw }}%</DsBadge>
       <DsProgressBar :value="row.raw" :aria-label="row.label" />
     </div>
   </div>
@@ -65,7 +65,7 @@ const stages = [
 <template>
   <div class="grid gap-3">
     <div v-for="stage in stages" :key="stage.label" class="grid gap-2">
-      <DsBadge size="sm" :variant="stage.variant">{{ stage.value }}%</DsBadge>
+      <DsBadge size="sm" :tone="stage.variant">{{ stage.value }}%</DsBadge>
       <DsProgressBar :value="stage.value" :aria-label="stage.label" />
     </div>
   </div>

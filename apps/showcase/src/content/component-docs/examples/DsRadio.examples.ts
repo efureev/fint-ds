@@ -49,9 +49,9 @@ const selectedLabel = computed(() => {
 </template>`,
   },
   {
-    id: 'radio-button-variant',
-    title: 'Button variant for segmented controls',
-    description: 'Отдельный пример для `variant="button"`: по API это всё тот же radio, но визуально он работает как сегментированный toolbar-control.',
+    id: 'radio-button-tone',
+    title: 'Button tone for segmented controls',
+    description: 'Отдельный пример для `tone="button"`: по API это всё тот же radio, но визуально он работает как сегментированный toolbar-control.',
     status: 'ready',
     previewKey: 'ds-radio-button-variant',
     code: `<script setup lang="ts">

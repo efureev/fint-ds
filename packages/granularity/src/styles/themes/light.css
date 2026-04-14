@@ -39,6 +39,14 @@
   --ds-info-light: #e0e7ff;
   --ds-info-foreground: #ffffff;
   --ds-info-text: #3730a3;
+  --ds-slate: #475569;
+  --ds-slate-light: #e2e8f0;
+  --ds-slate-foreground: #ffffff;
+  --ds-slate-text: #334155;
+  --ds-azure: #0ea5e9;
+  --ds-azure-light: #e0f2fe;
+  --ds-azure-foreground: #ffffff;
+  --ds-azure-text: #075985;
 
   /* Data visualization roles */
   --chart-1: #4f46e5;
@@ -82,6 +90,10 @@
     --ds-danger-active: #bb2427;
     --ds-info-hover: #5c60e1;
     --ds-info-active: #5659d1;
+    --ds-slate-hover: #435062;
+    --ds-slate-active: #3d4a5b;
+    --ds-azure-hover: #0284c7;
+    --ds-azure-active: #0369a1;
 
     /* Component semantic fallbacks */
     --ds-category-tree-branch-line-active-color: #c4cdf7;

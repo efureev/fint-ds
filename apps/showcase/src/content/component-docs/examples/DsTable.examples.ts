@@ -22,7 +22,7 @@ import { DsBadge, DsTable } from '@feugene/granularity'
 
     <tr class="border-t border-[var(--border)]">
       <td class="px-4 py-3">Spring onboarding</td>
-      <td class="px-4 py-3"><DsBadge size="sm" variant="secondary">Ready</DsBadge></td>
+      <td class="px-4 py-3"><DsBadge size="sm" tone="secondary">Ready</DsBadge></td>
     </tr>
   </DsTable>
 </template>`,

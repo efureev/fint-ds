@@ -4,7 +4,7 @@ import { computed, ref } from 'vue'
 import IconClose from '~icons/lucide/x'
 
 import DsBadge from '../DsBadge/DsBadge.vue'
-import type { DsBadgeRadius, DsBadgeSize, DsBadgeVariant } from '../DsBadge'
+import type { DsBadgeRadius, DsBadgeSize, DsBadgeTone } from '../DsBadge'
 import type { DsInputSize } from '../DsInput/DsInput.vue'
 
 export type DsInputTagSize = DsInputSize
@@ -27,7 +27,7 @@ const props = withDefaults(
     max?: number
     addOnBlur?: boolean
     clearInputOnAdd?: boolean
-    tagVariant?: DsBadgeVariant
+    tagTone?: DsBadgeTone
     tagDark?: boolean
     tagSize?: DsBadgeSize
     tagRadius?: DsBadgeRadius
@@ -46,7 +46,7 @@ const props = withDefaults(
     max: undefined,
     addOnBlur: false,
     clearInputOnAdd: true,
-    tagVariant: 'neutral',
+    tagTone: 'neutral',
     tagDark: false,
     tagSize: 'md',
     tagRadius: 'round',
@@ -255,7 +255,7 @@ const placeholderText = computed(() => props.modelValue.length > 0 ? undefined :
     <DsBadge
       v-for="(tag, i) in props.modelValue"
       :key="`${tag}-${i}`"
-      :variant="props.tagVariant"
+      :tone="props.tagTone"
       :dark="props.tagDark"
       :size="props.tagSize"
       :radius="props.tagRadius"

@@ -73,8 +73,8 @@ function validateFiles(files: File[]) {
 <template>
   <div class="grid gap-4">
     <div class="flex flex-wrap gap-2">
-      <DsBadge variant="info" radius="round">Only .pdf</DsBadge>
-      <DsBadge variant="warning" radius="round">Up to 1 MB</DsBadge>
+      <DsBadge tone="info" radius="round">Only .pdf</DsBadge>
+      <DsBadge tone="warning" radius="round">Up to 1 MB</DsBadge>
     </div>
 
     <DsFormField
@@ -124,8 +124,8 @@ const totalSizeLabel = computed(() => {
 <template>
   <div class="grid gap-4">
     <div class="flex flex-wrap items-center gap-2">
-      <DsBadge variant="neutral" radius="round">{{ attachments.length }} files</DsBadge>
-      <DsBadge variant="secondary" radius="round">{{ totalSizeLabel }}</DsBadge>
+      <DsBadge tone="neutral" radius="round">{{ attachments.length }} files</DsBadge>
+      <DsBadge tone="secondary" radius="round">{{ totalSizeLabel }}</DsBadge>
     </div>
 
     <DsFormFile

@@ -79,7 +79,7 @@ export const composablePackageDocOverrides: Record<string, PackageDocOverride> =
           'const id = toast.push({',
           '  title: "Saved",',
           '  message: "Profile updated",',
-          '  variant: "success",',
+          '  tone: "success",',
           '  timeoutMs: 0,',
           '})',
           'toast.dismiss(id)',

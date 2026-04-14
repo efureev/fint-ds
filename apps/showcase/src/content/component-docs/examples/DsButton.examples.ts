@@ -4,7 +4,7 @@ export const dsButtonExamples: ShowcaseComponentExampleDoc[] = [
   {
     id: 'button-builder',
     title: 'Interactive button constructor',
-    description: 'Живой playground для всех пропсов `DsButton`: меняйте visual `variant`, semantic `tone`, size, type и состояния без переключения между отдельными demo-картами.',
+    description: 'Живой playground для всех ключевых пропсов `DsButton`: меняйте `variant`, `tone`, size, type и состояния без переключения между отдельными demo-картами.',
     status: 'ready',
     previewKey: 'ds-button-builder',
     code: '',
@@ -34,6 +34,8 @@ const toneRows = [
   { value: 'danger', label: 'Danger', note: 'Рискованные и необратимые действия.' },
   { value: 'info', label: 'Info', note: 'Информационные CTA.' },
   { value: 'neutral', label: 'Neutral', note: 'Нейтральные secondary и toolbar actions.' },
+  { value: 'slate', label: 'Slate', note: 'Сдержанный utilitarian tone.' },
+  { value: 'azure', label: 'Azure', note: 'Информационный tone, отличный от brand-primary.' },
 ] satisfies Array<{ value: DsButtonTone, label: string, note: string }>
 
 const sizeOptions = ['xs', 'sm', 'md', 'lg']
@@ -87,6 +89,15 @@ const sizeOptions = ['xs', 'sm', 'md', 'lg']
     </div>
   </div>
 </template>`,
+  },
+  {
+    id: 'button-state-matrix',
+    title: 'Tone × variant state matrix',
+    description: 'Полная матрица по всем `tone` и `variant`, включая live, `hover`, `focus` и `active` для дизайн-ревью и визуальной регрессии.',
+    status: 'ready',
+    previewKey: 'ds-button-state-matrix',
+    code: '',
+    note: 'Это тот же сценарий, который раньше жил в `playground-5`: удобно сравнивать новые tones и проверять state-contract без ручного наведения.',
   },
   {
     id: 'button-group-composition',

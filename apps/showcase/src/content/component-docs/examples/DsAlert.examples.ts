@@ -2,9 +2,9 @@ import type { ShowcaseComponentExampleDoc } from '../types'
 
 export const dsAlertExamples: ShowcaseComponentExampleDoc[] = [
   {
-    id: 'alert-variant-matrix',
-    title: 'Semantic variants for inline feedback',
-    description: 'Базовая матрица фиксирует все ключевые alert-состояния, чтобы на странице компонента сразу был виден визуальный диапазон `info/success/warning/danger`.',
+    id: 'alert-tone-matrix',
+    title: 'Semantic tones for inline feedback',
+    description: 'Базовая матрица фиксирует ключевые alert-tone состояния, чтобы на странице компонента сразу был виден визуальный диапазон `info/success/warning/danger/slate/azure`.',
     status: 'ready',
     previewKey: 'ds-alert-variant-matrix',
     code: `<script setup lang="ts">
@@ -13,10 +13,12 @@ import { DsAlert } from '@feugene/granularity'
 
 <template>
   <div class="grid gap-3">
-    <DsAlert title="Info" variant="info">Deploy preview URL is ready for the QA handoff.</DsAlert>
-    <DsAlert title="Success" variant="success">Billing sync finished and no manual retries are required.</DsAlert>
-    <DsAlert title="Warning" variant="warning">API quota is at 78%; consider moving heavy jobs to the night window.</DsAlert>
-    <DsAlert title="Danger" variant="danger">Background worker lost connection to Redis and needs operator attention.</DsAlert>
+    <DsAlert title="Info" tone="info">Deploy preview URL is ready for the QA handoff.</DsAlert>
+    <DsAlert title="Success" tone="success">Billing sync finished and no manual retries are required.</DsAlert>
+    <DsAlert title="Warning" tone="warning">API quota is at 78%; consider moving heavy jobs to the night window.</DsAlert>
+    <DsAlert title="Danger" tone="danger">Background worker lost connection to Redis and needs operator attention.</DsAlert>
+    <DsAlert title="Slate" tone="slate">Runbook is archived and kept for passive operator context.</DsAlert>
+    <DsAlert title="Azure" tone="azure">Release note references are ready for stakeholder review.</DsAlert>
   </div>
 </template>`,
   },
@@ -38,7 +40,8 @@ const visible = ref(true)
   <DsAlert
     v-if="visible"
     title="Maintenance window"
-    variant="warning-light"
+    tone="warning"
+    variant="light"
     closable
     @close="visible = false"
   >

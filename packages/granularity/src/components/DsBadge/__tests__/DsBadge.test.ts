@@ -4,10 +4,10 @@ import { describe, expect, it } from 'vitest'
 import DsBadge from '../DsBadge.vue'
 
 describe('DsBadge', () => {
-  it('рендерит light-вариант по умолчанию', () => {
+  it('рендерит light-tone по указанному tone', () => {
     const wrapper = mount(DsBadge, {
       props: {
-        variant: 'success',
+        tone: 'success',
       },
       slots: {
         default: 'Success',
@@ -48,10 +48,10 @@ describe('DsBadge', () => {
     expect(round.attributes('class')).toContain('rounded-full')
   })
 
-  it('рендерит dark filled variant при dark=true', () => {
+  it('рендерит dark filled tone при dark=true', () => {
     const wrapper = mount(DsBadge, {
       props: {
-        variant: 'success',
+        tone: 'success',
         dark: true,
         size: 'lg',
         radius: 'semi',
@@ -64,5 +64,22 @@ describe('DsBadge', () => {
     expect(wrapper.attributes('class')).toContain('bg-[var(--ds-success)]')
     expect(wrapper.attributes('class')).toContain('text-white')
     expect(wrapper.attributes('class')).toContain('rounded-[5px]')
+  })
+
+  it('поддерживает новые tones slate и azure', () => {
+    const slate = mount(DsBadge, {
+      props: { tone: 'slate' },
+      slots: { default: 'Slate' },
+    })
+
+    const azure = mount(DsBadge, {
+      props: { tone: 'azure', dark: true },
+      slots: { default: 'Azure' },
+    })
+
+    expect(slate.attributes('class')).toContain('bg-[var(--ds-slate-light)]')
+    expect(slate.attributes('class')).toContain('text-[var(--ds-slate-text)]')
+    expect(azure.attributes('class')).toContain('bg-[var(--ds-azure)]')
+    expect(azure.attributes('class')).toContain('text-[var(--ds-azure-foreground)]')
   })
 })

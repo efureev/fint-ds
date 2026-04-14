@@ -2,9 +2,9 @@ import type { ShowcaseComponentExampleDoc } from '../types'
 
 export const dsToasterExamples: ShowcaseComponentExampleDoc[] = [
   {
-    id: 'toaster-variant-push',
+    id: 'toaster-tone-push',
     title: 'Variant push buttons',
-    description: 'Показываем базовый `push` с разными `variant` и сразу фиксируем, что toast store общий для приложения.',
+    description: 'Показываем базовый `push` с разными `tone` и сразу фиксируем, что toast store общий для приложения.',
     status: 'ready',
     previewKey: 'ds-toaster-variant-push',
     code: `<script setup lang="ts">

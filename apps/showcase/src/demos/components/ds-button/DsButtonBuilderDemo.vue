@@ -43,6 +43,8 @@ const toneOptions = [
   {value: 'warning', label: 'Warning'},
   {value: 'danger', label: 'Danger'},
   {value: 'info', label: 'Info'},
+  {value: 'slate', label: 'Slate'},
+  {value: 'azure', label: 'Azure'},
 ] satisfies Array<{ value: DsButtonTone, label: string }>
 
 const sizeOptions = [
@@ -67,6 +69,22 @@ const buttonText = computed(() => {
 
 const effectiveAriaLabel = computed(() => {
   return ariaLabel.value.trim() || buttonText.value
+})
+
+const previewSummary = computed(() => {
+  if (square.value)
+    return 'Square mode делает кнопку icon-only, поэтому `aria-label` должен описывать действие для screen reader.'
+
+  if (loading.value)
+    return 'Loading автоматически блокирует кнопку и помогает защититься от повторного submit в асинхронных сценариях.'
+
+  if (disabled.value)
+    return 'Disabled сохраняет визуальный contract выбранных variant/tone, но выключает интерактивность и pointer events.'
+
+  if (variant.value === 'ghost' || variant.value === 'ghost-border')
+    return 'Ghost-варианты лучше работают в тулбарах и плотных action-областях, где filled CTA был бы слишком тяжёлым.'
+
+  return 'Соберите нужную комбинацию `variant`, `tone`, `size` и `type`, чтобы быстро проверить contract кнопки перед внедрением в продуктовый сценарий.'
 })
 
 function escapeAttribute(value: string) {
@@ -130,16 +148,7 @@ const previewCode = computed(() => {
 
           <div class="pointer-events-none absolute inset-x-6 bottom-6 flex justify-center border-t border-dashed border-[var(--preview-border)] pt-2">
             <div class="showcase-demo-text max-w-[40ch] text-center text-sm">
-              <template v-if="square">
-                В square-режиме кнопка показывает только иконку, поэтому `aria-label` становится обязательным для screen
-                reader.
-              </template>
-              <template v-else-if="loading">
-                Loading делает кнопку недоступной автоматически — это полезно для защиты от повторного submit.
-              </template>
-              <template v-else>
-                Используйте конструктор, чтобы быстро выбрать правильную комбинацию варианта, размера и типа действия.
-              </template>
+              {{ previewSummary }}
             </div>
           </div>
         </div>
@@ -170,16 +179,10 @@ const previewCode = computed(() => {
           <DsRadioGroup v-model="type" :options="typeOptions" variant="button" size="sm"/>
         </DsFormField>
 
-        <DsFormField :label="square ? 'Aria label (required for icon-only)' : 'Button label'">
+        <DsFormField label="Button label">
           <DsInput
-              v-if="square"
-              v-model="ariaLabel"
-              placeholder="Open quick actions"
-              aria-label="Button aria label"
-          />
-          <DsInput
-              v-else
               v-model="label"
+              :disabled="square"
               placeholder="Create workspace"
               aria-label="Button label"
           />
@@ -188,7 +191,7 @@ const previewCode = computed(() => {
         <DsFormField label="Accessibility label">
           <DsInput
               v-model="ariaLabel"
-              placeholder="Used by screen readers and icon-only state"
+              :placeholder="square ? 'Required for icon-only state' : 'Optional override for screen readers'"
               aria-label="Accessibility label"
           />
         </DsFormField>

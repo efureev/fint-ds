@@ -11,7 +11,8 @@ const visible = ref(true)
     <DsAlert
       v-if="visible"
       title="Maintenance window"
-      variant="warning-light"
+      tone="warning"
+      variant="light"
       closable
       @close="visible = false"
     >

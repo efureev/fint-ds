@@ -70,7 +70,7 @@ import { DsBadge, DsCard, DsIcon } from '@feugene/granularity'
           <path d="m9.5 12 1.7 1.8 3.5-4.1" />
         </svg>
       </DsIcon>
-      <DsBadge size="sm" variant="secondary">snapshot</DsBadge>
+      <DsBadge size="sm" tone="secondary">snapshot</DsBadge>
     </div>
   </DsCard>
 </template>`,

@@ -37,8 +37,8 @@ const selectedOption = computed(() => options.find(option => option.value === st
 </template>`,
   },
   {
-    id: 'radio-group-button-variant',
-    title: 'Button variant with runtime size control',
+    id: 'radio-group-button-tone',
+    title: 'Button tone with runtime size control',
     description: 'Группа переключается в button-mode и масштабируется через `size`, что особенно полезно для toolbar и page-view toggles.',
     status: 'ready',
     previewKey: 'ds-radio-group-button-variant',

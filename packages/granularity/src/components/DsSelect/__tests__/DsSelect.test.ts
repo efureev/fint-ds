@@ -54,7 +54,7 @@ describe('DsSelect', () => {
     expect(events![0]).toEqual(['EUR'])
   })
 
-  it('поддерживает view="link" и link-пропсы variant/underline (как у ссылки)', () => {
+  it('поддерживает view="link" и link-пропсы tone/underline (как у ссылки)', () => {
     const linkWrapper = mount(DsSelect, {
       props: {
         modelValue: 'USD',

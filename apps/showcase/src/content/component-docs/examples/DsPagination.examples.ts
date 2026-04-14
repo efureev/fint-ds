@@ -135,7 +135,7 @@ function clampPage() {
   <div class="grid gap-4">
     <DsDataTable :rows="pagedRows" :columns="columns" row-key="id">
       <template #cell-status="{ row }">
-        <DsBadge :variant="row.status === 'healthy' ? 'success' : 'warning'">
+        <DsBadge :tone="row.status === 'healthy' ? 'success' : 'warning'">
           {{ row.status }}
         </DsBadge>
       </template>

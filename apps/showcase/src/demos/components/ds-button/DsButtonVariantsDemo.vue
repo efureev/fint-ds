@@ -60,6 +60,16 @@ const toneRows = [
     label: 'Neutral',
     note: 'Нейтральные toolbar- и secondary-действия.',
   },
+  {
+    value: 'slate',
+    label: 'Slate',
+    note: 'Сдержанный tone для utilitarian actions и B2B-поверхностей.',
+  },
+  {
+    value: 'azure',
+    label: 'Azure',
+    note: 'Холодный informational tone, отделённый от brand-primary.',
+  },
 ] satisfies Array<{ value: DsButtonTone, label: string, note: string }>
 
 const sizeOptions = ['xs', 'sm', 'md', 'lg'] as const

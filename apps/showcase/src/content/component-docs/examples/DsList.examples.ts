@@ -37,7 +37,7 @@ import { DsBadge, DsButton, DsList, DsListItem } from '@feugene/granularity'
   <DsList>
     <DsListItem title="Publish release notes" description="Ready for review by marketing">
       <div class="flex items-center gap-2">
-        <DsBadge size="sm" variant="secondary">Ready</DsBadge>
+        <DsBadge size="sm" tone="secondary">Ready</DsBadge>
         <DsButton size="sm" variant="outline">Open</DsButton>
       </div>
     </DsListItem>

@@ -4,7 +4,7 @@ export const dsLinkExamples: ShowcaseComponentExampleDoc[] = [
   {
     id: 'link-builder',
     title: 'Interactive link constructor',
-    description: 'Соберите `DsLink` под ваш сценарий: переключайте variant, underline, size, навигационные атрибуты и сразу смотрите итоговый snippet.',
+    description: 'Соберите `DsLink` под ваш сценарий: переключайте tone, underline, size, навигационные атрибуты и сразу смотрите итоговый snippet.',
     status: 'ready',
     previewKey: 'ds-link-builder',
     code: '',
@@ -12,7 +12,7 @@ export const dsLinkExamples: ShowcaseComponentExampleDoc[] = [
   {
     id: 'link-variants',
     title: 'Variants and underline modes',
-    description: 'На витрине важно сравнить `variant`, `underline` и size contract, потому что `DsLink` часто используется как inline action вместо кнопки.',
+    description: 'На витрине важно сравнить `tone`, `underline` и size contract, потому что `DsLink` часто используется как inline action вместо кнопки.',
     status: 'ready',
     previewKey: 'ds-link-variants',
     code: `<script setup lang="ts">

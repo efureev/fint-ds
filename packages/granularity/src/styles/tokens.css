@@ -111,4 +111,8 @@
   --ds-danger-active: color-mix(in srgb, var(--ds-danger) 84%, var(--foreground));
   --ds-info-hover: color-mix(in srgb, var(--ds-info) 92%, var(--foreground));
   --ds-info-active: color-mix(in srgb, var(--ds-info) 84%, var(--foreground));
+  --ds-slate-hover: color-mix(in srgb, var(--ds-slate) 92%, var(--foreground));
+  --ds-slate-active: color-mix(in srgb, var(--ds-slate) 84%, var(--foreground));
+  --ds-azure-hover: color-mix(in srgb, var(--ds-azure) 92%, var(--foreground));
+  --ds-azure-active: color-mix(in srgb, var(--ds-azure) 84%, var(--foreground));
 }

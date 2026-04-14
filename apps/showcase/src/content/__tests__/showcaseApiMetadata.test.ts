@@ -26,7 +26,7 @@ describe('showcase generated component API metadata', () => {
     expect(slotsSection?.items.find(item => item.name === 'default')?.description).toContain('Текст кнопки')
   })
 
-  it('раскрывает literal union значения для variant, tone и size у DsButton и DsLink в API showcase', () => {
+  it('раскрывает literal union значения для tone, tone и size у DsButton и DsLink в API showcase', () => {
     const buttonEntity = showcaseComponentEntities.find(entity => entity.name === 'DsButton')
     const linkEntity = showcaseComponentEntities.find(entity => entity.name === 'DsLink')
 

@@ -7,17 +7,17 @@
   --ds-button-primary-soft-background-hover: color-mix(in srgb, var(--primary) 18%, var(--background));
   --ds-button-primary-soft-background-active: color-mix(in srgb, var(--primary) 24%, var(--background));
 
-  --ds-button-success-background: var(--ds-success);
-  --ds-button-success-background-hover: var(--ds-success-hover);
-  --ds-button-success-background-active: var(--ds-success-active);
+  --ds-button-success-background: #047857;
+  --ds-button-success-background-hover: #036c4d;
+  --ds-button-success-background-active: #025f44;
   --ds-button-success-foreground: var(--ds-success-foreground);
   --ds-button-success-soft-background: var(--ds-success-light);
   --ds-button-success-soft-background-hover: color-mix(in srgb, var(--ds-success) 20%, var(--background));
   --ds-button-success-soft-background-active: color-mix(in srgb, var(--ds-success) 26%, var(--background));
 
-  --ds-button-warning-background: var(--ds-warning);
-  --ds-button-warning-background-hover: var(--ds-warning-hover);
-  --ds-button-warning-background-active: var(--ds-warning-active);
+  --ds-button-warning-background: #c2410c;
+  --ds-button-warning-background-hover: #b53b0a;
+  --ds-button-warning-background-active: #9f3307;
   --ds-button-warning-foreground: var(--ds-warning-foreground);
   --ds-button-warning-soft-background: var(--ds-warning-light);
   --ds-button-warning-soft-background-hover: color-mix(in srgb, var(--ds-warning) 20%, var(--background));
@@ -38,6 +38,22 @@
   --ds-button-info-soft-background: var(--ds-info-light);
   --ds-button-info-soft-background-hover: color-mix(in srgb, var(--ds-info) 20%, var(--background));
   --ds-button-info-soft-background-active: color-mix(in srgb, var(--ds-info) 26%, var(--background));
+
+  --ds-button-slate-background: var(--ds-slate);
+  --ds-button-slate-background-hover: var(--ds-slate-hover);
+  --ds-button-slate-background-active: var(--ds-slate-active);
+  --ds-button-slate-foreground: var(--ds-slate-foreground);
+  --ds-button-slate-soft-background: var(--ds-slate-light);
+  --ds-button-slate-soft-background-hover: color-mix(in srgb, var(--ds-slate) 20%, var(--background));
+  --ds-button-slate-soft-background-active: color-mix(in srgb, var(--ds-slate) 26%, var(--background));
+
+  --ds-button-azure-background: #0369a1;
+  --ds-button-azure-background-hover: #075985;
+  --ds-button-azure-background-active: #0c4a6e;
+  --ds-button-azure-foreground: #ffffff;
+  --ds-button-azure-soft-background: var(--ds-azure-light);
+  --ds-button-azure-soft-background-hover: color-mix(in srgb, var(--ds-azure) 20%, var(--background));
+  --ds-button-azure-soft-background-active: color-mix(in srgb, var(--ds-azure) 26%, var(--background));
 }
 
 .theme-dark,
@@ -67,4 +83,14 @@
   --ds-button-info-background-hover: #3d33bb;
   --ds-button-info-background-active: #362da8;
   --ds-button-info-foreground: #f8fafc;
+
+  --ds-button-slate-background: #475569;
+  --ds-button-slate-background-hover: #334155;
+  --ds-button-slate-background-active: #1e293b;
+  --ds-button-slate-foreground: #f8fafc;
+
+  --ds-button-azure-background: #0369a1;
+  --ds-button-azure-background-hover: #075985;
+  --ds-button-azure-background-active: #0c4a6e;
+  --ds-button-azure-foreground: #f8fafc;
 }

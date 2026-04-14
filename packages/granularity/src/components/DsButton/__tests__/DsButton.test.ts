@@ -185,8 +185,8 @@ const derivedThemeVars = parseVars(readFileSync(resolve(process.cwd(), 'src/styl
 const dsButtonLightThemeVars = parseVars(extractCssBlock(dsButtonTokensContent, ':root'))
 const dsButtonDarkThemeVars = parseVars(extractCssBlock(dsButtonTokensContent, ".theme-dark,"))
 const variants: DsButtonVariant[] = ['primary', 'secondary', 'outline', 'ghost', 'ghost-border']
-const tones: DsButtonTone[] = ['primary', 'neutral', 'success', 'warning', 'danger', 'info']
-const filledTones: DsButtonTone[] = ['primary', 'success', 'warning', 'danger', 'info']
+const tones: DsButtonTone[] = ['primary', 'neutral', 'success', 'warning', 'danger', 'info', 'slate', 'azure']
+const filledTones: DsButtonTone[] = ['primary', 'success', 'warning', 'danger', 'info', 'slate', 'azure']
 const states = ['rest', 'hover', 'active'] as const
 
 function getButtonColors(variant: DsButtonVariant, tone: DsButtonTone, state: (typeof states)[number]) {
@@ -230,13 +230,13 @@ describe('DsButton', () => {
 
     const button = wrapper.get('[data-ds-button]')
 
-    expect(button.attributes('data-ds-variant')).toBe('primary')
+    expect(button.attributes('data-ds-tone')).toBe('primary')
     expect(button.attributes('data-ds-tone')).toBe('primary')
     expect(button.classes()).toContain('bg-[var(--ds-button-primary-background,var(--primary))]')
     expect(button.classes()).toContain('text-[var(--ds-button-primary-foreground,var(--primary-foreground))]')
   })
 
-  it('поддерживает semantic tone для filled variant', () => {
+  it('поддерживает semantic tone для filled tone', () => {
     const wrapper = mount(DsButton, {
       props: {
         variant: 'primary',
@@ -249,7 +249,7 @@ describe('DsButton', () => {
 
     const button = wrapper.get('[data-ds-button]')
 
-    expect(button.attributes('data-ds-variant')).toBe('primary')
+    expect(button.attributes('data-ds-tone')).toBe('primary')
     expect(button.attributes('data-ds-tone')).toBe('success')
     expect(button.classes()).toContain('bg-[var(--ds-button-success-background,var(--ds-success))]')
     expect(button.classes()).toContain('text-[var(--ds-button-success-foreground,var(--ds-success-foreground,var(--foreground)))]')
@@ -257,7 +257,7 @@ describe('DsButton', () => {
     expect(button.classes()).toContain('active:bg-[var(--ds-button-success-background-active,var(--ds-success-active))]')
   })
 
-  it('поддерживает tone-aware outline variant', () => {
+  it('поддерживает tone-aware outline tone', () => {
     const wrapper = mount(DsButton, {
       props: {
         variant: 'outline',
@@ -271,13 +271,46 @@ describe('DsButton', () => {
     const button = wrapper.get('[data-ds-button]')
     const className = button.attributes('class') ?? ''
 
-    expect(button.attributes('data-ds-variant')).toBe('outline')
+    expect(button.attributes('data-ds-tone')).toBe('outline')
     expect(button.attributes('data-ds-tone')).toBe('warning')
     expect(button.classes()).toContain('text-[var(--ds-warning-text,var(--ds-warning))]')
     expect(button.classes()).toContain('border-[var(--ds-warning)]')
     expect(className).toContain('hover:bg-[var(--ds-button-warning-soft-background-hover)]')
     expect(className).toContain('active:bg-[var(--ds-button-warning-soft-background-active)]')
     expect(className).toContain('hover:active:bg-[var(--ds-button-warning-soft-background-active)]')
+  })
+
+  it('поддерживает новые semantic tones slate и azure', () => {
+    const slate = mount(DsButton, {
+      props: {
+        variant: 'primary',
+        tone: 'slate',
+      },
+      slots: {
+        default: 'Archive',
+      },
+    }).get('[data-ds-button]')
+
+    const azure = mount(DsButton, {
+      props: {
+        variant: 'ghost-border',
+        tone: 'azure',
+      },
+      slots: {
+        default: 'Details',
+      },
+    }).get('[data-ds-button]')
+
+    expect(slate.attributes('data-ds-tone')).toBe('slate')
+    expect(slate.classes()).toContain('bg-[var(--ds-button-slate-background,var(--ds-slate))]')
+    expect(slate.classes()).toContain('text-[var(--ds-button-slate-foreground,var(--ds-slate-foreground,var(--foreground)))]')
+    expect(slate.classes()).toContain('hover:bg-[var(--ds-button-slate-background-hover,var(--ds-slate-hover))]')
+
+    const azureClassName = azure.attributes('class') ?? ''
+    expect(azure.attributes('data-ds-tone')).toBe('azure')
+    expect(azure.classes()).toContain('text-[var(--ds-azure-text,var(--ds-azure))]')
+    expect(azureClassName).toContain('hover:bg-[var(--ds-button-azure-soft-background-hover)]')
+    expect(azureClassName).toContain('hover:active:border-[var(--ds-azure-active)]')
   })
 
   it('добавляет hover:active правила, чтобы pressed-состояние не терялось под hover', () => {
@@ -323,16 +356,16 @@ describe('DsButton', () => {
 
     const button = wrapper.get('[data-ds-button]')
 
-    expect(button.attributes('data-ds-variant')).toBe('primary')
+    expect(button.attributes('data-ds-tone')).toBe('primary')
     expect(button.attributes('data-ds-tone')).toBe('danger')
     expect(button.classes()).toContain('bg-[var(--ds-button-danger-background,var(--ds-danger))]')
     expect(button.classes()).toContain('text-[var(--ds-button-danger-foreground,var(--ds-danger-foreground,var(--foreground)))]')
   })
 
-  it('в light theme filled success и warning кнопки используют светлый foreground с достаточным контрастом', () => {
+  it('в light theme filled success, warning, slate и azure кнопки используют светлый foreground с достаточным контрастом', () => {
     const failures: string[] = []
 
-    for (const tone of ['success', 'warning'] as const) {
+    for (const tone of ['success', 'warning', 'slate', 'azure'] as const) {
       for (const state of states) {
         const colors = getButtonColors('primary', tone, state)
         const text = resolveColorExpression(colors.text, { ...lightThemeVars, ...dsButtonLightThemeVars }, derivedThemeVars)
@@ -366,7 +399,7 @@ describe('DsButton', () => {
     expect(failures).toEqual([])
   })
 
-  it('сохраняет достаточный контраст текста и заливки для всех variant × tone в light и dark темах', () => {
+  it('сохраняет достаточный контраст текста и заливки для всех tone × tone в light и dark темах', () => {
     const failures: string[] = []
 
     for (const [themeName, themeVars] of Object.entries({

@@ -1,6 +1,6 @@
 export type DsButtonVariant = 'primary' | 'secondary' | 'outline' | 'ghost' | 'ghost-border'
 export type DsButtonLegacyVariant = DsButtonVariant | 'destructive'
-export type DsButtonTone = 'primary' | 'neutral' | 'success' | 'warning' | 'danger' | 'info'
+export type DsButtonTone = 'primary' | 'neutral' | 'success' | 'warning' | 'danger' | 'info' | 'slate' | 'azure'
 export type DsButtonSize = 'xs' | 'sm' | 'md' | 'lg'
 
 type DsButtonClassOptions = {
@@ -130,6 +130,34 @@ const tones: Record<DsButtonTone, DsButtonToneTokens> = {
     border: 'var(--ds-info)',
     borderHover: 'var(--ds-info-hover)',
     borderActive: 'var(--ds-info-active)',
+  },
+  slate: {
+    solidBackground: 'var(--ds-button-slate-background,var(--ds-slate))',
+    solidBackgroundHover: 'var(--ds-button-slate-background-hover,var(--ds-slate-hover))',
+    solidBackgroundActive: 'var(--ds-button-slate-background-active,var(--ds-slate-active))',
+    solidForeground: 'var(--ds-button-slate-foreground,var(--ds-slate-foreground,var(--foreground)))',
+    accentText: 'var(--ds-slate-text,var(--ds-slate))',
+    softBackground: 'var(--ds-button-slate-soft-background)',
+    softBackgroundHover: 'var(--ds-button-slate-soft-background-hover)',
+    softBackgroundActive: 'var(--ds-button-slate-soft-background-active)',
+    softForeground: 'var(--ds-slate-text,var(--ds-slate))',
+    border: 'var(--ds-slate)',
+    borderHover: 'var(--ds-slate-hover)',
+    borderActive: 'var(--ds-slate-active)',
+  },
+  azure: {
+    solidBackground: 'var(--ds-button-azure-background,var(--ds-azure))',
+    solidBackgroundHover: 'var(--ds-button-azure-background-hover,var(--ds-azure-hover))',
+    solidBackgroundActive: 'var(--ds-button-azure-background-active,var(--ds-azure-active))',
+    solidForeground: 'var(--ds-button-azure-foreground,var(--ds-azure-foreground,var(--foreground)))',
+    accentText: 'var(--ds-azure-text,var(--ds-azure))',
+    softBackground: 'var(--ds-button-azure-soft-background)',
+    softBackgroundHover: 'var(--ds-button-azure-soft-background-hover)',
+    softBackgroundActive: 'var(--ds-button-azure-soft-background-active)',
+    softForeground: 'var(--ds-azure-text,var(--ds-azure))',
+    border: 'var(--ds-azure)',
+    borderHover: 'var(--ds-azure-hover)',
+    borderActive: 'var(--ds-azure-active)',
   },
 }
 
