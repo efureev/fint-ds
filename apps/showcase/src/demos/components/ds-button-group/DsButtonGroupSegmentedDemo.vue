@@ -27,7 +27,7 @@ const views = [
         </DsButton>
       </DsButtonGroup>
 
-      <DsBadge size="sm" variant="primary">
+      <DsBadge size="sm" tone="primary">
         Active: {{ currentView }}
       </DsBadge>
     </div>

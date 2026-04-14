@@ -42,7 +42,7 @@ const filters = [
           </div>
         </div>
 
-        <DsBadge :variant="currentFilter === filter.value ? 'primary' : 'secondary'">
+        <DsBadge :tone="currentFilter === filter.value ? 'primary' : 'secondary'">
           {{ filter.count }}
         </DsBadge>
       </DsCard>

@@ -8,7 +8,7 @@ import { DsBadge, DsButton, DsNavbar } from '@feugene/granularity'
       <template #title>
         <div class="flex items-center gap-2">
           <span class="text-sm font-semibold">Release dashboard</span>
-          <DsBadge size="sm" variant="info">
+          <DsBadge size="sm" tone="info">
             Beta
           </DsBadge>
         </div>

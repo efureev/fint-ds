@@ -30,7 +30,7 @@ const actions = [
       </DsDropdownMenuItem>
     </DsDropdownMenu>
 
-    <DsBadge variant="neutral">
+    <DsBadge tone="neutral">
       Last action: {{ lastAction }}
     </DsBadge>
   </div>

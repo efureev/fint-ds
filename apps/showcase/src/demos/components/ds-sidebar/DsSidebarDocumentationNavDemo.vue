@@ -29,7 +29,7 @@ const activeSection = computed(() => {
           @click="currentSection = section.value"
         >
           <span>{{ section.label }}</span>
-          <DsBadge size="sm" variant="secondary">
+          <DsBadge size="sm" tone="neutral">
             #
           </DsBadge>
         </button>

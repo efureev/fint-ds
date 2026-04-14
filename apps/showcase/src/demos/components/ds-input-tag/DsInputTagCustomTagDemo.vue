@@ -11,7 +11,7 @@ const environments = ref(['production', 'staging'])
     <DsInputTag
       v-model="environments"
       placeholder="Environment alias"
-      tag-variant="warning"
+      tag-tone="warning"
       tag-dark
     >
       <template #tag="{ tag, index }">

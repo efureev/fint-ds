@@ -2,6 +2,7 @@
 import { ref } from 'vue'
 
 import { DsBadge, DsButton, DsDataTable } from '@feugene/granularity'
+import IconTrash from '~icons/lucide/trash2'
 
 const lastAction = ref('No actions yet')
 
@@ -33,7 +34,7 @@ function statusVariant(status: unknown): 'success' | 'warning' | 'danger' {
   <div class="grid gap-3">
     <DsDataTable :rows="rows" :columns="columns" row-key="id">
       <template #cell-status="{ row }">
-        <DsBadge :variant="statusVariant(row.status)">
+        <DsBadge size="lg" :tone="statusVariant(row.status)">
           {{ row.status }}
         </DsBadge>
       </template>
@@ -43,8 +44,8 @@ function statusVariant(status: unknown): 'success' | 'warning' | 'danger' {
           <DsButton size="sm" variant="ghost" @click="lastAction = 'Viewed ' + row.service">
             View
           </DsButton>
-          <DsButton size="sm" variant="outline" @click="lastAction = 'Escalated ' + row.service">
-            Escalate
+          <DsButton size="sm" square variant="outline" tone="danger" @click="lastAction = 'Escalated ' + row.service">
+            <IconTrash />
           </DsButton>
         </div>
       </template>

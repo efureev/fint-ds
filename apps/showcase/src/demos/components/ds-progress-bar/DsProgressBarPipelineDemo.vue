@@ -17,7 +17,7 @@ const stages = [
     >
       <div class="flex items-center justify-between gap-3 text-sm">
         <span>{{ stage.label }}</span>
-        <DsBadge size="sm" :variant="stage.variant">{{ stage.value }}%</DsBadge>
+        <DsBadge size="sm" :tone="stage.variant">{{ stage.value }}%</DsBadge>
       </div>
 
       <DsProgressBar :value="stage.value" :aria-label="stage.label" />

@@ -14,7 +14,7 @@ const activeFilter = ref<'all' | 'failed' | 'review'>('all')
       </DsButton>
       <DsButton :variant="activeFilter === 'failed' ? 'primary' : 'outline'" @click="activeFilter = 'failed'">
         Failed
-        <DsBadge class="ml-2" size="sm" radius="semi" dark>3</DsBadge>
+        <DsBadge class="ml-2" size="sm" radius="semi" dark tone="azure">3</DsBadge>
       </DsButton>
       <DsButton :variant="activeFilter === 'review' ? 'primary' : 'outline'" @click="activeFilter = 'review'">
         Needs review

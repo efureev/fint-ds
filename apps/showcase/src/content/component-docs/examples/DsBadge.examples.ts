@@ -2,9 +2,17 @@ import type { ShowcaseComponentExampleDoc } from '../types'
 
 export const dsBadgeExamples: ShowcaseComponentExampleDoc[] = [
   {
+    id: 'badge-builder',
+    title: 'Interactive badge constructor',
+    description: 'Соберите `DsBadge` под ваш сценарий: переключайте `tone`, `size`, `radius`, filled-mode и текст лейбла, сразу видя итоговый snippet.',
+    status: 'ready',
+    previewKey: 'ds-badge-builder',
+    code: '',
+  },
+  {
     id: 'badge-tone-scale',
     title: 'Light and dark semantic tones',
-    description: 'Первый сценарий нужен как справочник по semantic palette: light и filled (`dark`) режимы удобно сравнить бок о бок, включая `slate` и `azure`.',
+    description: 'Сценарий работает как справочник по semantic palette: light и filled (`dark`) режимы удобно сравнить бок о бок, включая `slate` и `azure`.',
     status: 'ready',
     previewKey: 'ds-badge-variant-scale',
     code: `<script setup lang="ts">

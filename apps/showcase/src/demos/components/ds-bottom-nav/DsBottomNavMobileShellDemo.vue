@@ -34,7 +34,7 @@ const sectionDescription = computed(() => {
           </div>
         </div>
 
-        <DsBadge size="sm" variant="info">
+        <DsBadge size="sm" tone="info">
           Safe area ready
         </DsBadge>
       </div>

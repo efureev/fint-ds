@@ -9,7 +9,7 @@ const notifications = ref(3)
 <template>
   <div class="grid gap-3 rounded-xl border border-[var(--brd)] bg-[var(--bg)] p-3">
     <DsNavbar title="Workspace">
-      <DsBadge size="sm" variant="neutral">
+      <DsBadge size="sm" tone="neutral">
         {{ notifications }} updates
       </DsBadge>
 

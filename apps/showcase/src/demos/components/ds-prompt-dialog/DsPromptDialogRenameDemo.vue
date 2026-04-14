@@ -14,7 +14,7 @@ const savedValue = ref(value.value)
       <DsButton class="justify-self-start" @click="open = true">
         Rename objective
       </DsButton>
-      <DsBadge size="sm" variant="secondary">
+      <DsBadge size="sm" tone="secondary">
         {{ savedValue }}
       </DsBadge>
     </div>

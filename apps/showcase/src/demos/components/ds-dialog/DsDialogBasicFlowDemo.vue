@@ -19,10 +19,10 @@ const open = ref(false)
         </p>
 
         <div class="flex flex-wrap items-center gap-2">
-          <DsBadge size="sm" variant="info">
+          <DsBadge size="sm" tone="info">
             12 recipients
           </DsBadge>
-          <DsBadge size="sm" variant="secondary">
+          <DsBadge size="sm" tone="neutral">
             Draft ready
           </DsBadge>
         </div>

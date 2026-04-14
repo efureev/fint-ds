@@ -25,8 +25,8 @@ function validateFiles(files: File[]): FileValidationIssue[] {
 <template>
   <div class="grid gap-4">
     <div class="flex flex-wrap gap-2">
-      <DsBadge variant="info" radius="round">Only `.pdf`</DsBadge>
-      <DsBadge variant="warning" radius="round">Up to 1 MB</DsBadge>
+      <DsBadge tone="info" radius="round">Only `.pdf`</DsBadge>
+      <DsBadge tone="warning" radius="round">Up to 1 MB</DsBadge>
     </div>
 
     <DsFormField

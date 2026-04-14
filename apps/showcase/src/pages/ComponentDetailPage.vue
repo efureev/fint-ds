@@ -30,6 +30,7 @@ const previewRegistry = {
   'ds-avatar-image-fallback': defineAsyncComponent(() => import('../demos/components/ds-avatar/DsAvatarImageFallbackDemo.vue')),
   'ds-avatar-size-shape': defineAsyncComponent(() => import('../demos/components/ds-avatar/DsAvatarSizeShapeDemo.vue')),
   'ds-avatar-team-row': defineAsyncComponent(() => import('../demos/components/ds-avatar/DsAvatarTeamRowDemo.vue')),
+  'ds-badge-builder': defineAsyncComponent(() => import('../demos/components/ds-badge/DsBadgeBuilderDemo.vue')),
   'ds-badge-size-radius': defineAsyncComponent(() => import('../demos/components/ds-badge/DsBadgeSizeRadiusDemo.vue')),
   'ds-badge-toolbar-filters': defineAsyncComponent(() => import('../demos/components/ds-badge/DsBadgeToolbarFiltersDemo.vue')),
   'ds-badge-variant-scale': defineAsyncComponent(() => import('../demos/components/ds-badge/DsBadgeVariantScaleDemo.vue')),

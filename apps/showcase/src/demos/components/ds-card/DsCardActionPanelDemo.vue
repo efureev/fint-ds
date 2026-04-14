@@ -6,7 +6,7 @@ import {DsCard, DsBadge, DsButton} from "@feugene/granularity";
     <div class="grid gap-2">
       <div class="flex flex-wrap items-center gap-2">
         <div class="text-sm font-semibold text-[var(--fg)]">Release checklist</div>
-        <DsBadge size="sm" variant="info" radius="semi">2 blockers</DsBadge>
+        <DsBadge size="sm" tone="info" radius="semi">2 blockers</DsBadge>
       </div>
 
       <div class="text-sm text-[var(--muted-fg)]">

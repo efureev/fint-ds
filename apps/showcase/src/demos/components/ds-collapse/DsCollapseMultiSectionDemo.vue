@@ -17,7 +17,7 @@ const expanded = ref<Array<string | number>>(['summary', 'alerts'])
         <template #title>
           <div class="flex items-center gap-2 text-sm font-600">
             Executive summary
-            <DsBadge size="sm" variant="success">Ready</DsBadge>
+            <DsBadge size="sm" tone="success">Ready</DsBadge>
           </div>
         </template>
 
@@ -28,7 +28,7 @@ const expanded = ref<Array<string | number>>(['summary', 'alerts'])
         <template #title>
           <div class="flex items-center gap-2 text-sm font-600">
             Risk alerts
-            <DsBadge size="sm" variant="warning">2 active</DsBadge>
+            <DsBadge size="sm" tone="warning">2 active</DsBadge>
           </div>
         </template>
 

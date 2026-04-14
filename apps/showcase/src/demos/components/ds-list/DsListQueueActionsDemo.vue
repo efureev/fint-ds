@@ -17,7 +17,7 @@ const jobs = [
       :description="job.description"
     >
       <div class="flex items-center gap-2">
-        <DsBadge size="sm" variant="neutral">
+        <DsBadge size="sm" tone="success">
           {{ job.status }}
         </DsBadge>
         <DsButton size="sm" variant="outline">

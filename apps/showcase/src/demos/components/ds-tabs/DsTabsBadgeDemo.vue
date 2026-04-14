@@ -16,7 +16,7 @@ const tabs = [
     <DsTabs v-model="currentTab" :tabs="tabs" />
 
     <div class="flex flex-wrap gap-2">
-      <DsBadge v-for="tab in tabs" :key="tab.value" :variant="tab.value === currentTab ? 'primary' : 'neutral'">
+      <DsBadge v-for="tab in tabs" :key="tab.value" :tone="tab.value === currentTab ? 'primary' : 'neutral'">
         {{ tab.label }}: {{ tab.badge }}
       </DsBadge>
     </div>

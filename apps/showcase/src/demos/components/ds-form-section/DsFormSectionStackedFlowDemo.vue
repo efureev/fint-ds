@@ -22,8 +22,8 @@ const runbook = ref('docs/runbooks/incident-handoff')
         </DsFormField>
 
         <div class="flex flex-wrap gap-2">
-          <DsBadge variant="success" radius="round">Owner assigned</DsBadge>
-          <DsBadge variant="info" radius="round">Runbook linked</DsBadge>
+          <DsBadge tone="success" radius="round">Owner assigned</DsBadge>
+          <DsBadge tone="info" radius="round">Runbook linked</DsBadge>
         </div>
       </div>
     </DsFormSection>

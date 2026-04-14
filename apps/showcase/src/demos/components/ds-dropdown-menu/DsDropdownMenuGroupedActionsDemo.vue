@@ -48,7 +48,7 @@ const selectedAction = ref('Publish now')
         <div class="text-sm font-600 text-[var(--fg)]">
           {{ selectedAction }}
         </div>
-        <DsBadge size="sm" variant="primary">
+        <DsBadge size="sm" tone="primary">
           grouped menu
         </DsBadge>
       </div>

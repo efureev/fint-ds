@@ -64,7 +64,7 @@ const selectionLabel = computed(() => {
       <DsBadge v-for="value in selectedValues" :key="value">
         {{ value }}
       </DsBadge>
-      <DsBadge variant="neutral">
+      <DsBadge tone="neutral">
         {{ selectionLabel }}
       </DsBadge>
     </div>

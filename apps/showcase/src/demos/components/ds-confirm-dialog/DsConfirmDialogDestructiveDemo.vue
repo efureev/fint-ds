@@ -13,7 +13,7 @@ const lastAction = ref<'confirm' | 'cancel' | 'idle'>('idle')
       <DsButton variant="primary" tone="danger" class="justify-self-start" @click="open = true">
         Delete workspace
       </DsButton>
-      <DsBadge size="sm" :variant="lastAction === 'confirm' ? 'danger' : 'neutral'">
+      <DsBadge size="sm" :tone="lastAction === 'confirm' ? 'danger' : 'neutral'">
         {{ lastAction }}
       </DsBadge>
     </div>

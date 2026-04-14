@@ -14,7 +14,7 @@ const isMenuOpen = ref(false)
       menu-button-class="sm:hidden"
       @menu="isMenuOpen = !isMenuOpen"
     >
-      <DsBadge size="sm" :variant="isMenuOpen ? 'primary' : 'neutral'">
+      <DsBadge size="sm" :tone="isMenuOpen ? 'primary' : 'neutral'">
         {{ isMenuOpen ? 'Drawer open' : 'Drawer closed' }}
       </DsBadge>
     </DsNavbar>

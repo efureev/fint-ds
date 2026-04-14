@@ -47,7 +47,7 @@ const sectionTitle = computed(() => {
         <DsBadge v-if="currentTab === 'summary'">
           Uptime 99.96%
         </DsBadge>
-        <DsBadge v-else-if="currentTab === 'incidents'" variant="warning">
+        <DsBadge v-else-if="currentTab === 'incidents'" tone="warning">
           3 incidents require follow-up
         </DsBadge>
         <DsBadge v-else>
