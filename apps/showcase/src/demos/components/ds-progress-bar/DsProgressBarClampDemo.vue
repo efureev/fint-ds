@@ -2,9 +2,9 @@
 import { DsBadge, DsProgressBar } from '@feugene/granularity'
 
 const rows = [
-  { label: 'Imported from legacy job', raw: -18 },
-  { label: 'Actual processed records', raw: 58 },
-  { label: 'Overreported upstream value', raw: 146 },
+  { label: 'Imported from legacy job', raw: -18, tone: 'danger' as const },
+  { label: 'Actual processed records', raw: 58, tone: 'info' as const },
+  { label: 'Overreported upstream value', raw: 146, tone: 'warning' as const },
 ]
 </script>
 
@@ -17,10 +17,10 @@ const rows = [
     >
       <div class="flex items-center justify-between gap-3 text-sm">
         <span>{{ row.label }}</span>
-        <DsBadge size="sm" tone="neutral">input: {{ row.raw }}%</DsBadge>
+        <DsBadge size="sm" :tone="row.tone">input: {{ row.raw }}%</DsBadge>
       </div>
 
-      <DsProgressBar :value="row.raw" :aria-label="row.label" />
+      <DsProgressBar :value="row.raw" :tone="row.tone" :aria-label="row.label" />
     </div>
   </div>
 </template>

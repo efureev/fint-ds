@@ -1,11 +1,15 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 
+import { dsProgressBarFillClass, type DsProgressBarTone } from './dsStyle'
+
 const props = withDefaults(defineProps<{
   value: number
   ariaLabel?: string
+  tone?: DsProgressBarTone
 }>(), {
   ariaLabel: undefined,
+  tone: 'primary',
 })
 
 const safe = computed(() => {
@@ -14,6 +18,8 @@ const safe = computed(() => {
 
   return Math.min(100, Math.max(0, props.value))
 })
+
+const fillClassName = computed(() => dsProgressBarFillClass(props.tone))
 </script>
 
 <template>
@@ -26,7 +32,7 @@ const safe = computed(() => {
     class="h-2 w-full rounded-full bg-[var(--muted)] border border-[var(--brd)] overflow-hidden"
   >
     <div
-      class="h-full bg-[var(--primary)]"
+      :class="['h-full', fillClassName]"
       :style="{ width: `${safe}%` }"
     />
   </div>

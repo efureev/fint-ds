@@ -2,9 +2,9 @@
 import { DsBadge, DsProgressBar } from '@feugene/granularity'
 
 const stages = [
-  { label: 'Validation', value: 100, variant: 'success' as const },
-  { label: 'Fraud screening', value: 72, variant: 'warning' as const },
-  { label: 'Settlement', value: 41, variant: 'neutral' as const },
+  { label: 'Validation', value: 100, tone: 'success' as const },
+  { label: 'Fraud screening', value: 72, tone: 'warning' as const },
+  { label: 'Settlement', value: 41, tone: 'neutral' as const },
 ]
 </script>
 
@@ -17,10 +17,10 @@ const stages = [
     >
       <div class="flex items-center justify-between gap-3 text-sm">
         <span>{{ stage.label }}</span>
-        <DsBadge size="sm" :tone="stage.variant">{{ stage.value }}%</DsBadge>
+        <DsBadge size="sm" :tone="stage.tone">{{ stage.value }}%</DsBadge>
       </div>
 
-      <DsProgressBar :value="stage.value" :aria-label="stage.label" />
+      <DsProgressBar :value="stage.value" :tone="stage.tone" :aria-label="stage.label" />
     </div>
   </div>
 </template>

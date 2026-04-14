@@ -1,11 +1,1 @@
-export const dsProgressBarSafelist = [
-  'h-2',
-  'w-full',
-  'rounded-full',
-  'bg-[var(--muted)]',
-  'border',
-  'border-[var(--brd)]',
-  'overflow-hidden',
-  'h-full',
-  'bg-[var(--primary)]',
-] as const
+export { dsProgressBarSafelist } from './dsStyle'
