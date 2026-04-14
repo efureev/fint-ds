@@ -70,6 +70,9 @@ API для управления loading-state через директиву и �
 
 ```ts
 import { vClickOutside, vLoading } from '@feugene/granularity/directives'
+
+void vClickOutside
+void vLoading
 ```
 
 ### Гранулярный импорт отдельных директив
@@ -77,6 +80,9 @@ import { vClickOutside, vLoading } from '@feugene/granularity/directives'
 ```ts
 import { vClickOutside } from '@feugene/granularity/directives/clickOutside'
 import { vLoading } from '@feugene/granularity/directives/loading'
+
+void vClickOutside
+void vLoading
 ```
 
 ## Типы глобальных директив в IDE

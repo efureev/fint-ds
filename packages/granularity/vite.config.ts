@@ -134,7 +134,7 @@ async function createGranularityCssGenerator(selection: GranularityComponentSele
     ? 'all'
     : [...selection] as GranularityComponentName[]
 
-  return await createGenerator({
+  return createGenerator({
     presets: [
       presetMini(),
       presetGranularityNode({
@@ -163,7 +163,7 @@ async function generateGranularityCss(selection: GranularityComponentSelection =
 async function generateGranularityPackageCss(
   selection: GranularityComponentSelection = 'all',
 ): Promise<string> {
-  return await generateGranularityCss(selection)
+  return generateGranularityCss(selection)
 }
 
 async function generateGranularityFoundationLayerCss(): Promise<string> {

@@ -32,7 +32,8 @@ const fillClassName = computed(() => dsProgressBarFillClass(props.tone))
     class="h-2 w-full rounded-full bg-[var(--muted)] border border-[var(--brd)] overflow-hidden"
   >
     <div
-      :class="['h-full', fillClassName]"
+      class="h-full"
+      :class="fillClassName"
       :style="{ width: `${safe}%` }"
     />
   </div>

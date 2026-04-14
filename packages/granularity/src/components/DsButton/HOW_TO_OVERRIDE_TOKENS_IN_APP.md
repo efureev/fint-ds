@@ -76,7 +76,9 @@
 ```vue
 <template>
   <section class="custom-info-scope">
-    <DsButton tone="info">Info</DsButton>
+    <DsButton tone="info">
+      Info
+    </DsButton>
   </section>
 </template>
 

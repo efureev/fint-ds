@@ -72,12 +72,12 @@ describe('granularity package contracts', () => {
 
   it('собирает отдельные build-entry для top-level composables', () => {
     expect(granularityViteConfigSource).toContain("readdirSync(fileURLToPath(new URL('./src/composables', import.meta.url)), { withFileTypes: true })")
-    expect(granularityViteConfigSource).toContain("`composables/${entry.name.slice(0, -'.ts'.length)}`")
+    expect(granularityViteConfigSource).toContain("`composables/" + '$' + "{entry.name.slice(0, -'.ts'.length)}`")
   })
 
   it('собирает отдельные build-entry для top-level directives и подключает global directive typings', () => {
     expect(granularityViteConfigSource).toContain("readdirSync(fileURLToPath(new URL('./src/directives', import.meta.url)), { withFileTypes: true })")
-    expect(granularityViteConfigSource).toContain("`directives/${entry.name.slice(0, -'.ts'.length)}`")
+    expect(granularityViteConfigSource).toContain("`directives/" + '$' + "{entry.name.slice(0, -'.ts'.length)}`")
     expect(granularityDirectivesIndexSource).toContain("export type {} from './globalDirectives'")
   })
 })

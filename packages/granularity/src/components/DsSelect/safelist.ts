@@ -20,7 +20,7 @@ const selectBase = [
   'shrink-0 h-4 w-4',
   'shrink-0 text-[var(--muted-fg)] pointer-events-none',
   'absolute top-1/2 -translate-y-1/2 right-3 h-6 w-6 inline-flex items-center justify-center rounded-md text-[var(--muted-fg)] hover:text-[var(--fg)] hover:bg-[color-mix(in_srgb,var(--muted)_25%,transparent)] disabled:opacity-50',
-  'absolute z-50 mt-2 w-full',
+  'fixed w-full',
   'p-2 border-b border-[var(--brd)]',
   'p-1 overflow-auto',
   'w-full rounded-[10px] px-3 py-2 text-left text-[13px] hover:bg-[color-mix(in_srgb,var(--muted)_30%,transparent)]',

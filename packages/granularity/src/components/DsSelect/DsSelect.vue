@@ -145,7 +145,43 @@ const nativeCustomOptionVisible = computed(() => {
 const customValue = ref('')
 const open = ref(false)
 const rootEl = ref<HTMLElement | null>(null)
+const panelEl = ref<HTMLElement | null>(null)
 const customInputRef = ref<InstanceType<typeof DsInput> | null>(null)
+const clickOutsideExclude = [() => panelEl.value]
+const panelStyle = ref<Record<string, string>>({
+  left: '0px',
+  top: '0px',
+  width: '0px',
+  zIndex: '2147483647',
+})
+
+function syncPanelPosition(): void {
+  if (typeof window === 'undefined') return
+
+  const root = rootEl.value
+  if (!root) return
+
+  const rect = root.getBoundingClientRect()
+
+  panelStyle.value = {
+    left: `${rect.left}px`,
+    top: `${rect.bottom + 8}px`,
+    width: `${rect.width}px`,
+    zIndex: '2147483647',
+  }
+}
+
+function bindPanelPositionListeners(): void {
+  if (typeof window === 'undefined') return
+  window.addEventListener('resize', syncPanelPosition)
+  window.addEventListener('scroll', syncPanelPosition, true)
+}
+
+function unbindPanelPositionListeners(): void {
+  if (typeof window === 'undefined') return
+  window.removeEventListener('resize', syncPanelPosition)
+  window.removeEventListener('scroll', syncPanelPosition, true)
+}
 
 function closeDropdown(): void {
   open.value = false
@@ -166,6 +202,8 @@ watch(
     if (typeof document === 'undefined') return
 
     document.removeEventListener('keydown', closeOnEscape)
+    unbindPanelPositionListeners()
+
     if (isOpen) document.addEventListener('keydown', closeOnEscape)
 
     if (!isOpen) {
@@ -173,8 +211,11 @@ watch(
       return
     }
 
+    bindPanelPositionListeners()
+    await nextTick()
+    syncPanelPosition()
+
     if (props.allowCustomValue) {
-      await nextTick()
       customInputRef.value?.focus()
     }
   },
@@ -184,6 +225,7 @@ watch(
 onUnmounted(() => {
   if (typeof document === 'undefined') return
   document.removeEventListener('keydown', closeOnEscape)
+  unbindPanelPositionListeners()
 })
 
 const panelClasses = computed(() => {
@@ -437,7 +479,7 @@ function clearSelection(): void {
   <div
     v-else
     ref="rootEl"
-    v-click-outside="{ handler: closeDropdown, enabled: open }"
+    v-click-outside="{ handler: closeDropdown, enabled: open, exclude: clickOutsideExclude }"
     :class="props.view === 'link' ? 'relative inline-block align-baseline' : 'relative w-full'"
   >
     <button
@@ -496,71 +538,75 @@ function clearSelection(): void {
       <span class="i-lucide-x h-4 w-4" aria-hidden="true" />
     </button>
 
-    <transition
-      enter-active-class="transition ease-out duration-150"
-      enter-from-class="transform opacity-0 scale-95"
-      enter-to-class="transform opacity-100 scale-100"
-      leave-active-class="transition ease-in duration-100"
-      leave-from-class="transform opacity-100 scale-100"
-      leave-to-class="transform opacity-0 scale-95"
-    >
-      <div
-        v-show="open"
-        data-testid="ds-select-panel"
-        class="absolute z-50 mt-2 w-full"
+    <teleport to="body">
+      <transition
+        enter-active-class="transition ease-out duration-150"
+        enter-from-class="transform opacity-0 scale-95"
+        enter-to-class="transform opacity-100 scale-100"
+        leave-active-class="transition ease-in duration-100"
+        leave-from-class="transform opacity-100 scale-100"
+        leave-to-class="transform opacity-0 scale-95"
       >
-        <div :class="panelClasses">
-          <div v-if="props.allowCustomValue" class="p-2 border-b border-[var(--brd)]">
-            <DsInput
-              ref="customInputRef"
-              v-model="customValue"
-              data-testid="ds-select-custom-input"
-              type="text"
-              :placeholder="props.customValuePlaceholder"
-              size="sm"
-              @keydown.enter.prevent="addCustom"
-            />
-          </div>
+        <div
+          v-show="open"
+          ref="panelEl"
+          data-testid="ds-select-panel"
+          class="fixed w-full"
+          :style="panelStyle"
+        >
+          <div :class="panelClasses">
+            <div v-if="props.allowCustomValue" class="p-2 border-b border-[var(--brd)]">
+              <DsInput
+                ref="customInputRef"
+                v-model="customValue"
+                data-testid="ds-select-custom-input"
+                type="text"
+                :placeholder="props.customValuePlaceholder"
+                size="sm"
+                @keydown.enter.prevent="addCustom"
+              />
+            </div>
 
-          <div
-            class="p-1 overflow-auto"
-            :style="{ maxHeight: `${props.dropdownMaxHeight}px` }"
-            role="listbox"
-            :aria-multiselectable="props.multiple ? 'true' : undefined"
-          >
-            <button
-              v-if="canAddCustom"
-              data-testid="ds-select-add-option"
-              type="button"
-              class="w-full rounded-[10px] px-3 py-2 text-left text-[13px] hover:bg-[color-mix(in_srgb,var(--muted)_30%,transparent)]"
-              @click="addCustom"
+            <div
+              class="p-1 overflow-auto"
+              :style="{ maxHeight: `${props.dropdownMaxHeight}px` }"
+              role="listbox"
+              :aria-multiselectable="props.multiple ? 'true' : undefined"
             >
-              Add “{{ customValue.trim() }}”
-            </button>
+              <button
+                v-if="canAddCustom"
+                data-testid="ds-select-add-option"
+                type="button"
+                class="w-full rounded-[10px] px-3 py-2 text-left text-[13px] hover:bg-[color-mix(in_srgb,var(--muted)_30%,transparent)]"
+                @click="addCustom"
+              >
+                Add “{{ customValue.trim() }}”
+              </button>
 
-            <button
-              v-for="opt in visibleOptions"
-              :key="opt.value"
-              type="button"
-              role="option"
-              :aria-selected="isSelected(opt.value) ? 'true' : 'false'"
-              class="w-full rounded-[10px] px-3 py-2 text-left text-[13px] hover:bg-[color-mix(in_srgb,var(--muted)_30%,transparent)]"
-              @click="toggleValue(opt.value)"
-            >
-              <slot name="option" :option="opt" :selected="isSelected(opt.value)">
-                <span class="flex items-center gap-2 min-w-0">
-                  <span
-                    class="h-4 w-4 shrink-0"
-                    :class="isSelected(opt.value) ? 'i-lucide-check text-[var(--primary)]' : ''"
-                    aria-hidden="true"
-                  />
-                  <span class="truncate">{{ opt.label }}</span>
-                </span>
-              </slot>
-            </button>
+              <button
+                v-for="opt in visibleOptions"
+                :key="opt.value"
+                type="button"
+                role="option"
+                :aria-selected="isSelected(opt.value) ? 'true' : 'false'"
+                class="w-full rounded-[10px] px-3 py-2 text-left text-[13px] hover:bg-[color-mix(in_srgb,var(--muted)_30%,transparent)]"
+                @click="toggleValue(opt.value)"
+              >
+                <slot name="option" :option="opt" :selected="isSelected(opt.value)">
+                  <span class="flex items-center gap-2 min-w-0">
+                    <span
+                      class="h-4 w-4 shrink-0"
+                      :class="isSelected(opt.value) ? 'i-lucide-check text-[var(--primary)]' : ''"
+                      aria-hidden="true"
+                    />
+                    <span class="truncate">{{ opt.label }}</span>
+                  </span>
+                </slot>
+              </button>
+            </div>
           </div>
         </div>
-      </div>
-    </transition>
+      </transition>
+    </teleport>
   </div>
 </template>

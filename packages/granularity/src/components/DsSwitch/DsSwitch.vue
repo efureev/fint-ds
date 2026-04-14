@@ -93,7 +93,7 @@ function toggle(): void {
         v-if="$slots.default"
         :class="labelClass"
     >
-      <slot/>
+      <slot />
     </span>
   </button>
 </template>

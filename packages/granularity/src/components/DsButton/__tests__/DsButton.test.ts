@@ -122,7 +122,7 @@ function resolveColorExpression(
 
   if (value.startsWith('color-mix(')) {
     const [space, left, right] = splitTopLevel(value.slice('color-mix('.length, -1))
-    const leftMatch = left.match(/^(.*)\s+(\d+)%$/)
+    const leftMatch = left.match(/^(.+?)\s+(\d+)%$/)
 
     if (space !== 'in srgb' || !leftMatch) {
       throw new Error(`Unsupported color-mix() expression: ${value}`)
