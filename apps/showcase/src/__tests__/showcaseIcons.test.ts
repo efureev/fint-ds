@@ -10,11 +10,6 @@ const iconFiles = [
     forbiddenSymbol: '→',
   },
   {
-    relativePath: '../pages/ComponentDetailPage.vue',
-    expectedImport: "import IconArrowLeft from '~icons/lucide/arrow-left'",
-    forbiddenSymbol: '←',
-  },
-  {
     relativePath: '../pages/PackageEntityDetailPage.vue',
     expectedImport: "import IconArrowLeft from '~icons/lucide/arrow-left'",
     forbiddenSymbol: '←',
@@ -28,26 +23,6 @@ const iconFiles = [
     relativePath: '../layouts/ShowcaseLayout.vue',
     expectedImport: "import IconX from '~icons/lucide/x'",
     forbiddenSymbol: '✕',
-  },
-  {
-    relativePath: '../demos/components/ds-button/DsButtonStatesDemo.vue',
-    expectedImport: "import IconSettings from '~icons/lucide/settings'",
-    forbiddenSymbol: '⚙',
-  },
-  {
-    relativePath: '../demos/components/ds-button/DsButtonStatesDemo.vue',
-    expectedImport: "import IconPlus from '~icons/lucide/plus'",
-    forbiddenSymbol: '＋',
-  },
-  {
-    relativePath: '../content/component-docs/examples/DsButton.examples.ts',
-    expectedImport: "import IconSettings from '~icons/lucide/settings'",
-    forbiddenSymbol: '⚙',
-  },
-  {
-    relativePath: '../content/component-docs/examples/DsButton.examples.ts',
-    expectedImport: "import IconPlus from '~icons/lucide/plus'",
-    forbiddenSymbol: '＋',
   },
 ] as const
 

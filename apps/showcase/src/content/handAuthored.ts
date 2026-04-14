@@ -77,12 +77,6 @@ export const showcaseEntityMetadataOverrides: Record<string, ShowcaseEntityMetad
     tags: ['featured', 'starter'],
     examples: [
       {
-        id: 'button-variants',
-        title: 'Variants and sizes',
-        description: 'Покажем базовые состояния, размеры и визуальные варианты кнопки.',
-        status: 'planned',
-      },
-      {
         id: 'button-loading',
         title: 'Loading and icon-only',
         description: 'Отдельный сценарий для loading-state и icon-only кнопок.',
