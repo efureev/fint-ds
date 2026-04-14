@@ -1,7 +1,7 @@
 export const dsCollapseSafelist = [
   'divide-y',
-  'divide-[var(--border)]',
-  'text-[var(--foreground)]',
+  'divide-[var(--brd)]',
+  'text-[var(--fg)]',
   'm-0',
   'w-full',
   'px-4',
@@ -29,7 +29,7 @@ export const dsCollapseSafelist = [
   'h-4',
   'w-4',
   'shrink-0',
-  'text-[var(--muted-foreground)]',
+  'text-[var(--muted-fg)]',
   'rotate-180',
   'grid',
   'grid-rows-[1fr]',

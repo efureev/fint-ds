@@ -10,7 +10,7 @@ function splitClassTokens(value: string): string[] {
 }
 
 const trackBase =
-    'relative inline-flex items-center rounded-full border border-[var(--ds-switch-track-border)] transition-colors duration-150'
+    'relative inline-flex items-center rounded-full border border-[var(--ds-switch-track-brd)] transition-colors duration-150'
 
 const trackSizes: Record<DsSwitchSize, string> = {
     sm: 'h-5 w-9',
@@ -42,7 +42,7 @@ const thumbTranslations: Record<DsSwitchSize, { checked: string, unchecked: stri
     },
 }
 
-const labelBase = 'text-[var(--muted-foreground)]'
+const labelBase = 'text-[var(--muted-fg)]'
 
 const labelSizes: Record<DsSwitchSize, string> = {
     sm: 'text-sm',

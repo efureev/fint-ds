@@ -203,7 +203,7 @@ function getSidebarItemClass(item: SidebarNavigationItem) {
           >
             <RouterLink
               :to="crumb.to"
-              class="showcase-text-subtle font-medium transition-colors hover:text-[var(--foreground)]"
+              class="showcase-text-subtle font-medium transition-colors hover:text-[var(--fg)]"
             >
               {{ crumb.label }}
             </RouterLink>

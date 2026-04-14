@@ -92,7 +92,7 @@ function next(): void {
         :key="pageNumber"
         type="button"
         class="h-8 min-w-8 px-2 rounded-md text-sm font-600 transition-colors duration-150 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring)]"
-        :class="pageNumber === props.page ? 'bg-[var(--primary)] text-[var(--primary-foreground)]' : 'text-[var(--muted-foreground)] hover:bg-[var(--muted)] hover:text-[var(--foreground)]'"
+        :class="pageNumber === props.page ? 'bg-[var(--primary)] text-[var(--primary-fg)]' : 'text-[var(--muted-fg)] hover:bg-[var(--muted)] hover:text-[var(--fg)]'"
         @click="pageModel = pageNumber"
       >
         {{ pageNumber }}

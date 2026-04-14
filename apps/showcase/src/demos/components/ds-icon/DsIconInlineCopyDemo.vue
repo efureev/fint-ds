@@ -13,7 +13,7 @@ const items = [
     <div
       v-for="item in items"
       :key="item"
-      class="flex items-start gap-3 rounded-xl border border-[var(--border)] bg-[var(--background)] p-4"
+      class="flex items-start gap-3 rounded-xl border border-[var(--brd)] bg-[var(--bg)] p-4"
     >
       <DsIcon size="md" class="mt-0.5 text-[var(--primary)]">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" class="h-full w-full">
@@ -22,7 +22,7 @@ const items = [
         </svg>
       </DsIcon>
 
-      <div class="min-w-0 text-sm text-[var(--foreground)]">
+      <div class="min-w-0 text-sm text-[var(--fg)]">
         {{ item }}
       </div>
     </div>

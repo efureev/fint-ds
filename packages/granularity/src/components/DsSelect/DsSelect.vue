@@ -189,8 +189,8 @@ onUnmounted(() => {
 const panelClasses = computed(() => {
   return [
     'rounded-[var(--ds-radius-xl)]',
-    'border border-[var(--border)]',
-    'bg-[var(--card)] text-[var(--card-foreground)]',
+    'border border-[var(--brd)]',
+    'bg-[var(--card)] text-[var(--card-fg)]',
     'shadow-[var(--ds-shadow-2)]',
     'overflow-hidden',
   ].join(' ')
@@ -310,8 +310,8 @@ const className = computed(() => {
       const map: Record<DsSelectVariant, string> = {
         primary:
           'text-[var(--primary)] hover:text-[var(--primary-hover)] active:text-[var(--primary-active)]',
-        default: 'text-[var(--foreground)] hover:text-[var(--primary)] active:text-[var(--primary-active)]',
-        muted: 'text-[var(--muted-foreground)] hover:text-[var(--foreground)] active:text-[var(--foreground)]',
+        default: 'text-[var(--fg)] hover:text-[var(--primary)] active:text-[var(--primary-active)]',
+        muted: 'text-[var(--muted-fg)] hover:text-[var(--fg)] active:text-[var(--fg)]',
         danger:
           'text-[var(--ds-danger)] hover:text-[var(--ds-danger-hover)] active:text-[var(--ds-danger-active)]',
       }
@@ -326,12 +326,12 @@ const className = computed(() => {
       underlineClass,
       variantClass,
       'transition-colors duration-150 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring)]',
-      'disabled:opacity-60 disabled:cursor-not-allowed disabled:text-[var(--muted-foreground)] disabled:no-underline',
+      'disabled:opacity-60 disabled:cursor-not-allowed disabled:text-[var(--muted-fg)] disabled:no-underline',
     ].join(' ')
   }
 
   return [
-    'w-full rounded-md border border-[var(--border)] bg-[var(--background)] text-[var(--foreground)]',
+    'w-full rounded-md border border-[var(--brd)] bg-[var(--bg)] text-[var(--fg)]',
     sizeClass,
     'transition-colors duration-150 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring)]',
     'disabled:opacity-50 disabled:cursor-not-allowed',
@@ -428,7 +428,7 @@ function clearSelection(): void {
     <span
       v-if="showNativeChevron"
       data-testid="ds-select-chevron"
-      class="absolute top-1/2 -translate-y-1/2 right-3 text-[var(--muted-foreground)] pointer-events-none"
+      class="absolute top-1/2 -translate-y-1/2 right-3 text-[var(--muted-fg)] pointer-events-none"
     >
       <span class="i-lucide-chevron-down h-4 w-4" aria-hidden="true" />
     </span>
@@ -462,7 +462,7 @@ function clearSelection(): void {
         >
           <span
             class="block truncate"
-            :class="!hasSelection ? 'text-[var(--muted-foreground)]' : ''"
+            :class="!hasSelection ? 'text-[var(--muted-fg)]' : ''"
           >
             {{ displayText }}
           </span>
@@ -478,7 +478,7 @@ function clearSelection(): void {
       <span
         v-else
         data-testid="ds-select-chevron"
-        class="shrink-0 text-[var(--muted-foreground)] pointer-events-none"
+        class="shrink-0 text-[var(--muted-fg)] pointer-events-none"
       >
         <span class="i-lucide-chevron-down h-4 w-4" aria-hidden="true" />
       </span>
@@ -488,7 +488,7 @@ function clearSelection(): void {
       v-if="panelClearVisible"
       data-testid="ds-select-clear"
       type="button"
-      class="absolute top-1/2 -translate-y-1/2 right-3 h-6 w-6 inline-flex items-center justify-center rounded-md text-[var(--muted-foreground)] hover:text-[var(--foreground)] hover:bg-[color-mix(in_srgb,var(--muted)_25%,transparent)] disabled:opacity-50"
+      class="absolute top-1/2 -translate-y-1/2 right-3 h-6 w-6 inline-flex items-center justify-center rounded-md text-[var(--muted-fg)] hover:text-[var(--fg)] hover:bg-[color-mix(in_srgb,var(--muted)_25%,transparent)] disabled:opacity-50"
       :disabled="props.disabled"
       aria-label="Clear"
       @click.stop="clearSelection"
@@ -510,7 +510,7 @@ function clearSelection(): void {
         class="absolute z-50 mt-2 w-full"
       >
         <div :class="panelClasses">
-          <div v-if="props.allowCustomValue" class="p-2 border-b border-[var(--border)]">
+          <div v-if="props.allowCustomValue" class="p-2 border-b border-[var(--brd)]">
             <DsInput
               ref="customInputRef"
               v-model="customValue"

@@ -46,11 +46,11 @@ const trackStyle = computed(() => {
 
   return {
     '--ds-switch-track-bg': backgroundColor,
-    '--ds-switch-track-border': customBackgroundColor
+    '--ds-switch-track-brd': customBackgroundColor
         ? backgroundColor
         : isChecked
             ? 'var(--primary)'
-            : 'var(--border)',
+            : 'var(--brd)',
     backgroundColor: 'var(--ds-switch-track-bg)',
   }
 })

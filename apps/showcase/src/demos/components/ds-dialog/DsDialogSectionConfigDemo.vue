@@ -18,8 +18,8 @@ function openDialog() {
       Open stateful dialog
     </DsButton>
 
-    <div class="text-xs text-[var(--muted-foreground)]">
-      Footer action enabled: <span class="font-medium text-[var(--foreground)]">{{ confirmed ? 'yes' : 'no' }}</span>
+    <div class="text-xs text-[var(--muted-fg)]">
+      Footer action enabled: <span class="font-medium text-[var(--fg)]">{{ confirmed ? 'yes' : 'no' }}</span>
     </div>
 
     <DsDialog
@@ -28,12 +28,12 @@ function openDialog() {
       :header-config="{ paddingX: 'px-4', paddingY: 'py-3' }"
       :footer-config="{ paddingX: 'px-4', paddingY: 'py-3', bordered: false }"
     >
-      <div class="grid gap-4 text-sm text-[var(--muted-foreground)]">
+      <div class="grid gap-4 text-sm text-[var(--muted-fg)]">
         <p>
           Внутреннее состояние формы продолжает жить внутри dialog-shell, а section config помогает адаптировать плотность под compact workflows.
         </p>
 
-        <label class="flex items-start gap-3 rounded-lg border border-[var(--border)] p-3 text-[var(--foreground)]">
+        <label class="flex items-start gap-3 rounded-lg border border-[var(--brd)] p-3 text-[var(--fg)]">
           <input v-model="confirmed" type="checkbox" class="mt-1" />
           <span>I reviewed access levels and notification scope.</span>
         </label>

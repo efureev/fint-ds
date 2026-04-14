@@ -8,8 +8,8 @@ export const dsDataTableSafelist = [
   'inline-flex',
   'items-center',
   'gap-2',
-  'text-[var(--muted-foreground)]',
-  'hover:text-[var(--foreground)]',
+  'text-[var(--muted-fg)]',
+  'hover:text-[var(--fg)]',
   'transition-colors',
   'focus:outline-none',
   'focus-visible:ring-2',
@@ -18,5 +18,5 @@ export const dsDataTableSafelist = [
   'h-4',
   'w-4',
   'border-t',
-  'border-[var(--border)]',
+  'border-[var(--brd)]',
 ] as const

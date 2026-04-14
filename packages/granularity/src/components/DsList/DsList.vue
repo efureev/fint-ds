@@ -13,7 +13,7 @@ withDefaults(
 
 <template>
   <DsCard>
-    <div :class="divided ? 'divide-y divide-[var(--border)]' : ''">
+    <div :class="divided ? 'divide-y divide-[var(--brd)]' : ''">
       <slot />
     </div>
   </DsCard>

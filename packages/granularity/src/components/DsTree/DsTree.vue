@@ -398,7 +398,7 @@ defineExpose<DsTreeInstance<T>>({
     --ds-tree-row-min-height: 28px;
     --ds-tree-row-radius: 8px;
     --ds-tree-row-pr: 8px;
-    --ds-tree-row-color: var(--foreground);
+    --ds-tree-row-color: var(--fg);
     --ds-tree-row-hover-bg: color-mix(in srgb, var(--primary, #000) 10%, transparent);
     --ds-tree-row-current-bg: color-mix(in srgb, var(--primary, #000) 5%, transparent);
     --ds-tree-row-current-hover-bg: color-mix(in srgb, var(--primary, #000) 16%, transparent);

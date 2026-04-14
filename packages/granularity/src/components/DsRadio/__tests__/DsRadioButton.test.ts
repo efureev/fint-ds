@@ -25,7 +25,7 @@ describe('DsRadio (button)', () => {
     const native = wrapper.get('input[type="radio"]').element as HTMLInputElement
     expect(native.checked).toBe(true)
     expect(btn.attributes('class')).toContain('h-11')
-    expect(btn.attributes('class')).toContain('bg-[var(--ds-button-primary-background,var(--primary))]')
+    expect(btn.attributes('class')).toContain('bg-[var(--ds-button-primary-bg,var(--primary))]')
   })
 
   it('эмитит update:modelValue при клике (standalone v-model)', async () => {

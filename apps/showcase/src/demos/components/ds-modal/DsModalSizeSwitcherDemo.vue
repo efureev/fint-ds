@@ -27,20 +27,20 @@ function openWithSize(size: 'sm' | 'lg') {
       <div class="grid gap-4">
         <div class="flex items-center justify-between gap-3">
           <div>
-            <div class="text-sm font-semibold text-[var(--foreground)]">
+            <div class="text-sm font-semibold text-[var(--fg)]">
               Active size: {{ activeSize }}
             </div>
-            <div class="text-sm text-[var(--muted-foreground)]">
+            <div class="text-sm text-[var(--muted-fg)]">
               Один и тот же flow может масштабироваться под review, preview или multi-column payload.
             </div>
           </div>
         </div>
 
         <div class="grid gap-3 sm:grid-cols-2">
-          <div class="rounded-2xl border border-[var(--border)] p-3 text-sm">
+          <div class="rounded-2xl border border-[var(--brd)] p-3 text-sm">
             Summary block
           </div>
-          <div class="rounded-2xl border border-[var(--border)] p-3 text-sm">
+          <div class="rounded-2xl border border-[var(--brd)] p-3 text-sm">
             Secondary block
           </div>
         </div>

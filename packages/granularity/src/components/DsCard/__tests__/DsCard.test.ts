@@ -13,8 +13,8 @@ describe('DsCard', () => {
 
     expect(wrapper.text()).toContain('Card content')
     expect(wrapper.attributes('class')).toContain('rounded-[var(--ds-radius-lg)]')
-    expect(wrapper.attributes('class')).toContain('border-[var(--border)]')
+    expect(wrapper.attributes('class')).toContain('border-[var(--brd)]')
     expect(wrapper.attributes('class')).toContain('bg-[var(--card)]')
-    expect(wrapper.attributes('class')).toContain('text-[var(--card-foreground)]')
+    expect(wrapper.attributes('class')).toContain('text-[var(--card-fg)]')
   })
 })

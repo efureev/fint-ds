@@ -19,14 +19,14 @@ async function request(selected: File[]) {
           <DsButton type="button" @click="openDialog">
             Select files
           </DsButton>
-          <span class="text-sm text-[var(--muted-foreground)]">
+          <span class="text-sm text-[var(--muted-fg)]">
             {{ files.length ? files.join(', ') : 'No files selected yet' }}
           </span>
         </div>
       </template>
     </DsFileUpload>
 
-    <div class="text-sm text-[var(--muted-foreground)]">
+    <div class="text-sm text-[var(--muted-fg)]">
       В этом режиме библиотека отвечает за file-handling, а триггер можно строить из любых UI primitives пакета.
     </div>
   </div>

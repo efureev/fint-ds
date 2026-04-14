@@ -19,7 +19,7 @@ const archived = ref(false)
     </div>
 
     <DsConfirmDialog v-model="open" title="Archive sprint" confirm-text="Archive" @confirm="archived = true">
-      <div class="grid gap-3 text-sm text-[var(--muted-foreground)]">
+      <div class="grid gap-3 text-sm text-[var(--muted-fg)]">
         <p>Кастомный slot позволяет вывести richer summary прямо внутри confirm shell.</p>
         <ul class="list-disc pl-5">
           <li>18 tasks will move to history</li>

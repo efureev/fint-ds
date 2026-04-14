@@ -21,7 +21,7 @@ const resolvedConfig = computed(() => resolveDsDialogSectionConfig(props.config,
 const rootClass = computed(() => [
   resolvedConfig.value.paddingX,
   resolvedConfig.value.paddingY,
-  resolvedConfig.value.bordered ? 'border-t border-[var(--border)]' : '',
+  resolvedConfig.value.bordered ? 'border-t border-[var(--brd)]' : '',
 ])
 </script>
 

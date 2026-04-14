@@ -12,7 +12,7 @@ withDefaults(
 <template>
   <div
     role="separator"
-    class="border-t border-[var(--border)]"
+    class="border-t border-[var(--brd)]"
     :class="inset ? 'mx-2' : ''"
   />
 </template>

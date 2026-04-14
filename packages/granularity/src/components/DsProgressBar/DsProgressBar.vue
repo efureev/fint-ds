@@ -23,7 +23,7 @@ const safe = computed(() => {
     :aria-valuenow="safe"
     aria-valuemin="0"
     aria-valuemax="100"
-    class="h-2 w-full rounded-full bg-[var(--muted)] border border-[var(--border)] overflow-hidden"
+    class="h-2 w-full rounded-full bg-[var(--muted)] border border-[var(--brd)] overflow-hidden"
   >
     <div
       class="h-full bg-[var(--primary)]"

@@ -22,7 +22,7 @@ const props = withDefaults(
     <label
       v-if="props.label"
       :for="props.forId"
-      class="text-sm text-[var(--muted-foreground)]"
+      class="text-sm text-[var(--muted-fg)]"
       :class="props.labelClass"
     >
       {{ props.label }}

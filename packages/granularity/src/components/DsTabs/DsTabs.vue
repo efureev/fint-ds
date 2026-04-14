@@ -49,7 +49,7 @@ function onKeydown(event: KeyboardEvent): void {
 <template>
   <div
     role="tablist"
-    class="inline-flex flex-wrap gap-1 rounded-[var(--ds-radius-lg)] border border-[var(--border)] bg-[var(--muted)] p-1"
+    class="inline-flex flex-wrap gap-1 rounded-[var(--ds-radius-lg)] border border-[var(--brd)] bg-[var(--muted)] p-1"
     @keydown="onKeydown"
   >
     <button
@@ -60,15 +60,15 @@ function onKeydown(event: KeyboardEvent): void {
       :aria-selected="tab.value === props.modelValue ? 'true' : 'false'"
       class="h-9 px-3 rounded-[10px] text-sm font-600 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring)]"
       :class="tab.value === props.modelValue
-        ? 'bg-[var(--card)] text-[var(--foreground)] border border-[var(--border)]'
-        : 'text-[var(--muted-foreground)] hover:text-[var(--foreground)] hover:bg-[color-mix(in_srgb,var(--card)_70%,transparent)]'"
+        ? 'bg-[var(--card)] text-[var(--fg)] border border-[var(--brd)]'
+        : 'text-[var(--muted-fg)] hover:text-[var(--fg)] hover:bg-[color-mix(in_srgb,var(--card)_70%,transparent)]'"
       @click="select(tab.value)"
     >
       <span class="inline-flex items-center gap-2">
         <span>{{ tab.label }}</span>
         <span
           v-if="tab.badge"
-          class="text-[11px] px-1.5 py-0.5 rounded-full bg-[var(--secondary)] text-[var(--secondary-foreground)]"
+          class="text-[11px] px-1.5 py-0.5 rounded-full bg-[var(--secondary)] text-[var(--secondary-fg)]"
         >
           {{ tab.badge }}
         </span>

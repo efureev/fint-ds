@@ -10,7 +10,7 @@ const iconColor = ref('var(--warning)')
 <template>
   <div class="grid gap-4">
     <div class="flex flex-wrap items-center gap-3">
-      <span class="text-sm font-600 text-[var(--foreground)]">
+      <span class="text-sm font-600 text-[var(--fg)]">
         Custom tone
       </span>
       <DsTooltip :text="tooltipText" :icon-color="iconColor" />

@@ -18,9 +18,9 @@ const selectedOption = computed(() => options.find(option => option.value === st
   <div class="grid gap-4 lg:grid-cols-[minmax(0,1fr)_220px]">
     <DsRadioGroup v-model="status" :options="options" />
 
-    <div class="rounded-2xl border border-[var(--border)] bg-[var(--card)] p-4 text-sm text-[var(--muted-foreground)]">
+    <div class="rounded-2xl border border-[var(--brd)] bg-[var(--card)] p-4 text-sm text-[var(--muted-fg)]">
       Selected state:
-      <div class="mt-2 text-base font-semibold text-[var(--foreground)]">
+      <div class="mt-2 text-base font-semibold text-[var(--fg)]">
         {{ selectedOption }}
       </div>
     </div>

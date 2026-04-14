@@ -33,15 +33,15 @@ type ButtonToneTokens = {
 
 const buttonToneTokens: Record<ButtonTone, ButtonToneTokens> = {
   primary: {
-    solidBackground: 'var(--ds-button-primary-background,var(--primary))',
-    solidBackgroundHover: 'var(--ds-button-primary-background-hover,var(--primary-hover))',
-    solidBackgroundActive: 'var(--ds-button-primary-background-active,var(--primary-active))',
-    solidForeground: 'var(--ds-button-primary-foreground,var(--primary-foreground))',
-    accentText: 'var(--accent-foreground)',
-    softBackground: 'var(--ds-button-primary-soft-background)',
-    softBackgroundHover: 'var(--ds-button-primary-soft-background-hover)',
-    softBackgroundActive: 'var(--ds-button-primary-soft-background-active)',
-    softForeground: 'var(--accent-foreground)',
+    solidBackground: 'var(--ds-button-primary-bg,var(--primary))',
+    solidBackgroundHover: 'var(--ds-button-primary-bg-hover,var(--primary-hover))',
+    solidBackgroundActive: 'var(--ds-button-primary-bg-active,var(--primary-active))',
+    solidForeground: 'var(--ds-button-primary-fg,var(--primary-fg))',
+    accentText: 'var(--accent-fg)',
+    softBackground: 'var(--ds-button-primary-soft-bg)',
+    softBackgroundHover: 'var(--ds-button-primary-soft-bg-hover)',
+    softBackgroundActive: 'var(--ds-button-primary-soft-bg-active)',
+    softForeground: 'var(--accent-fg)',
     border: 'var(--primary)',
     borderHover: 'var(--primary-hover)',
     borderActive: 'var(--primary-active)',
@@ -50,95 +50,95 @@ const buttonToneTokens: Record<ButtonTone, ButtonToneTokens> = {
     solidBackground: 'var(--secondary)',
     solidBackgroundHover: 'var(--secondary-hover)',
     solidBackgroundActive: 'var(--secondary-active)',
-    solidForeground: 'var(--secondary-foreground)',
-    accentText: 'var(--foreground)',
+    solidForeground: 'var(--secondary-fg)',
+    accentText: 'var(--fg)',
     softBackground: 'var(--secondary)',
     softBackgroundHover: 'var(--secondary-hover)',
     softBackgroundActive: 'var(--secondary-active)',
-    softForeground: 'var(--secondary-foreground)',
-    border: 'var(--border)',
-    borderHover: 'var(--border-hover,var(--border))',
-    borderActive: 'var(--border-active,var(--border))',
+    softForeground: 'var(--secondary-fg)',
+    border: 'var(--brd)',
+    borderHover: 'var(--brd-hover,var(--brd))',
+    borderActive: 'var(--brd-active,var(--brd))',
   },
   success: {
-    solidBackground: 'var(--ds-button-success-background,var(--ds-success))',
-    solidBackgroundHover: 'var(--ds-button-success-background-hover,var(--ds-success-hover))',
-    solidBackgroundActive: 'var(--ds-button-success-background-active,var(--ds-success-active))',
-    solidForeground: 'var(--ds-button-success-foreground,var(--ds-success-foreground,var(--foreground)))',
+    solidBackground: 'var(--ds-button-success-bg,var(--ds-success))',
+    solidBackgroundHover: 'var(--ds-button-success-bg-hover,var(--ds-success-hover))',
+    solidBackgroundActive: 'var(--ds-button-success-bg-active,var(--ds-success-active))',
+    solidForeground: 'var(--ds-button-success-fg,var(--ds-success-fg,var(--fg)))',
     accentText: 'var(--ds-success-text,var(--ds-success))',
-    softBackground: 'var(--ds-button-success-soft-background)',
-    softBackgroundHover: 'var(--ds-button-success-soft-background-hover)',
-    softBackgroundActive: 'var(--ds-button-success-soft-background-active)',
+    softBackground: 'var(--ds-button-success-soft-bg)',
+    softBackgroundHover: 'var(--ds-button-success-soft-bg-hover)',
+    softBackgroundActive: 'var(--ds-button-success-soft-bg-active)',
     softForeground: 'var(--ds-success-text,var(--ds-success))',
     border: 'var(--ds-success)',
     borderHover: 'var(--ds-success-hover)',
     borderActive: 'var(--ds-success-active)',
   },
   warning: {
-    solidBackground: 'var(--ds-button-warning-background,var(--ds-warning))',
-    solidBackgroundHover: 'var(--ds-button-warning-background-hover,var(--ds-warning-hover))',
-    solidBackgroundActive: 'var(--ds-button-warning-background-active,var(--ds-warning-active))',
-    solidForeground: 'var(--ds-button-warning-foreground,var(--ds-warning-foreground,var(--foreground)))',
+    solidBackground: 'var(--ds-button-warning-bg,var(--ds-warning))',
+    solidBackgroundHover: 'var(--ds-button-warning-bg-hover,var(--ds-warning-hover))',
+    solidBackgroundActive: 'var(--ds-button-warning-bg-active,var(--ds-warning-active))',
+    solidForeground: 'var(--ds-button-warning-fg,var(--ds-warning-fg,var(--fg)))',
     accentText: 'var(--ds-warning-text,var(--ds-warning))',
-    softBackground: 'var(--ds-button-warning-soft-background)',
-    softBackgroundHover: 'var(--ds-button-warning-soft-background-hover)',
-    softBackgroundActive: 'var(--ds-button-warning-soft-background-active)',
+    softBackground: 'var(--ds-button-warning-soft-bg)',
+    softBackgroundHover: 'var(--ds-button-warning-soft-bg-hover)',
+    softBackgroundActive: 'var(--ds-button-warning-soft-bg-active)',
     softForeground: 'var(--ds-warning-text,var(--ds-warning))',
     border: 'var(--ds-warning)',
     borderHover: 'var(--ds-warning-hover)',
     borderActive: 'var(--ds-warning-active)',
   },
   danger: {
-    solidBackground: 'var(--ds-button-danger-background,var(--ds-danger))',
-    solidBackgroundHover: 'var(--ds-button-danger-background-hover,var(--ds-danger-hover))',
-    solidBackgroundActive: 'var(--ds-button-danger-background-active,var(--ds-danger-active))',
-    solidForeground: 'var(--ds-button-danger-foreground,var(--ds-danger-foreground,var(--foreground)))',
+    solidBackground: 'var(--ds-button-danger-bg,var(--ds-danger))',
+    solidBackgroundHover: 'var(--ds-button-danger-bg-hover,var(--ds-danger-hover))',
+    solidBackgroundActive: 'var(--ds-button-danger-bg-active,var(--ds-danger-active))',
+    solidForeground: 'var(--ds-button-danger-fg,var(--ds-danger-fg,var(--fg)))',
     accentText: 'var(--ds-danger-text,var(--ds-danger))',
-    softBackground: 'var(--ds-button-danger-soft-background)',
-    softBackgroundHover: 'var(--ds-button-danger-soft-background-hover)',
-    softBackgroundActive: 'var(--ds-button-danger-soft-background-active)',
+    softBackground: 'var(--ds-button-danger-soft-bg)',
+    softBackgroundHover: 'var(--ds-button-danger-soft-bg-hover)',
+    softBackgroundActive: 'var(--ds-button-danger-soft-bg-active)',
     softForeground: 'var(--ds-danger-text,var(--ds-danger))',
     border: 'var(--ds-danger)',
     borderHover: 'var(--ds-danger-hover)',
     borderActive: 'var(--ds-danger-active)',
   },
   info: {
-    solidBackground: 'var(--ds-button-info-background,var(--ds-info))',
-    solidBackgroundHover: 'var(--ds-button-info-background-hover,var(--ds-info-hover))',
-    solidBackgroundActive: 'var(--ds-button-info-background-active,var(--ds-info-active))',
-    solidForeground: 'var(--ds-button-info-foreground,var(--ds-info-foreground,var(--foreground)))',
+    solidBackground: 'var(--ds-button-info-bg,var(--ds-info))',
+    solidBackgroundHover: 'var(--ds-button-info-bg-hover,var(--ds-info-hover))',
+    solidBackgroundActive: 'var(--ds-button-info-bg-active,var(--ds-info-active))',
+    solidForeground: 'var(--ds-button-info-fg,var(--ds-info-fg,var(--fg)))',
     accentText: 'var(--ds-info-text,var(--ds-info))',
-    softBackground: 'var(--ds-button-info-soft-background)',
-    softBackgroundHover: 'var(--ds-button-info-soft-background-hover)',
-    softBackgroundActive: 'var(--ds-button-info-soft-background-active)',
+    softBackground: 'var(--ds-button-info-soft-bg)',
+    softBackgroundHover: 'var(--ds-button-info-soft-bg-hover)',
+    softBackgroundActive: 'var(--ds-button-info-soft-bg-active)',
     softForeground: 'var(--ds-info-text,var(--ds-info))',
     border: 'var(--ds-info)',
     borderHover: 'var(--ds-info-hover)',
     borderActive: 'var(--ds-info-active)',
   },
   slate: {
-    solidBackground: 'var(--ds-button-slate-background,var(--ds-slate))',
-    solidBackgroundHover: 'var(--ds-button-slate-background-hover,var(--ds-slate-hover))',
-    solidBackgroundActive: 'var(--ds-button-slate-background-active,var(--ds-slate-active))',
-    solidForeground: 'var(--ds-button-slate-foreground,var(--ds-slate-foreground,var(--foreground)))',
+    solidBackground: 'var(--ds-button-slate-bg,var(--ds-slate))',
+    solidBackgroundHover: 'var(--ds-button-slate-bg-hover,var(--ds-slate-hover))',
+    solidBackgroundActive: 'var(--ds-button-slate-bg-active,var(--ds-slate-active))',
+    solidForeground: 'var(--ds-button-slate-fg,var(--ds-slate-fg,var(--fg)))',
     accentText: 'var(--ds-slate-text,var(--ds-slate))',
-    softBackground: 'var(--ds-button-slate-soft-background)',
-    softBackgroundHover: 'var(--ds-button-slate-soft-background-hover)',
-    softBackgroundActive: 'var(--ds-button-slate-soft-background-active)',
+    softBackground: 'var(--ds-button-slate-soft-bg)',
+    softBackgroundHover: 'var(--ds-button-slate-soft-bg-hover)',
+    softBackgroundActive: 'var(--ds-button-slate-soft-bg-active)',
     softForeground: 'var(--ds-slate-text,var(--ds-slate))',
     border: 'var(--ds-slate)',
     borderHover: 'var(--ds-slate-hover)',
     borderActive: 'var(--ds-slate-active)',
   },
   azure: {
-    solidBackground: 'var(--ds-button-azure-background,var(--ds-azure))',
-    solidBackgroundHover: 'var(--ds-button-azure-background-hover,var(--ds-azure-hover))',
-    solidBackgroundActive: 'var(--ds-button-azure-background-active,var(--ds-azure-active))',
-    solidForeground: 'var(--ds-button-azure-foreground,var(--ds-azure-foreground,var(--foreground)))',
+    solidBackground: 'var(--ds-button-azure-bg,var(--ds-azure))',
+    solidBackgroundHover: 'var(--ds-button-azure-bg-hover,var(--ds-azure-hover))',
+    solidBackgroundActive: 'var(--ds-button-azure-bg-active,var(--ds-azure-active))',
+    solidForeground: 'var(--ds-button-azure-fg,var(--ds-azure-fg,var(--fg)))',
     accentText: 'var(--ds-azure-text,var(--ds-azure))',
-    softBackground: 'var(--ds-button-azure-soft-background)',
-    softBackgroundHover: 'var(--ds-button-azure-soft-background-hover)',
-    softBackgroundActive: 'var(--ds-button-azure-soft-background-active)',
+    softBackground: 'var(--ds-button-azure-soft-bg)',
+    softBackgroundHover: 'var(--ds-button-azure-soft-bg-hover)',
+    softBackgroundActive: 'var(--ds-button-azure-soft-bg-active)',
     softForeground: 'var(--ds-azure-text,var(--ds-azure))',
     border: 'var(--ds-azure)',
     borderHover: 'var(--ds-azure-hover)',
@@ -232,7 +232,7 @@ function getButtonPreviewStyle(variant: ButtonVariant, tone: ButtonTone, state: 
 
 <template>
   <div class="grid gap-4">
-    <div class="rounded-2xl border border-[var(--border)] bg-[var(--card)] p-4 text-sm text-[var(--muted-foreground)]">
+    <div class="rounded-2xl border border-[var(--brd)] bg-[var(--card)] p-4 text-sm text-[var(--muted-fg)]">
       Та же матрица, что была в `playground-5`: для каждого `tone` видно live-кнопки и принудительно
       отрисованные состояния `hover`, `focus`, `active` по всем `variant`.
     </div>
@@ -241,7 +241,7 @@ function getButtonPreviewStyle(variant: ButtonVariant, tone: ButtonTone, state: 
       <article
         v-for="tone in buttonTones"
         :key="tone"
-        class="overflow-x-auto rounded-2xl border border-[var(--border)] bg-[var(--card)] p-4"
+        class="overflow-x-auto rounded-2xl border border-[var(--brd)] bg-[var(--card)] p-4"
       >
         <div class="mb-3 flex items-center justify-between gap-3">
           <h3 class="showcase-demo-title text-sm font-semibold uppercase tracking-[0.12em]">
@@ -255,13 +255,13 @@ function getButtonPreviewStyle(variant: ButtonVariant, tone: ButtonTone, state: 
         <table class="min-w-full border-separate border-spacing-3">
           <thead>
             <tr>
-              <th class="w-28 px-2 py-1 text-left text-xs font-semibold uppercase tracking-[0.12em] text-[var(--muted-foreground)]">
+              <th class="w-28 px-2 py-1 text-left text-xs font-semibold uppercase tracking-[0.12em] text-[var(--muted-fg)]">
                 state \ variant
               </th>
               <th
                 v-for="variant in buttonVariants"
                 :key="`${tone}-variant-${variant}`"
-                class="px-2 py-1 text-left text-xs font-semibold uppercase tracking-[0.12em] text-[var(--muted-foreground)]"
+                class="px-2 py-1 text-left text-xs font-semibold uppercase tracking-[0.12em] text-[var(--muted-fg)]"
               >
                 {{ variant }}
               </th>
@@ -270,7 +270,7 @@ function getButtonPreviewStyle(variant: ButtonVariant, tone: ButtonTone, state: 
 
           <tbody>
             <tr>
-              <th class="px-2 py-1 text-left text-xs font-semibold uppercase tracking-[0.12em] text-[var(--muted-foreground)]">
+              <th class="px-2 py-1 text-left text-xs font-semibold uppercase tracking-[0.12em] text-[var(--muted-fg)]">
                 Live
               </th>
               <td
@@ -289,7 +289,7 @@ function getButtonPreviewStyle(variant: ButtonVariant, tone: ButtonTone, state: 
             </tr>
 
             <tr v-for="state in buttonStates" :key="`${tone}-${state.key}`">
-              <th class="px-2 py-1 text-left text-xs font-semibold uppercase tracking-[0.12em] text-[var(--muted-foreground)]">
+              <th class="px-2 py-1 text-left text-xs font-semibold uppercase tracking-[0.12em] text-[var(--muted-fg)]">
                 {{ state.label }}
               </th>
               <td

@@ -18,8 +18,8 @@ export const dsPaginationSafelist = [
   'focus-visible:ring-2',
   'focus-visible:ring-[var(--ring)]',
   'bg-[var(--primary)]',
-  'text-[var(--primary-foreground)]',
-  'text-[var(--muted-foreground)]',
+  'text-[var(--primary-fg)]',
+  'text-[var(--muted-fg)]',
   'hover:bg-[var(--muted)]',
-  'hover:text-[var(--foreground)]',
+  'hover:text-[var(--fg)]',
 ] as const

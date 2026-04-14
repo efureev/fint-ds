@@ -13,7 +13,7 @@ const open = ref(false)
     </DsButton>
 
     <DsDialog v-model="open" title="Publish weekly digest" size="sm">
-      <div class="grid gap-4 text-sm text-[var(--muted-foreground)]">
+      <div class="grid gap-4 text-sm text-[var(--muted-fg)]">
         <p>
           `DsDialog` собирает готовый header/footer shell поверх `DsModal`, поэтому его удобно использовать для простых approval flow.
         </p>

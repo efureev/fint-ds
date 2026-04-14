@@ -97,7 +97,7 @@ describe('DsAlert', () => {
     const alert = wrapper.get('[role="alert"]').element as HTMLDivElement
 
     expect(alert.style.getPropertyValue('--ds-alert-bg')).toBe('#fffbeb')
-    expect(alert.style.getPropertyValue('--ds-alert-border')).toBe('#fcd34d')
+    expect(alert.style.getPropertyValue('--ds-alert-brd')).toBe('#fcd34d')
     expect(alert.style.getPropertyValue('--ds-alert-icon-color')).toBe('#92400e')
     expect(alert.style.getPropertyValue('--ds-alert-title-color')).toBe('#92400e')
     expect(alert.style.getPropertyValue('--ds-alert-text-color')).toBe('#92400e')
@@ -122,7 +122,7 @@ describe('DsAlert', () => {
     const alert = wrapper.get('[role="alert"]').element as HTMLDivElement
 
     expect(alert.style.getPropertyValue('--ds-alert-bg')).toBe('#111827')
-    expect(alert.style.getPropertyValue('--ds-alert-border')).toBe('#22c55e')
+    expect(alert.style.getPropertyValue('--ds-alert-brd')).toBe('#22c55e')
     expect(alert.style.getPropertyValue('--ds-alert-icon-color')).toBe('#f9fafb')
     expect(alert.style.getPropertyValue('--ds-alert-title-color')).toBe('#f9fafb')
     expect(alert.style.getPropertyValue('--ds-alert-text-color')).toBe('#f9fafb')

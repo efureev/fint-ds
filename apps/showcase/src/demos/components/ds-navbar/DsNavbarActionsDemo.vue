@@ -7,7 +7,7 @@ const notifications = ref(3)
 </script>
 
 <template>
-  <div class="grid gap-3 rounded-xl border border-[var(--border)] bg-[var(--background)] p-3">
+  <div class="grid gap-3 rounded-xl border border-[var(--brd)] bg-[var(--bg)] p-3">
     <DsNavbar title="Workspace">
       <DsBadge size="sm" variant="neutral">
         {{ notifications }} updates
@@ -18,7 +18,7 @@ const notifications = ref(3)
       </DsButton>
     </DsNavbar>
 
-    <div class="px-4 py-3 text-sm text-[var(--muted-foreground)]">
+    <div class="px-4 py-3 text-sm text-[var(--muted-fg)]">
       Action slot works well for global filters, status pills and quick actions in page-level shells.
     </div>
   </div>

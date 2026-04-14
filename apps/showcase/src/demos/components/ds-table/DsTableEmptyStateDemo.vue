@@ -28,7 +28,7 @@ const rows = [
         </tr>
       </template>
 
-      <tr v-if="empty" class="border-t border-[var(--border)]">
+      <tr v-if="empty" class="border-t border-[var(--brd)]">
         <td colspan="3" class="px-4 py-6">
           <DsEmptyState
             title="No preset rows"
@@ -45,10 +45,10 @@ const rows = [
         <tr
           v-for="row in rows"
           :key="row.name"
-          class="border-t border-[var(--border)]"
+          class="border-t border-[var(--brd)]"
         >
           <td class="px-4 py-3">{{ row.name }}</td>
-          <td class="px-4 py-3 text-[var(--muted-foreground)]">{{ row.owner }}</td>
+          <td class="px-4 py-3 text-[var(--muted-fg)]">{{ row.owner }}</td>
           <td class="px-4 py-3">{{ row.value }}</td>
         </tr>
       </template>

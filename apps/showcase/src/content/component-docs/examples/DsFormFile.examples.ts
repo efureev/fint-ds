@@ -35,7 +35,7 @@ const summary = computed(() => {
       />
     </DsFormField>
 
-    <div class="rounded-2xl border border-[var(--border)] bg-[var(--card)] p-4 text-sm text-[var(--muted-foreground)]">
+    <div class="rounded-2xl border border-[var(--brd)] bg-[var(--card)] p-4 text-sm text-[var(--muted-fg)]">
       {{ summary }}
     </div>
   </div>
@@ -93,9 +93,9 @@ function validateFiles(files: File[]) {
       />
     </DsFormField>
 
-    <div class="text-sm text-[var(--muted-foreground)]">
+    <div class="text-sm text-[var(--muted-fg)]">
       Latest validation status:
-      <span class="font-semibold text-[var(--foreground)]">
+      <span class="font-semibold text-[var(--fg)]">
         {{ validationMessages[0] ?? 'Ready for upload review' }}
       </span>
     </div>
@@ -138,7 +138,7 @@ const totalSizeLabel = computed(() => {
       clear-all-text="Clear queue"
     />
 
-    <div class="rounded-2xl border border-dashed border-[var(--border)] bg-[var(--card)] p-4 text-sm text-[var(--muted-foreground)]">
+    <div class="rounded-2xl border border-dashed border-[var(--brd)] bg-[var(--card)] p-4 text-sm text-[var(--muted-fg)]">
       This scenario mirrors incident-report attachments where reviewers build a small queue before submitting the form.
     </div>
   </div>

@@ -20,7 +20,7 @@ import { DsBadge, DsTable } from '@feugene/granularity'
       </tr>
     </template>
 
-    <tr class="border-t border-[var(--border)]">
+    <tr class="border-t border-[var(--brd)]">
       <td class="px-4 py-3">Spring onboarding</td>
       <td class="px-4 py-3"><DsBadge size="sm" tone="secondary">Ready</DsBadge></td>
     </tr>
@@ -46,7 +46,7 @@ import { DsSkeleton, DsTable } from '@feugene/granularity'
       </tr>
     </template>
 
-    <tr class="border-t border-[var(--border)]">
+    <tr class="border-t border-[var(--brd)]">
       <td class="px-4 py-3"><DsSkeleton class="h-4 w-32" /></td>
       <td class="px-4 py-3"><DsSkeleton class="h-4 w-24" /></td>
     </tr>
@@ -72,7 +72,7 @@ import { DsButton, DsEmptyState, DsTable } from '@feugene/granularity'
       </tr>
     </template>
 
-    <tr class="border-t border-[var(--border)]">
+    <tr class="border-t border-[var(--brd)]">
       <td colspan="2" class="px-4 py-6">
         <DsEmptyState title="No preset rows" description="Load sample data to replace the placeholder.">
           <DsButton size="sm">Load sample data</DsButton>

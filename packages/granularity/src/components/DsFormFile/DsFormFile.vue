@@ -283,7 +283,7 @@ watch(
 
         <span
           v-if="!props.multiple && hasFiles"
-          class="text-sm text-[var(--muted-foreground)] truncate max-w-[240px]"
+          class="text-sm text-[var(--muted-fg)] truncate max-w-[240px]"
           data-ds-form-file-single-name
           :title="files[0]?.name"
         >
@@ -292,7 +292,7 @@ watch(
 
         <span
           v-if="!hasFiles"
-          class="text-sm text-[var(--muted-foreground)]"
+          class="text-sm text-[var(--muted-fg)]"
           data-ds-form-file-placeholder
         >
           {{ props.placeholder }}
@@ -307,7 +307,7 @@ watch(
           data-ds-form-file-item
         >
           <span
-            class="text-sm text-[var(--muted-foreground)] truncate max-w-[240px]"
+            class="text-sm text-[var(--muted-fg)] truncate max-w-[240px]"
             :title="file.name"
             data-ds-form-file-item-name
           >
@@ -316,7 +316,7 @@ watch(
 
           <button
             type="button"
-            class="text-xs text-[var(--muted-foreground)] hover:text-[var(--foreground)]"
+            class="text-xs text-[var(--muted-fg)] hover:text-[var(--fg)]"
             data-ds-form-file-item-remove
             :disabled="props.disabled"
             @click.prevent="removeAt(index)"

@@ -15,8 +15,8 @@ const items = ['Overview', 'Approvals', 'Members', 'Security']
       Open left rail
     </DsButton>
 
-    <div class="text-xs text-[var(--muted-foreground)]">
-      Active section: <span class="font-medium text-[var(--foreground)]">{{ activeItem }}</span>
+    <div class="text-xs text-[var(--muted-fg)]">
+      Active section: <span class="font-medium text-[var(--fg)]">{{ activeItem }}</span>
     </div>
 
     <DsDrawer v-model="open" title="Workspace sections" side="left" size="sm">
@@ -26,7 +26,7 @@ const items = ['Overview', 'Approvals', 'Members', 'Security']
           :key="item"
           type="button"
           class="rounded-lg px-3 py-2 text-left text-sm transition"
-          :class="item === activeItem ? 'bg-[var(--accent)] text-[var(--accent-foreground)]' : 'border border-[var(--border)] text-[var(--muted-foreground)]'"
+          :class="item === activeItem ? 'bg-[var(--accent)] text-[var(--accent-fg)]' : 'border border-[var(--brd)] text-[var(--muted-fg)]'"
           @click="activeItem = item"
         >
           {{ item }}

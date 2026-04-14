@@ -66,7 +66,7 @@
 /* light.css */
 --ds-brand-alt: #0ea5e9;
 --ds-brand-alt-light: #e0f2fe;
---ds-brand-alt-foreground: #ffffff;
+--ds-brand-alt-fg: #ffffff;
 --ds-brand-alt-text: #075985;
 ```
 
@@ -74,7 +74,7 @@
 /* dark.css */
 --ds-brand-alt: #38bdf8;
 --ds-brand-alt-light: #0c4a6e;
---ds-brand-alt-foreground: #0f172a;
+--ds-brand-alt-fg: #0f172a;
 --ds-brand-alt-text: #bae6fd;
 ```
 
@@ -82,30 +82,30 @@
 
 ```css
 /* src/styles/tokens.css */
---ds-brand-alt-hover: color-mix(in srgb, var(--ds-brand-alt) 92%, var(--foreground));
---ds-brand-alt-active: color-mix(in srgb, var(--ds-brand-alt) 84%, var(--foreground));
+--ds-brand-alt-hover: color-mix(in srgb, var(--ds-brand-alt) 92%, var(--fg));
+--ds-brand-alt-active: color-mix(in srgb, var(--ds-brand-alt) 84%, var(--fg));
 ```
 
 #### 3. Component token'ы для `DsButton`
 
 ```css
 /* DsButton/tokens.css */
---ds-button-brand-alt-background: var(--ds-brand-alt);
---ds-button-brand-alt-background-hover: var(--ds-brand-alt-hover);
---ds-button-brand-alt-background-active: var(--ds-brand-alt-active);
---ds-button-brand-alt-foreground: var(--ds-brand-alt-foreground);
---ds-button-brand-alt-soft-background: var(--ds-brand-alt-light);
---ds-button-brand-alt-soft-background-hover: color-mix(in srgb, var(--ds-brand-alt) 20%, var(--background));
---ds-button-brand-alt-soft-background-active: color-mix(in srgb, var(--ds-brand-alt) 26%, var(--background));
+--ds-button-brand-alt-bg: var(--ds-brand-alt);
+--ds-button-brand-alt-bg-hover: var(--ds-brand-alt-hover);
+--ds-button-brand-alt-bg-active: var(--ds-brand-alt-active);
+--ds-button-brand-alt-fg: var(--ds-brand-alt-fg);
+--ds-button-brand-alt-soft-bg: var(--ds-brand-alt-light);
+--ds-button-brand-alt-soft-bg-hover: color-mix(in srgb, var(--ds-brand-alt) 20%, var(--bg));
+--ds-button-brand-alt-soft-bg-active: color-mix(in srgb, var(--ds-brand-alt) 26%, var(--bg));
 ```
 
 Если filled-кнопка с `var(--ds-brand-alt)` не проходит контраст, как это уже сделано для отдельных tone в `DsButton`, можно задать более тёмные button-specific значения:
 
 ```css
---ds-button-brand-alt-background: #0369a1;
---ds-button-brand-alt-background-hover: #075985;
---ds-button-brand-alt-background-active: #0c4a6e;
---ds-button-brand-alt-foreground: #ffffff;
+--ds-button-brand-alt-bg: #0369a1;
+--ds-button-brand-alt-bg-hover: #075985;
+--ds-button-brand-alt-bg-active: #0c4a6e;
+--ds-button-brand-alt-fg: #ffffff;
 ```
 
 #### 4. Подключение в `dsButtonStyles.ts`
@@ -126,14 +126,14 @@ export type DsButtonTone =
 ```ts
 const tones = {
   'brand-alt': {
-    solidBackground: 'var(--ds-button-brand-alt-background,var(--ds-brand-alt))',
-    solidBackgroundHover: 'var(--ds-button-brand-alt-background-hover,var(--ds-brand-alt-hover))',
-    solidBackgroundActive: 'var(--ds-button-brand-alt-background-active,var(--ds-brand-alt-active))',
-    solidForeground: 'var(--ds-button-brand-alt-foreground,var(--ds-brand-alt-foreground,var(--foreground)))',
+    solidBackground: 'var(--ds-button-brand-alt-bg,var(--ds-brand-alt))',
+    solidBackgroundHover: 'var(--ds-button-brand-alt-bg-hover,var(--ds-brand-alt-hover))',
+    solidBackgroundActive: 'var(--ds-button-brand-alt-bg-active,var(--ds-brand-alt-active))',
+    solidForeground: 'var(--ds-button-brand-alt-fg,var(--ds-brand-alt-fg,var(--fg)))',
     accentText: 'var(--ds-brand-alt-text,var(--ds-brand-alt))',
-    softBackground: 'var(--ds-button-brand-alt-soft-background)',
-    softBackgroundHover: 'var(--ds-button-brand-alt-soft-background-hover)',
-    softBackgroundActive: 'var(--ds-button-brand-alt-soft-background-active)',
+    softBackground: 'var(--ds-button-brand-alt-soft-bg)',
+    softBackgroundHover: 'var(--ds-button-brand-alt-soft-bg-hover)',
+    softBackgroundActive: 'var(--ds-button-brand-alt-soft-bg-active)',
     softForeground: 'var(--ds-brand-alt-text,var(--ds-brand-alt))',
     border: 'var(--ds-brand-alt)',
     borderHover: 'var(--ds-brand-alt-hover)',

@@ -45,9 +45,9 @@ function validateFiles(files: File[]): FileValidationIssue[] {
       />
     </DsFormField>
 
-    <div class="text-sm text-[var(--muted-foreground)]">
+    <div class="text-sm text-[var(--muted-fg)]">
       Latest validation status:
-      <span class="font-semibold text-[var(--foreground)]">
+      <span class="font-semibold text-[var(--fg)]">
         {{ validationMessages[0] ?? 'Ready for upload review' }}
       </span>
     </div>

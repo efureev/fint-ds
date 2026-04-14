@@ -12,7 +12,7 @@ import { DsAvatar, DsBadgeWrap, DsCard } from '@feugene/granularity'
       <DsAvatar :size="40" shape="square">QA</DsAvatar>
     </DsBadgeWrap>
 
-    <DsCard class="p-4 text-sm text-[var(--muted-foreground)]">
+    <DsCard class="p-4 text-sm text-[var(--muted-fg)]">
       Dot mode is useful when the exact count is less important than “requires attention now”.
     </DsCard>
   </div>

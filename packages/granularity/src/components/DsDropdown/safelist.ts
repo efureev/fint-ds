@@ -28,9 +28,9 @@ export const dsDropdownSafelist = [
   '-translate-x-1/2',
   'rounded-[var(--ds-radius-xl)]',
   'border',
-  'border-[var(--border)]',
+  'border-[var(--brd)]',
   'bg-[var(--card)]',
-  'text-[var(--card-foreground)]',
+  'text-[var(--card-fg)]',
   'shadow-[var(--ds-shadow-2)]',
   'p-1',
 ] as const

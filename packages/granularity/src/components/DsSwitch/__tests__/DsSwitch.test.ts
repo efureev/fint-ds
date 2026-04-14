@@ -24,7 +24,7 @@ describe('DsSwitch', () => {
     expect(track.attributes('class')).toContain('h-6')
     expect(track.attributes('class')).toContain('w-11')
     expect(track.attributes('style')).toContain('--ds-switch-track-bg: #10b981')
-    expect(track.attributes('style')).toContain('--ds-switch-track-border: #10b981')
+    expect(track.attributes('style')).toContain('--ds-switch-track-brd: #10b981')
 
     const thumb = wrapper.get('[data-testid="ds-switch-thumb"]')
     expect(thumb.attributes('class')).toContain('translate-x-5')

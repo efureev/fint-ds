@@ -35,7 +35,7 @@ function colorFor(variant: string): string {
       <div
         v-for="toast in items"
         :key="toast.id"
-        class="rounded-[var(--ds-radius-lg)] border border-[var(--border)] bg-[var(--card)] px-4 py-3 shadow-[var(--ds-shadow-2)]"
+        class="rounded-[var(--ds-radius-lg)] border border-[var(--brd)] bg-[var(--card)] px-4 py-3 shadow-[var(--ds-shadow-2)]"
       >
         <div class="flex items-start gap-3">
           <component :is="iconFor(toast.variant)" class="mt-0.5 h-5 w-5" :style="{ color: colorFor(toast.variant) }" aria-hidden="true" />

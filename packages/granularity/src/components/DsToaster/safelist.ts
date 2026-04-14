@@ -9,7 +9,7 @@ export const dsToasterSafelist = [
   'gap-3',
   'rounded-[var(--ds-radius-lg)]',
   'border',
-  'border-[var(--border)]',
+  'border-[var(--brd)]',
   'bg-[var(--card)]',
   'px-4',
   'py-3',

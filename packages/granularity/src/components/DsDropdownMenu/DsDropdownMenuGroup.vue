@@ -22,7 +22,7 @@ const props = withDefaults(
 const itemsClass = computed(() => {
   return [
     'w-full',
-    props.dividers ? 'divide-y divide-[var(--border)]' : '',
+    props.dividers ? 'divide-y divide-[var(--brd)]' : '',
   ].filter(Boolean).join(' ')
 })
 </script>

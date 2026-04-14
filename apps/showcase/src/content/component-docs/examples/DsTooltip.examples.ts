@@ -32,7 +32,7 @@ import { DsTooltip } from '@feugene/granularity'
 
 <template>
   <DsTooltip text="Custom slot lets you attach the tooltip to any trigger element.">
-    <button type="button" class="inline-flex h-10 w-10 items-center justify-center rounded-full border border-[var(--border)] bg-[var(--card)]">
+    <button type="button" class="inline-flex h-10 w-10 items-center justify-center rounded-full border border-[var(--brd)] bg-[var(--card)]">
       ?
     </button>
   </DsTooltip>

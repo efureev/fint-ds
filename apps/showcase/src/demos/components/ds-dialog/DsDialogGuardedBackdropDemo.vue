@@ -13,7 +13,7 @@ const open = ref(false)
     </DsButton>
 
     <DsDialog v-model="open" title="Resolve blockers" :close-on-backdrop="false" :show-close-button="false">
-      <div class="grid gap-3 text-sm text-[var(--muted-foreground)]">
+      <div class="grid gap-3 text-sm text-[var(--muted-fg)]">
         <p>
           В критичных flows можно отключить backdrop close и оставить только явные действия в footer.
         </p>

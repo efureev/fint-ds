@@ -1,5 +1,5 @@
 :root {
-  color: var(--foreground);
+  color: var(--fg);
   background: linear-gradient(180deg, #eef2ff 0%, #ffffff 100%);
   --bundle-accent-rgb: 99, 102, 241;
 }

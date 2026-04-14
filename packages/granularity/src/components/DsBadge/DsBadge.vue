@@ -18,9 +18,9 @@ const SEMI_RADIUS_BY_SIZE: Record<DsBadgeSize, string> = {
 }
 
 const LIGHT_TONES: Record<DsBadgeTone, string> = {
-  neutral: 'bg-[var(--muted)] text-[var(--foreground)] border-[var(--border)]',
+  neutral: 'bg-[var(--muted)] text-[var(--fg)] border-[var(--brd)]',
   primary:
-    'bg-[var(--accent)] text-[var(--accent-foreground)] border-[color-mix(in_srgb,var(--primary)_30%,var(--accent))]',
+    'bg-[var(--accent)] text-[var(--accent-fg)] border-[color-mix(in_srgb,var(--primary)_30%,var(--accent))]',
   success: 'bg-[var(--ds-success-light)] text-[var(--ds-success)] border-[color-mix(in_srgb,var(--ds-success)_30%,var(--ds-success-light))]',
   warning: 'bg-[var(--ds-warning-light)] text-[var(--ds-warning)] border-[color-mix(in_srgb,var(--ds-warning)_30%,var(--ds-warning-light))]',
   danger: 'bg-[var(--ds-danger-light)] text-[var(--ds-danger)] border-[color-mix(in_srgb,var(--ds-danger)_30%,var(--ds-danger-light))]',
@@ -30,14 +30,14 @@ const LIGHT_TONES: Record<DsBadgeTone, string> = {
 }
 
 const DARK_TONES: Record<DsBadgeTone, string> = {
-  neutral: 'bg-[var(--foreground)] text-[var(--background)] border-[color-mix(in_srgb,var(--foreground)_35%,var(--border))]',
-  primary: 'bg-[var(--primary)] text-[var(--primary-foreground)] border-[var(--primary)]',
+  neutral: 'bg-[var(--fg)] text-[var(--bg)] border-[color-mix(in_srgb,var(--fg)_35%,var(--brd))]',
+  primary: 'bg-[var(--primary)] text-[var(--primary-fg)] border-[var(--primary)]',
   success: 'bg-[var(--ds-success)] text-white border-[var(--ds-success)]',
   warning: 'bg-[var(--ds-warning)] text-white border-[var(--ds-warning)]',
   danger: 'bg-[var(--ds-danger)] text-white border-[var(--ds-danger)]',
   info: 'bg-[var(--ds-info)] text-white border-[var(--ds-info)]',
-  slate: 'bg-[var(--ds-slate)] text-[var(--ds-slate-foreground)] border-[var(--ds-slate)]',
-  azure: 'bg-[var(--ds-azure)] text-[var(--ds-azure-foreground)] border-[var(--ds-azure)]',
+  slate: 'bg-[var(--ds-slate)] text-[var(--ds-slate-fg)] border-[var(--ds-slate)]',
+  azure: 'bg-[var(--ds-azure)] text-[var(--ds-azure-fg)] border-[var(--ds-azure)]',
 }
 
 const props = withDefaults(

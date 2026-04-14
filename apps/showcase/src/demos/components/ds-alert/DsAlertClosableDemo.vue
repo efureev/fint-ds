@@ -19,16 +19,16 @@ const visible = ref(true)
       Payments will be processed in read-only mode from 02:00 to 02:30 UTC.
     </DsAlert>
 
-    <DsCard v-else class="flex min-h-[92px] items-center justify-center p-4 text-sm text-[var(--muted-foreground)]">
+    <DsCard v-else class="flex min-h-[92px] items-center justify-center p-4 text-sm text-[var(--muted-fg)]">
       Alert dismissed. Bring it back from the side panel.
     </DsCard>
 
     <DsCard class="grid gap-3 p-4">
       <div>
-        <div class="text-sm font-semibold text-[var(--foreground)]">
+        <div class="text-sm font-semibold text-[var(--fg)]">
           Close event
         </div>
-        <div class="text-sm text-[var(--muted-foreground)]">
+        <div class="text-sm text-[var(--muted-fg)]">
           `close` is emitted so the host screen can hide or persist the banner state.
         </div>
       </div>

@@ -4381,7 +4381,7 @@
             "description": "",
             "type": "string | undefined",
             "required": false,
-            "default": "\"var(--muted-foreground)\""
+            "default": "\"var(--muted-fg)\""
           },
           {
             "name": "text",

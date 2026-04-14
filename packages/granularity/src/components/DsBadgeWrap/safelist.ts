@@ -13,7 +13,7 @@ export const dsBadgeWrapSafelist = [
   'min-w-5',
   'h-5',
   'px-1',
-  'text-[var(--destructive-foreground)]',
+  'text-[var(--destructive-fg)]',
   'text-[11px]',
   'font-700',
   'items-center',

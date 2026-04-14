@@ -20,7 +20,7 @@ const density = ref('balanced')
       </DsRadio>
     </div>
 
-    <div class="rounded-2xl border border-dashed border-[var(--border)] bg-[var(--muted)]/35 p-4 text-sm text-[var(--muted-foreground)]">
+    <div class="rounded-2xl border border-dashed border-[var(--brd)] bg-[var(--muted)]/35 p-4 text-sm text-[var(--muted-fg)]">
       Button-like radios keep the same `v-model` contract while matching toolbar and segmented-control layouts.
     </div>
   </div>

@@ -25,7 +25,7 @@ const activeSection = computed(() => {
           :key="section.value"
           type="button"
           class="flex items-center justify-between rounded-md px-3 py-2 text-left text-sm transition-colors"
-          :class="section.value === currentSection ? 'bg-[var(--sidebar-primary)] text-[var(--sidebar-primary-foreground)]' : 'hover:bg-[var(--sidebar-accent)] hover:text-[var(--sidebar-accent-foreground)]'"
+          :class="section.value === currentSection ? 'bg-[var(--sidebar-primary)] text-[var(--sidebar-primary-fg)]' : 'hover:bg-[var(--sidebar-accent)] hover:text-[var(--sidebar-accent-fg)]'"
           @click="currentSection = section.value"
         >
           <span>{{ section.label }}</span>
@@ -36,8 +36,8 @@ const activeSection = computed(() => {
       </div>
     </DsSidebar>
 
-    <div class="rounded-xl border border-[var(--border)] bg-[var(--background)] p-4">
-      <div class="text-sm text-[var(--muted-foreground)]">
+    <div class="rounded-xl border border-[var(--brd)] bg-[var(--bg)] p-4">
+      <div class="text-sm text-[var(--muted-fg)]">
         Current anchor target
       </div>
       <div class="mt-1 text-base font-semibold">

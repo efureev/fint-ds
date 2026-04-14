@@ -33,12 +33,12 @@ const enabledCount = computed(() => [weeklyDigest.value, incidentAlerts.value].f
       </DsCheckbox>
     </div>
 
-    <div class="grid gap-3 rounded-2xl border border-[var(--border)] bg-[var(--card)] p-4">
+    <div class="grid gap-3 rounded-2xl border border-[var(--brd)] bg-[var(--card)] p-4">
       <div>
-        <div class="text-sm font-semibold text-[var(--foreground)]">
+        <div class="text-sm font-semibold text-[var(--fg)]">
           Selection summary
         </div>
-        <div class="text-sm text-[var(--muted-foreground)]">
+        <div class="text-sm text-[var(--muted-fg)]">
           {{ enabledCount }} of 2 optional channels are active.
         </div>
       </div>
@@ -81,7 +81,7 @@ const previewOpens = ref(0)
         </a>
         <button
           type="button"
-          class="rounded-full border border-[var(--border)] px-2 py-1 text-xs font-medium text-[var(--foreground)] transition hover:border-[var(--primary)] hover:text-[var(--primary)]"
+          class="rounded-full border border-[var(--brd)] px-2 py-1 text-xs font-medium text-[var(--fg)] transition hover:border-[var(--primary)] hover:text-[var(--primary)]"
           @click.stop="previewOpens += 1"
         >
           Preview changes
@@ -89,8 +89,8 @@ const previewOpens = ref(0)
       </span>
     </DsCheckbox>
 
-    <div class="rounded-2xl border border-dashed border-[var(--border)] bg-[var(--muted)]/35 p-4 text-sm text-[var(--muted-foreground)]">
-      Checkbox value: <span class="font-semibold text-[var(--foreground)]">{{ accepted ? 'accepted' : 'pending' }}</span> ·
+    <div class="rounded-2xl border border-dashed border-[var(--brd)] bg-[var(--muted)]/35 p-4 text-sm text-[var(--muted-fg)]">
+      Checkbox value: <span class="font-semibold text-[var(--fg)]">{{ accepted ? 'accepted' : 'pending' }}</span> ·
       Preview clicked {{ previewOpens }} times.
     </div>
   </div>
@@ -135,7 +135,7 @@ function onSubmit(event: SubmitEvent): void {
       </div>
     </form>
 
-    <pre class="overflow-x-auto rounded-2xl border border-[var(--border)] bg-[var(--foreground)] p-4 text-xs text-[var(--background)]">{{ submission }}</pre>
+    <pre class="overflow-x-auto rounded-2xl border border-[var(--brd)] bg-[var(--fg)] p-4 text-xs text-[var(--bg)]">{{ submission }}</pre>
   </div>
 </template>`,
   },

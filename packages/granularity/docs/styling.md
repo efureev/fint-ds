@@ -127,7 +127,7 @@
 Примеры:
 
 - `--ds-space-4`, `--ds-radius-md`, `--ds-duration-fast` → `tokens`;
-- `--background`, `--primary`, `--border`, `--ring` → `theme`;
+- `--bg`, `--primary`, `--brd`, `--ring` → `theme`;
 - производные значения вроде `--primary-hover`, если они рассчитываются от semantic-переменных, логично держать рядом с токенами, а не дублировать по темам.
 
 ## Сценарии подключения CSS

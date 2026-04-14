@@ -11,8 +11,8 @@ const props = withDefaults(
 </script>
 
 <template>
-  <aside class="border-r border-[var(--sidebar-border)] bg-[var(--sidebar)] text-[var(--sidebar-foreground)]">
-    <div class="border-b border-[var(--sidebar-border)] px-4 py-4">
+  <aside class="border-r border-[var(--sidebar-brd)] bg-[var(--sidebar)] text-[var(--sidebar-fg)]">
+    <div class="border-b border-[var(--sidebar-brd)] px-4 py-4">
       <div v-if="props.subtitle" class="text-[14px] ds-muted">
         {{ props.subtitle }}
       </div>

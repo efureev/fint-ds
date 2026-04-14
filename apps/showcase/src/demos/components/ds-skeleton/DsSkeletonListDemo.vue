@@ -5,7 +5,7 @@ const rows = [1, 2, 3]
 </script>
 
 <template>
-  <div class="grid gap-3 rounded-xl border border-[var(--border)] bg-[var(--card)] p-4">
+  <div class="grid gap-3 rounded-xl border border-[var(--brd)] bg-[var(--card)] p-4">
     <div v-for="row in rows" :key="row" class="flex items-center gap-3">
       <DsSkeleton width="44px" height="44px" rounded="9999px" />
       <div class="min-w-0 flex-1 grid gap-2">

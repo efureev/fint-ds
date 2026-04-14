@@ -9,7 +9,7 @@ const drawerClasses = [
   'bg-black/40',
   'left-0 border-r right-0 border-l',
   'w-[360px] max-w-[90vw] w-[420px] max-w-[92vw] w-[560px] max-w-[94vw] w-[100vw]',
-  'border-[var(--border)] bg-[var(--card)] text-[var(--card-foreground)] shadow-[var(--ds-shadow-2)] outline-none',
+  'border-[var(--brd)] bg-[var(--card)] text-[var(--card-fg)] shadow-[var(--ds-shadow-2)] outline-none',
   'flex flex-col flex-1 items-center justify-between gap-4',
   'px-5 py-4 border-b border-t p-5 overflow-y-auto',
   'text-[14px] font-700 min-w-0 truncate',

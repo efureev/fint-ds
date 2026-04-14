@@ -42,7 +42,7 @@ describe('showcase foundations content', () => {
 
   it('собирает current theme token registry из light.css и dark.css', () => {
     expect(showcaseThemeTokens.length).toBeGreaterThan(30)
-    expect(showcaseThemeTokens.find(token => token.name === '--background')).toMatchObject({
+    expect(showcaseThemeTokens.find(token => token.name === '--bg')).toMatchObject({
       section: 'Surface roles',
       values: {
         light: {

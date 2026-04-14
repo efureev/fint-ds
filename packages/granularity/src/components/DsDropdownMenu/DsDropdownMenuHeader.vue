@@ -34,7 +34,7 @@ const titleAlignClass = computed(() => {
 <template>
   <div
     v-if="isVisible"
-    class="px-4 py-2 text-[11px] tracking-wide text-[var(--muted-foreground)]"
+    class="px-4 py-2 text-[11px] tracking-wide text-[var(--muted-fg)]"
     :class="[titleAlignClass, { uppercase: props.uppercase }]"
   >
     <slot>{{ props.title }}</slot>

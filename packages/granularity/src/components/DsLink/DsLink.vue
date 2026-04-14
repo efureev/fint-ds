@@ -85,8 +85,8 @@ const variantClass = computed(() => {
   const map: Record<DsLinkVariant, string> = {
     primary:
       'text-[var(--primary)] visited:text-[var(--primary)] hover:text-[var(--primary-hover)] active:text-[var(--primary-active)]',
-    default: 'text-[var(--foreground)] hover:text-[var(--primary)] active:text-[var(--primary-active)]',
-    muted: 'text-[var(--muted-foreground)] hover:text-[var(--foreground)] active:text-[var(--foreground)]',
+    default: 'text-[var(--fg)] hover:text-[var(--primary)] active:text-[var(--primary-active)]',
+    muted: 'text-[var(--muted-fg)] hover:text-[var(--fg)] active:text-[var(--fg)]',
     danger: 'text-[var(--ds-danger)] hover:text-[var(--ds-danger-hover)] active:text-[var(--ds-danger-active)]',
   }
 
@@ -94,7 +94,7 @@ const variantClass = computed(() => {
 })
 
 const disabledClass = computed(() => {
-  return props.disabled ? 'cursor-not-allowed opacity-60 text-[var(--muted-foreground)]' : ''
+  return props.disabled ? 'cursor-not-allowed opacity-60 text-[var(--muted-fg)]' : ''
 })
 
 const className = computed(() => {

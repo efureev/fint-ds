@@ -76,8 +76,8 @@ onBeforeUnmount(() => {
       </DsBadge>
     </div>
 
-    <div class="rounded-xl border border-[var(--border)] bg-[var(--background)] p-4">
-      <div class="mb-3 text-sm text-[var(--muted-foreground)]">
+    <div class="rounded-xl border border-[var(--brd)] bg-[var(--bg)] p-4">
+      <div class="mb-3 text-sm text-[var(--muted-fg)]">
         Используйте viewer после загрузки gallery payload — так проще показать loading/progress state до fullscreen modal.
       </div>
 

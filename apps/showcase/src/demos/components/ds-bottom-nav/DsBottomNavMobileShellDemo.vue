@@ -29,7 +29,7 @@ const sectionDescription = computed(() => {
           <div class="text-base font-semibold capitalize">
             {{ currentSection }}
           </div>
-          <div class="mt-1 text-sm text-[var(--muted-foreground)]">
+          <div class="mt-1 text-sm text-[var(--muted-fg)]">
             {{ sectionDescription }}
           </div>
         </div>

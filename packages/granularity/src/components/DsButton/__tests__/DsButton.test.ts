@@ -101,7 +101,7 @@ function resolveColorExpression(
   const value = expression.trim()
 
   if (value === 'transparent') {
-    return resolveColorExpression('var(--background)', vars, derivedVars, stack)
+    return resolveColorExpression('var(--bg)', vars, derivedVars, stack)
   }
 
   if (value.startsWith('var(')) {
@@ -198,7 +198,7 @@ function getButtonColors(variant: DsButtonVariant, tone: DsButtonTone, state: (t
   })
 
   const text = getColorClassExpression(className, 'text-[')
-  const restBackground = getColorClassExpression(className, 'bg-[') ?? getColorClassExpression(className, 'bg-') ?? 'var(--background)'
+  const restBackground = getColorClassExpression(className, 'bg-[') ?? getColorClassExpression(className, 'bg-') ?? 'var(--bg)'
 
   if (!text) {
     throw new Error(`Missing text color class for ${variant}/${tone}`)
@@ -230,10 +230,10 @@ describe('DsButton', () => {
 
     const button = wrapper.get('[data-ds-button]')
 
+    expect(button.attributes('data-ds-variant')).toBe('primary')
     expect(button.attributes('data-ds-tone')).toBe('primary')
-    expect(button.attributes('data-ds-tone')).toBe('primary')
-    expect(button.classes()).toContain('bg-[var(--ds-button-primary-background,var(--primary))]')
-    expect(button.classes()).toContain('text-[var(--ds-button-primary-foreground,var(--primary-foreground))]')
+    expect(button.classes()).toContain('bg-[var(--ds-button-primary-bg,var(--primary))]')
+    expect(button.classes()).toContain('text-[var(--ds-button-primary-fg,var(--primary-fg))]')
   })
 
   it('поддерживает semantic tone для filled tone', () => {
@@ -249,12 +249,12 @@ describe('DsButton', () => {
 
     const button = wrapper.get('[data-ds-button]')
 
-    expect(button.attributes('data-ds-tone')).toBe('primary')
+    expect(button.attributes('data-ds-variant')).toBe('primary')
     expect(button.attributes('data-ds-tone')).toBe('success')
-    expect(button.classes()).toContain('bg-[var(--ds-button-success-background,var(--ds-success))]')
-    expect(button.classes()).toContain('text-[var(--ds-button-success-foreground,var(--ds-success-foreground,var(--foreground)))]')
-    expect(button.classes()).toContain('hover:bg-[var(--ds-button-success-background-hover,var(--ds-success-hover))]')
-    expect(button.classes()).toContain('active:bg-[var(--ds-button-success-background-active,var(--ds-success-active))]')
+    expect(button.classes()).toContain('bg-[var(--ds-button-success-bg,var(--ds-success))]')
+    expect(button.classes()).toContain('text-[var(--ds-button-success-fg,var(--ds-success-fg,var(--fg)))]')
+    expect(button.classes()).toContain('hover:bg-[var(--ds-button-success-bg-hover,var(--ds-success-hover))]')
+    expect(button.classes()).toContain('active:bg-[var(--ds-button-success-bg-active,var(--ds-success-active))]')
   })
 
   it('поддерживает tone-aware outline tone', () => {
@@ -271,13 +271,13 @@ describe('DsButton', () => {
     const button = wrapper.get('[data-ds-button]')
     const className = button.attributes('class') ?? ''
 
-    expect(button.attributes('data-ds-tone')).toBe('outline')
+    expect(button.attributes('data-ds-variant')).toBe('outline')
     expect(button.attributes('data-ds-tone')).toBe('warning')
     expect(button.classes()).toContain('text-[var(--ds-warning-text,var(--ds-warning))]')
     expect(button.classes()).toContain('border-[var(--ds-warning)]')
-    expect(className).toContain('hover:bg-[var(--ds-button-warning-soft-background-hover)]')
-    expect(className).toContain('active:bg-[var(--ds-button-warning-soft-background-active)]')
-    expect(className).toContain('hover:active:bg-[var(--ds-button-warning-soft-background-active)]')
+    expect(className).toContain('hover:bg-[var(--ds-button-warning-soft-bg-hover)]')
+    expect(className).toContain('active:bg-[var(--ds-button-warning-soft-bg-active)]')
+    expect(className).toContain('hover:active:bg-[var(--ds-button-warning-soft-bg-active)]')
   })
 
   it('поддерживает новые semantic tones slate и azure', () => {
@@ -302,14 +302,14 @@ describe('DsButton', () => {
     }).get('[data-ds-button]')
 
     expect(slate.attributes('data-ds-tone')).toBe('slate')
-    expect(slate.classes()).toContain('bg-[var(--ds-button-slate-background,var(--ds-slate))]')
-    expect(slate.classes()).toContain('text-[var(--ds-button-slate-foreground,var(--ds-slate-foreground,var(--foreground)))]')
-    expect(slate.classes()).toContain('hover:bg-[var(--ds-button-slate-background-hover,var(--ds-slate-hover))]')
+    expect(slate.classes()).toContain('bg-[var(--ds-button-slate-bg,var(--ds-slate))]')
+    expect(slate.classes()).toContain('text-[var(--ds-button-slate-fg,var(--ds-slate-fg,var(--fg)))]')
+    expect(slate.classes()).toContain('hover:bg-[var(--ds-button-slate-bg-hover,var(--ds-slate-hover))]')
 
     const azureClassName = azure.attributes('class') ?? ''
     expect(azure.attributes('data-ds-tone')).toBe('azure')
     expect(azure.classes()).toContain('text-[var(--ds-azure-text,var(--ds-azure))]')
-    expect(azureClassName).toContain('hover:bg-[var(--ds-button-azure-soft-background-hover)]')
+    expect(azureClassName).toContain('hover:bg-[var(--ds-button-azure-soft-bg-hover)]')
     expect(azureClassName).toContain('hover:active:border-[var(--ds-azure-active)]')
   })
 
@@ -333,14 +333,14 @@ describe('DsButton', () => {
       square: false,
     })
 
-    expect(filled).toContain('hover:active:bg-[var(--ds-button-info-background-active,var(--ds-info-active))]')
-    expect(filled).toContain('hover:active:border-[var(--ds-button-info-background-active,var(--ds-info-active))]')
+    expect(filled).toContain('hover:active:bg-[var(--ds-button-info-bg-active,var(--ds-info-active))]')
+    expect(filled).toContain('hover:active:border-[var(--ds-button-info-bg-active,var(--ds-info-active))]')
 
-    expect(ghost).toContain('hover:bg-[var(--ds-button-info-soft-background-hover)]')
-    expect(ghost).toContain('active:bg-[var(--ds-button-info-soft-background-active)]')
-    expect(ghost).toContain('hover:active:bg-[var(--ds-button-info-soft-background-active)]')
+    expect(ghost).toContain('hover:bg-[var(--ds-button-info-soft-bg-hover)]')
+    expect(ghost).toContain('active:bg-[var(--ds-button-info-soft-bg-active)]')
+    expect(ghost).toContain('hover:active:bg-[var(--ds-button-info-soft-bg-active)]')
 
-    expect(ghostBorder).toContain('hover:active:bg-[var(--ds-button-success-soft-background-active)]')
+    expect(ghostBorder).toContain('hover:active:bg-[var(--ds-button-success-soft-bg-active)]')
     expect(ghostBorder).toContain('hover:active:border-[var(--ds-success-active)]')
   })
 
@@ -356,10 +356,10 @@ describe('DsButton', () => {
 
     const button = wrapper.get('[data-ds-button]')
 
-    expect(button.attributes('data-ds-tone')).toBe('primary')
+    expect(button.attributes('data-ds-variant')).toBe('primary')
     expect(button.attributes('data-ds-tone')).toBe('danger')
-    expect(button.classes()).toContain('bg-[var(--ds-button-danger-background,var(--ds-danger))]')
-    expect(button.classes()).toContain('text-[var(--ds-button-danger-foreground,var(--ds-danger-foreground,var(--foreground)))]')
+    expect(button.classes()).toContain('bg-[var(--ds-button-danger-bg,var(--ds-danger))]')
+    expect(button.classes()).toContain('text-[var(--ds-button-danger-fg,var(--ds-danger-fg,var(--fg)))]')
   })
 
   it('в light theme filled success, warning, slate и azure кнопки используют светлый foreground с достаточным контрастом', () => {

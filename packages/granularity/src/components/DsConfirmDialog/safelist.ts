@@ -3,7 +3,7 @@ function splitClassTokens(value: string): string[] {
 }
 
 const confirmDialogClasses = [
-  'text-[14px] text-[var(--muted-foreground)]',
+  'text-[14px] text-[var(--muted-fg)]',
   'flex items-center justify-end gap-3',
 ]
 

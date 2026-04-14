@@ -2,52 +2,52 @@
 .dark,
 [data-theme='dark'] {
   /* Surface roles */
-  --background: #0f172a;
-  --foreground: #f8fafc;
+  --bg: #0f172a;
+  --fg: #f8fafc;
   --card: #1e293b;
-  --card-foreground: #f8fafc;
+  --card-fg: #f8fafc;
   --popover: #1e293b;
-  --popover-foreground: #f8fafc;
+  --popover-fg: #f8fafc;
   --muted: #334155;
-  --muted-foreground: #94a3b8;
+  --muted-fg: #94a3b8;
   --secondary: #334155;
-  --secondary-foreground: #f1f5f9;
-  --border: #334155;
+  --secondary-fg: #f1f5f9;
+  --brd: #334155;
   --input: #334155;
   --ring: #818cf8;
 
   /* Action roles */
   --primary: #6366f1;
-  --primary-foreground: #ffffff;
+  --primary-fg: #ffffff;
   --accent: #1e1b4b;
-  --accent-foreground: #c7d2fe;
+  --accent-fg: #c7d2fe;
   --destructive: #ef4444;
-  --destructive-foreground: #ffffff;
+  --destructive-fg: #ffffff;
 
   /* Status roles */
   --ds-success: #34d399;
   --ds-success-light: #064e3b;
-  --ds-success-foreground: #0f172a;
+  --ds-success-fg: #0f172a;
   --ds-success-text: #6ee7b7;
   --ds-warning: #fb923c;
   --ds-warning-light: #7c2d12;
-  --ds-warning-foreground: #0f172a;
+  --ds-warning-fg: #0f172a;
   --ds-warning-text: #fdba74;
   --ds-danger: #f87171;
   --ds-danger-light: #7f1d1d;
-  --ds-danger-foreground: #0f172a;
+  --ds-danger-fg: #0f172a;
   --ds-danger-text: #fca5a5;
   --ds-info: #818cf8;
   --ds-info-light: #312e81;
-  --ds-info-foreground: #0f172a;
+  --ds-info-fg: #0f172a;
   --ds-info-text: #c7d2fe;
   --ds-slate: #94a3b8;
   --ds-slate-light: #334155;
-  --ds-slate-foreground: #0f172a;
+  --ds-slate-fg: #0f172a;
   --ds-slate-text: #cbd5e1;
   --ds-azure: #38bdf8;
   --ds-azure-light: #0c4a6e;
-  --ds-azure-foreground: #0f172a;
+  --ds-azure-fg: #0f172a;
   --ds-azure-text: #bae6fd;
 
   /* Data visualization roles */
@@ -59,16 +59,13 @@
 
   /* Navigation roles */
   --sidebar: #1e293b;
-  --sidebar-foreground: #f8fafc;
+  --sidebar-fg: #f8fafc;
   --sidebar-primary: #6366f1;
-  --sidebar-primary-foreground: #ffffff;
+  --sidebar-primary-fg: #ffffff;
   --sidebar-accent: #334155;
-  --sidebar-accent-foreground: #f1f5f9;
-  --sidebar-border: #334155;
+  --sidebar-accent-fg: #f1f5f9;
+  --sidebar-brd: #334155;
   --sidebar-ring: #818cf8;
-
-  /* Component semantic roles */
-  --ds-category-tree-branch-line-active-color: color-mix(in srgb, var(--primary) 38%, var(--border));
 }
 
 @supports not (color: color-mix(in srgb, #000 50%, #fff)) {
@@ -80,8 +77,8 @@
     --primary-active: #7b7ef3;
     --secondary-hover: #435062;
     --secondary-active: #535f70;
-    --border-hover: #6e7987;
-    --border-active: #8c94a0;
+    --brd-hover: #6e7987;
+    --brd-active: #8c94a0;
     --destructive-hover: #f05353;
     --destructive-active: #f06161;
 

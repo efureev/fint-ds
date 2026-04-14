@@ -73,7 +73,7 @@ describe('DsSelect', () => {
     expect(linkSelect.attributes('class')).toContain('inline-block')
     expect(linkSelect.attributes('class')).toContain('w-auto')
     expect(linkSelect.attributes('class')).toContain('cursor-pointer')
-    expect(linkSelect.attributes('class')).toContain('text-[var(--muted-foreground)]')
+    expect(linkSelect.attributes('class')).toContain('text-[var(--muted-fg)]')
     expect(linkSelect.attributes('class')).toContain('no-underline')
     expect(linkSelect.attributes('class')).toContain('border-transparent')
     expect(linkSelect.attributes('class')).toContain('bg-transparent')
@@ -87,7 +87,7 @@ describe('DsSelect', () => {
     })
 
     const defaultSelect = defaultWrapper.get('select')
-    expect(defaultSelect.attributes('class')).toContain('border-[var(--border)]')
+    expect(defaultSelect.attributes('class')).toContain('border-[var(--brd)]')
   })
 
   it('в native-режиме добавляет option для modelValue, которого нет в options, когда allowCustomValue=true', () => {

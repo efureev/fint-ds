@@ -30,9 +30,9 @@ const selectedLabel = computed(() => {
       </DsRadio>
     </div>
 
-    <div class="rounded-2xl border border-[var(--border)] bg-[var(--card)] p-4 text-sm text-[var(--muted-foreground)]">
+    <div class="rounded-2xl border border-[var(--brd)] bg-[var(--card)] p-4 text-sm text-[var(--muted-fg)]">
       Current delivery cadence:
-      <div class="mt-2 text-base font-semibold text-[var(--foreground)]">
+      <div class="mt-2 text-base font-semibold text-[var(--fg)]">
         {{ selectedLabel }}
       </div>
     </div>

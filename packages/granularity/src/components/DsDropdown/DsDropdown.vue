@@ -73,8 +73,8 @@ const alignmentClasses = computed(() => {
 const contentClasses = computed(() => {
   return [
     'rounded-[var(--ds-radius-xl)]',
-    'border border-[var(--border)]',
-    'bg-[var(--card)] text-[var(--card-foreground)]',
+    'border border-[var(--brd)]',
+    'bg-[var(--card)] text-[var(--card-fg)]',
     'shadow-[var(--ds-shadow-2)]',
     'p-1',
     props.contentClass,

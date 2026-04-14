@@ -21,8 +21,8 @@ const avatarImageSrc = `data:image/svg+xml;charset=UTF-8,${avatarSvg}`
       <DsAvatar :size="72" shape="square" :src="avatarImageSrc" alt="Alex Doe" />
     </div>
 
-    <DsCard class="grid gap-2 p-4 text-sm text-[var(--muted-foreground)]">
-      <div class="font-semibold text-[var(--foreground)]">
+    <DsCard class="grid gap-2 p-4 text-sm text-[var(--muted-fg)]">
+      <div class="font-semibold text-[var(--fg)]">
         Fallback contract
       </div>
       <div>

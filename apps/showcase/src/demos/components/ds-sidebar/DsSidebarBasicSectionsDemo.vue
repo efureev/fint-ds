@@ -28,7 +28,7 @@ const sections = [
       </div>
     </DsSidebar>
 
-    <div class="rounded-xl border border-[var(--border)] bg-[var(--background)] p-4">
+    <div class="rounded-xl border border-[var(--brd)] bg-[var(--bg)] p-4">
       <div class="flex items-center justify-between gap-3">
         <div class="text-base font-semibold capitalize">
           {{ currentSection }}

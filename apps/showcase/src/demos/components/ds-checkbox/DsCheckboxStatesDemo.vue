@@ -24,12 +24,12 @@ const enabledCount = computed(() => [weeklyDigest.value, incidentAlerts.value].f
       </DsCheckbox>
     </div>
 
-    <div class="grid gap-3 rounded-2xl border border-[var(--border)] bg-[var(--card)] p-4">
+    <div class="grid gap-3 rounded-2xl border border-[var(--brd)] bg-[var(--card)] p-4">
       <div>
-        <div class="text-sm font-semibold text-[var(--foreground)]">
+        <div class="text-sm font-semibold text-[var(--fg)]">
           Selection summary
         </div>
-        <div class="text-sm text-[var(--muted-foreground)]">
+        <div class="text-sm text-[var(--muted-fg)]">
           {{ enabledCount }} of 2 optional channels are active.
         </div>
       </div>

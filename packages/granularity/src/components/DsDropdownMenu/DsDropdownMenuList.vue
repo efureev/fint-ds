@@ -17,9 +17,9 @@ const props = withDefaults(
 const className = computed(() => {
   return [
     'w-full',
-    props.dividers ? 'divide-y divide-[var(--border)]' : '',
-    props.borderTop ? 'border-t border-[var(--border)]' : '',
-    props.borderBottom ? 'border-b border-[var(--border)]' : '',
+    props.dividers ? 'divide-y divide-[var(--brd)]' : '',
+    props.borderTop ? 'border-t border-[var(--brd)]' : '',
+    props.borderBottom ? 'border-b border-[var(--brd)]' : '',
   ].filter(Boolean).join(' ')
 })
 </script>

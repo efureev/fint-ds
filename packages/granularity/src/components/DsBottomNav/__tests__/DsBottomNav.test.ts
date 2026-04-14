@@ -19,7 +19,7 @@ describe('DsBottomNav', () => {
 
     expect(buttons).toHaveLength(2)
     expect(buttons[0].classes()).toContain('text-[var(--primary)]')
-    expect(buttons[1].classes()).toContain('text-[var(--muted-foreground)]')
+    expect(buttons[1].classes()).toContain('text-[var(--muted-fg)]')
   })
 
   it('эмитит update:modelValue по клику', async () => {

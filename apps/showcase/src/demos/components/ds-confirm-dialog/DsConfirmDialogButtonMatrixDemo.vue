@@ -13,8 +13,8 @@ const approved = ref(false)
       Open compact confirm
     </DsButton>
 
-    <div class="text-xs text-[var(--muted-foreground)]">
-      Approved in current session: <span class="font-medium text-[var(--foreground)]">{{ approved ? 'yes' : 'no' }}</span>
+    <div class="text-xs text-[var(--muted-fg)]">
+      Approved in current session: <span class="font-medium text-[var(--fg)]">{{ approved ? 'yes' : 'no' }}</span>
     </div>
 
     <DsConfirmDialog

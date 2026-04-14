@@ -1,6 +1,6 @@
 export const dsListSafelist = [
   'divide-y',
-  'divide-[var(--border)]',
+  'divide-[var(--brd)]',
   'px-4',
   'py-3',
   'flex',

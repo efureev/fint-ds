@@ -72,7 +72,7 @@ function onConfirm(): void {
     :footer-config="props.footerConfig"
   >
     <slot>
-      <div v-if="props.description" class="text-[14px] text-[var(--muted-foreground)]">
+      <div v-if="props.description" class="text-[14px] text-[var(--muted-fg)]">
         {{ props.description }}
       </div>
     </slot>

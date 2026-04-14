@@ -13,15 +13,15 @@ export const playground6GranularityLayer = 'granularity'
 
 export const playground6PreflightCss = `
 :root {
-  --background: #fff1f2;
-  --foreground: #3f0d24;
+  --bg: #fff1f2;
+  --fg: #3f0d24;
   --primary: #db2777;
-  --primary-foreground: #ffffff;
+  --primary-fg: #ffffff;
   --secondary: #fbcfe8;
-  --secondary-foreground: #831843;
+  --secondary-fg: #831843;
   --destructive: #be123c;
-  --destructive-foreground: #ffffff;
-  --border: #f9a8d4;
+  --destructive-fg: #ffffff;
+  --brd: #f9a8d4;
   --ring: #ec4899;
   --muted: #ffe4e6;
   --primary-hover: #be185d;
@@ -40,7 +40,7 @@ body {
   margin: 0;
   font-family: Inter, Roboto, system-ui, -apple-system, Segoe UI, Arial, sans-serif;
   background: linear-gradient(180deg, #fff1f2 0%, #ffffff 100%);
-  color: var(--foreground);
+  color: var(--fg);
 }
 `
 

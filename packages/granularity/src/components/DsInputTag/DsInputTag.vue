@@ -200,7 +200,7 @@ function onPaste(e: ClipboardEvent): void {
 }
 
 const wrapperBase =
-  'w-full flex flex-wrap items-center rounded-md border bg-[var(--background)] text-[var(--foreground)] transition-colors duration-150 focus-within:ring-2 focus-within:ring-[var(--ring)]'
+  'w-full flex flex-wrap items-center rounded-md border bg-[var(--bg)] text-[var(--fg)] transition-colors duration-150 focus-within:ring-2 focus-within:ring-[var(--ring)]'
 
 const wrapperSizeClass = computed(() => {
   const map: Record<DsInputTagSize, string> = {
@@ -226,7 +226,7 @@ const inputSizeClass = computed(() => {
 
 const wrapperClassName = computed(() => {
   const borderByState: Record<DsInputTagState, string> = {
-    default: 'border-[var(--border)]',
+    default: 'border-[var(--brd)]',
     success: 'border-[var(--ds-success)] focus-within:ring-[var(--ds-success)]',
     warning: 'border-[var(--ds-warning)] focus-within:ring-[var(--ds-warning)]',
     danger: 'border-[var(--ds-danger)] focus-within:ring-[var(--ds-danger)]',
@@ -242,7 +242,7 @@ const wrapperClassName = computed(() => {
 
 const inputClassName = computed(() => {
   return [
-    'flex-1 min-w-[120px] bg-transparent border-none outline-none placeholder:text-[var(--muted-foreground)]',
+    'flex-1 min-w-[120px] bg-transparent border-none outline-none placeholder:text-[var(--muted-fg)]',
     inputSizeClass.value,
   ].join(' ')
 })

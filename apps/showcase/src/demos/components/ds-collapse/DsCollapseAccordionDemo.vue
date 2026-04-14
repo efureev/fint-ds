@@ -21,7 +21,7 @@ const activeLabel = computed(() => {
 
 <template>
   <div class="grid gap-3">
-    <div class="flex items-center gap-2 text-sm text-[var(--muted-foreground)]">
+    <div class="flex items-center gap-2 text-sm text-[var(--muted-fg)]">
       <span>Open panel:</span>
       <DsBadge variant="neutral">{{ activeLabel }}</DsBadge>
     </div>

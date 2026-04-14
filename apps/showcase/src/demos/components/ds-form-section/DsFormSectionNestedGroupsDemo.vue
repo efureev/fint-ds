@@ -18,7 +18,7 @@ const requireApproval = ref(false)
         <DsInput id="notify-channel" v-model="channel" placeholder="release-updates" />
       </DsFormField>
 
-      <div class="grid gap-3 rounded-2xl border border-[var(--border)] bg-[var(--card)] p-4">
+      <div class="grid gap-3 rounded-2xl border border-[var(--brd)] bg-[var(--card)] p-4">
         <DsCheckbox v-model="includeStakeholders">
           Include business stakeholders in the launch message
         </DsCheckbox>

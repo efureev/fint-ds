@@ -187,7 +187,7 @@ const suffixStyle = computed(() => {
 })
 
 const base =
-  'w-full rounded-md border bg-[var(--background)] text-[var(--foreground)] placeholder:text-[var(--muted-foreground)] focus:placeholder:text-transparent transition-colors duration-150 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring)] disabled:opacity-50 disabled:cursor-not-allowed'
+  'w-full rounded-md border bg-[var(--bg)] text-[var(--fg)] placeholder:text-[var(--muted-fg)] focus:placeholder:text-transparent transition-colors duration-150 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring)] disabled:opacity-50 disabled:cursor-not-allowed'
 
 const sizeClass = computed(() => {
   const map: Record<NonNullable<typeof props.size>, string> = {
@@ -214,7 +214,7 @@ const className = computed(() => {
   const state = props.state
 
   const borderByState: Record<typeof state, string> = {
-    default: 'border-[var(--border)]',
+    default: 'border-[var(--brd)]',
     success: 'border-[var(--ds-success)] focus-visible:ring-[var(--ds-success)]',
     warning: 'border-[var(--ds-warning)] focus-visible:ring-[var(--ds-warning)]',
     danger: 'border-[var(--ds-danger)] focus-visible:ring-[var(--ds-danger)]',
@@ -239,7 +239,7 @@ function onInput(e: Event): void {
       v-if="$slots.prefix"
       ref="prefixEl"
       data-testid="ds-input-prefix"
-      class="absolute inset-y-0 left-0 flex items-center justify-center border-r border-[var(--border)] px-2 text-[var(--muted-foreground)] pointer-events-none select-none truncate"
+      class="absolute inset-y-0 left-0 flex items-center justify-center border-r border-[var(--brd)] px-2 text-[var(--muted-fg)] pointer-events-none select-none truncate"
       :style="prefixStyle"
       aria-hidden="true"
     >
@@ -267,7 +267,7 @@ function onInput(e: Event): void {
       v-if="$slots.suffix"
       ref="suffixEl"
       data-testid="ds-input-suffix"
-      class="absolute inset-y-0 right-0 flex items-center justify-center border-l border-[var(--border)] px-2 text-[var(--muted-foreground)] pointer-events-none select-none truncate"
+      class="absolute inset-y-0 right-0 flex items-center justify-center border-l border-[var(--brd)] px-2 text-[var(--muted-fg)] pointer-events-none select-none truncate"
       :style="suffixStyle"
       aria-hidden="true"
     >

@@ -4,7 +4,7 @@ function splitClassTokens(value: string): string[] {
 
 const promptClasses = [
   'grid gap-4',
-  'text-[14px] text-[var(--muted-foreground)]',
+  'text-[14px] text-[var(--muted-fg)]',
   'flex items-center justify-end gap-3',
 ]
 

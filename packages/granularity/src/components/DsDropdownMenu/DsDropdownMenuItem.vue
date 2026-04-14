@@ -42,7 +42,7 @@ const variantClass = computed(() => {
   if (props.variant === 'danger')
     return 'text-[var(--ds-danger)]'
 
-  return 'text-[var(--foreground)]'
+  return 'text-[var(--fg)]'
 })
 
 const disabledClass = computed(() => {
@@ -56,7 +56,7 @@ const interactiveClass = computed(() => {
   if (props.disabled)
     return ''
 
-  return 'hover:bg-[var(--accent)] hover:text-[var(--accent-foreground)]'
+  return 'hover:bg-[var(--accent)] hover:text-[var(--accent-fg)]'
 })
 
 const className = computed(() => {

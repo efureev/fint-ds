@@ -71,7 +71,7 @@ const spinnerClass = computed(() => {
     'ds-loading__spinner',
     'h-7 w-7',
     props.animated ? 'ds-loading__spinner--animated' : '',
-    'text-[var(--muted-foreground)]',
+    'text-[var(--muted-fg)]',
     props.spinnerClass,
   ]
     .filter(Boolean)

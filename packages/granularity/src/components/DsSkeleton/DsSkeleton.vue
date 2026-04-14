@@ -12,7 +12,7 @@ const props = withDefaults(defineProps<{
 
 <template>
   <div
-    class="animate-pulse bg-[var(--muted)] border border-[var(--border)]"
+    class="animate-pulse bg-[var(--muted)] border border-[var(--brd)]"
     :style="{ height: props.height, width: props.width, borderRadius: props.rounded }"
     aria-hidden="true"
   />

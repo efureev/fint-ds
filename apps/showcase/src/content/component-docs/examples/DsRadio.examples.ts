@@ -39,9 +39,9 @@ const selectedLabel = computed(() => {
       </DsRadio>
     </div>
 
-    <div class="rounded-2xl border border-[var(--border)] bg-[var(--card)] p-4 text-sm text-[var(--muted-foreground)]">
+    <div class="rounded-2xl border border-[var(--brd)] bg-[var(--card)] p-4 text-sm text-[var(--muted-fg)]">
       Current delivery cadence:
-      <div class="mt-2 text-base font-semibold text-[var(--foreground)]">
+      <div class="mt-2 text-base font-semibold text-[var(--fg)]">
         {{ selectedLabel }}
       </div>
     </div>
@@ -76,7 +76,7 @@ const density = ref('balanced')
       </DsRadio>
     </div>
 
-    <div class="rounded-2xl border border-dashed border-[var(--border)] bg-[var(--muted)]/35 p-4 text-sm text-[var(--muted-foreground)]">
+    <div class="rounded-2xl border border-dashed border-[var(--brd)] bg-[var(--muted)]/35 p-4 text-sm text-[var(--muted-fg)]">
       Button-like radios keep the same v-model contract while matching toolbar and segmented-control layouts.
     </div>
   </div>
@@ -105,12 +105,12 @@ const disabled = ref(false)
       <DsRadio value="production">Production</DsRadio>
     </DsRadioGroup>
 
-    <div class="grid gap-3 rounded-2xl border border-[var(--border)] bg-[var(--card)] p-4">
+    <div class="grid gap-3 rounded-2xl border border-[var(--brd)] bg-[var(--card)] p-4">
       <DsSwitch v-model="disabled" size="sm">
         Disable full group
       </DsSwitch>
-      <div class="text-sm text-[var(--muted-foreground)]">
-        Active target: <span class="font-semibold text-[var(--foreground)]">{{ environment }}</span>
+      <div class="text-sm text-[var(--muted-fg)]">
+        Active target: <span class="font-semibold text-[var(--fg)]">{{ environment }}</span>
       </div>
     </div>
   </div>

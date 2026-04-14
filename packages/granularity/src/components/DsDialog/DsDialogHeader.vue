@@ -37,7 +37,7 @@ const resolvedConfig = computed(() => resolveDsDialogSectionConfig(props.config,
 const rootClass = computed(() => [
   resolvedConfig.value.paddingX,
   resolvedConfig.value.paddingY,
-  resolvedConfig.value.bordered ? 'border-b border-[var(--border)]' : '',
+  resolvedConfig.value.bordered ? 'border-b border-[var(--brd)]' : '',
   'flex items-center justify-between gap-4',
 ])
 </script>

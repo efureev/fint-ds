@@ -34,8 +34,8 @@ function notify(variant: 'info' | 'success' | 'warning' | 'danger') {
       </DsButton>
     </div>
 
-    <div class="text-xs text-[var(--muted-foreground)]">
-      Active host: <span class="font-medium text-[var(--foreground)]">{{ isActiveHost ? 'this preview' : 'another preview' }}</span>
+    <div class="text-xs text-[var(--muted-fg)]">
+      Active host: <span class="font-medium text-[var(--fg)]">{{ isActiveHost ? 'this preview' : 'another preview' }}</span>
     </div>
 
     <DsToaster v-if="isActiveHost" />

@@ -15,8 +15,8 @@ const tags = ref(['critical', 'backend'])
       :separators="[',', ';']"
     />
 
-    <div class="rounded-2xl border border-[var(--border)] bg-[var(--card)] p-4 text-sm text-[var(--muted-foreground)]">
-      Current tags: <span class="font-semibold text-[var(--foreground)]">{{ tags.join(', ') || 'none' }}</span>
+    <div class="rounded-2xl border border-[var(--brd)] bg-[var(--card)] p-4 text-sm text-[var(--muted-fg)]">
+      Current tags: <span class="font-semibold text-[var(--fg)]">{{ tags.join(', ') || 'none' }}</span>
     </div>
   </div>
 </template>

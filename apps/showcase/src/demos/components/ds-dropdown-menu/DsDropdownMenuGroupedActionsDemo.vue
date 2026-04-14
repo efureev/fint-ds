@@ -40,12 +40,12 @@ const selectedAction = ref('Publish now')
       </DsDropdownMenuGroup>
     </DsDropdownMenu>
 
-    <div class="rounded-xl border border-[var(--border)] bg-[var(--background)] p-4">
-      <div class="text-sm text-[var(--muted-foreground)]">
+    <div class="rounded-xl border border-[var(--brd)] bg-[var(--bg)] p-4">
+      <div class="text-sm text-[var(--muted-fg)]">
         Selected action
       </div>
       <div class="mt-2 flex items-center gap-3">
-        <div class="text-sm font-600 text-[var(--foreground)]">
+        <div class="text-sm font-600 text-[var(--fg)]">
           {{ selectedAction }}
         </div>
         <DsBadge size="sm" variant="primary">

@@ -7,8 +7,8 @@ import {DsAvatar, DsCard} from "@feugene/granularity";
       <div class="flex items-center gap-3">
         <DsAvatar :size="44">AD</DsAvatar>
         <div>
-          <div class="text-sm font-semibold text-[var(--foreground)]">Alex Doe</div>
-          <div class="text-sm text-[var(--muted-foreground)]">Engineering lead</div>
+          <div class="text-sm font-semibold text-[var(--fg)]">Alex Doe</div>
+          <div class="text-sm text-[var(--muted-fg)]">Engineering lead</div>
         </div>
       </div>
     </DsCard>
@@ -17,8 +17,8 @@ import {DsAvatar, DsCard} from "@feugene/granularity";
       <div class="flex items-center gap-3">
         <DsAvatar :size="44" shape="square">QA</DsAvatar>
         <div>
-          <div class="text-sm font-semibold text-[var(--foreground)]">Quality squad</div>
-          <div class="text-sm text-[var(--muted-foreground)]">Square avatars help differentiate team entities from
+          <div class="text-sm font-semibold text-[var(--fg)]">Quality squad</div>
+          <div class="text-sm text-[var(--muted-fg)]">Square avatars help differentiate team entities from
             people.
           </div>
         </div>

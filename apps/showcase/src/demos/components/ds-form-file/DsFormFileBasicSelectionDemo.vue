@@ -26,7 +26,7 @@ const summary = computed(() => {
       />
     </DsFormField>
 
-    <div class="rounded-2xl border border-[var(--border)] bg-[var(--card)] p-4 text-sm text-[var(--muted-foreground)]">
+    <div class="rounded-2xl border border-[var(--brd)] bg-[var(--card)] p-4 text-sm text-[var(--muted-fg)]">
       {{ summary }}
     </div>
   </div>

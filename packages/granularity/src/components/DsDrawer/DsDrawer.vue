@@ -42,8 +42,8 @@ const panelClass = computed(() => {
     'fixed inset-y-0',
     sideClass,
     widthBySize[props.size],
-    'border-[var(--border)]',
-    'bg-[var(--card)] text-[var(--card-foreground)]',
+    'border-[var(--brd)]',
+    'bg-[var(--card)] text-[var(--card-fg)]',
     'shadow-[var(--ds-shadow-2)] outline-none',
     'flex flex-col',
   ].join(' ')
@@ -110,7 +110,7 @@ function onOverlayClick(): void {
             :leave-to="panelEnterFrom"
           >
             <DialogPanel data-ds-drawer-panel tabindex="-1" :class="panelClass">
-              <div class="px-5 py-4 border-b border-[var(--border)] flex items-center justify-between gap-4">
+              <div class="px-5 py-4 border-b border-[var(--brd)] flex items-center justify-between gap-4">
                 <DialogTitle as="div" class="text-[14px] font-700 min-w-0 truncate">
                   <slot name="title">
                     {{ props.title ?? 'Drawer' }}
@@ -134,7 +134,7 @@ function onOverlayClick(): void {
                 </div>
               </div>
 
-              <div v-if="$slots.footer" class="px-5 py-4 border-t border-[var(--border)]">
+              <div v-if="$slots.footer" class="px-5 py-4 border-t border-[var(--brd)]">
                 <slot name="footer" />
               </div>
             </DialogPanel>

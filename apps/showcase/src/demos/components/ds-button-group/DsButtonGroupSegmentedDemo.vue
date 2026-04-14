@@ -32,7 +32,7 @@ const views = [
       </DsBadge>
     </div>
 
-    <div class="rounded-xl border border-[var(--border)] bg-[var(--background)] p-4 text-sm text-[var(--muted-foreground)]">
+    <div class="rounded-xl border border-[var(--brd)] bg-[var(--bg)] p-4 text-sm text-[var(--muted-fg)]">
       Используйте группу, когда несколько action-кнопок переключают один контекст и должны восприниматься как единый control cluster.
     </div>
   </div>

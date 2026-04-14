@@ -25,7 +25,7 @@ describe('DsButtonGroup', () => {
           }),
           defineComponent({
             components: { DsButton },
-            template: '<DsButton tone="outline">Two</DsButton>',
+            template: '<DsButton variant="outline">Two</DsButton>',
           }),
         ],
       },

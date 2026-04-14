@@ -124,7 +124,7 @@ const previewCode = computed(() => {
 
     <div class="grid gap-4">
       <div
-          class="relative grid min-h-[280px] rounded-[24px] border border-dashed border-[var(--preview-border)] bg-[image:var(--preview-surface)] p-6 pb-[72px]">
+          class="relative grid min-h-[280px] rounded-[24px] border border-dashed border-[var(--preview-brd)] bg-[image:var(--preview-surface)] p-6 pb-[72px]">
         <div class="flex h-full flex-col items-center justify-center gap-4 text-center">
           <div class="showcase-demo-caption text-xs">
             Preview
@@ -146,7 +146,7 @@ const previewCode = computed(() => {
             </template>
           </DsButton>
 
-          <div class="pointer-events-none absolute inset-x-6 bottom-6 flex justify-center border-t border-dashed border-[var(--preview-border)] pt-2">
+          <div class="pointer-events-none absolute inset-x-6 bottom-6 flex justify-center border-t border-dashed border-[var(--preview-brd)] pt-2">
             <div class="showcase-demo-text max-w-[40ch] text-center text-sm">
               {{ previewSummary }}
             </div>
@@ -197,7 +197,7 @@ const previewCode = computed(() => {
         </DsFormField>
       </div>
 
-      <div class="grid gap-3 rounded-2xl border border-[var(--border)] bg-[var(--card)] p-4">
+      <div class="grid gap-3 rounded-2xl border border-[var(--brd)] bg-[var(--card)] p-4">
         <DsSwitch v-model="loading" size="sm">
           Loading
         </DsSwitch>

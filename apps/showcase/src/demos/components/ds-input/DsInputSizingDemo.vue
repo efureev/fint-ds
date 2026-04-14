@@ -20,7 +20,7 @@ const sizeValues = {
 
 <template>
   <div class="grid gap-4">
-    <div class="grid gap-2 rounded-2xl border border-[var(--border)] bg-[var(--card)] p-4">
+    <div class="grid gap-2 rounded-2xl border border-[var(--brd)] bg-[var(--card)] p-4">
       <div class="showcase-demo-title text-sm font-semibold">
         Text alignment
       </div>

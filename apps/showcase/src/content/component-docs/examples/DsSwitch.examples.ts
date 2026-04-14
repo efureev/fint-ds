@@ -59,7 +59,7 @@ const disabled = ref(false)
       </DsSwitch>
     </div>
 
-    <div class="rounded-2xl border border-[var(--border)] bg-[var(--card)] p-4">
+    <div class="rounded-2xl border border-[var(--brd)] bg-[var(--card)] p-4">
       <DsSwitch v-model="disabled" size="sm">
         Disable labeled switch
       </DsSwitch>

@@ -19,8 +19,8 @@ function openDialog() {
       Edit billing company
     </DsButton>
 
-    <div class="text-xs text-[var(--muted-foreground)]">
-      Persisted value: <span class="font-medium text-[var(--foreground)]">{{ savedCompany }}</span>
+    <div class="text-xs text-[var(--muted-fg)]">
+      Persisted value: <span class="font-medium text-[var(--fg)]">{{ savedCompany }}</span>
     </div>
 
     <DsPromptDialog

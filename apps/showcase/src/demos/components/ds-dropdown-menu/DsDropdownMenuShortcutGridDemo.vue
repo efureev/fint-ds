@@ -25,10 +25,10 @@ const shortcuts = [
     <DsDropdownMenuColumns>
       <template v-for="shortcut in shortcuts" :key="shortcut.action">
         <DsDropdownMenuColumn align="left">
-          <span class="text-sm text-[var(--foreground)]">{{ shortcut.action }}</span>
+          <span class="text-sm text-[var(--fg)]">{{ shortcut.action }}</span>
         </DsDropdownMenuColumn>
         <DsDropdownMenuColumn align="right">
-          <code class="rounded bg-[var(--muted)] px-2 py-1 text-xs text-[var(--muted-foreground)]">{{ shortcut.hotkey }}</code>
+          <code class="rounded bg-[var(--muted)] px-2 py-1 text-xs text-[var(--muted-fg)]">{{ shortcut.hotkey }}</code>
         </DsDropdownMenuColumn>
       </template>
     </DsDropdownMenuColumns>

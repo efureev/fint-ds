@@ -29,13 +29,13 @@ const emit = defineEmits<{
 }>()
 
 const base =
-  'w-full rounded-md border bg-[var(--background)] px-3 py-2 text-[14px] text-[var(--foreground)] placeholder:text-[var(--muted-foreground)] transition-colors duration-150 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring)] disabled:opacity-50 disabled:cursor-not-allowed'
+  'w-full rounded-md border bg-[var(--bg)] px-3 py-2 text-[14px] text-[var(--fg)] placeholder:text-[var(--muted-fg)] transition-colors duration-150 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring)] disabled:opacity-50 disabled:cursor-not-allowed'
 
 const className = computed(() => {
   const state = props.state
 
   const borderByState: Record<typeof state, string> = {
-    default: 'border-[var(--border)]',
+    default: 'border-[var(--brd)]',
     success: 'border-[var(--ds-success)] focus-visible:ring-[var(--ds-success)]',
     warning: 'border-[var(--ds-warning)] focus-visible:ring-[var(--ds-warning)]',
     danger: 'border-[var(--ds-danger)] focus-visible:ring-[var(--ds-danger)]',

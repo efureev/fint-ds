@@ -57,7 +57,7 @@ function onClick(e: MouseEvent): void {
 
 <template>
   <div
-    class="ds-checkbox inline-flex items-center gap-2 select-none focus-visible:outline-none focus-visible:rounded-[8px] focus-visible:shadow-[0_0_0_2px_var(--ring),0_0_0_4px_var(--background)]"
+    class="ds-checkbox inline-flex items-center gap-2 select-none focus-visible:outline-none focus-visible:rounded-[8px] focus-visible:shadow-[0_0_0_2px_var(--ring),0_0_0_4px_var(--bg)]"
     role="checkbox"
     :aria-checked="props.modelValue ? 'true' : 'false'"
     :aria-disabled="props.disabled ? 'true' : undefined"
@@ -85,17 +85,17 @@ function onClick(e: MouseEvent): void {
       class="ds-checkbox-box h-4 w-4 rounded border flex items-center justify-center transition-colors duration-150"
       :class="props.modelValue
         ? 'border-[var(--primary)] bg-[var(--primary)]'
-        : 'border-[var(--border)] bg-[var(--background)]'"
+        : 'border-[var(--brd)] bg-[var(--bg)]'"
     >
       <IconCheck
         class="ds-checkbox-icon h-3.5 w-3.5 transition-transform transition-opacity duration-150"
         :class="props.modelValue
-          ? 'opacity-100 scale-100 text-[var(--primary-foreground)]'
+          ? 'opacity-100 scale-100 text-[var(--primary-fg)]'
           : 'opacity-0 scale-75 text-transparent'"
       />
     </span>
 
-    <span class="text-sm text-[var(--muted-foreground)]">
+    <span class="text-sm text-[var(--muted-fg)]">
       <slot />
     </span>
   </div>

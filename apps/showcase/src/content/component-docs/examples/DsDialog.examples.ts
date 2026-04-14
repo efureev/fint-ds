@@ -21,7 +21,7 @@ const open = ref(false)
   </DsButton>
 
   <DsDialog v-model="open" title="Publish weekly digest" size="sm">
-    <div class="text-sm text-[var(--muted-foreground)]">
+    <div class="text-sm text-[var(--muted-fg)]">
       <code>DsDialog</code> already provides consistent header, close action and footer slot.
     </div>
 
@@ -91,7 +91,7 @@ const open = ref(false)
   </DsButton>
 
   <DsDialog v-model="open" title="Resolve blockers" :close-on-backdrop="false" :show-close-button="false">
-    <div class="text-sm text-[var(--muted-foreground)]">
+    <div class="text-sm text-[var(--muted-fg)]">
       Backdrop clicks are ignored until the user explicitly chooses an action.
     </div>
   </DsDialog>

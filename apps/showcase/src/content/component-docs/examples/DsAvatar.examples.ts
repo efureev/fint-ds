@@ -57,7 +57,7 @@ import { DsAvatar, DsCard } from '@feugene/granularity'
     <DsAvatar :size="44">AD</DsAvatar>
     <div>
       <div class="text-sm font-semibold">Alex Doe</div>
-      <div class="text-sm text-[var(--muted-foreground)]">Engineering lead</div>
+      <div class="text-sm text-[var(--muted-fg)]">Engineering lead</div>
     </div>
   </DsCard>
 </template>`,

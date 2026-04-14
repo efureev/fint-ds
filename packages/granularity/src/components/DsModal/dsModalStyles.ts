@@ -23,7 +23,7 @@ const layout = 'min-h-full flex items-center justify-center'
 const overlay = 'fixed inset-0 z-0 bg-black/40'
 const overlayTransition = 'duration-200 ease-out opacity-0 opacity-100 duration-150 ease-in'
 const panelBase =
-  'w-full overflow-hidden relative z-10 border border-[var(--border)] bg-[var(--card)] text-[var(--card-foreground)] shadow-[var(--ds-shadow-2)] outline-none'
+  'w-full overflow-hidden relative z-10 border border-[var(--brd)] bg-[var(--card)] text-[var(--card-fg)] shadow-[var(--ds-shadow-2)] outline-none'
 const panelTransition =
   'duration-200 ease-out opacity-0 translate-y-2 sm:translate-y-0 sm:scale-95 opacity-100 translate-y-0 sm:scale-100 duration-150 ease-in'
 

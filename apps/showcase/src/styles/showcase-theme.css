@@ -1,75 +1,75 @@
 :root {
-    --showcase-border-strong: color-mix(in srgb, var(--border) 88%, var(--foreground) 12%);
-    --preview-border: color-mix(in srgb, var(--primary) 16%, var(--border) 84%);
-    --preview-surface: linear-gradient(135deg, color-mix(in srgb, var(--background) 68%, var(--primary) 6%) 0%, color-mix(in srgb, var(--muted) 62%, var(--background) 38%) 100%);
-    --showcase-surface-base: color-mix(in srgb, var(--background) 90%, var(--muted) 10%);
-    --showcase-surface-raised: color-mix(in srgb, var(--card) 92%, var(--background) 8%);
-    --showcase-surface-muted: color-mix(in srgb, var(--muted) 56%, var(--background) 44%);
+    --showcase-brd-strong: color-mix(in srgb, var(--brd) 88%, var(--fg) 12%);
+    --preview-brd: color-mix(in srgb, var(--primary) 16%, var(--brd) 84%);
+    --preview-surface: linear-gradient(135deg, color-mix(in srgb, var(--bg) 68%, var(--primary) 6%) 0%, color-mix(in srgb, var(--muted) 62%, var(--bg) 38%) 100%);
+    --showcase-surface-base: color-mix(in srgb, var(--bg) 90%, var(--muted) 10%);
+    --showcase-surface-raised: color-mix(in srgb, var(--card) 92%, var(--bg) 8%);
+    --showcase-surface-muted: color-mix(in srgb, var(--muted) 56%, var(--bg) 44%);
     --showcase-surface-emphasis: color-mix(in srgb, var(--primary) 10%, var(--card) 90%);
-    --showcase-surface-code: color-mix(in srgb, var(--foreground) 84%, var(--card) 16%);
-    --showcase-surface-code-border: color-mix(in srgb, var(--foreground) 14%, var(--border) 86%);
-    --showcase-text-code: color-mix(in srgb, var(--background) 94%, var(--foreground) 6%);
-    --showcase-text-code-muted: color-mix(in srgb, var(--background) 72%, var(--muted-foreground) 28%);
-    --showcase-text-muted: color-mix(in srgb, var(--foreground) 72%, var(--muted-foreground) 28%);
-    --showcase-text-subtle: color-mix(in srgb, var(--muted-foreground) 84%, transparent);
-    --showcase-link-muted: color-mix(in srgb, var(--foreground) 60%, var(--muted-foreground) 40%);
-    --showcase-shadow-soft: 0 24px 80px color-mix(in srgb, var(--foreground) 10%, transparent);
-    --showcase-shadow-raised: 0 18px 40px color-mix(in srgb, var(--foreground) 8%, transparent);
+    --showcase-surface-code: color-mix(in srgb, var(--fg) 84%, var(--card) 16%);
+    --showcase-surface-code-brd: color-mix(in srgb, var(--fg) 14%, var(--brd) 86%);
+    --showcase-text-code: color-mix(in srgb, var(--bg) 94%, var(--fg) 6%);
+    --showcase-text-code-muted: color-mix(in srgb, var(--bg) 72%, var(--muted-fg) 28%);
+    --showcase-text-muted: color-mix(in srgb, var(--fg) 72%, var(--muted-fg) 28%);
+    --showcase-text-subtle: color-mix(in srgb, var(--muted-fg) 84%, transparent);
+    --showcase-link-muted: color-mix(in srgb, var(--fg) 60%, var(--muted-fg) 40%);
+    --showcase-shadow-soft: 0 24px 80px color-mix(in srgb, var(--fg) 10%, transparent);
+    --showcase-shadow-raised: 0 18px 40px color-mix(in srgb, var(--fg) 8%, transparent);
     --showcase-shadow-focus: 0 12px 24px color-mix(in srgb, var(--primary) 22%, transparent);
-    --showcase-overlay: color-mix(in srgb, var(--foreground) 32%, transparent);
+    --showcase-overlay: color-mix(in srgb, var(--fg) 32%, transparent);
 }
 
 .showcase-shell {
     min-height: 100vh;
-    color: var(--foreground);
-    background-color: var(--background);
+    color: var(--fg);
+    background-color: var(--bg);
     background-image: radial-gradient(circle at top, color-mix(in srgb, var(--primary) 12%, transparent), transparent 36%),
-    linear-gradient(180deg, color-mix(in srgb, var(--background) 92%, var(--muted) 8%) 0%, color-mix(in srgb, var(--background) 82%, var(--muted) 18%) 100%);
+    linear-gradient(180deg, color-mix(in srgb, var(--bg) 92%, var(--muted) 8%) 0%, color-mix(in srgb, var(--bg) 82%, var(--muted) 18%) 100%);
 }
 
 [data-theme='dark'] .showcase-shell {
     background-image: radial-gradient(circle at top, color-mix(in srgb, var(--primary) 22%, transparent), transparent 32%),
-    linear-gradient(180deg, color-mix(in srgb, var(--background) 94%, var(--foreground) 6%) 0%, color-mix(in srgb, var(--background) 86%, var(--muted) 14%) 100%);
+    linear-gradient(180deg, color-mix(in srgb, var(--bg) 94%, var(--fg) 6%) 0%, color-mix(in srgb, var(--bg) 86%, var(--muted) 14%) 100%);
 }
 
 [data-theme='dark'] {
-    --showcase-surface-code: color-mix(in srgb, var(--card) 82%, var(--foreground) 15%);
-    --showcase-surface-code-border: color-mix(in srgb, var(--primary) 22%, var(--border) 78%);
-    --showcase-text-code: color-mix(in srgb, var(--foreground) 94%, var(--background) 6%);
-    --showcase-text-code-muted: color-mix(in srgb, var(--muted-foreground) 68%, var(--foreground) 32%);
+    --showcase-surface-code: color-mix(in srgb, var(--card) 82%, var(--fg) 15%);
+    --showcase-surface-code-brd: color-mix(in srgb, var(--primary) 22%, var(--brd) 78%);
+    --showcase-text-code: color-mix(in srgb, var(--fg) 94%, var(--bg) 6%);
+    --showcase-text-code-muted: color-mix(in srgb, var(--muted-fg) 68%, var(--fg) 32%);
 }
 
 .showcase-header {
-    border-color: var(--showcase-border-strong);
+    border-color: var(--showcase-brd-strong);
 }
 
 .showcase-panel {
-    border-color: var(--showcase-border-strong);
+    border-color: var(--showcase-brd-strong);
     background-color: var(--showcase-surface-raised);
     box-shadow: var(--showcase-shadow-raised);
     overflow-wrap: anywhere;
 }
 
 .showcase-panel-soft {
-    border-color: var(--showcase-border-strong);
+    border-color: var(--showcase-brd-strong);
     background-color: var(--showcase-surface-muted);
     overflow-wrap: anywhere;
 }
 
 .showcase-panel-emphasis {
-    border-color: color-mix(in srgb, var(--primary) 22%, var(--border) 78%);
+    border-color: color-mix(in srgb, var(--primary) 22%, var(--brd) 78%);
     background-color: var(--showcase-surface-emphasis);
     overflow-wrap: anywhere;
 }
 
 .showcase-code-surface {
-    border-color: var(--showcase-surface-code-border);
+    border-color: var(--showcase-surface-code-brd);
     background-color: var(--showcase-surface-code);
     color: var(--showcase-text-code);
 }
 
 .showcase-code-divider {
-    border-color: color-mix(in srgb, var(--showcase-surface-code-border) 72%, transparent);
+    border-color: color-mix(in srgb, var(--showcase-surface-code-brd) 72%, transparent);
 }
 
 .showcase-code-muted {
@@ -77,11 +77,11 @@
 }
 
 .showcase-border-strong {
-    border-color: var(--showcase-border-strong);
+    border-color: var(--showcase-brd-strong);
 }
 
 .showcase-border-dashed {
-    border-color: color-mix(in srgb, var(--border) 92%, var(--muted-foreground) 8%);
+    border-color: color-mix(in srgb, var(--brd) 92%, var(--muted-fg) 8%);
 }
 
 .showcase-text-muted {
@@ -103,11 +103,11 @@
 }
 
 .showcase-text-primary:hover {
-    color: color-mix(in srgb, var(--primary) 82%, var(--foreground) 18%);
+    color: color-mix(in srgb, var(--primary) 82%, var(--fg) 18%);
 }
 
 .showcase-interactive-accent:hover {
-    border-color: color-mix(in srgb, var(--primary) 40%, var(--border) 60%);
+    border-color: color-mix(in srgb, var(--primary) 40%, var(--brd) 60%);
     color: var(--primary);
 }
 
@@ -120,21 +120,21 @@
 }
 
 .showcase-pill {
-    border-color: var(--showcase-border-strong);
+    border-color: var(--showcase-brd-strong);
     background-color: var(--showcase-surface-muted);
     color: var(--showcase-text-subtle);
 }
 
 .showcase-pill-active {
     background-color: var(--showcase-surface-raised);
-    color: var(--foreground);
+    color: var(--fg);
     box-shadow: var(--ds-shadow-1);
 }
 
 .showcase-nav-item-active {
     border-color: color-mix(in srgb, var(--primary) 28%, transparent);
     background-color: var(--primary);
-    color: var(--primary-foreground);
+    color: var(--primary-fg);
     box-shadow: var(--showcase-shadow-focus);
 }
 
@@ -145,15 +145,15 @@
 }
 
 .showcase-nav-item-inactive:hover {
-    border-color: var(--showcase-border-strong);
+    border-color: var(--showcase-brd-strong);
     background-color: var(--showcase-surface-muted);
-    color: var(--foreground);
+    color: var(--fg);
 }
 
 .showcase-sidebar-item-active {
     border-color: color-mix(in srgb, var(--primary) 22%, transparent);
     background-color: color-mix(in srgb, var(--primary) 10%, var(--card) 90%);
-    color: var(--foreground);
+    color: var(--fg);
 }
 
 .showcase-sidebar-item-inactive {
@@ -162,30 +162,30 @@
 }
 
 .showcase-sidebar-item-inactive:hover {
-    border-color: var(--showcase-border-strong);
-    background-color: color-mix(in srgb, var(--muted) 46%, var(--background) 54%);
-    color: var(--foreground);
+    border-color: var(--showcase-brd-strong);
+    background-color: color-mix(in srgb, var(--muted) 46%, var(--bg) 54%);
+    color: var(--fg);
 }
 
 .showcase-link-chip {
-    border-color: var(--showcase-border-strong);
+    border-color: var(--showcase-brd-strong);
     color: var(--showcase-text-subtle);
 }
 
 .showcase-link-chip:hover {
-    border-color: color-mix(in srgb, var(--primary) 18%, var(--border) 82%);
-    color: var(--foreground);
+    border-color: color-mix(in srgb, var(--primary) 18%, var(--brd) 82%);
+    color: var(--fg);
 }
 
 .showcase-card-link {
-    border-color: var(--showcase-border-strong);
+    border-color: var(--showcase-brd-strong);
     background-color: var(--showcase-surface-raised);
     min-width: 0;
     overflow: hidden;
 }
 
 .showcase-card-link:hover {
-    border-color: color-mix(in srgb, var(--primary) 30%, var(--border) 70%);
+    border-color: color-mix(in srgb, var(--primary) 30%, var(--brd) 70%);
     background-color: color-mix(in srgb, var(--card) 96%, var(--primary) 4%);
 }
 
@@ -194,9 +194,9 @@
 }
 
 .showcase-input {
-    border-color: var(--showcase-border-strong);
+    border-color: var(--showcase-brd-strong);
     background-color: var(--showcase-surface-muted);
-    color: var(--foreground);
+    color: var(--fg);
 }
 
 .showcase-input::placeholder {
@@ -208,7 +208,7 @@
 }
 
 .showcase-overlay {
-    border-color: var(--showcase-border-strong);
+    border-color: var(--showcase-brd-strong);
     background-color: var(--showcase-surface-raised);
     box-shadow: var(--showcase-shadow-soft);
 }
@@ -223,14 +223,14 @@
 }
 
 .showcase-inline-surface {
-    border-color: var(--showcase-border-strong);
+    border-color: var(--showcase-brd-strong);
     background-color: var(--showcase-surface-muted);
     overflow-wrap: anywhere;
 }
 
 .showcase-empty-state {
-    border-color: var(--showcase-border-dashed);
-    background-color: color-mix(in srgb, var(--muted) 42%, var(--background) 58%);
+    border-color: var(--showcase-brd-dashed);
+    background-color: color-mix(in srgb, var(--muted) 42%, var(--bg) 58%);
     color: var(--showcase-text-muted);
     overflow-wrap: anywhere;
 }
@@ -248,7 +248,7 @@
 }
 
 .showcase-demo-title {
-    color: var(--foreground);
+    color: var(--fg);
 }
 
 .showcase-demo-text {
@@ -262,12 +262,12 @@
 }
 
 .showcase-demo-panel {
-    border-color: var(--showcase-border-strong);
+    border-color: var(--showcase-brd-strong);
     background-color: var(--showcase-surface-muted);
 }
 
 .showcase-demo-chip {
-    border-color: var(--showcase-border-strong);
-    background-color: color-mix(in srgb, var(--muted) 62%, var(--background) 38%);
+    border-color: var(--showcase-brd-strong);
+    background-color: color-mix(in srgb, var(--muted) 62%, var(--bg) 38%);
     color: var(--showcase-text-muted);
 }

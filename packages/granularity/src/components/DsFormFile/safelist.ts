@@ -17,10 +17,10 @@ export const dsFormFileSafelist = [
   'ml-2',
   'i-lucide-x',
   'text-sm',
-  'text-[var(--muted-foreground)]',
+  'text-[var(--muted-fg)]',
   'truncate',
   'max-w-[240px]',
   'text-xs',
-  'hover:text-[var(--foreground)]',
+  'hover:text-[var(--fg)]',
   'text-[var(--ds-danger)]',
 ] as const

@@ -7,7 +7,7 @@ const props = withDefaults(
     iconColor?: string
   }>(),
   {
-    iconColor: 'var(--muted-foreground)',
+    iconColor: 'var(--muted-fg)',
   },
 )
 
@@ -31,7 +31,7 @@ const triggerStyle = {
 
     <span
       role="tooltip"
-      class="pointer-events-none absolute bottom-[calc(100%+8px)] left-1/2 z-10 -translate-x-1/2 whitespace-nowrap rounded-md border border-[var(--border)] bg-[var(--popover)] px-2 py-1 text-[12px] text-[var(--popover-foreground)] opacity-0 shadow-[var(--ds-shadow-1)] transition-opacity duration-150 group-hover:opacity-100 group-focus-within:opacity-100"
+      class="pointer-events-none absolute bottom-[calc(100%+8px)] left-1/2 z-10 -translate-x-1/2 whitespace-nowrap rounded-md border border-[var(--brd)] bg-[var(--popover)] px-2 py-1 text-[12px] text-[var(--popover-fg)] opacity-0 shadow-[var(--ds-shadow-1)] transition-opacity duration-150 group-hover:opacity-100 group-focus-within:opacity-100"
     >
       {{ props.text }}
     </span>

@@ -38,8 +38,8 @@ function clearStickyToast() {
       </DsButton>
     </div>
 
-    <div class="text-xs text-[var(--muted-foreground)]">
-      Last sticky id: <span class="font-medium text-[var(--foreground)]">{{ lastId || '—' }}</span>
+    <div class="text-xs text-[var(--muted-fg)]">
+      Last sticky id: <span class="font-medium text-[var(--fg)]">{{ lastId || '—' }}</span>
     </div>
 
     <DsToaster v-if="isActiveHost" />

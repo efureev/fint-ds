@@ -13,15 +13,15 @@ const open = ref(false)
     </DsButton>
 
     <DsDrawer v-model="open" title="Report filters" size="sm">
-      <div class="grid gap-4 text-sm text-[var(--muted-foreground)]">
+      <div class="grid gap-4 text-sm text-[var(--muted-fg)]">
         <label class="grid gap-2">
-          <span class="text-[var(--foreground)]">Owner</span>
-          <input class="rounded-lg border border-[var(--border)] bg-transparent px-3 py-2" value="Operations" />
+          <span class="text-[var(--fg)]">Owner</span>
+          <input class="rounded-lg border border-[var(--brd)] bg-transparent px-3 py-2" value="Operations" />
         </label>
 
         <label class="grid gap-2">
-          <span class="text-[var(--foreground)]">Date range</span>
-          <input class="rounded-lg border border-[var(--border)] bg-transparent px-3 py-2" value="Last 30 days" />
+          <span class="text-[var(--fg)]">Date range</span>
+          <input class="rounded-lg border border-[var(--brd)] bg-transparent px-3 py-2" value="Last 30 days" />
         </label>
       </div>
 

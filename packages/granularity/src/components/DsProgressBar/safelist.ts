@@ -4,7 +4,7 @@ export const dsProgressBarSafelist = [
   'rounded-full',
   'bg-[var(--muted)]',
   'border',
-  'border-[var(--border)]',
+  'border-[var(--brd)]',
   'overflow-hidden',
   'h-full',
   'bg-[var(--primary)]',

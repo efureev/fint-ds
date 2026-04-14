@@ -265,8 +265,8 @@ function toggleThemeTokenSection(section: string) {
                                   :style="{
                                     backgroundColor: token.hexValue ?? 'var(--showcase-surface-muted)',
                                     borderColor: token.hexValue
-                                      ? 'color-mix(in srgb, var(--foreground) 12%, transparent)'
-                                      : 'var(--showcase-border-strong)',
+                                      ? 'color-mix(in srgb, var(--fg) 12%, transparent)'
+                                      : 'var(--showcase-brd-strong)',
                                   }"
                               />
 
@@ -371,8 +371,8 @@ function toggleThemeTokenSection(section: string) {
                                   :style="{
                                     backgroundColor: getActiveThemeTokenValue(token).hexValue ?? 'var(--showcase-surface-muted)',
                                     borderColor: getActiveThemeTokenValue(token).hexValue
-                                      ? 'color-mix(in srgb, var(--foreground) 12%, transparent)'
-                                      : 'var(--showcase-border-strong)',
+                                      ? 'color-mix(in srgb, var(--fg) 12%, transparent)'
+                                      : 'var(--showcase-brd-strong)',
                                   }"
                               />
 

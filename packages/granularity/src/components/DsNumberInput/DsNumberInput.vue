@@ -44,7 +44,7 @@ const TEXT_ALIGN_CLASS_BY_ALIGN: Record<DsNumberInputTextAlign, string> = {
 }
 
 const BORDER_CLASS_BY_STATE: Record<DsNumberInputState, string> = {
-  default: 'border-[var(--border)]',
+  default: 'border-[var(--brd)]',
   success: 'border-[var(--ds-success)] focus-within:ring-[var(--ds-success)]',
   warning: 'border-[var(--ds-warning)] focus-within:ring-[var(--ds-warning)]',
   danger: 'border-[var(--ds-danger)] focus-within:ring-[var(--ds-danger)]',
@@ -253,7 +253,7 @@ const sizeClass = computed(() => SIZE_CLASS_BY_SIZE[props.size])
 const textAlignClass = computed(() => TEXT_ALIGN_CLASS_BY_ALIGN[props.textAlign])
 
 const shellBase =
-  'relative w-full overflow-hidden rounded-md border bg-[var(--background)] transition-colors duration-150 focus-within:ring-2 focus-within:ring-[var(--ring)]'
+  'relative w-full overflow-hidden rounded-md border bg-[var(--bg)] transition-colors duration-150 focus-within:ring-2 focus-within:ring-[var(--ring)]'
 
 const shellClassName = computed(() => {
   const state: DsNumberInputState = props.state
@@ -268,7 +268,7 @@ const shellClassName = computed(() => {
 })
 
 const inputBase =
-  'w-full bg-transparent text-[var(--foreground)] placeholder:text-[var(--muted-foreground)] focus:placeholder:text-transparent focus:outline-none disabled:cursor-not-allowed'
+  'w-full bg-transparent text-[var(--fg)] placeholder:text-[var(--muted-fg)] focus:placeholder:text-transparent focus:outline-none disabled:cursor-not-allowed'
 
 const inputClassName = computed(() => [inputBase, sizeClass.value, textAlignClass.value].join(' '))
 
@@ -355,10 +355,10 @@ function stepBy(dir: 1 | -1): void {
 }
 
 const controlsButtonBase =
-  'h-4 w-7 inline-flex items-center justify-center rounded text-[10px] text-[var(--muted-foreground)] hover:bg-[var(--muted)] active:bg-[var(--muted)] disabled:opacity-50 disabled:cursor-not-allowed'
+  'h-4 w-7 inline-flex items-center justify-center rounded text-[10px] text-[var(--muted-fg)] hover:bg-[var(--muted)] active:bg-[var(--muted)] disabled:opacity-50 disabled:cursor-not-allowed'
 
 const horizontalControlsButtonBase =
-  'h-full w-full inline-flex items-center justify-center text-[var(--muted-foreground)] hover:bg-[var(--muted)] active:bg-[var(--muted)] disabled:opacity-50 disabled:cursor-not-allowed focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring)]'
+  'h-full w-full inline-flex items-center justify-center text-[var(--muted-fg)] hover:bg-[var(--muted)] active:bg-[var(--muted)] disabled:opacity-50 disabled:cursor-not-allowed focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring)]'
 </script>
 
 <template>
@@ -367,7 +367,7 @@ const horizontalControlsButtonBase =
       v-if="$slots.prefix"
       ref="prefixEl"
       data-testid="number-input-prefix"
-      class="absolute inset-y-0 left-0 flex items-center justify-center border-r border-[var(--border)] px-2 text-[var(--muted-foreground)] pointer-events-none select-none truncate"
+      class="absolute inset-y-0 left-0 flex items-center justify-center border-r border-[var(--brd)] px-2 text-[var(--muted-fg)] pointer-events-none select-none truncate"
       :style="prefixStyle"
       aria-hidden="true"
     >
@@ -396,7 +396,7 @@ const horizontalControlsButtonBase =
       v-if="$slots.suffix"
       ref="suffixEl"
       data-testid="number-input-suffix"
-      class="absolute inset-y-0 flex items-center justify-center border-l border-[var(--border)] px-2 text-[var(--muted-foreground)] pointer-events-none select-none truncate"
+      class="absolute inset-y-0 flex items-center justify-center border-l border-[var(--brd)] px-2 text-[var(--muted-fg)] pointer-events-none select-none truncate"
       :style="suffixStyle"
       aria-hidden="true"
     >
@@ -406,7 +406,7 @@ const horizontalControlsButtonBase =
     <div
       v-if="hasVerticalControls"
       data-testid="number-input-controls-vertical"
-      class="absolute inset-y-0 flex items-center justify-center border-l border-[var(--border)]"
+      class="absolute inset-y-0 flex items-center justify-center border-l border-[var(--brd)]"
       :style="verticalControlsStyle"
     >
       <div class="flex flex-col justify-center gap-1">
@@ -452,7 +452,7 @@ const horizontalControlsButtonBase =
     <div
       v-if="hasHorizontalControls"
       data-testid="number-input-controls-horizontal-left"
-      class="absolute inset-y-0 flex items-stretch justify-center border-r border-[var(--border)]"
+      class="absolute inset-y-0 flex items-stretch justify-center border-r border-[var(--brd)]"
       :style="horizontalLeftControlsStyle"
     >
       <button
@@ -478,7 +478,7 @@ const horizontalControlsButtonBase =
     <div
       v-if="hasHorizontalControls"
       data-testid="number-input-controls-horizontal-right"
-      class="absolute inset-y-0 flex items-stretch justify-center border-l border-[var(--border)]"
+      class="absolute inset-y-0 flex items-stretch justify-center border-l border-[var(--brd)]"
       :style="horizontalRightControlsStyle"
     >
       <button

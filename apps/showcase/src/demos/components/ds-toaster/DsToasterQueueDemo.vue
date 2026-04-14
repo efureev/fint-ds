@@ -21,7 +21,7 @@ function queueWorkflowToasts() {
       Queue workflow toasts
     </DsButton>
 
-    <div class="text-xs text-[var(--muted-foreground)]">
+    <div class="text-xs text-[var(--muted-fg)]">
       One active `DsToaster` host is enough because `useToast` shares a global reactive store.
     </div>
 

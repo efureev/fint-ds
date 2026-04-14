@@ -151,7 +151,7 @@ function onButtonClick(): void {
     :aria-label="props.ariaLabel"
     :aria-disabled="resolvedDisabled ? 'true' : undefined"
     :tabindex="resolvedDisabled ? -1 : 0"
-    class="inline-flex items-center gap-2 select-none focus-visible:outline-none focus-visible:rounded-[8px] focus-visible:shadow-[0_0_0_2px_var(--ring),0_0_0_4px_var(--background)]"
+    class="inline-flex items-center gap-2 select-none focus-visible:outline-none focus-visible:rounded-[8px] focus-visible:shadow-[0_0_0_2px_var(--ring),0_0_0_4px_var(--bg)]"
     :class="resolvedDisabled ? 'cursor-not-allowed opacity-70' : 'cursor-pointer'"
     @click="onButtonClick"
     @keydown.space.prevent="onButtonClick"
@@ -175,8 +175,8 @@ function onButtonClick(): void {
       class="h-4 w-4 rounded-full border flex items-center justify-center transition-colors duration-150"
       :class="[
         checked
-          ? 'border-[var(--primary)] bg-[color-mix(in_srgb,var(--primary)_10%,var(--background))]'
-          : 'border-[var(--border)] bg-[var(--background)]',
+          ? 'border-[var(--primary)] bg-[color-mix(in_srgb,var(--primary)_10%,var(--bg))]'
+          : 'border-[var(--brd)] bg-[var(--bg)]',
       ].join(' ')"
     >
       <span
@@ -188,7 +188,7 @@ function onButtonClick(): void {
       />
     </span>
 
-    <span class="text-sm text-[var(--muted-foreground)]">
+    <span class="text-sm text-[var(--muted-fg)]">
       <slot />
     </span>
   </div>

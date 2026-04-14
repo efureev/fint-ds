@@ -22,7 +22,7 @@ const environments = ref(['production', 'staging'])
       </template>
     </DsInputTag>
 
-    <div class="text-sm text-[var(--muted-foreground)]">
+    <div class="text-sm text-[var(--muted-fg)]">
       Custom tag slot lets host screens inject status markers, counters or semantic labels.
     </div>
   </div>

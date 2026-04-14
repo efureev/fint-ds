@@ -13,10 +13,10 @@ const props = withDefaults(
 </script>
 
 <template>
-  <div class="rounded-[var(--ds-radius-lg)] border border-[var(--border)] bg-[var(--card)] p-6 text-center">
+  <div class="rounded-[var(--ds-radius-lg)] border border-[var(--brd)] bg-[var(--card)] p-6 text-center">
     <div class="flex justify-center">
-      <div class="h-12 w-12 rounded-[12px] bg-[var(--muted)] border border-[var(--border)] flex items-center justify-center">
-        <IconInbox class="h-6 w-6 text-[var(--muted-foreground)]" aria-hidden="true" />
+      <div class="h-12 w-12 rounded-[12px] bg-[var(--muted)] border border-[var(--brd)] flex items-center justify-center">
+        <IconInbox class="h-6 w-6 text-[var(--muted-fg)]" aria-hidden="true" />
       </div>
     </div>
 
@@ -24,7 +24,7 @@ const props = withDefaults(
       {{ props.title }}
     </div>
 
-    <div v-if="props.description" class="mt-1 text-[13px] text-[var(--muted-foreground)]">
+    <div v-if="props.description" class="mt-1 text-[13px] text-[var(--muted-fg)]">
       {{ props.description }}
     </div>
 

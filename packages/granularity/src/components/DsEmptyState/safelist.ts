@@ -1,7 +1,7 @@
 export const dsEmptyStateSafelist = [
   'rounded-[var(--ds-radius-lg)]',
   'border',
-  'border-[var(--border)]',
+  'border-[var(--brd)]',
   'bg-[var(--card)]',
   'p-6',
   'text-center',
@@ -14,7 +14,7 @@ export const dsEmptyStateSafelist = [
   'items-center',
   'h-6',
   'w-6',
-  'text-[var(--muted-foreground)]',
+  'text-[var(--muted-fg)]',
   'mt-4',
   'text-[14px]',
   'font-700',

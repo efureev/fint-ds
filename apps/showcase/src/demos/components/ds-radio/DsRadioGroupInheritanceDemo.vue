@@ -15,12 +15,12 @@ const disabled = ref(false)
       <DsRadio value="production">Production</DsRadio>
     </DsRadioGroup>
 
-    <div class="grid gap-3 rounded-2xl border border-[var(--border)] bg-[var(--card)] p-4">
+    <div class="grid gap-3 rounded-2xl border border-[var(--brd)] bg-[var(--card)] p-4">
       <DsSwitch v-model="disabled" size="sm">
         Disable full group
       </DsSwitch>
-      <div class="text-sm text-[var(--muted-foreground)]">
-        Active target: <span class="font-semibold text-[var(--foreground)]">{{ environment }}</span>
+      <div class="text-sm text-[var(--muted-fg)]">
+        Active target: <span class="font-semibold text-[var(--fg)]">{{ environment }}</span>
       </div>
     </div>
   </div>

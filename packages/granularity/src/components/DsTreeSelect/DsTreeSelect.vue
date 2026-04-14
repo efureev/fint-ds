@@ -218,7 +218,7 @@ const displayValue = computed(() => {
 })
 
 const base =
-  'w-full rounded-md border bg-[var(--background)] text-[var(--foreground)] placeholder:text-[var(--muted-foreground)] transition-colors duration-150 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring)] disabled:opacity-50 disabled:cursor-not-allowed'
+  'w-full rounded-md border bg-[var(--bg)] text-[var(--fg)] placeholder:text-[var(--muted-fg)] transition-colors duration-150 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring)] disabled:opacity-50 disabled:cursor-not-allowed'
 
 const sizeClass = computed(() => {
   const map: Record<NonNullable<typeof props.size>, string> = {
@@ -240,7 +240,7 @@ const resolvedFilterPlaceholder = computed(() => {
 const className = computed(() => {
   const state = props.state
   const borderByState: Record<typeof state, string> = {
-    default: 'border-[var(--border)]',
+    default: 'border-[var(--brd)]',
     success: 'border-[var(--ds-success)] focus-visible:ring-[var(--ds-success)]',
     warning: 'border-[var(--ds-warning)] focus-visible:ring-[var(--ds-warning)]',
     danger: 'border-[var(--ds-danger)] focus-visible:ring-[var(--ds-danger)]',
@@ -258,8 +258,8 @@ const className = computed(() => {
 const panelClasses = computed(() => {
   return [
     'rounded-[var(--ds-radius-xl)]',
-    'border border-[var(--border)]',
-    'bg-[var(--card)] text-[var(--card-foreground)]',
+    'border border-[var(--brd)]',
+    'bg-[var(--card)] text-[var(--card-fg)]',
     'shadow-[var(--ds-shadow-2)]',
     'overflow-hidden',
   ].join(' ')
@@ -470,7 +470,7 @@ function onNodeClick(data: T, node: DsTreeNode<T>): void {
         v-if="props.clearable && hasSelection"
         data-testid="ds-tree-select-clear"
         type="button"
-        class="absolute top-1/2 -translate-y-1/2 right-3 h-6 w-6 inline-flex items-center justify-center rounded-md text-[var(--muted-foreground)] hover:text-[var(--foreground)] hover:bg-[color-mix(in_srgb,var(--muted)_25%,transparent)] disabled:opacity-50"
+        class="absolute top-1/2 -translate-y-1/2 right-3 h-6 w-6 inline-flex items-center justify-center rounded-md text-[var(--muted-fg)] hover:text-[var(--fg)] hover:bg-[color-mix(in_srgb,var(--muted)_25%,transparent)] disabled:opacity-50"
         :disabled="props.disabled"
         :aria-label="t('ds.common.clear', 'Clear')"
         @click.stop="clear"
@@ -481,7 +481,7 @@ function onNodeClick(data: T, node: DsTreeNode<T>): void {
       <span
         v-else
         data-testid="ds-tree-select-chevron"
-        class="absolute top-1/2 -translate-y-1/2 right-3 text-[var(--muted-foreground)] pointer-events-none"
+        class="absolute top-1/2 -translate-y-1/2 right-3 text-[var(--muted-fg)] pointer-events-none"
       >
         <span
           class="i-lucide-chevron-down h-4 w-4 transition-transform duration-150"
@@ -517,7 +517,7 @@ function onNodeClick(data: T, node: DsTreeNode<T>): void {
         class="absolute z-50 mt-2 w-full"
       >
         <div :class="panelClasses">
-          <div v-if="props.filterable" class="p-2 border-b border-[var(--border)]">
+          <div v-if="props.filterable" class="p-2 border-b border-[var(--brd)]">
             <DsInput
               ref="filterInputRef"
               v-model="filterValue"
@@ -533,7 +533,7 @@ function onNodeClick(data: T, node: DsTreeNode<T>): void {
             class="p-1 overflow-auto"
             :style="{ maxHeight: `${props.dropdownMaxHeight}px` }"
           >
-            <div v-if="(props.data?.length ?? 0) === 0" class="px-3 py-2 text-[13px] text-[var(--muted-foreground)]">
+            <div v-if="(props.data?.length ?? 0) === 0" class="px-3 py-2 text-[13px] text-[var(--muted-fg)]">
               <slot name="empty">
                 {{ t('ds.treeSelect.empty', 'No data') }}
               </slot>

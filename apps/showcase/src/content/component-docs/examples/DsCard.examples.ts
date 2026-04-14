@@ -15,7 +15,7 @@ import { DsButton, DsCard } from '@feugene/granularity'
   <DsCard class="grid gap-4 p-5">
     <div>
       <div class="text-sm font-semibold">Basic card</div>
-      <div class="mt-1 text-sm text-[var(--muted-foreground)]">Use cards to group related content.</div>
+      <div class="mt-1 text-sm text-[var(--muted-fg)]">Use cards to group related content.</div>
     </div>
 
     <div class="flex gap-2">
@@ -38,7 +38,7 @@ import { DsBadge, DsCard } from '@feugene/granularity'
 <template>
   <div class="grid gap-4 md:grid-cols-3">
     <DsCard class="grid gap-2 p-4">
-      <div class="text-sm text-[var(--muted-foreground)]">Error budget</div>
+      <div class="text-sm text-[var(--muted-fg)]">Error budget</div>
       <div class="text-2xl font-semibold">98.4%</div>
       <DsBadge size="sm" tone="success" radius="semi">Healthy</DsBadge>
     </DsCard>
@@ -62,7 +62,7 @@ import { DsBadge, DsButton, DsCard } from '@feugene/granularity'
         <div class="text-sm font-semibold">Release checklist</div>
         <DsBadge size="sm" tone="info" radius="semi">2 blockers</DsBadge>
       </div>
-      <div class="text-sm text-[var(--muted-foreground)]">Cards work well as shells for richer dashboard sections.</div>
+      <div class="text-sm text-[var(--muted-fg)]">Cards work well as shells for richer dashboard sections.</div>
     </div>
   </DsCard>
 </template>`,

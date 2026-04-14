@@ -22,7 +22,7 @@ describe('DsTooltip', () => {
     })
 
     const trigger = wrapper.get('[data-testid="ds-tooltip-trigger"]')
-    expect(trigger.attributes('style')).toContain('--ds-tooltip-icon-color: var(--muted-foreground)')
+    expect(trigger.attributes('style')).toContain('--ds-tooltip-icon-color: var(--muted-fg)')
     expect(wrapper.get('[data-icon="info"]')).toBeTruthy()
 
     const tooltip = wrapper.get('[role="tooltip"]')

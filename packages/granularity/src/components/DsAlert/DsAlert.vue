@@ -22,10 +22,10 @@ type DsAlertResolvedStyles = {
 }
 
 const DEFAULT_TEXT_COLORS = {
-  title: 'var(--foreground)',
-  text: 'var(--muted-foreground)',
-  close: 'var(--muted-foreground)',
-  closeHover: 'var(--foreground)',
+  title: 'var(--fg)',
+  text: 'var(--muted-fg)',
+  close: 'var(--muted-fg)',
+  closeHover: 'var(--fg)',
 } as const
 
 const WARNING_LIGHT_TEXT_COLOR = '#92400e'
@@ -57,42 +57,42 @@ const getCustomColor = (value?: string) => value?.trim() || undefined
 const SOFT_TONE_STYLES: Record<DsAlertTone, DsAlertResolvedStyles> = {
   info: {
     bg: 'var(--ds-info-light)',
-    border: 'color-mix(in srgb, var(--ds-info) 22%, var(--border))',
+    border: 'color-mix(in srgb, var(--ds-info) 22%, var(--brd))',
     icon: 'var(--ds-info)',
     ...DEFAULT_TEXT_COLORS,
     Icon: IconInfo,
   },
   success: {
     bg: 'var(--ds-success-light)',
-    border: 'color-mix(in srgb, var(--ds-success) 22%, var(--border))',
+    border: 'color-mix(in srgb, var(--ds-success) 22%, var(--brd))',
     icon: 'var(--ds-success)',
     ...DEFAULT_TEXT_COLORS,
     Icon: IconCheck,
   },
   warning: {
     bg: 'var(--ds-warning-light)',
-    border: 'color-mix(in srgb, var(--ds-warning) 22%, var(--border))',
+    border: 'color-mix(in srgb, var(--ds-warning) 22%, var(--brd))',
     icon: 'var(--ds-warning)',
     ...DEFAULT_TEXT_COLORS,
     Icon: IconWarning,
   },
   danger: {
     bg: 'var(--ds-danger-light)',
-    border: 'color-mix(in srgb, var(--ds-danger) 22%, var(--border))',
+    border: 'color-mix(in srgb, var(--ds-danger) 22%, var(--brd))',
     icon: 'var(--ds-danger)',
     ...DEFAULT_TEXT_COLORS,
     Icon: IconError,
   },
   slate: {
     bg: 'var(--ds-slate-light)',
-    border: 'color-mix(in srgb, var(--ds-slate) 22%, var(--border))',
+    border: 'color-mix(in srgb, var(--ds-slate) 22%, var(--brd))',
     icon: 'var(--ds-slate)',
     ...DEFAULT_TEXT_COLORS,
     Icon: IconInfo,
   },
   azure: {
     bg: 'var(--ds-azure-light)',
-    border: 'color-mix(in srgb, var(--ds-azure) 22%, var(--border))',
+    border: 'color-mix(in srgb, var(--ds-azure) 22%, var(--brd))',
     icon: 'var(--ds-azure)',
     ...DEFAULT_TEXT_COLORS,
     Icon: IconInfo,
@@ -130,14 +130,14 @@ const styles = computed<DsAlertResolvedStyles>(() => {
 
 const rootStyle = computed(() => ({
   '--ds-alert-bg': styles.value.bg,
-  '--ds-alert-border': styles.value.border,
+  '--ds-alert-brd': styles.value.border,
   '--ds-alert-icon-color': styles.value.icon,
   '--ds-alert-title-color': styles.value.title,
   '--ds-alert-text-color': styles.value.text,
   '--ds-alert-close-color': styles.value.close,
   '--ds-alert-close-hover-color': styles.value.closeHover,
   background: 'var(--ds-alert-bg)',
-  borderColor: 'var(--ds-alert-border)',
+  borderColor: 'var(--ds-alert-brd)',
 }))
 </script>
 

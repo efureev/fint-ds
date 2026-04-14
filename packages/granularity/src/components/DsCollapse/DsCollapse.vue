@@ -93,7 +93,7 @@ provide(DS_COLLAPSE_CONTEXT, context)
 
 <template>
   <DsCard data-ds-collapse>
-    <div :class="props.divided ? 'divide-y divide-[var(--border)]' : ''">
+    <div :class="props.divided ? 'divide-y divide-[var(--brd)]' : ''">
       <slot />
     </div>
   </DsCard>

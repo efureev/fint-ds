@@ -115,7 +115,7 @@ function onKeydown(event: KeyboardEvent): void {
 <template>
   <div
     data-ds-collapse-item
-    class="text-[var(--foreground)]"
+    class="text-[var(--fg)]"
   >
     <h3 class="m-0">
       <button
@@ -141,7 +141,7 @@ function onKeydown(event: KeyboardEvent): void {
 
         <ChevronDownIcon
           aria-hidden="true"
-          class="h-4 w-4 shrink-0 transition-transform duration-150 text-[var(--muted-foreground)]"
+          class="h-4 w-4 shrink-0 transition-transform duration-150 text-[var(--muted-fg)]"
           :class="expanded ? 'rotate-180' : ''"
         />
       </button>
@@ -155,7 +155,7 @@ function onKeydown(event: KeyboardEvent): void {
       :class="expanded ? 'grid-rows-[1fr]' : 'grid-rows-[0fr]'"
     >
       <div class="overflow-hidden">
-        <div class="px-4 pb-4 text-sm text-[var(--muted-foreground)]">
+        <div class="px-4 pb-4 text-sm text-[var(--muted-fg)]">
           <slot />
         </div>
       </div>

@@ -47,7 +47,7 @@ function onError(error: unknown) {
       </template>
     </DsFileUpload>
 
-    <div class="text-sm text-[var(--muted-foreground)]">
+    <div class="text-sm text-[var(--muted-fg)]">
       {{ lastResult }}
     </div>
   </div>

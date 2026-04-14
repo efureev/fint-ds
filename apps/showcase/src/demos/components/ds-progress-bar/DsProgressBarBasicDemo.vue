@@ -20,7 +20,7 @@ const progress = ref(32)
     <div class="grid gap-2">
       <div class="flex items-center justify-between text-sm">
         <span>Verification progress</span>
-        <span class="text-[var(--muted-foreground)]">{{ progress }}%</span>
+        <span class="text-[var(--muted-fg)]">{{ progress }}%</span>
       </div>
       <DsProgressBar :value="progress" aria-label="Verification progress" />
     </div>

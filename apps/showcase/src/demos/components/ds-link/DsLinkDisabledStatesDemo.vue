@@ -16,7 +16,7 @@ import { DsCard, DsLink } from '@feugene/granularity'
       </DsLink>
     </div>
 
-    <p class="text-[var(--muted-foreground)]">
+    <p class="text-[var(--muted-fg)]">
       Disabled mode рендерится как неинтерактивный текстовый элемент и сохраняет тот же layout внутри forms, cards и inline toolbars.
     </p>
   </DsCard>

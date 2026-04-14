@@ -20,7 +20,7 @@ function runFullscreenSync() {
       Simulate global sync
     </DsButton>
 
-    <div class="text-xs text-[var(--muted-foreground)]">
+    <div class="text-xs text-[var(--muted-fg)]">
       Fullscreen overlay closes automatically after a short async cycle.
     </div>
 

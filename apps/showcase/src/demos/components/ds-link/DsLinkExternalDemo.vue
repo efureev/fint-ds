@@ -14,7 +14,7 @@ import { DsIcon, DsLink } from '@feugene/granularity'
       </DsIcon>
     </DsLink>
 
-    <div class="rounded-xl border border-[var(--border)] bg-[var(--background)] p-4 text-[var(--muted-foreground)]">
+    <div class="rounded-xl border border-[var(--brd)] bg-[var(--bg)] p-4 text-[var(--muted-fg)]">
       Use `external` when the link should automatically resolve `target="_blank"` и безопасный `rel`.
     </div>
   </div>

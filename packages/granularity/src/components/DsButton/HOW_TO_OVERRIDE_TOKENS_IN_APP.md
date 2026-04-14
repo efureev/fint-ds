@@ -21,7 +21,7 @@
 :root {
   --ds-azure: #0891b2;
   --ds-azure-light: #cffafe;
-  --ds-azure-foreground: #ffffff;
+  --ds-azure-fg: #ffffff;
   --ds-azure-text: #155e75;
   --ds-azure-hover: #0e7490;
   --ds-azure-active: #155e75;
@@ -36,13 +36,13 @@
 
 ```css
 :root {
-  --ds-button-azure-background: #0369a1;
-  --ds-button-azure-background-hover: #075985;
-  --ds-button-azure-background-active: #0c4a6e;
-  --ds-button-azure-foreground: #ffffff;
-  --ds-button-azure-soft-background: #e0f2fe;
-  --ds-button-azure-soft-background-hover: color-mix(in srgb, #0ea5e9 20%, var(--background));
-  --ds-button-azure-soft-background-active: color-mix(in srgb, #0ea5e9 26%, var(--background));
+  --ds-button-azure-bg: #0369a1;
+  --ds-button-azure-bg-hover: #075985;
+  --ds-button-azure-bg-active: #0c4a6e;
+  --ds-button-azure-fg: #ffffff;
+  --ds-button-azure-soft-bg: #e0f2fe;
+  --ds-button-azure-soft-bg-hover: color-mix(in srgb, #0ea5e9 20%, var(--bg));
+  --ds-button-azure-soft-bg-active: color-mix(in srgb, #0ea5e9 26%, var(--bg));
 }
 ```
 
@@ -55,17 +55,17 @@
 ```css
 /* app.css */
 :root {
-  --ds-button-info-background: #0f766e;
-  --ds-button-info-background-hover: #115e59;
-  --ds-button-info-background-active: #134e4a;
-  --ds-button-info-foreground: #ffffff;
+  --ds-button-info-bg: #0f766e;
+  --ds-button-info-bg-hover: #115e59;
+  --ds-button-info-bg-active: #134e4a;
+  --ds-button-info-fg: #ffffff;
 }
 
 .dark {
-  --ds-button-info-background: #0f766e;
-  --ds-button-info-background-hover: #115e59;
-  --ds-button-info-background-active: #134e4a;
-  --ds-button-info-foreground: #f8fafc;
+  --ds-button-info-bg: #0f766e;
+  --ds-button-info-bg-hover: #115e59;
+  --ds-button-info-bg-active: #134e4a;
+  --ds-button-info-fg: #f8fafc;
 }
 ```
 
@@ -82,13 +82,13 @@
 
 <style scoped>
 .custom-info-scope {
-  --ds-button-info-background: #475569;
-  --ds-button-info-background-hover: #334155;
-  --ds-button-info-background-active: #1e293b;
-  --ds-button-info-foreground: #ffffff;
-  --ds-button-info-soft-background: #e2e8f0;
-  --ds-button-info-soft-background-hover: color-mix(in srgb, #475569 20%, var(--background));
-  --ds-button-info-soft-background-active: color-mix(in srgb, #475569 26%, var(--background));
+  --ds-button-info-bg: #475569;
+  --ds-button-info-bg-hover: #334155;
+  --ds-button-info-bg-active: #1e293b;
+  --ds-button-info-fg: #ffffff;
+  --ds-button-info-soft-bg: #e2e8f0;
+  --ds-button-info-soft-bg-hover: color-mix(in srgb, #475569 20%, var(--bg));
+  --ds-button-info-soft-bg-active: color-mix(in srgb, #475569 26%, var(--bg));
 }
 </style>
 ```
@@ -115,7 +115,7 @@
 - `slate`
 - `azure`
 
-Отдельно `neutral` в `DsButton` использует общие surface token'ы (`--secondary`, `--secondary-hover`, `--secondary-active`, `--secondary-foreground`, `--border`).
+Отдельно `neutral` в `DsButton` использует общие surface token'ы (`--secondary`, `--secondary-hover`, `--secondary-active`, `--secondary-fg`, `--brd`).
 
 ### Когда override делать через semantic token, а когда через button token
 

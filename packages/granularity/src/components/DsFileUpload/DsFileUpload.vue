@@ -352,10 +352,10 @@ defineExpose({
       hasCustomUi
         ? 'inline-block'
         : [
-            'relative w-full rounded-[var(--ds-radius-lg)] border border-dashed border-[var(--border)] bg-[var(--card)] px-5 py-6 outline-none transition',
+            'relative w-full rounded-[var(--ds-radius-lg)] border border-dashed border-[var(--brd)] bg-[var(--card)] px-5 py-6 outline-none transition',
             props.disabled
               ? 'opacity-60 cursor-not-allowed'
-              : 'cursor-pointer hover:bg-[var(--muted)] focus-visible:ring-2 focus-visible:ring-[var(--ring)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--background)]',
+              : 'cursor-pointer hover:bg-[var(--muted)] focus-visible:ring-2 focus-visible:ring-[var(--ring)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg)]',
             isOver && !props.disabled ? 'border-[var(--ring)] bg-[var(--muted)]' : '',
           ]
     "
@@ -390,10 +390,10 @@ defineExpose({
 
     <div v-else class="flex items-start gap-4">
       <div
-        class="h-12 w-12 shrink-0 rounded-[12px] bg-[var(--muted)] border border-[var(--border)] flex items-center justify-center"
+        class="h-12 w-12 shrink-0 rounded-[12px] bg-[var(--muted)] border border-[var(--brd)] flex items-center justify-center"
         aria-hidden="true"
       >
-        <IconArrowUp class="h-6 w-6 text-[var(--muted-foreground)]" />
+        <IconArrowUp class="h-6 w-6 text-[var(--muted-fg)]" />
       </div>
 
       <div class="min-w-0">

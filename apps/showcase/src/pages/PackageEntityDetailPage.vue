@@ -42,7 +42,7 @@ const pageEyebrow = computed(() => page.value?.eyebrow ?? showcasePageRecord.ove
 <template>
   <div v-if="entity && entityDoc && page" class="space-y-8">
     <div class="showcase-text-subtle flex items-center gap-3 text-sm">
-      <RouterLink :to="page.path" class="inline-flex items-center gap-2 font-medium transition-colors hover:text-[var(--foreground)]">
+      <RouterLink :to="page.path" class="inline-flex items-center gap-2 font-medium transition-colors hover:text-[var(--fg)]">
         <IconArrowLeft class="h-4 w-4 shrink-0" />
         <span>Back to {{ page.shortTitle.toLowerCase() }}</span>
       </RouterLink>

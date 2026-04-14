@@ -22,10 +22,10 @@ const rows = [
     <tr
       v-for="row in rows"
       :key="row.campaign"
-      class="border-t border-[var(--border)]"
+      class="border-t border-[var(--brd)]"
     >
       <td class="px-4 py-3">{{ row.campaign }}</td>
-      <td class="px-4 py-3 text-[var(--muted-foreground)]">{{ row.owner }}</td>
+      <td class="px-4 py-3 text-[var(--muted-fg)]">{{ row.owner }}</td>
       <td class="px-4 py-3">
         <DsBadge size="sm" variant="neutral">
           {{ row.status }}

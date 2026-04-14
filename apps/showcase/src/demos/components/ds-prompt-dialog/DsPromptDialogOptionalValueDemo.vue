@@ -14,8 +14,8 @@ const lastSubmitted = ref(note.value)
       Open optional prompt
     </DsButton>
 
-    <div class="text-xs text-[var(--muted-foreground)]">
-      Last submitted note: <span class="font-medium text-[var(--foreground)]">{{ lastSubmitted || '—' }}</span>
+    <div class="text-xs text-[var(--muted-fg)]">
+      Last submitted note: <span class="font-medium text-[var(--fg)]">{{ lastSubmitted || '—' }}</span>
     </div>
 
     <DsPromptDialog

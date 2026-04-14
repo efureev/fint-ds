@@ -29,8 +29,8 @@ const channel = ref('slack')
       </DsRadio>
     </DsRadioGroup>
 
-    <div class="rounded-2xl border border-[var(--border)] bg-[var(--card)] p-4 text-sm text-[var(--muted-foreground)]">
-      Routed through: <span class="font-semibold text-[var(--foreground)]">{{ channel }}</span>
+    <div class="rounded-2xl border border-[var(--brd)] bg-[var(--card)] p-4 text-sm text-[var(--muted-fg)]">
+      Routed through: <span class="font-semibold text-[var(--fg)]">{{ channel }}</span>
     </div>
   </div>
 </template>

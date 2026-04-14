@@ -154,7 +154,7 @@ export default defineConfig({
         presetGranularity({
             components: ['DsButton'],
             preflights: createGranularityCssPreflights([
-                ':root { --primary: hotpink; --primary-foreground: white; }',
+                ':root { --primary: hotpink; --primary-fg: white; }',
             ]),
         }),
     ],

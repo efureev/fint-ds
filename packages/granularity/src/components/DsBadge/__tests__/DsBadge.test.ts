@@ -80,6 +80,6 @@ describe('DsBadge', () => {
     expect(slate.attributes('class')).toContain('bg-[var(--ds-slate-light)]')
     expect(slate.attributes('class')).toContain('text-[var(--ds-slate-text)]')
     expect(azure.attributes('class')).toContain('bg-[var(--ds-azure)]')
-    expect(azure.attributes('class')).toContain('text-[var(--ds-azure-foreground)]')
+    expect(azure.attributes('class')).toContain('text-[var(--ds-azure-fg)]')
   })
 })

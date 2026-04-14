@@ -193,7 +193,7 @@ function getFoundationTokenDescription(name: string, section: string) {
     return `Кривая ускорения \`${easing}\` для motion-паттернов дизайн-системы.`
   }
 
-  if (name.startsWith('--primary-') || name.startsWith('--secondary-') || name.startsWith('--border-') || name.startsWith('--destructive-'))
+  if (name.startsWith('--primary-') || name.startsWith('--secondary-') || name.startsWith('--brd-') || name.startsWith('--destructive-'))
     return 'Производное interaction-состояние, вычисляемое из semantic theme roles для hover/active поведения.'
 
   if (name.startsWith('--ds-success-') || name.startsWith('--ds-warning-') || name.startsWith('--ds-danger-') || name.startsWith('--ds-info-'))
@@ -204,53 +204,69 @@ function getFoundationTokenDescription(name: string, section: string) {
 
 function getThemeTokenDescription(name: string, section: string) {
   const descriptions: Record<string, string> = {
-    '--background': 'Базовый фон приложения и крупных layout-поверхностей текущей темы.',
-    '--foreground': 'Основной цвет текста и иконок поверх базового фона текущей темы.',
+    '--bg': 'Базовый фон приложения и крупных layout-поверхностей текущей темы.',
+    '--fg': 'Основной цвет текста и иконок поверх базового фона текущей темы.',
     '--card': 'Фон карточек, панелей и других поднятых поверхностей.',
-    '--card-foreground': 'Цвет контента внутри карточек и raised surface-блоков.',
+    '--card-fg': 'Цвет контента внутри карточек и raised surface-блоков.',
     '--popover': 'Фон popover-, dropdown- и overlay-поверхностей.',
-    '--popover-foreground': 'Цвет текста и иконок внутри popover-слоёв.',
+    '--popover-fg': 'Цвет текста и иконок внутри popover-слоёв.',
     '--muted': 'Приглушённая поверхность для вторичных блоков, плашек и заполнений.',
-    '--muted-foreground': 'Вторичный текстовый цвет для helper-копии и менее важных подписей.',
+    '--muted-fg': 'Вторичный текстовый цвет для helper-копии и менее важных подписей.',
     '--secondary': 'Нейтральная secondary action/surface-подложка без сильного бренд-акцента.',
-    '--secondary-foreground': 'Контрастный текст для secondary-кнопок и поверхностей.',
-    '--border': 'Базовый цвет бордеров и разделителей текущей темы.',
+    '--secondary-fg': 'Контрастный текст для secondary-кнопок и поверхностей.',
+    '--brd': 'Базовый цвет бордеров и разделителей текущей темы.',
     '--input': 'Цвет рамки и фона input-like контролов в состоянии покоя.',
     '--ring': 'Цвет focus-ring и акцентного outline для интерактивных компонентов.',
     '--primary': 'Главный brand/action цвет темы для primary CTA и ключевых акцентов.',
-    '--primary-foreground': 'Контрастный текст и иконки поверх primary-заливки.',
+    '--primary-fg': 'Контрастный текст и иконки поверх primary-заливки.',
     '--accent': 'Мягкая акцентная поверхность для selected/hovered областей и подсветок.',
-    '--accent-foreground': 'Цвет текста поверх accent-подложек.',
+    '--accent-fg': 'Цвет текста поверх accent-подложек.',
     '--destructive': 'Цвет destructive action-сценариев и критических состояний.',
-    '--destructive-foreground': 'Контрастный текст и иконки поверх destructive-заливки.',
+    '--destructive-fg': 'Контрастный текст и иконки поверх destructive-заливки.',
     '--ds-success': 'Основной semantic success-цвет для статусов, бейджей и уведомлений.',
     '--ds-success-light': 'Облегчённая success-подложка для мягких статусов и подсветок.',
+    '--ds-success-fg': 'Контрастный текст и иконки поверх success-заливки.',
+    '--ds-success-text': 'Текстовый оттенок для success-сообщений на светлой подложке.',
     '--ds-warning': 'Основной semantic warning-цвет для предупреждений и промежуточных статусов.',
     '--ds-warning-light': 'Облегчённая warning-подложка для мягких warning-состояний.',
+    '--ds-warning-fg': 'Контрастный текст и иконки поверх warning-заливки.',
+    '--ds-warning-text': 'Текстовый оттенок для warning-сообщений на мягкой warning-подложке.',
     '--ds-danger': 'Semantic danger-цвет для ошибок, рисков и критических сообщений.',
     '--ds-danger-light': 'Облегчённая danger-подложка для мягких error-состояний.',
+    '--ds-danger-fg': 'Контрастный текст и иконки поверх danger-заливки.',
+    '--ds-danger-text': 'Текстовый оттенок для error-сообщений на мягкой danger-подложке.',
     '--ds-info': 'Semantic info-цвет для нейтральных уведомлений и информационных акцентов.',
     '--ds-info-light': 'Облегчённая info-подложка для спокойных информационных блоков.',
+    '--ds-info-fg': 'Контрастный текст и иконки поверх info-заливки.',
+    '--ds-info-text': 'Текстовый оттенок для спокойных info-сообщений и подсказок.',
+    '--ds-slate': 'Нейтральный semantic slate-цвет для subdued индикаторов и secondary статусов.',
+    '--ds-slate-light': 'Облегчённая slate-подложка для мягких нейтральных состояний.',
+    '--ds-slate-fg': 'Контрастный текст и иконки поверх slate-заливки.',
+    '--ds-slate-text': 'Текстовый оттенок для нейтральных slate-сообщений и плашек.',
+    '--ds-azure': 'Semantic azure-цвет для информационных акцентов и вспомогательных статусов.',
+    '--ds-azure-light': 'Облегчённая azure-подложка для мягких informational поверхностей.',
+    '--ds-azure-fg': 'Контрастный текст и иконки поверх azure-заливки.',
+    '--ds-azure-text': 'Текстовый оттенок для azure-плашек и спокойных informational блоков.',
     '--chart-1': 'Первый цвет серии для графиков и data-visualization элементов.',
     '--chart-2': 'Второй цвет серии для графиков и data-visualization элементов.',
     '--chart-3': 'Третий цвет серии для графиков и data-visualization элементов.',
     '--chart-4': 'Четвёртый цвет серии для графиков и data-visualization элементов.',
     '--chart-5': 'Пятый цвет серии для графиков и data-visualization элементов.',
     '--sidebar': 'Фон sidebar/navigation rail области текущей темы.',
-    '--sidebar-foreground': 'Основной текст и иконки внутри sidebar.',
+    '--sidebar-fg': 'Основной текст и иконки внутри sidebar.',
     '--sidebar-primary': 'Акцентный цвет активных/ключевых элементов внутри sidebar.',
-    '--sidebar-primary-foreground': 'Контрастный текст поверх sidebar primary-акцентов.',
+    '--sidebar-primary-fg': 'Контрастный текст поверх sidebar primary-акцентов.',
     '--sidebar-accent': 'Мягкий accent-фон для hover/selected состояний в sidebar.',
-    '--sidebar-accent-foreground': 'Цвет текста поверх sidebar accent-подложек.',
-    '--sidebar-border': 'Бордеры и разделители sidebar-области.',
+    '--sidebar-accent-fg': 'Цвет текста поверх sidebar accent-подложек.',
+    '--sidebar-brd': 'Бордеры и разделители sidebar-области.',
     '--sidebar-ring': 'Focus-ring для интерактивных элементов внутри sidebar.',
     '--ds-category-tree-branch-line-active-color': 'Semantic цвет активной ветки category tree и подобных композитных компонентов.',
     '--primary-hover': 'Fallback-цвет hover-состояния для primary action без поддержки `color-mix`.',
     '--primary-active': 'Fallback-цвет active-состояния для primary action без поддержки `color-mix`.',
     '--secondary-hover': 'Fallback-цвет hover-состояния для secondary action без поддержки `color-mix`.',
     '--secondary-active': 'Fallback-цвет active-состояния для secondary action без поддержки `color-mix`.',
-    '--border-hover': 'Fallback-цвет hover-состояния для border/outline-элементов без поддержки `color-mix`.',
-    '--border-active': 'Fallback-цвет active-состояния для border/outline-элементов без поддержки `color-mix`.',
+    '--brd-hover': 'Fallback-цвет hover-состояния для border/outline-элементов без поддержки `color-mix`.',
+    '--brd-active': 'Fallback-цвет active-состояния для border/outline-элементов без поддержки `color-mix`.',
     '--destructive-hover': 'Fallback-цвет hover-состояния для destructive action без поддержки `color-mix`.',
     '--destructive-active': 'Fallback-цвет active-состояния для destructive action без поддержки `color-mix`.',
     '--ds-success-hover': 'Fallback-цвет hover-состояния для success-ролей без поддержки `color-mix`.',
@@ -261,6 +277,10 @@ function getThemeTokenDescription(name: string, section: string) {
     '--ds-danger-active': 'Fallback-цвет active-состояния для danger-ролей без поддержки `color-mix`.',
     '--ds-info-hover': 'Fallback-цвет hover-состояния для info-ролей без поддержки `color-mix`.',
     '--ds-info-active': 'Fallback-цвет active-состояния для info-ролей без поддержки `color-mix`.',
+    '--ds-slate-hover': 'Fallback-цвет hover-состояния для slate-ролей без поддержки `color-mix`.',
+    '--ds-slate-active': 'Fallback-цвет active-состояния для slate-ролей без поддержки `color-mix`.',
+    '--ds-azure-hover': 'Fallback-цвет hover-состояния для azure-ролей без поддержки `color-mix`.',
+    '--ds-azure-active': 'Fallback-цвет active-состояния для azure-ролей без поддержки `color-mix`.',
   }
 
   return descriptions[name] ?? `Theme token из группы \`${section}\`, задающий semantic цветовой контракт текущего режима.`
@@ -507,59 +527,75 @@ const tokensCssSource = `:root {
   --ds-ease-in: cubic-bezier(0.7, 0, 0.84, 0);
 
   /* Derived interaction formulas: action roles */
-  --primary-hover: color-mix(in srgb, var(--primary) 92%, var(--foreground));
-  --primary-active: color-mix(in srgb, var(--primary) 84%, var(--foreground));
-  --secondary-hover: color-mix(in srgb, var(--secondary) 92%, var(--foreground));
-  --secondary-active: color-mix(in srgb, var(--secondary) 84%, var(--foreground));
-  --border-hover: color-mix(in srgb, var(--border) 70%, var(--foreground));
-  --border-active: color-mix(in srgb, var(--border) 55%, var(--foreground));
-  --destructive-hover: color-mix(in srgb, var(--destructive) 92%, var(--foreground));
-  --destructive-active: color-mix(in srgb, var(--destructive) 84%, var(--foreground));
+  --primary-hover: color-mix(in srgb, var(--primary) 92%, var(--fg));
+  --primary-active: color-mix(in srgb, var(--primary) 84%, var(--fg));
+  --secondary-hover: color-mix(in srgb, var(--secondary) 92%, var(--fg));
+  --secondary-active: color-mix(in srgb, var(--secondary) 84%, var(--fg));
+  --brd-hover: color-mix(in srgb, var(--brd) 70%, var(--fg));
+  --brd-active: color-mix(in srgb, var(--brd) 55%, var(--fg));
+  --destructive-hover: color-mix(in srgb, var(--destructive) 92%, var(--fg));
+  --destructive-active: color-mix(in srgb, var(--destructive) 84%, var(--fg));
 
   /* Derived interaction formulas: status roles */
-  --ds-success-hover: color-mix(in srgb, var(--ds-success) 92%, var(--foreground));
-  --ds-success-active: color-mix(in srgb, var(--ds-success) 84%, var(--foreground));
-  --ds-warning-hover: color-mix(in srgb, var(--ds-warning) 92%, var(--foreground));
-  --ds-warning-active: color-mix(in srgb, var(--ds-warning) 84%, var(--foreground));
-  --ds-danger-hover: color-mix(in srgb, var(--ds-danger) 92%, var(--foreground));
-  --ds-danger-active: color-mix(in srgb, var(--ds-danger) 84%, var(--foreground));
-  --ds-info-hover: color-mix(in srgb, var(--ds-info) 92%, var(--foreground));
-  --ds-info-active: color-mix(in srgb, var(--ds-info) 84%, var(--foreground));
+  --ds-success-hover: color-mix(in srgb, var(--ds-success) 92%, var(--fg));
+  --ds-success-active: color-mix(in srgb, var(--ds-success) 84%, var(--fg));
+  --ds-warning-hover: color-mix(in srgb, var(--ds-warning) 92%, var(--fg));
+  --ds-warning-active: color-mix(in srgb, var(--ds-warning) 84%, var(--fg));
+  --ds-danger-hover: color-mix(in srgb, var(--ds-danger) 92%, var(--fg));
+  --ds-danger-active: color-mix(in srgb, var(--ds-danger) 84%, var(--fg));
+  --ds-info-hover: color-mix(in srgb, var(--ds-info) 92%, var(--fg));
+  --ds-info-active: color-mix(in srgb, var(--ds-info) 84%, var(--fg));
 }`
 
 const lightThemeCssSource = `:root {
   /* Surface roles */
-  --background: #f8fafc;
-  --foreground: #0f172a;
+  --bg: #f8fafc;
+  --fg: #0f172a;
   --card: #ffffff;
-  --card-foreground: #0f172a;
+  --card-fg: #0f172a;
   --popover: #ffffff;
-  --popover-foreground: #0f172a;
+  --popover-fg: #0f172a;
   --muted: #f1f5f9;
-  --muted-foreground: #64748b;
+  --muted-fg: #64748b;
   --secondary: #e2e8f0;
-  --secondary-foreground: #1e293b;
-  --border: #e2e8f0;
+  --secondary-fg: #1e293b;
+  --brd: #e2e8f0;
   --input: #e2e8f0;
   --ring: #6366f1;
 
   /* Action roles */
   --primary: #4f46e5;
-  --primary-foreground: #ffffff;
+  --primary-fg: #ffffff;
   --accent: #eef2ff;
-  --accent-foreground: #3730a3;
+  --accent-fg: #3730a3;
   --destructive: #dc2626;
-  --destructive-foreground: #ffffff;
+  --destructive-fg: #ffffff;
 
   /* Status roles */
   --ds-success: #10b981;
   --ds-success-light: #d1fae5;
+  --ds-success-fg: #ffffff;
+  --ds-success-text: #065f46;
   --ds-warning: #f97316;
   --ds-warning-light: #ffedd5;
+  --ds-warning-fg: #ffffff;
+  --ds-warning-text: #7c2d12;
   --ds-danger: #dc2626;
   --ds-danger-light: #fee2e2;
-  --ds-info: #6366f1;
+  --ds-danger-fg: #ffffff;
+  --ds-danger-text: #991b1b;
+  --ds-info: #5850ec;
   --ds-info-light: #e0e7ff;
+  --ds-info-fg: #ffffff;
+  --ds-info-text: #3730a3;
+  --ds-slate: #475569;
+  --ds-slate-light: #e2e8f0;
+  --ds-slate-fg: #ffffff;
+  --ds-slate-text: #334155;
+  --ds-azure: #0ea5e9;
+  --ds-azure-light: #e0f2fe;
+  --ds-azure-fg: #ffffff;
+  --ds-azure-text: #075985;
 
   /* Data visualization roles */
   --chart-1: #4f46e5;
@@ -570,16 +606,16 @@ const lightThemeCssSource = `:root {
 
   /* Navigation roles */
   --sidebar: #ffffff;
-  --sidebar-foreground: #0f172a;
+  --sidebar-fg: #0f172a;
   --sidebar-primary: #4f46e5;
-  --sidebar-primary-foreground: #ffffff;
+  --sidebar-primary-fg: #ffffff;
   --sidebar-accent: #f1f5f9;
-  --sidebar-accent-foreground: #1e293b;
-  --sidebar-border: #e2e8f0;
+  --sidebar-accent-fg: #1e293b;
+  --sidebar-brd: #e2e8f0;
   --sidebar-ring: #6366f1;
 
   /* Component semantic roles */
-  --ds-category-tree-branch-line-active-color: color-mix(in srgb, var(--primary) 20%, var(--border));
+  --ds-category-tree-branch-line-active-color: color-mix(in srgb, var(--primary) 20%, var(--brd));
 }
 
 @supports not (color: color-mix(in srgb, #000 50%, #fff)) {
@@ -589,8 +625,8 @@ const lightThemeCssSource = `:root {
     --primary-active: #453ec7;
     --secondary-hover: #d1d7e0;
     --secondary-active: #c0c7d0;
-    --border-hover: #a3a9b5;
-    --border-active: #838a97;
+    --brd-hover: #a3a9b5;
+    --brd-active: #838a97;
     --destructive-hover: #cc2526;
     --destructive-active: #bb2427;
 
@@ -603,6 +639,10 @@ const lightThemeCssSource = `:root {
     --ds-danger-active: #bb2427;
     --ds-info-hover: #5c60e1;
     --ds-info-active: #5659d1;
+    --ds-slate-hover: #435062;
+    --ds-slate-active: #3d4a5b;
+    --ds-azure-hover: #0284c7;
+    --ds-azure-active: #0369a1;
 
     /* Component semantic fallbacks */
     --ds-category-tree-branch-line-active-color: #c4cdf7;
@@ -613,37 +653,53 @@ const darkThemeCssSource = `.theme-dark,
 .dark,
 [data-theme='dark'] {
   /* Surface roles */
-  --background: #0f172a;
-  --foreground: #f8fafc;
+  --bg: #0f172a;
+  --fg: #f8fafc;
   --card: #1e293b;
-  --card-foreground: #f8fafc;
+  --card-fg: #f8fafc;
   --popover: #1e293b;
-  --popover-foreground: #f8fafc;
+  --popover-fg: #f8fafc;
   --muted: #334155;
-  --muted-foreground: #94a3b8;
+  --muted-fg: #94a3b8;
   --secondary: #334155;
-  --secondary-foreground: #f1f5f9;
-  --border: #334155;
+  --secondary-fg: #f1f5f9;
+  --brd: #334155;
   --input: #334155;
   --ring: #818cf8;
 
   /* Action roles */
   --primary: #6366f1;
-  --primary-foreground: #ffffff;
+  --primary-fg: #ffffff;
   --accent: #1e1b4b;
-  --accent-foreground: #c7d2fe;
+  --accent-fg: #c7d2fe;
   --destructive: #ef4444;
-  --destructive-foreground: #ffffff;
+  --destructive-fg: #ffffff;
 
   /* Status roles */
   --ds-success: #34d399;
   --ds-success-light: #064e3b;
+  --ds-success-fg: #0f172a;
+  --ds-success-text: #6ee7b7;
   --ds-warning: #fb923c;
   --ds-warning-light: #7c2d12;
+  --ds-warning-fg: #0f172a;
+  --ds-warning-text: #fdba74;
   --ds-danger: #f87171;
   --ds-danger-light: #7f1d1d;
+  --ds-danger-fg: #0f172a;
+  --ds-danger-text: #fca5a5;
   --ds-info: #818cf8;
   --ds-info-light: #312e81;
+  --ds-info-fg: #0f172a;
+  --ds-info-text: #c7d2fe;
+  --ds-slate: #94a3b8;
+  --ds-slate-light: #334155;
+  --ds-slate-fg: #0f172a;
+  --ds-slate-text: #cbd5e1;
+  --ds-azure: #38bdf8;
+  --ds-azure-light: #0c4a6e;
+  --ds-azure-fg: #0f172a;
+  --ds-azure-text: #bae6fd;
 
   /* Data visualization roles */
   --chart-1: #6366f1;
@@ -654,16 +710,16 @@ const darkThemeCssSource = `.theme-dark,
 
   /* Navigation roles */
   --sidebar: #1e293b;
-  --sidebar-foreground: #f8fafc;
+  --sidebar-fg: #f8fafc;
   --sidebar-primary: #6366f1;
-  --sidebar-primary-foreground: #ffffff;
+  --sidebar-primary-fg: #ffffff;
   --sidebar-accent: #334155;
-  --sidebar-accent-foreground: #f1f5f9;
-  --sidebar-border: #334155;
+  --sidebar-accent-fg: #f1f5f9;
+  --sidebar-brd: #334155;
   --sidebar-ring: #818cf8;
 
   /* Component semantic roles */
-  --ds-category-tree-branch-line-active-color: color-mix(in srgb, var(--primary) 38%, var(--border));
+  --ds-category-tree-branch-line-active-color: color-mix(in srgb, var(--primary) 38%, var(--brd));
 }
 
 @supports not (color: color-mix(in srgb, #000 50%, #fff)) {
@@ -675,8 +731,8 @@ const darkThemeCssSource = `.theme-dark,
     --primary-active: #7b7ef3;
     --secondary-hover: #435062;
     --secondary-active: #535f70;
-    --border-hover: #6e7987;
-    --border-active: #8c94a0;
+    --brd-hover: #6e7987;
+    --brd-active: #8c94a0;
     --destructive-hover: #f05353;
     --destructive-active: #f06161;
 
@@ -689,6 +745,10 @@ const darkThemeCssSource = `.theme-dark,
     --ds-danger-active: #f88787;
     --ds-info-hover: #8b95f8;
     --ds-info-active: #949ef9;
+    --ds-slate-hover: #9faec0;
+    --ds-slate-active: #aab7c8;
+    --ds-azure-hover: #4bc3f9;
+    --ds-azure-active: #5dcbf9;
 
     /* Component semantic fallbacks */
     --ds-category-tree-branch-line-active-color: #505b8c;
@@ -712,8 +772,8 @@ body {
 body {
   margin: 0;
   font-family: var(--ds-font-ui);
-  background: var(--background);
-  color: var(--foreground);
+  background: var(--bg);
+  color: var(--fg);
 }
 
 :where(a, button) {
@@ -721,14 +781,14 @@ body {
 }`
 
 const lightThemeCssExcerpt = `:root {
-  --background: #f8fafc;
-  --foreground: #0f172a;
+  --bg: #f8fafc;
+  --fg: #0f172a;
   --card: #ffffff;
   --muted: #f1f5f9;
-  --border: #e2e8f0;
+  --brd: #e2e8f0;
   --ring: #6366f1;
   --primary: #4f46e5;
-  --primary-foreground: #ffffff;
+  --primary-fg: #ffffff;
   --ds-success: #10b981;
   --ds-warning: #f97316;
   --ds-danger: #dc2626;
@@ -738,14 +798,14 @@ const lightThemeCssExcerpt = `:root {
 const darkThemeCssExcerpt = `.theme-dark,
 .dark,
 [data-theme='dark'] {
-  --background: #0f172a;
-  --foreground: #f8fafc;
+  --bg: #0f172a;
+  --fg: #f8fafc;
   --card: #1e293b;
   --muted: #334155;
-  --border: #334155;
+  --brd: #334155;
   --ring: #818cf8;
   --primary: #6366f1;
-  --primary-foreground: #ffffff;
+  --primary-fg: #ffffff;
   --ds-success: #34d399;
   --ds-warning: #fb923c;
   --ds-danger: #f87171;
@@ -799,7 +859,7 @@ export const showcaseQuickStartCards: ShowcaseQuickStartCard[] = [
 presetGranularity({
   components: ['DsButton'],
   preflights: createGranularityCssPreflights([
-    ':root { --primary: hotpink; --primary-foreground: white; }',
+    ':root { --primary: hotpink; --primary-fg: white; }',
   ]),
 })`,
     language: 'ts',
@@ -863,7 +923,7 @@ export const showcaseFoundationGuides: ShowcaseFoundationGuide[] = [
     id: 'themes',
     title: 'Themes',
     summary: 'Встроенные `light` и `dark` темы отделены от foundation-токенов и могут жить рядом с кастомными theme layers приложения.',
-    description: 'Theme layer определяет semantic значения вроде `--background`, `--primary`, `--border` и статусные роли. Это позволяет использовать один набор foundations и переключать только визуальный режим.',
+    description: 'Theme layer определяет semantic значения вроде `--bg`, `--primary`, `--brd` и статусные роли. Это позволяет использовать один набор foundations и переключать только визуальный режим.',
     narrativeSource: takeHeadingBlock(stylingDocSource, '## Встроенные темы'),
     sourcePath: 'packages/granularity/docs/styling.md',
     keyPoints: [

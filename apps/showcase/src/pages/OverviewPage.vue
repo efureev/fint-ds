@@ -83,7 +83,7 @@ const overviewFeatureList = [
           >
             <h4 class="flex items-center gap-3 text-base font-semibold leading-6">
                 <span
-                    class="inline-flex h-8 w-8 min-w-8 shrink-0 items-center justify-center rounded-full bg-[var(--primary)] text-xs font-semibold text-[var(--primary-foreground)]">
+                    class="inline-flex h-8 w-8 min-w-8 shrink-0 items-center justify-center rounded-full bg-[var(--primary)] text-xs font-semibold text-[var(--primary-fg)]">
                   0{{ index + 1 }}
                 </span>
               {{ feature.title }}

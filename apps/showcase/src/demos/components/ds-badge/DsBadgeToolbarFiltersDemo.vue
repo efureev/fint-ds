@@ -22,8 +22,8 @@ const activeFilter = ref<'all' | 'failed' | 'review'>('all')
       </DsButton>
     </DsButtonGroup>
 
-    <DsCard class="p-4 text-sm text-[var(--muted-foreground)]">
-      Active filter: <span class="font-semibold text-[var(--foreground)]">{{ activeFilter }}</span>
+    <DsCard class="p-4 text-sm text-[var(--muted-fg)]">
+      Active filter: <span class="font-semibold text-[var(--fg)]">{{ activeFilter }}</span>
     </DsCard>
   </div>
 </template>

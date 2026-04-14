@@ -25,12 +25,12 @@ describe('granularity safelist selection', () => {
       name: 'DsButton',
       expected: dsButtonSafelist,
       requiredTokens: [
-        'bg-[var(--primary)]',
+        'bg-[var(--ds-button-primary-bg,var(--primary))]',
         'focus-visible:ring-[var(--ring)]',
         'animate-spin',
         'border-transparent',
-        'hover:border-[var(--border-hover,var(--border))]',
-        'active:border-[var(--border-active,var(--border))]',
+        'hover:border-[var(--brd-hover,var(--brd))]',
+        'active:border-[var(--brd-active,var(--brd))]',
       ],
     },
     {

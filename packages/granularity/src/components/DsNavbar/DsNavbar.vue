@@ -31,7 +31,7 @@ const menuAriaLabel = computed(() => {
 </script>
 
 <template>
-  <header class="h-[56px] border-b border-[var(--border)] bg-[var(--background)] flex items-center justify-between px-4 sm:px-6">
+  <header class="h-[56px] border-b border-[var(--brd)] bg-[var(--bg)] flex items-center justify-between px-4 sm:px-6">
     <div class="flex items-center gap-3">
       <DsButton
         v-if="showMenuButton"

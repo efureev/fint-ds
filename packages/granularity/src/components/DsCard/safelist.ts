@@ -1,8 +1,8 @@
 export const dsCardSafelist = [
   'rounded-[var(--ds-radius-lg)]',
   'border',
-  'border-[var(--border)]',
+  'border-[var(--brd)]',
   'bg-[var(--card)]',
-  'text-[var(--card-foreground)]',
+  'text-[var(--card-fg)]',
   'shadow-sm',
 ] as const

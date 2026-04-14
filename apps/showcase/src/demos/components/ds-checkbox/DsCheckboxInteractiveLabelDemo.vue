@@ -23,7 +23,7 @@ const previewOpens = ref(0)
         </a>
         <button
           type="button"
-          class="rounded-full border border-[var(--border)] px-2 py-1 text-xs font-medium text-[var(--foreground)] transition hover:border-[var(--primary)] hover:text-[var(--primary)]"
+          class="rounded-full border border-[var(--brd)] px-2 py-1 text-xs font-medium text-[var(--fg)] transition hover:border-[var(--primary)] hover:text-[var(--primary)]"
           @click.stop="previewOpens += 1"
         >
           Preview changes
@@ -31,8 +31,8 @@ const previewOpens = ref(0)
       </span>
     </DsCheckbox>
 
-    <div class="rounded-2xl border border-dashed border-[var(--border)] bg-[var(--muted)]/35 p-4 text-sm text-[var(--muted-foreground)]">
-      Checkbox value: <span class="font-semibold text-[var(--foreground)]">{{ accepted ? 'accepted' : 'pending' }}</span> ·
+    <div class="rounded-2xl border border-dashed border-[var(--brd)] bg-[var(--muted)]/35 p-4 text-sm text-[var(--muted-fg)]">
+      Checkbox value: <span class="font-semibold text-[var(--fg)]">{{ accepted ? 'accepted' : 'pending' }}</span> ·
       Preview clicked {{ previewOpens }} times.
     </div>
   </div>

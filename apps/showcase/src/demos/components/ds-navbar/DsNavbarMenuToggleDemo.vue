@@ -7,7 +7,7 @@ const isMenuOpen = ref(false)
 </script>
 
 <template>
-  <div class="grid gap-3 rounded-xl border border-[var(--border)] bg-[var(--background)] p-3">
+  <div class="grid gap-3 rounded-xl border border-[var(--brd)] bg-[var(--bg)] p-3">
     <DsNavbar
       title="Mobile shell"
       show-menu-button
@@ -23,7 +23,7 @@ const isMenuOpen = ref(false)
       <DsButton size="sm" variant="outline" @click="isMenuOpen = false">
         Close manually
       </DsButton>
-      <div class="text-sm text-[var(--muted-foreground)]">
+      <div class="text-sm text-[var(--muted-fg)]">
         `menu` event can be wired to drawers, command panels or any other responsive navigation container.
       </div>
     </div>

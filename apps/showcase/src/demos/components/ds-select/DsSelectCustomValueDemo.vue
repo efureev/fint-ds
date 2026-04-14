@@ -27,11 +27,11 @@ const region = ref('')
           <DsBadge>custom</DsBadge>
           <span class="truncate">{{ displayLabel }}</span>
         </span>
-        <span v-else class="text-[var(--muted-foreground)]">{{ placeholder }}</span>
+        <span v-else class="text-[var(--muted-fg)]">{{ placeholder }}</span>
       </template>
     </DsSelect>
 
-    <div class="text-sm text-[var(--muted-foreground)]">
+    <div class="text-sm text-[var(--muted-fg)]">
       current value: {{ region || '—' }}
     </div>
   </div>

@@ -94,7 +94,7 @@ function rowKeyValue(row: Record<string, unknown>): string {
             <button
               v-if="col.sortable"
               type="button"
-              class="inline-flex items-center gap-2 text-[var(--muted-foreground)] hover:text-[var(--foreground)] transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring)] rounded"
+              class="inline-flex items-center gap-2 text-[var(--muted-fg)] hover:text-[var(--fg)] transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring)] rounded"
               @click="toggleSort(col)"
             >
               <span>{{ col.label }}</span>
@@ -111,13 +111,13 @@ function rowKeyValue(row: Record<string, unknown>): string {
                 />
               </span>
             </button>
-            <span v-else class="text-[var(--muted-foreground)]">{{ col.label }}</span>
+            <span v-else class="text-[var(--muted-fg)]">{{ col.label }}</span>
           </div>
         </th>
       </tr>
     </template>
 
-    <tr v-for="row in sortedRows" :key="rowKeyValue(row)" class="border-t border-[var(--border)]">
+    <tr v-for="row in sortedRows" :key="rowKeyValue(row)" class="border-t border-[var(--brd)]">
       <td
         v-for="col in props.columns"
         :key="col.key"

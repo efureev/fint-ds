@@ -8,7 +8,7 @@ const loadingClasses = [
   'cursor-wait select-none pointer-events-auto',
   'bg-black/25',
   'h-7 w-7',
-  'text-[var(--muted-foreground)] text-sm ds-muted',
+  'text-[var(--muted-fg)] text-sm ds-muted',
 ]
 
 export const dsLoadingSafelist = [...new Set([

@@ -60,6 +60,6 @@ export function getDsDialogPanelClass(size: DsDialogSize): string {
     widthBySize[size],
     heightBySize[size],
     radiusBySize[size],
-    'border border-[var(--border)] bg-[var(--card)] text-[var(--card-foreground)] shadow-[var(--ds-shadow-2)] outline-none',
+    'border border-[var(--brd)] bg-[var(--card)] text-[var(--card-fg)] shadow-[var(--ds-shadow-2)] outline-none',
   ].join(' ')
 }

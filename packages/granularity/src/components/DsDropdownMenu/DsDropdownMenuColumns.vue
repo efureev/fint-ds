@@ -20,7 +20,7 @@ const colsClass = computed(() => {
 </script>
 
 <template>
-  <div class="w-full grid divide-x divide-[var(--border)]" :class="colsClass">
+  <div class="w-full grid divide-x divide-[var(--brd)]" :class="colsClass">
     <slot />
   </div>
 </template>
