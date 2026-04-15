@@ -1,4 +1,4 @@
-import {useFintI18n} from '@feugene/fint-i18n/vue'
+import {useFintI18n, useI18nScope} from '@feugene/fint-i18n/vue'
 
 import {
     showcasePages,
@@ -38,12 +38,10 @@ function normalizeLabel(value: string) {
 }
 
 export function useShowcasePageI18n() {
-    const i18n = useFintI18n()
+    const { t } = useFintI18n()
 
     function translateWithFallback(key: string, fallback: string) {
-        i18n.locale.value
-
-        const result = i18n.t(key)
+        const result = t(key)
         return result === key ? fallback : result
     }
 
@@ -98,6 +96,6 @@ export function useShowcasePageI18n() {
         localizePageByName,
         localizeSections,
         getEntityGroupLabel,
-        useI18nScope: i18n.useI18nScope
+        useI18nScope,
     }
 }

@@ -18,7 +18,7 @@ import IconSparkles from '~icons/lucide/sparkles'
 import CodeBlock from '../../../components/doc/CodeBlock.vue'
 import {useFintI18n} from '@feugene/fint-i18n/vue'
 
-const {t} = useFintI18n()
+const {t } = useFintI18n()
 type DsButtonType = 'button' | 'submit' | 'reset'
 
 const variant = ref<DsButtonVariant>('primary')
@@ -76,18 +76,18 @@ const effectiveAriaLabel = computed(() => {
 
 const previewSummary = computed(() => {
   if (square.value)
-    return t('Square mode makes the button icon-only, so `aria-label` should describe the action for screen readers.')
+    return t('components.DsButton.Square mode makes the button icon-only, so `aria-label` should describe the action for screen readers')
 
   if (loading.value)
-    return t('Loading automatically disables the button and helps prevent repeated submit actions in async scenarios.')
+    return t('components.DsButton.Loading automatically disables the button and helps prevent repeated submit actions in async scenarios')
 
   if (disabled.value)
-    return t('Disabled preserves the visual contract of the selected variant/tone while turning off interactivity and pointer events.')
+    return t('components.DsButton.Disabled preserves the visual contract of the selected variant/tone while turning off interactivity and pointer events')
 
   if (variant.value === 'ghost' || variant.value === 'ghost-border')
-    return t('Ghost variants work best in toolbars and dense action areas where a filled CTA would feel too heavy.')
+    return t('components.DsButton.Ghost variants work best in toolbars and dense action areas where a filled CTA would feel too heavy')
 
-  return t('Combine `variant`, `tone`, `size`, and `type` to quickly verify the button contract before shipping it to a product scenario.')
+  return t('components.DsButton.Combine `variant`, `tone`, `size`, and `type` to quickly verify the button contract before shipping it to a product scenario')
 })
 
 function escapeAttribute(value: string) {
@@ -124,7 +124,6 @@ const previewCode = computed(() => {
 
 <template>
   <div class="grid gap-4 xl:grid-cols-[minmax(0,1.15fr)_320px]">
-
     <div class="grid gap-4">
       <div
           class="relative grid min-h-[280px] rounded-[24px] border border-dashed border-[var(--preview-brd)] bg-[image:var(--preview-surface)] p-6 pb-[72px]">

@@ -7,7 +7,7 @@ import {DsCard} from '@feugene/granularity'
 import {
   getShowcaseComponentBySlug,
 } from '../app/showcase'
-import { useShowcasePageI18n } from '../app/useShowcasePageI18n'
+import {useShowcasePageI18n} from '../app/useShowcasePageI18n'
 import EventsTable from '../components/doc/EventsTable.vue'
 import ExampleCard from '../components/doc/ExampleCard.vue'
 import InfoSectionCard from '../components/doc/InfoSectionCard.vue'
@@ -22,7 +22,7 @@ import {
 import {getShowcaseComponentDoc} from '../content/componentDocs'
 
 const route = useRoute()
-const { localizePageByName, useI18nScope } = useShowcasePageI18n()
+const {localizePageByName, useI18nScope} = useShowcasePageI18n()
 
 const previewRegistry = {
   'ds-alert-closable-flow': defineAsyncComponent(() => import('../demos/components/ds-alert/DsAlertClosableDemo.vue')),
@@ -196,11 +196,12 @@ function resolvePreviewComponent(previewKey?: string) {
 
   return previewRegistry[previewKey as keyof typeof previewRegistry]
 }
+
 watch(componentEntity, () => {
   if (componentEntity.value) {
-    useI18nScope([componentEntity.value.id])
+    useI18nScope(['components.' + componentEntity.value.name])
   }
-})
+}, {immediate: true})
 </script>
 
 <template>
