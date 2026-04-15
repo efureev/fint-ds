@@ -26,6 +26,68 @@ const props = withDefaults(
 )
 
 const open = ref(false)
+const rootEl = ref<HTMLElement | null>(null)
+const panelEl = ref<HTMLElement | null>(null)
+const clickOutsideExclude = [() => panelEl.value]
+const panelStyle = ref<Record<string, string>>({
+  left: '0px',
+  top: '0px',
+  zIndex: '2147483647',
+})
+let syncFrame = 0
+
+function cancelPanelPositionSync(): void {
+  if (typeof window === 'undefined') return
+  if (!syncFrame) return
+
+  window.cancelAnimationFrame(syncFrame)
+  syncFrame = 0
+}
+
+function syncPanelPosition(): void {
+  if (typeof window === 'undefined') return
+
+  const root = rootEl.value
+  if (!root) return
+
+  const rootRect = root.getBoundingClientRect()
+  const left = (() => {
+    if (props.align === 'right') return rootRect.right
+    if (props.align === 'center') return rootRect.left + (rootRect.width / 2)
+    return rootRect.left
+  })()
+
+  panelStyle.value = {
+    left: `${left}px`,
+    top: `${rootRect.bottom + 8}px`,
+    zIndex: '2147483647',
+  }
+}
+
+function schedulePanelPositionSync(): void {
+  if (typeof window === 'undefined') return
+  if (syncFrame) return
+
+  syncFrame = window.requestAnimationFrame(() => {
+    syncFrame = 0
+
+    if (open.value) {
+      syncPanelPosition()
+    }
+  })
+}
+
+function bindPanelPositionListeners(): void {
+  if (typeof window === 'undefined') return
+  window.addEventListener('resize', schedulePanelPositionSync)
+  window.addEventListener('scroll', schedulePanelPositionSync, true)
+}
+
+function unbindPanelPositionListeners(): void {
+  if (typeof window === 'undefined') return
+  window.removeEventListener('resize', schedulePanelPositionSync)
+  window.removeEventListener('scroll', schedulePanelPositionSync, true)
+}
 
 function toggle(): void {
   open.value = !open.value
@@ -43,27 +105,46 @@ watch(
   open,
   (isOpen) => {
     if (typeof document === 'undefined') return
+
     document.removeEventListener('keydown', closeOnEscape)
+    unbindPanelPositionListeners()
+    cancelPanelPositionSync()
     if (isOpen) document.addEventListener('keydown', closeOnEscape)
+
+    if (!isOpen) return
+
+    bindPanelPositionListeners()
+    syncPanelPosition()
   },
   { immediate: true },
+)
+
+watch(
+  () => props.align,
+  () => {
+    if (open.value) {
+      schedulePanelPositionSync()
+    }
+  },
 )
 
 onUnmounted(() => {
   if (typeof document === 'undefined') return
   document.removeEventListener('keydown', closeOnEscape)
+  unbindPanelPositionListeners()
+  cancelPanelPositionSync()
 })
 
 const widthClass = computed(() => {
   return dsDropdownWidthClass(props.width)
 })
 
-const alignmentClasses = computed(() => {
-  return dsDropdownAlignmentClass(props.align)
-})
-
 const contentClasses = computed(() => {
   return dsDropdownContentClass(props.contentClass)
+})
+
+const panelClasses = computed(() => {
+  return ['fixed z-50', widthClass.value, dsDropdownAlignmentClass(props.align)].filter(Boolean)
 })
 
 function onContentClick(): void {
@@ -74,32 +155,37 @@ function onContentClick(): void {
 </script>
 
 <template>
-  <div
-    v-click-outside="{ handler: close, enabled: open }"
-    class="relative inline-block"
-  >
-    <div @click="toggle">
+  <div>
+    <div
+      ref="rootEl"
+      v-click-outside="{ handler: close, enabled: open, exclude: clickOutsideExclude }"
+      class="inline-block max-w-full"
+      @click="toggle"
+    >
       <slot name="trigger" :open="open" :toggle="toggle" :close="close" />
     </div>
 
-    <transition
-      enter-active-class="transition ease-out duration-150"
-      enter-from-class="transform opacity-0 scale-95"
-      enter-to-class="transform opacity-100 scale-100"
-      leave-active-class="transition ease-in duration-100"
-      leave-from-class="transform opacity-100 scale-100"
-      leave-to-class="transform opacity-0 scale-95"
-    >
-      <div
-        v-show="open"
-        class="absolute z-50 mt-2"
-        :class="[widthClass, alignmentClasses]"
-        @click="onContentClick"
+    <teleport to="body">
+      <transition
+        enter-active-class="transition ease-out duration-150"
+        enter-from-class="transform opacity-0 scale-95"
+        enter-to-class="transform opacity-100 scale-100"
+        leave-active-class="transition ease-in duration-100"
+        leave-from-class="transform opacity-100 scale-100"
+        leave-to-class="transform opacity-0 scale-95"
       >
-        <div :class="contentClasses">
-          <slot name="content" :close="close" />
+        <div
+          v-show="open"
+          ref="panelEl"
+          :class="panelClasses"
+          :style="panelStyle"
+          @click="onContentClick"
+        >
+          <div :class="contentClasses">
+            <slot name="content" :close="close" />
+          </div>
         </div>
-      </div>
-    </transition>
+      </transition>
+    </teleport>
   </div>
 </template>

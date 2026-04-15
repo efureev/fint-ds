@@ -13,9 +13,9 @@ const widthClassByWidth: Record<DsDropdownWidth, string> = {
 }
 
 const alignmentClassByAlign: Record<DsDropdownAlign, string> = {
-  left: 'origin-top-left left-0',
-  right: 'origin-top-right right-0',
-  center: 'origin-top left-1/2 -translate-x-1/2',
+  left: 'origin-top-left',
+  right: 'origin-top-right -translate-x-full',
+  center: 'origin-top -translate-x-1/2',
 }
 
 export function dsDropdownWidthClass(width: DsDropdownWidth): string {
