@@ -16,12 +16,14 @@ const props = withDefaults(
     width?: DsDropdownWidth
     closeOnContentClick?: boolean
     contentClass?: string
+    teleportTo?: string | HTMLElement
   }>(),
   {
     align: 'right',
     width: '48',
     closeOnContentClick: true,
     contentClass: '',
+    teleportTo: 'body',
   },
 )
 
@@ -165,7 +167,7 @@ function onContentClick(): void {
       <slot name="trigger" :open="open" :toggle="toggle" :close="close" />
     </div>
 
-    <teleport to="body">
+    <teleport :to="props.teleportTo">
       <transition
         enter-active-class="transition ease-out duration-150"
         enter-from-class="transform opacity-0 scale-95"

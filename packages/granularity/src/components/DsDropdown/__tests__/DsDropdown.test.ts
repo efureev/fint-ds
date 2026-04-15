@@ -42,6 +42,32 @@ describe('DsDropdown', () => {
     expect(wrapper.element.contains(content)).toBe(false)
   })
 
+  it('телепортирует панель в указанный target вместо body', async () => {
+    const target = document.createElement('div')
+    target.id = 'dropdown-target'
+    document.body.appendChild(target)
+
+    const wrapper = mount(DsDropdown, {
+      attachTo: document.body,
+      props: {
+        teleportTo: '#dropdown-target',
+      },
+      slots: {
+        trigger: '<button type="button" data-testid="trigger">Открыть</button>',
+        content: '<div id="dropdown-content">Элемент меню</div>',
+      },
+    })
+
+    await wrapper.get('[data-testid="trigger"]').trigger('click')
+    await nextTick()
+
+    const content = target.querySelector('#dropdown-content')
+
+    expect(content).toBeTruthy()
+    expect(document.body.querySelector('#dropdown-content')).toBe(content)
+    expect(wrapper.element.contains(content)).toBe(false)
+  })
+
   it('привязывает правый край панели к trigger без измерения ширины панели', async () => {
     vi.spyOn(window, 'requestAnimationFrame').mockImplementation((callback: FrameRequestCallback) => {
       return window.setTimeout(() => callback(performance.now()), 0)
