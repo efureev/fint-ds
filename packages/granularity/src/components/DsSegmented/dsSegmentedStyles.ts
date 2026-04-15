@@ -3,7 +3,7 @@ import type { Component } from 'vue'
 import { splitClassTokens } from '../shared/classTokens'
 
 export type DsSegmentedVariant = 'pills' | 'button'
-export type DsSegmentedSize = 'sm' | 'md' | 'lg'
+export type DsSegmentedSize = 'xs' | 'sm' | 'md' | 'lg'
 export type DsSegmentedValue = string | number
 
 export type DsSegmentedOption = {
@@ -27,7 +27,7 @@ const indicatorBaseClass =
   'pointer-events-none absolute left-0 top-0 rounded-[calc(var(--ds-segmented-radius)-var(--ds-segmented-padding))] transition-[transform,width,height,opacity] ease-out'
 
 const indicatorVariantClassMap: Record<DsSegmentedVariant, string> = {
-  pills: 'border border-[var(--ds-segmented-indicator-brd)] bg-[var(--ds-segmented-indicator-bg)] shadow-[var(--ds-segmented-indicator-shadow)]',
+  pills:  'border border-[var(--ds-segmented-indicator-brd)] bg-[var(--ds-segmented-indicator-bg)] shadow-[var(--ds-segmented-indicator-shadow)]',
   button: 'border border-[var(--ds-segmented-indicator-brd)] bg-[var(--ds-segmented-indicator-bg)] shadow-[var(--ds-segmented-indicator-shadow)]',
 }
 
@@ -47,15 +47,25 @@ const itemIconClass = 'h-4 w-4 shrink-0'
 const iconOnlyClass = 'gap-0'
 
 const rootSizeStyles: Record<DsSegmentedSize, Record<string, string>> = {
-  sm: {
+  xs: {
     '--ds-segmented-radius': '9999px',
-    '--ds-segmented-padding': '3px',
-    '--ds-segmented-item-px': '12px',
-    '--ds-segmented-item-py': '7px',
-    '--ds-segmented-font-size': '0.8125rem',
+    '--ds-segmented-padding': '2px',
+    '--ds-segmented-item-px': '10px',
+    '--ds-segmented-item-py': '5px',
+    '--ds-segmented-font-size': '0.75rem',
     '--ds-segmented-line-height': '1rem',
     '--ds-segmented-font-weight': '600',
-    '--ds-segmented-min-height': '34px',
+    '--ds-segmented-min-height': '28px',
+  },
+  sm: {
+    '--ds-segmented-radius': '9999px',
+    '--ds-segmented-padding': '2px',
+    '--ds-segmented-item-px': '12px',
+    '--ds-segmented-item-py': '6px',
+    '--ds-segmented-font-size': '0.75rem',
+    '--ds-segmented-line-height': '1rem',
+    '--ds-segmented-font-weight': '600',
+    '--ds-segmented-min-height': '32px',
   },
   md: {
     '--ds-segmented-radius': '9999px',

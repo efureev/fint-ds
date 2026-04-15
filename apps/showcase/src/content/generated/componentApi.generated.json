@@ -3570,6 +3570,13 @@
             "default": "undefined"
           },
           {
+            "name": "indicatorDuration",
+            "description": "",
+            "type": "number | undefined",
+            "required": false,
+            "default": "300"
+          },
+          {
             "name": "block",
             "description": "",
             "type": "boolean | undefined",

@@ -2,6 +2,7 @@
   "header": {
     "subtitle": "Component package showcase",
     "openNavigation": "Open navigation",
+    "languageLabel": "Language",
     "searchLabel": "Quick search",
     "navigationLabel": "Navigation",
     "contextNavigationLabel": "Context navigation"

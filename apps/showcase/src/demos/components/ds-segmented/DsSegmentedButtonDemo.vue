@@ -8,6 +8,7 @@ const size = ref<DsSegmentedSize>('md')
 const indicatorDuration = ref(400)
 
 const sizeOptions = [
+  { value: 'xs', label: 'Extra small' },
   { value: 'sm', label: 'Small' },
   { value: 'md', label: 'Medium' },
   { value: 'lg', label: 'Large' },

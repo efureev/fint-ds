@@ -186,6 +186,34 @@ describe('DsSegmented', () => {
     expect(group.attributes('style')).toContain('grid-template-columns: minmax(0,1fr) minmax(0,1fr) minmax(0,1fr)')
   })
 
+  it('использует компактные size-токены для sm и xs', () => {
+    const smWrapper = mount(DsSegmented, {
+      props: {
+        modelValue: 'board',
+        size: 'sm',
+        options: [...options],
+      },
+    })
+
+    const xsWrapper = mount(DsSegmented, {
+      props: {
+        modelValue: 'board',
+        size: 'xs',
+        options: [...options],
+      },
+    })
+
+    const smStyle = smWrapper.get('[data-ds-segmented]').attributes('style')
+    const xsStyle = xsWrapper.get('[data-ds-segmented]').attributes('style')
+
+    expect(smStyle).toContain('--ds-segmented-padding: 2px')
+    expect(smStyle).toContain('--ds-segmented-font-size: 0.75rem')
+    expect(smStyle).toContain('--ds-segmented-min-height: 32px')
+    expect(xsStyle).toContain('--ds-segmented-padding: 2px')
+    expect(xsStyle).toContain('--ds-segmented-item-px: 10px')
+    expect(xsStyle).toContain('--ds-segmented-min-height: 28px')
+  })
+
   it('обновляет индикатор при controlled update без сброса в ноль', async () => {
     const wrapper = mount(DsSegmented, {
       props: {

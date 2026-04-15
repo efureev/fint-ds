@@ -147,7 +147,7 @@
 
 ```ts
 export type DsSegmentedVariant = 'pills' | 'button'
-export type DsSegmentedSize = 'sm' | 'md' | 'lg'
+export type DsSegmentedSize = 'xs' | 'sm' | 'md' | 'lg'
 export type DsSegmentedValue = string | number
 
 export type DsSegmentedOption = {

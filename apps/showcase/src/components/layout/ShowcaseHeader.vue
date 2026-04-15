@@ -5,7 +5,8 @@ import {
   useRoute,
 } from 'vue-router'
 
-import { DsButton } from '@feugene/granularity'
+import { useFintI18n } from '@feugene/fint-i18n/vue'
+import { DsButton, DsSegmented, type DsSegmentedOption } from '@feugene/granularity'
 
 import { showcaseNavigationItems } from '../../app/showcase'
 import type { ShowcaseNavigationItem } from '../../app/showcase'
@@ -19,6 +20,23 @@ const emit = defineEmits<{
 }>()
 
 const route = useRoute()
+const i18n = useFintI18n()
+
+const localeOptions = [
+  { value: 'ru', label: 'RU' },
+  { value: 'en', label: 'EN' },
+] satisfies DsSegmentedOption[]
+
+const selectedLocale = computed<'ru' | 'en'>({
+  get() {
+    return i18n.locale.value === 'ru' ? 'ru' : 'en'
+  },
+  set(value) {
+    if (value !== i18n.locale.value) {
+      void i18n.setLocale(value)
+    }
+  },
+})
 
 const topNavigationItems = computed(() => showcaseNavigationItems.filter(item => item.name !== 'overview'))
 
@@ -86,6 +104,13 @@ function getTopNavigationItemClass(item: ShowcaseNavigationItem) {
         </nav>
 
         <div class="ml-auto flex items-center gap-1 sm:gap-2">
+          <DsSegmented
+            v-model="selectedLocale"
+            class="hidden sm:inline-grid font-semibold showcase-pill"
+            size="sm"
+            :options="localeOptions"
+            :aria-label="$t('showcase.header.languageLabel')"
+          />
           <div class="showcase-pill hidden items-center rounded-full border p-1 text-xs font-semibold sm:flex">
             <span class="showcase-pill-active rounded-full px-3 py-1.5">
               RU

@@ -2,6 +2,7 @@
   "header": {
     "subtitle": "Витрина пакета компонентов",
     "openNavigation": "Открыть навигацию",
+    "languageLabel": "Язык",
     "searchLabel": "Быстрый поиск",
     "navigationLabel": "Навигация",
     "contextNavigationLabel": "Контекстная навигация"
