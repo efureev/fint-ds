@@ -94,7 +94,7 @@ describe('DsSegmented', () => {
     const indicator = wrapper.get('[data-ds-segmented-indicator]')
     expect(indicator.attributes('style')).toContain('width: 84px')
     expect(indicator.attributes('style')).toContain('height: 40px')
-    expect(indicator.attributes('style')).toContain('translate3d(80px, 4px, 0)')
+    expect(indicator.attributes('style')).toContain('translate3d(80px, 3px, 0)')
   })
 
   it('применяет indicatorDuration через inline transitionDuration', async () => {
@@ -186,7 +186,20 @@ describe('DsSegmented', () => {
     expect(group.attributes('style')).toContain('grid-template-columns: minmax(0,1fr) minmax(0,1fr) minmax(0,1fr)')
   })
 
-  it('использует компактные size-токены для sm и xs', () => {
+  it('использует дополнительную highlight-тень для pills-индикатора', () => {
+    const wrapper = mount(DsSegmented, {
+      props: {
+        modelValue: 'board',
+        options: [...options],
+      },
+    })
+
+    const style = wrapper.get('[data-ds-segmented]').attributes('style')
+
+    expect(style).toContain('--ds-segmented-indicator-shadow: var(--ds-shadow-1), var(--ds-segmented-indicator-highlight-shadow, 0 0 0 0 transparent)')
+  })
+
+  it('использует одинаковый inset трека и компактные size-токены для sm и xs', () => {
     const smWrapper = mount(DsSegmented, {
       props: {
         modelValue: 'board',
@@ -205,13 +218,29 @@ describe('DsSegmented', () => {
 
     const smStyle = smWrapper.get('[data-ds-segmented]').attributes('style')
     const xsStyle = xsWrapper.get('[data-ds-segmented]').attributes('style')
+    const mdStyle = mount(DsSegmented, {
+      props: {
+        modelValue: 'board',
+        size: 'md',
+        options: [...options],
+      },
+    }).get('[data-ds-segmented]').attributes('style')
+    const lgStyle = mount(DsSegmented, {
+      props: {
+        modelValue: 'board',
+        size: 'lg',
+        options: [...options],
+      },
+    }).get('[data-ds-segmented]').attributes('style')
 
-    expect(smStyle).toContain('--ds-segmented-padding: 2px')
+    expect(smStyle).toContain('--ds-segmented-padding: 4px')
     expect(smStyle).toContain('--ds-segmented-font-size: 0.75rem')
-    expect(smStyle).toContain('--ds-segmented-min-height: 32px')
-    expect(xsStyle).toContain('--ds-segmented-padding: 2px')
+    expect(smStyle).toContain('--ds-segmented-min-height: 28px')
+    expect(xsStyle).toContain('--ds-segmented-padding: 4px')
     expect(xsStyle).toContain('--ds-segmented-item-px: 10px')
-    expect(xsStyle).toContain('--ds-segmented-min-height: 28px')
+    expect(xsStyle).toContain('--ds-segmented-min-height: 24px')
+    expect(mdStyle).toContain('--ds-segmented-padding: 4px')
+    expect(lgStyle).toContain('--ds-segmented-padding: 4px')
   })
 
   it('обновляет индикатор при controlled update без сброса в ноль', async () => {
@@ -230,7 +259,7 @@ describe('DsSegmented', () => {
 
     const indicator = wrapper.get('[data-ds-segmented-indicator]')
     const style = indicator.attributes('style')
-    expect(style).toContain('translate3d(168px, 4px, 0)')
+    expect(style).toContain('translate3d(168px, 3px, 0)')
     expect(style).not.toContain('translate3d(0px, 0px, 0px)')
   })
 

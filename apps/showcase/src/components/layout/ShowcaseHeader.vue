@@ -111,12 +111,6 @@ function getTopNavigationItemClass(item: ShowcaseNavigationItem) {
             :options="localeOptions"
             :aria-label="$t('showcase.header.languageLabel')"
           />
-          <div class="showcase-pill hidden items-center rounded-full border p-1 text-xs font-semibold sm:flex">
-            <span class="showcase-pill-active rounded-full px-3 py-1.5">
-              RU
-            </span>
-            <span class="px-3 py-1.5 opacity-60">EN</span>
-          </div>
           <ShowcaseQuickSearch />
           <ThemeSwitcher />
         </div>

@@ -196,7 +196,7 @@ function measureIndicator(): void {
     width: Math.max(Math.round(itemRect.width), 0),
     height: Math.max(Math.round(itemRect.height), 0),
     x: Math.round(itemRect.left - rootRect.left),
-    y: Math.round(itemRect.top - rootRect.top),
+    y: Math.max(Math.round(itemRect.top - rootRect.top) - 1, 0),
   } satisfies IndicatorGeometry
 
   if (!isSameGeometry(indicatorGeometry.value, nextGeometry)) {

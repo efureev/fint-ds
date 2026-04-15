@@ -48,8 +48,9 @@ describe('granularity theming and node runtime', () => {
   it('собирает node-only theme и component preflights через ./uno-node', async () => {
     const iconSafelist = getGranularitySafelist(['DsIcon'])
     const buttonSafelist = getGranularitySafelist(['DsButton'])
-    const [componentCss, buttonGenerator, iconGenerator] = await Promise.all([
+    const [componentCss, segmentedComponentCss, buttonGenerator, iconGenerator] = await Promise.all([
       getGranularityComponentCss(['DsIcon']),
+      getGranularityComponentCss(['DsSegmented']),
       createGenerator({
         presets: [presetMini(), presetGranularityNode({ components: ['DsButton'] })],
       }),
@@ -80,6 +81,7 @@ describe('granularity theming and node runtime', () => {
     expect(normalizedComponentCss).toContain('--ds-icon-size:18px')
     expect(normalizedComponentCss).toContain(':where(.ds-icon){width:var(--ds-icon-size);min-width:var(--ds-icon-size);height:var(--ds-icon-size);line-height:0;flex:none;}')
     expect(normalizedComponentCss).toContain(':where(.ds-iconsvg){width:100%;height:100%;display:block;}')
+    expect(normalizeCss(segmentedComponentCss)).toContain('--ds-segmented-indicator-highlight-shadow:0001pxrgba(248,250,252,0.08)')
     expect(normalizedIconCss).toContain('--ds-icon-size:18px')
     expect(normalizedIconCss).toContain(':where(.ds-icon){width:var(--ds-icon-size);min-width:var(--ds-icon-size);height:var(--ds-icon-size);line-height:0;flex:none;}')
     expect(normalizedIconCss).toContain(':where(.ds-iconsvg){width:100%;height:100%;display:block;}')
@@ -118,9 +120,11 @@ describe('granularity theming and node runtime', () => {
     expect(normalizedCustomTokensCss).not.toContain('--ds-icon-size:18px')
     expect(normalizedDarkThemeCss).toContain("[data-theme='dark']")
     expect(normalizedDarkThemeCss).toContain('--bg:#0f172a')
+    expect(normalizedDarkThemeCss).not.toContain('--ds-segmented-indicator-highlight-shadow:0001pxrgba(248,250,252,0.08)')
     expect(normalizedDarkThemeCss).not.toContain(':root{--bg:#f8fafc')
     expect(normalizedCombinedThemeCss).toContain("[data-theme='dark']")
     expect(normalizedCombinedThemeCss).toContain('--bg:#0f172a')
+    expect(normalizedCombinedThemeCss).not.toContain('--ds-segmented-indicator-highlight-shadow:0001pxrgba(248,250,252,0.08)')
     expect(normalizedCombinedThemeCss).toContain('--bg:#f8fafc')
   })
 

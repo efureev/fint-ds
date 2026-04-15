@@ -199,6 +199,12 @@ export const granularityComponentCssContracts = {
       'components/DsIcon/styles.css',
     ],
   },
+  DsSegmented: {
+    files: [
+      { pattern: /packages\/granularity\/src\/components\/DsSegmented\/tokens\.css$/, mustBeFileUrl: true },
+    ],
+    assetNames: ['components/DsSegmented/tokens.css'],
+  },
   DsProgressBar: {
     files: [
       { pattern: /packages\/granularity\/src\/components\/DsProgressBar\/tokens\.css$/, mustBeFileUrl: true },
