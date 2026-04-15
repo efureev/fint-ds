@@ -131,6 +131,18 @@ describe('component docs metadata', () => {
     expect(doc.examples.every(example => example.previewKey?.startsWith('ds-switch'))).toBe(true)
   })
 
+  it('возвращает live-scenarios для `DsSegmented` с корректными preview keys', () => {
+    const segmentedEntity = showcaseComponentEntities.find(entity => entity.name === 'DsSegmented')
+
+    expect(segmentedEntity).toBeDefined()
+
+    const doc = getShowcaseComponentDoc(segmentedEntity!)
+
+    expect(doc.examples).toHaveLength(4)
+    expect(doc.examples.every(example => example.status === 'ready')).toBe(true)
+    expect(doc.examples.every(example => example.previewKey?.startsWith('ds-segmented'))).toBe(true)
+  })
+
   it('возвращает live-scenarios для form-controls `DsInput`, `DsNumberInput`, `DsTextarea` и `DsSwitch`', () => {
     const inputEntity = showcaseComponentEntities.find(entity => entity.name === 'DsInput')
     const numberInputEntity = showcaseComponentEntities.find(entity => entity.name === 'DsNumberInput')

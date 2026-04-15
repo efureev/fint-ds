@@ -35,6 +35,7 @@ import { dsPromptDialogConfig } from '../components/DsPromptDialog/config'
 import { dsRadioConfig } from '../components/DsRadio/config'
 import { dsRadioGroupConfig } from '../components/DsRadioGroup/config'
 import { dsSelectConfig } from '../components/DsSelect/config'
+import { dsSegmentedConfig } from '../components/DsSegmented/config'
 import { dsSidebarConfig } from '../components/DsSidebar/config'
 import { dsSkeletonConfig } from '../components/DsSkeleton/config'
 import { dsSwitchConfig } from '../components/DsSwitch/config'
@@ -86,6 +87,7 @@ export const granularityComponentConfigs = {
   DsRadio: dsRadioConfig,
   DsRadioGroup: dsRadioGroupConfig,
   DsSelect: dsSelectConfig,
+  DsSegmented: dsSegmentedConfig,
   DsSidebar: dsSidebarConfig,
   DsSkeleton: dsSkeletonConfig,
   DsSwitch: dsSwitchConfig,

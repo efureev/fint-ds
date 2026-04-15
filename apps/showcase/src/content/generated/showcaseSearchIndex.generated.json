@@ -151,7 +151,7 @@
     "kindLabel": "Section",
     "context": "Components",
     "searchableTitle": "components component catalog",
-    "searchableContent": "components каталог компонентных страниц с поиском, группировкои и отдельнои витринои на каждыи публичныи компонент пакета. catalog component catalog здесь будет index-страница со всеми публичными компонентами и быстрои группировкои по категориям. источник правды `packages/granularity/src/registry/components.ts` с текущим покрытием в 47 компонентных сущностеи . навигация по компонентам должна быть мгновеннои и search-friendly. каждыи компонент получит отдельныи route и собственную страницу."
+    "searchableContent": "components каталог компонентных страниц с поиском, группировкои и отдельнои витринои на каждыи публичныи компонент пакета. catalog component catalog здесь будет index-страница со всеми публичными компонентами и быстрои группировкои по категориям. источник правды `packages/granularity/src/registry/components.ts` с текущим покрытием в 48 компонентных сущностеи . навигация по компонентам должна быть мгновеннои и search-friendly. каждыи компонент получит отдельныи route и собственную страницу."
   },
   {
     "id": "page:components:section:live-demos",
@@ -669,6 +669,17 @@
     "context": "forms / component",
     "searchableTitle": "dsradiogroup",
     "searchableContent": "dsradiogroup dsradiogroup собирает radio-опции в единыи сценарии выбора одного варианта. forms component /components/ds-radio-group packages/granularity/src/registry/components.ts @feugene/granularity/components/dsradiogroup generated public-api components components ds-radio-group ds radio group"
+  },
+  {
+    "id": "entity:component:DsSegmented",
+    "title": "DsSegmented",
+    "description": "Компактный single-choice control с pills/button представлением и движущимся индикатором выбора.",
+    "href": "/components/ds-segmented",
+    "kind": "entity",
+    "kindLabel": "component",
+    "context": "forms / component",
+    "searchableTitle": "dssegmented",
+    "searchableContent": "dssegmented dssegmented компактныи single-choice control с pills/button представлением и движущимся индикатором выбора. forms component /components/ds-segmented packages/granularity/src/registry/components.ts @feugene/granularity/components/dssegmented generated public-api components components ds-segmented ds segmented"
   },
   {
     "id": "entity:component:DsSelect",
@@ -2583,6 +2594,50 @@
     "context": "DsRadioGroup",
     "searchableTitle": "dsradiogroup integration notes",
     "searchableContent": "dsradiogroup собирает radio-опции в единыи сценарии выбора одного варианта. integration-notes integration notes дополнительные замечания по доступности, зависимостям и связанным package-level артефактам. keyboard/accessibility пункты выделяются отдельно от визуальных примеров. dependency notes показывают, есть ли связки с другими компонентами в registry. source/export ссылки помогают быстро переи ти к исходникам и публичному import path."
+  },
+  {
+    "id": "entity:component:DsSegmented:section:overview",
+    "title": "DsSegmented / Component overview",
+    "description": "Краткий контекст по месту компонента в пакете, registry metadata и текущему покрытию showcase.",
+    "href": "/components/ds-segmented#overview",
+    "kind": "section",
+    "kindLabel": "Section",
+    "context": "DsSegmented",
+    "searchableTitle": "dssegmented component overview",
+    "searchableContent": "dssegmented компактныи single-choice control с pills/button представлением и движущимся индикатором выбора. overview component overview краткии контекст по месту компонента в пакете, registry metadata и текущему покрытию showcase. показываем роль компонента в каталоге и его hand-authored summary. отражаем generated api coverage и package-level source links. фиксируем, какие сценарии уже реализованы в showcase, а какие еще планируются."
+  },
+  {
+    "id": "entity:component:DsSegmented:section:live-examples",
+    "title": "DsSegmented / Live examples",
+    "description": "Компонентные сценарии должны раскрывать одну конкретную возможность за карточку, а не сваливать всё в один demo.",
+    "href": "/components/ds-segmented#live-examples",
+    "kind": "section",
+    "kindLabel": "Section",
+    "context": "DsSegmented",
+    "searchableTitle": "dssegmented live examples",
+    "searchableContent": "dssegmented компактныи single-choice control с pills/button представлением и движущимся индикатором выбора. live-examples live examples компонентные сценарии должны раскрывать одну конкретную возможность за карточку, а не сваливать все в один demo. каждыи example card содержит живои preview, snippet и краткое пояснение. сначала покрываем самые показательные capability-сценарии, затем сложные edge cases. плановые сценарии явно отмечаются, чтобы roadmap был виден прямо на странице компонента."
+  },
+  {
+    "id": "entity:component:DsSegmented:section:api",
+    "title": "DsSegmented / Generated API",
+    "description": "Страница использует автогенерированные `props` / `slots` / `events` / `methods` и не дублирует API вручную.",
+    "href": "/components/ds-segmented#api",
+    "kind": "section",
+    "kindLabel": "Section",
+    "context": "DsSegmented",
+    "searchableTitle": "dssegmented generated api",
+    "searchableContent": "dssegmented компактныи single-choice control с pills/button представлением и движущимся индикатором выбора. api generated api страница использует автогенерированные `props` / `slots` / `events` / `methods` и не дублирует api вручную. generated metadata остае тся основным источником правды для api-таблиц. fallback metadata применяется только там, где extraction-слоя недостаточно. usage snippet живе т рядом с таблицами api и не расходится с публичным экспортом пакета."
+  },
+  {
+    "id": "entity:component:DsSegmented:section:integration-notes",
+    "title": "DsSegmented / Integration notes",
+    "description": "Дополнительные замечания по доступности, зависимостям и связанным package-level артефактам.",
+    "href": "/components/ds-segmented#integration-notes",
+    "kind": "section",
+    "kindLabel": "Section",
+    "context": "DsSegmented",
+    "searchableTitle": "dssegmented integration notes",
+    "searchableContent": "dssegmented компактныи single-choice control с pills/button представлением и движущимся индикатором выбора. integration-notes integration notes дополнительные замечания по доступности, зависимостям и связанным package-level артефактам. keyboard/accessibility пункты выделяются отдельно от визуальных примеров. dependency notes показывают, есть ли связки с другими компонентами в registry. source/export ссылки помогают быстро переи ти к исходникам и публичному import path."
   },
   {
     "id": "entity:component:DsSelect:section:overview",

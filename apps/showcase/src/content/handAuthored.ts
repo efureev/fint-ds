@@ -8,7 +8,7 @@ const componentGroups = {
   feedback: ['DsAlert', 'DsBadge', 'DsBadgeWrap', 'DsEmptyState', 'DsLoading', 'DsProgressBar', 'DsSkeleton', 'DsToaster'],
   navigation: ['DsBottomNav', 'DsNavbar', 'DsPagination', 'DsSidebar', 'DsTabs', 'DsTooltip'],
   overlays: ['DsCollapse', 'DsConfirmDialog', 'DsDialog', 'DsDrawer', 'DsDropdown', 'DsDropdownMenu', 'DsImageViewer', 'DsModal', 'DsPromptDialog'],
-  forms: ['DsCheckbox', 'DsFileUpload', 'DsFormFile', 'DsFormField', 'DsFormSection', 'DsInput', 'DsNumberInput', 'DsInputTag', 'DsRadio', 'DsRadioGroup', 'DsSelect', 'DsSwitch', 'DsTextarea', 'DsTreeSelect'],
+  forms: ['DsCheckbox', 'DsFileUpload', 'DsFormFile', 'DsFormField', 'DsFormSection', 'DsInput', 'DsNumberInput', 'DsInputTag', 'DsRadio', 'DsRadioGroup', 'DsSegmented', 'DsSelect', 'DsSwitch', 'DsTextarea', 'DsTreeSelect'],
   data: ['DsAvatar', 'DsCard', 'DsDataTable', 'DsIcon', 'DsList', 'DsTable', 'DsTree'],
 } as const satisfies Record<string, readonly string[]>
 
@@ -49,6 +49,7 @@ const componentSummaryOverrides = {
   DsPromptDialog: 'Запрашивает у пользователя короткий текстовый ввод в диалоге.',
   DsRadio: 'Один вариант выбора внутри группы взаимоисключающих опций.',
   DsRadioGroup: 'Собирает radio-опции в единый сценарий выбора одного варианта.',
+  DsSegmented: 'Компактный single-choice control с pills/button представлением и движущимся индикатором выбора.',
   DsSelect: 'Выбор одного или нескольких значений из списка опций.',
   DsSidebar: 'Боковая навигация для разделов, фильтров и вспомогательных действий.',
   DsSkeleton: 'Временный каркас интерфейса, пока контент ещё загружается.',

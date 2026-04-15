@@ -3525,6 +3525,110 @@
       }
     ]
   },
+  "DsSegmented": {
+    "name": "DsSegmented",
+    "sourcePath": "packages/granularity/src/components/DsSegmented/DsSegmented.vue",
+    "sections": [
+      {
+        "key": "props",
+        "title": "Props",
+        "origin": "generated",
+        "items": [
+          {
+            "name": "variant",
+            "description": "",
+            "type": "DsSegmentedVariant | undefined",
+            "required": false,
+            "default": "\"pills\""
+          },
+          {
+            "name": "size",
+            "description": "",
+            "type": "DsSegmentedSize | undefined",
+            "required": false,
+            "default": "\"md\""
+          },
+          {
+            "name": "disabled",
+            "description": "",
+            "type": "boolean | undefined",
+            "required": false,
+            "default": "false"
+          },
+          {
+            "name": "ariaLabel",
+            "description": "",
+            "type": "string | undefined",
+            "required": false,
+            "default": "undefined"
+          },
+          {
+            "name": "name",
+            "description": "",
+            "type": "string | undefined",
+            "required": false,
+            "default": "undefined"
+          },
+          {
+            "name": "block",
+            "description": "",
+            "type": "boolean | undefined",
+            "required": false,
+            "default": "false"
+          },
+          {
+            "name": "modelValue",
+            "description": "",
+            "type": "DsSegmentedValue",
+            "required": true
+          },
+          {
+            "name": "options",
+            "description": "",
+            "type": "DsSegmentedOption[]",
+            "required": true
+          }
+        ]
+      },
+      {
+        "key": "slots",
+        "title": "Slots",
+        "origin": "generated",
+        "items": [
+          {
+            "name": "default",
+            "description": "",
+            "type": "{ option: DsSegmentedOption; selected: boolean; disabled: boolean; }"
+          }
+        ]
+      },
+      {
+        "key": "events",
+        "title": "Events",
+        "origin": "generated",
+        "items": [
+          {
+            "name": "update:modelValue",
+            "description": "",
+            "type": "[value: DsSegmentedValue]",
+            "signature": "(event: \"update:modelValue\", value: DsSegmentedValue): void"
+          },
+          {
+            "name": "change",
+            "description": "",
+            "type": "[value: DsSegmentedValue, option: DsSegmentedOption]",
+            "signature": "(event: \"change\", value: DsSegmentedValue, option: DsSegmentedOption): void"
+          }
+        ]
+      },
+      {
+        "key": "methods",
+        "title": "Methods / Expose",
+        "origin": "generated",
+        "items": []
+      }
+    ]
+  },
   "DsSidebar": {
     "name": "DsSidebar",
     "sourcePath": "packages/granularity/src/components/DsSidebar/DsSidebar.vue",

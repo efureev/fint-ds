@@ -181,6 +181,10 @@
       "types": "./dist/types/src/components/DsSelect/index.d.ts",
       "import": "./dist/components/DsSelect/index.js"
     },
+    "./components/DsSegmented": {
+      "types": "./dist/types/src/components/DsSegmented/index.d.ts",
+      "import": "./dist/components/DsSegmented/index.js"
+    },
     "./components/DsSidebar": {
       "types": "./dist/types/src/components/DsSidebar/index.d.ts",
       "import": "./dist/components/DsSidebar/index.js"
@@ -271,6 +275,7 @@
     "./components/DsRadio/styles.css": "./dist/components/DsRadio/styles.css",
     "./components/DsRadioGroup/styles.css": "./dist/components/DsRadioGroup/styles.css",
     "./components/DsSelect/styles.css": "./dist/components/DsSelect/styles.css",
+    "./components/DsSegmented/styles.css": "./dist/components/DsSegmented/styles.css",
     "./components/DsSidebar/styles.css": "./dist/components/DsSidebar/styles.css",
     "./components/DsSkeleton/styles.css": "./dist/components/DsSkeleton/styles.css",
     "./components/DsSwitch/styles.css": "./dist/components/DsSwitch/styles.css",

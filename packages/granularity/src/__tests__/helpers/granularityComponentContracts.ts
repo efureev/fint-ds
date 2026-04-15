@@ -71,6 +71,8 @@ import { dsRadioGroupConfig } from '../../components/DsRadioGroup/config'
 import { dsRadioGroupSafelist } from '../../components/DsRadioGroup/safelist'
 import { dsSelectConfig } from '../../components/DsSelect/config'
 import { dsSelectSafelist } from '../../components/DsSelect/safelist'
+import { dsSegmentedConfig } from '../../components/DsSegmented/config'
+import { dsSegmentedSafelist } from '../../components/DsSegmented/safelist'
 import { dsSidebarConfig } from '../../components/DsSidebar/config'
 import { dsSidebarSafelist } from '../../components/DsSidebar/safelist'
 import { dsSkeletonConfig } from '../../components/DsSkeleton/config'
@@ -159,6 +161,7 @@ export const granularityComponentContracts = [
   { name: 'DsRadio', config: dsRadioConfig, safelist: dsRadioSafelist, dependencies: ['DsButton'] },
   { name: 'DsRadioGroup', config: dsRadioGroupConfig, safelist: dsRadioGroupSafelist, dependencies: ['DsButtonGroup', 'DsRadio'] },
   { name: 'DsSelect', config: dsSelectConfig, safelist: dsSelectSafelist, dependencies: ['DsInput'] },
+  { name: 'DsSegmented', config: dsSegmentedConfig, safelist: dsSegmentedSafelist, dependencies: [] },
   { name: 'DsSidebar', config: dsSidebarConfig, safelist: dsSidebarSafelist, dependencies: [] },
   { name: 'DsSkeleton', config: dsSkeletonConfig, safelist: dsSkeletonSafelist, dependencies: [] },
   { name: 'DsSwitch', config: dsSwitchConfig, safelist: dsSwitchSafelist, dependencies: [] },
