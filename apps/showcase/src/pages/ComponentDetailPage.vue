@@ -205,7 +205,6 @@ watch(componentEntity, () => {
 
 <template>
   <div v-if="componentEntity && componentDoc" class="space-y-8">
-    <pre>{{componentEntity.id}}</pre>
     <div>
       <h1 class="max-w-4xl text-3xl font-semibold leading-tight lg:text-4xl">
         {{ componentEntity.title }}

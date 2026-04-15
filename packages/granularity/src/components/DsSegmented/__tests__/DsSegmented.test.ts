@@ -11,8 +11,20 @@ const options = [
 ] as const
 
 class ResizeObserverMock {
+  static instances: ResizeObserverMock[] = []
+
+  readonly callback: ResizeObserverCallback
   observe = vi.fn()
   disconnect = vi.fn()
+
+  constructor(callback: ResizeObserverCallback) {
+    this.callback = callback
+    ResizeObserverMock.instances.push(this)
+  }
+
+  trigger(entries: ResizeObserverEntry[] = []) {
+    this.callback(entries, this as unknown as ResizeObserver)
+  }
 }
 
 function createRect({ left, top = 0, width, height }: { left: number, top?: number, width: number, height: number }) {
@@ -36,6 +48,7 @@ describe('DsSegmented', () => {
   let rectSpy: ReturnType<typeof vi.spyOn>
 
   beforeEach(() => {
+    ResizeObserverMock.instances = []
     globalThis.ResizeObserver = ResizeObserverMock as unknown as typeof ResizeObserver
 
     rectSpy = vi.spyOn(HTMLElement.prototype, 'getBoundingClientRect').mockImplementation(function getBoundingClientRect() {
@@ -261,6 +274,33 @@ describe('DsSegmented', () => {
     const style = indicator.attributes('style')
     expect(style).toContain('translate3d(168px, 3px, 0)')
     expect(style).not.toContain('translate3d(0px, 0px, 0px)')
+  })
+
+  it('не переинициализирует ResizeObserver из resize-callback', async () => {
+    const wrapper = mount(DsSegmented, {
+      props: {
+        modelValue: 'board',
+        options: [...options],
+      },
+    })
+
+    await nextTick()
+    await nextTick()
+
+    const observer = ResizeObserverMock.instances[0]
+    expect(observer).toBeDefined()
+
+    observer.observe.mockClear()
+    observer.disconnect.mockClear()
+
+    observer.trigger()
+    await nextTick()
+    await nextTick()
+
+    expect(observer.disconnect).not.toHaveBeenCalled()
+    expect(observer.observe).not.toHaveBeenCalled()
+
+    await wrapper.unmount()
   })
 
   it('поддерживает scoped slot для кастомного контента', () => {

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, getCurrentInstance, nextTick, onBeforeUnmount, onMounted, onUpdated, ref, watch } from 'vue'
+import { computed, getCurrentInstance, nextTick, onBeforeUnmount, onMounted, ref, watch } from 'vue'
 
 import type { ComponentPublicInstance } from 'vue'
 
@@ -68,6 +68,8 @@ const indicatorGeometry = ref<IndicatorGeometry | null>(null)
 const indicatorReady = ref(false)
 
 let resizeObserver: ResizeObserver | null = null
+let observedRoot: HTMLElement | null = null
+let observedItem: HTMLElement | null = null
 let scheduled = false
 
 const selectedIndex = computed(() => props.options.findIndex(option => option.value === props.modelValue))
@@ -214,25 +216,36 @@ function refreshObserver(): void {
     return
   }
 
+  const root = rootRef.value
+  const option = selectedOption.value
+  const selectedItem = option
+    ? itemRefs.value.get(getOptionKey(option.value)) ?? null
+    : null
+
   if (!resizeObserver) {
     resizeObserver = new ResizeObserver(() => scheduleMeasure())
   }
 
-  resizeObserver.disconnect()
-
-  if (rootRef.value) {
-    resizeObserver.observe(rootRef.value)
-  }
-
-  const option = selectedOption.value
-  if (!option) {
+  if (!root) {
+    resizeObserver.disconnect()
+    observedRoot = null
+    observedItem = null
     return
   }
 
-  const selectedItem = itemRefs.value.get(getOptionKey(option.value))
+  if (observedRoot === root && observedItem === selectedItem) {
+    return
+  }
+
+  resizeObserver.disconnect()
+  resizeObserver.observe(root)
+
   if (selectedItem) {
     resizeObserver.observe(selectedItem)
   }
+
+  observedRoot = root
+  observedItem = selectedItem
 }
 
 function scheduleMeasure(): void {
@@ -358,8 +371,11 @@ watch(() => props.size, () => scheduleMeasure())
 watch(() => props.block, () => scheduleMeasure())
 
 onMounted(() => scheduleMeasure())
-onUpdated(() => scheduleMeasure())
-onBeforeUnmount(() => resizeObserver?.disconnect())
+onBeforeUnmount(() => {
+  resizeObserver?.disconnect()
+  observedRoot = null
+  observedItem = null
+})
 </script>
 
 <template>
