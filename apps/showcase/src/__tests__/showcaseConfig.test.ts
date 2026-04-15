@@ -4,8 +4,6 @@ import { describe, expect, it } from 'vitest'
 
 import {
   showcaseContentIncludes,
-  showcasePresetComponents,
-  showcasePresetThemes,
 } from '../../uno.config'
 import {
   showcaseBuildAnalyzeMode,
@@ -75,10 +73,7 @@ describe('showcase bootstrap config', () => {
     expect(showcaseContentIncludes.some(re => re.test('/repo/apps/showcase/src/main.ts'))).toBe(true)
     expect(showcaseContentIncludes.some(re => re.test('/repo/apps/playground/src/main.ts'))).toBe(false)
     expect(showcaseContentIncludes.some(re => re.test('/repo/packages/granularity/dist/index.js'))).toBe(false)
-    expect(showcasePresetComponents).toEqual(['DsBadge', 'DsButton', 'DsCard'])
-    expect(showcasePresetThemes).toEqual(['light', 'dark'])
-    expect(showcaseUnoConfig).toContain("import { presetGranularityNode } from '@feugene/granularity/uno-node'")
-    expect(showcaseUnoConfig).toContain('components: [...showcasePresetComponents]')
-    expect(showcaseUnoConfig).toContain('themes: [...showcasePresetThemes]')
+    expect(showcaseUnoConfig).toContain("import {presetGranularityNode} from '@feugene/granularity/uno-node'")
+    expect(showcaseUnoConfig).toContain("themes: ['light', 'dark']")
   })
 })

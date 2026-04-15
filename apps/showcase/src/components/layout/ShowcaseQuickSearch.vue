@@ -45,21 +45,23 @@ function closeSearch() {
 
 <template>
   <div class="relative">
-    <DsButton
-      variant="ghost"
-      size="sm"
-      square
-      aria-label="Открыть поиск"
-      @click="toggleSearch()"
-    >
-      <SearchIcon />
-    </DsButton>
+    <div class="inline-flex">
+      <DsButton
+        variant="ghost"
+        size="sm"
+        square
+        aria-label="Открыть поиск"
+        @click="toggleSearch()"
+      >
+        <SearchIcon />
+      </DsButton>
+    </div>
 
     <div
       v-if="isOpen"
-      class="showcase-overlay absolute right-0 top-[calc(100%+0.75rem)] z-50 w-[min(92vw,30rem)] rounded-[28px] border p-4"
+      class="showcase-overlay absolute right-0 top-[calc(100%+0.75rem)] z-50 flex w-[min(92vw,30rem)] max-h-[calc(100dvh-8rem)] flex-col overflow-hidden rounded-[28px] border p-4 sm:max-h-[calc(100dvh-6rem)]"
     >
-      <div class="space-y-3">
+      <div class="flex min-h-0 flex-1 flex-col space-y-3">
         <div class="flex items-center justify-between gap-3">
           <div>
             <p class="showcase-kicker text-xs font-semibold tracking-[0.18em]">
@@ -82,7 +84,7 @@ function closeSearch() {
           class="showcase-input w-full rounded-2xl border px-4 py-3 text-sm outline-none transition-colors"
         >
 
-        <div v-if="hasNoResults" class="showcase-empty-state space-y-3 rounded-2xl border border-dashed px-4 py-4">
+        <div v-if="hasNoResults" class="showcase-empty-state min-h-0 overflow-y-auto overscroll-contain space-y-3 rounded-2xl border border-dashed px-4 py-4">
           <p class="text-sm leading-6">
             Ничего не найдено. Попробуйте имя сущности, export name, тип (`component`, `utility`) или section-title.
           </p>
@@ -104,32 +106,34 @@ function closeSearch() {
           </div>
         </div>
 
-        <div v-else class="grid gap-2">
-          <RouterLink
-            v-for="result in results"
-            :key="result.id"
-            :to="result.href"
-            class="showcase-sidebar-item-inactive rounded-2xl border border-transparent px-4 py-3 transition-colors"
-            @click="closeSearch()"
-          >
-            <div class="flex items-start justify-between gap-3">
-              <div class="min-w-0">
-                <p class="truncate text-sm font-semibold">
-                  {{ result.title }}
-                </p>
-                <p class="showcase-text-muted mt-1 text-xs leading-5">
-                  {{ result.description }}
-                </p>
-                <p class="showcase-kicker mt-2 text-[11px]">
-                  {{ result.context }}
-                </p>
-              </div>
+        <div v-else class="min-h-0 overflow-y-auto overscroll-contain pr-1">
+          <div class="grid gap-2">
+            <RouterLink
+              v-for="result in results"
+              :key="result.id"
+              :to="result.href"
+              class="showcase-sidebar-item-inactive rounded-2xl border border-transparent px-4 py-3 transition-colors"
+              @click="closeSearch()"
+            >
+              <div class="flex items-start justify-between gap-3">
+                <div class="min-w-0">
+                  <p class="truncate text-sm font-semibold">
+                    {{ result.title }}
+                  </p>
+                  <p class="showcase-text-muted mt-1 text-xs leading-5">
+                    {{ result.description }}
+                  </p>
+                  <p class="showcase-kicker mt-2 text-[11px]">
+                    {{ result.context }}
+                  </p>
+                </div>
 
-              <DsBadge>
-                {{ result.kindLabel }}
-              </DsBadge>
-            </div>
-          </RouterLink>
+                <DsBadge>
+                  {{ result.kindLabel }}
+                </DsBadge>
+              </div>
+            </RouterLink>
+          </div>
         </div>
       </div>
     </div>

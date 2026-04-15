@@ -906,6 +906,13 @@
             "type": "string | undefined",
             "required": false,
             "default": "\"\""
+          },
+          {
+            "name": "teleportTo",
+            "description": "",
+            "type": "string | HTMLElement | undefined",
+            "required": false,
+            "default": "\"body\""
           }
         ]
       },
@@ -1774,6 +1781,13 @@
         "origin": "generated",
         "items": [
           {
+            "name": "zIndex",
+            "description": "",
+            "type": "number | undefined",
+            "required": false,
+            "default": "undefined"
+          },
+          {
             "name": "initialIndex",
             "description": "",
             "type": "number | undefined",
@@ -1828,13 +1842,6 @@
             "type": "boolean | undefined",
             "required": false,
             "default": "true"
-          },
-          {
-            "name": "zIndex",
-            "description": "",
-            "type": "number | undefined",
-            "required": false,
-            "default": "undefined"
           },
           {
             "name": "modelValue",
@@ -2627,16 +2634,16 @@
         "origin": "generated",
         "items": [
           {
-            "name": "text",
+            "name": "zIndex",
             "description": "",
-            "type": "string | undefined",
+            "type": "number | undefined",
             "required": false,
             "default": "undefined"
           },
           {
-            "name": "zIndex",
+            "name": "text",
             "description": "",
-            "type": "number | undefined",
+            "type": "string | undefined",
             "required": false,
             "default": "undefined"
           },

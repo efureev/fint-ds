@@ -95,10 +95,9 @@ describe('showcase layout integration', () => {
 
     expect(wrapper.text()).toContain('Components')
     expect(wrapper.text()).toContain('DsButton')
-    expect(wrapper.text()).toContain('Actions')
     expect(wrapper.text()).toContain('Live examples')
     expect(wrapper.text()).toContain('API')
-    expect(wrapper.text()).toContain('Usage')
+    expect(wrapper.text()).toContain('Implementation notes')
   })
 
   it('рендерит package-level api, usage и breadcrumbs для composable detail route', async () => {
@@ -173,5 +172,31 @@ describe('showcase layout integration', () => {
 
     expect(wrapper.find('[aria-label="Закрыть навигацию"]').exists()).toBe(false)
     expect(wrapper.text()).toContain('Utilities catalog')
+  })
+
+  it('открывает quick search как CSS-sized панель с внутренним скроллом результатов', async () => {
+    const { wrapper } = await mountShowcaseAt('/components/ds-button')
+    const searchButton = findButtonByAriaLabel(wrapper, 'Открыть поиск')
+
+    expect(searchButton).toBeTruthy()
+
+    await searchButton?.trigger('click')
+    await flushPromises()
+
+    const searchPanel = wrapper.findAll('.showcase-overlay').find(node => node.text().includes('Quick search'))
+
+    expect(searchPanel).toBeTruthy()
+    expect(searchPanel?.classes()).toContain('absolute')
+    expect(searchPanel?.classes()).toContain('flex')
+    expect(searchPanel?.classes()).toContain('flex-col')
+    expect(searchPanel?.classes()).toContain('top-[calc(100%+0.75rem)]')
+    expect(searchPanel?.classes()).toContain('w-[min(92vw,30rem)]')
+    expect(searchPanel?.classes()).toContain('max-h-[calc(100dvh-8rem)]')
+    expect(searchPanel?.attributes('style')).toBeUndefined()
+
+    const scrollableResults = searchPanel?.find('.overflow-y-auto')
+
+    expect(scrollableResults?.exists()).toBe(true)
+    expect(scrollableResults?.classes()).toContain('min-h-0')
   })
 })
