@@ -9,6 +9,7 @@ import { useFintI18n } from '@feugene/fint-i18n/vue'
 import { DsButton, DsSegmented, type DsSegmentedOption } from '@feugene/granularity'
 
 import { showcaseNavigationItems } from '../../app/showcase'
+import { useShowcasePageI18n } from '../../app/useShowcasePageI18n'
 import type { ShowcaseNavigationItem } from '../../app/showcase'
 import ThemeSwitcher from '../ThemeSwitcher.vue'
 import ShowcaseQuickSearch from './ShowcaseQuickSearch.vue'
@@ -21,6 +22,7 @@ const emit = defineEmits<{
 
 const route = useRoute()
 const i18n = useFintI18n()
+const { localizePageByName } = useShowcasePageI18n()
 
 const localeOptions = [
   { value: 'ru', label: 'RU' },
@@ -38,7 +40,18 @@ const selectedLocale = computed<'ru' | 'en'>({
   },
 })
 
-const topNavigationItems = computed(() => showcaseNavigationItems.filter(item => item.name !== 'overview'))
+const topNavigationItems = computed(() => showcaseNavigationItems
+  .filter(item => item.name !== 'overview')
+  .map(item => {
+    const localizedPage = localizePageByName(item.name)
+
+    return {
+      ...item,
+      title: localizedPage.title,
+      shortTitle: localizedPage.shortTitle,
+      description: localizedPage.description,
+    }
+  }))
 
 function isActiveNavigationItem(item: ShowcaseNavigationItem) {
   if (item.path === '/')

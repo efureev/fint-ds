@@ -5,6 +5,7 @@ import IconArrowRight from '~icons/lucide/arrow-right'
 
 import { DsCard } from '@feugene/granularity'
 
+import { useShowcasePageI18n } from '../../app/useShowcasePageI18n'
 import type { ShowcaseEntityKind, ShowcaseEntityRegistryItem } from '../../content/model'
 import type { ShowcasePage } from '../../app/showcase'
 
@@ -14,13 +15,7 @@ const props = defineProps<{
   entities: ShowcaseEntityRegistryItem[]
 }>()
 
-const groupLabels: Record<string, string> = {
-  overlays: 'Overlays',
-  feedback: 'Feedback',
-  runtime: 'Runtime',
-  validation: 'Validation',
-  ungrouped: 'General',
-}
+const { getEntityGroupLabel } = useShowcasePageI18n()
 
 const searchQuery = ref('')
 
@@ -48,23 +43,12 @@ const groupedEntities = computed(() => {
   }
 
   return [...buckets.entries()]
-    .sort(([left], [right]) => (groupLabels[left] ?? left).localeCompare(groupLabels[right] ?? right))
+    .sort(([left], [right]) => getEntityGroupLabel(props.page.name, left).localeCompare(getEntityGroupLabel(props.page.name, right)))
     .map(([group, entities]) => ({
       group,
-      label: groupLabels[group] ?? group,
+      label: getEntityGroupLabel(props.page.name, group),
       entities: [...entities].sort((left, right) => left.title.localeCompare(right.title)),
     }))
-})
-
-const kindLabel = computed(() => {
-  if (props.kind === 'directive')
-    return 'directive'
-  if (props.kind === 'composable')
-    return 'composable'
-  if (props.kind === 'utility')
-    return 'utility'
-
-  return 'entity'
 })
 </script>
 
@@ -76,10 +60,10 @@ const kindLabel = computed(() => {
           {{ page.eyebrow }}
         </span>
         <h1 class="max-w-4xl text-4xl font-semibold leading-tight lg:text-5xl">
-          {{ page.title }} catalog
+          {{ page.title }} {{ $t('showcase.packageCatalog.titleSuffix') }}
         </h1>
         <p class="showcase-text-muted max-w-3xl text-base leading-7">
-          {{ page.description }} Здесь можно быстро найти нужную сущность и перейти к detail page.
+          {{ page.description }} {{ $t('showcase.packageCatalog.heroDescription') }}
         </p>
       </div>
     </DsCard>
@@ -87,11 +71,11 @@ const kindLabel = computed(() => {
     <section id="catalog" class="scroll-mt-28 space-y-5">
       <div class="showcase-panel rounded-3xl border p-4">
         <label class="grid gap-2 text-sm font-medium">
-          Search {{ page.shortTitle.toLowerCase() }}
+          {{ $t('showcase.packageCatalog.searchLabel') }}
           <input
             v-model="searchQuery"
             type="search"
-            :placeholder="`Filter ${page.shortTitle.toLowerCase()} by name or summary`"
+            :placeholder="$t('showcase.packageCatalog.searchPlaceholder')"
             class="showcase-input w-full rounded-2xl border px-4 py-3 text-sm outline-none transition"
           >
         </label>
@@ -109,7 +93,7 @@ const kindLabel = computed(() => {
                 {{ bucket.label }}
               </h2>
               <p class="showcase-text-subtle text-sm">
-                {{ bucket.entities.length }} {{ kindLabel }}<span v-if="bucket.entities.length !== 1">s</span>
+                {{ bucket.entities.length }} {{ $t('showcase.packageCatalog.itemsCount') }}
               </p>
             </div>
           </div>
@@ -136,7 +120,7 @@ const kindLabel = computed(() => {
                 </p>
 
                 <div class="showcase-text-primary mt-5 inline-flex items-center gap-2 text-sm font-medium">
-                  <span>Open detail page</span>
+                  <span>{{ $t('showcase.packageCatalog.openDetailPage') }}</span>
                   <IconArrowRight class="h-4 w-4 shrink-0" />
                 </div>
               </DsCard>
@@ -148,7 +132,7 @@ const kindLabel = computed(() => {
           v-if="groupedEntities.length === 0"
           class="showcase-empty-state rounded-3xl border border-dashed p-8 text-sm leading-6 shadow-sm"
         >
-          Nothing matched the current query. Try searching by export name or group.
+          {{ $t('showcase.packageCatalog.emptyState') }}
         </DsCard>
       </div>
     </section>

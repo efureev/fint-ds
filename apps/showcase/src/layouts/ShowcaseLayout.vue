@@ -9,7 +9,6 @@ import {
 import { DsButton, useTheme } from '@feugene/granularity'
 
 import {
-  getShowcaseBreadcrumbs,
   getShowcaseEntityByPath,
   getShowcasePageByName,
   getShowcasePageByPath,
@@ -21,6 +20,7 @@ import {
   showcasePageRecord,
   showcaseUtilityEntities,
 } from '../app/showcase'
+import { useShowcasePageI18n } from '../app/useShowcasePageI18n'
 import type { ShowcaseNavigationItem, ShowcasePageName } from '../app/showcase'
 import type { ShowcaseEntityRegistryItem } from '../content/model'
 import ThemeSwitcher from '../components/ThemeSwitcher.vue'
@@ -33,6 +33,12 @@ const route = useRoute()
 const isMobileNavigationOpen = ref(false)
 
 const { initTheme } = useTheme()
+const {
+  getEntityGroupLabel,
+  localizePage,
+  localizePageByName,
+  localizeSections,
+} = useShowcasePageI18n()
 
 onMounted(() => {
   initTheme()
@@ -48,21 +54,72 @@ const currentPage = computed(() => {
     ?? showcasePageRecord.overview
 })
 const currentEntity = computed(() => getShowcaseEntityByPath(route.path))
+const localizedCurrentPage = computed(() => localizePage(currentPage.value))
 
-const breadcrumbs = computed(() => getShowcaseBreadcrumbs(route.path))
-const currentSections = computed(() => getShowcaseSectionsForPath(route.path))
-const currentTitle = computed(() => currentEntity.value?.title ?? currentPage.value.title)
-const topNavigationItems = computed(() => showcaseNavigationItems.filter(item => item.name !== 'overview'))
+const breadcrumbs = computed(() => {
+  const currentEntityValue = currentEntity.value
+  const currentPageValue = localizePage(currentPage.value)
+  const overviewPage = localizePageByName('overview')
 
-const componentGroupLabels: Record<string, string> = {
-  actions: 'Actions',
-  feedback: 'Feedback',
-  navigation: 'Navigation',
-  overlays: 'Overlays',
-  forms: 'Forms',
-  data: 'Data display',
-  misc: 'Miscellaneous',
-}
+  if (currentEntityValue && currentPageValue.path !== '/') {
+    return [
+      {
+        label: overviewPage.shortTitle,
+        to: overviewPage.path,
+      },
+      {
+        label: currentPageValue.shortTitle,
+        to: currentPageValue.path,
+      },
+      {
+        label: currentEntityValue.title,
+        to: currentEntityValue.path,
+      },
+    ]
+  }
+
+  if (currentPageValue.path === '/') {
+    return [
+      {
+        label: overviewPage.shortTitle,
+        to: overviewPage.path,
+      },
+    ]
+  }
+
+  return [
+    {
+      label: overviewPage.shortTitle,
+      to: overviewPage.path,
+    },
+    {
+      label: currentPageValue.shortTitle,
+      to: currentPageValue.path,
+    },
+  ]
+})
+const currentSections = computed(() => {
+  const sections = getShowcaseSectionsForPath(route.path)
+
+  if (currentEntity.value) {
+    return sections
+  }
+
+  return localizeSections(currentPage.value.name, sections)
+})
+const currentTitle = computed(() => currentEntity.value?.title ?? localizedCurrentPage.value.title)
+const topNavigationItems = computed(() => showcaseNavigationItems
+  .filter(item => item.name !== 'overview')
+  .map(item => {
+    const localizedPage = localizePageByName(item.name)
+
+    return {
+      ...item,
+      title: localizedPage.title,
+      shortTitle: localizedPage.shortTitle,
+      description: localizedPage.description,
+    }
+  }))
 
 type SidebarNavigationItem = {
   id: string
@@ -75,12 +132,6 @@ type SidebarNavigationGroup = {
   id: string
   title: string
   items: SidebarNavigationItem[]
-}
-
-function normalizeLabel(value: string) {
-  return value
-    .replace(/[-_]+/g, ' ')
-    .replace(/\b\w/g, char => char.toUpperCase())
 }
 
 function getEntityCollection(pageName: ShowcasePageName): ShowcaseEntityRegistryItem[] {
@@ -98,13 +149,6 @@ function getEntityCollection(pageName: ShowcasePageName): ShowcaseEntityRegistry
   }
 }
 
-function getEntityGroupLabel(pageName: ShowcasePageName, group: string) {
-  if (pageName === 'components')
-    return componentGroupLabels[group] ?? normalizeLabel(group)
-
-  return normalizeLabel(group)
-}
-
 const contextNavigationGroups = computed<SidebarNavigationGroup[]>(() => {
   const pageName = currentPage.value.name
 
@@ -112,7 +156,7 @@ const contextNavigationGroups = computed<SidebarNavigationGroup[]>(() => {
     return [
       {
         id: `${pageName}-sections`,
-        title: 'Навигация по странице',
+        title: localizePageByName(pageName).shortTitle,
         items: currentSections.value.map(section => ({
           id: section.id,
           label: section.title,
@@ -190,7 +234,7 @@ function getSidebarItemClass(item: SidebarNavigationItem) {
 
     <div class="mx-auto grid max-w-7xl gap-6 px-4 py-6 lg:grid-cols-[290px_minmax(0,1fr)] lg:px-8">
       <ShowcaseSidebarNavigation
-        :eyebrow="currentPage.shortTitle"
+        :eyebrow="localizedCurrentPage.shortTitle"
         :title="currentTitle"
         :groups="contextNavigationGroups"
       />

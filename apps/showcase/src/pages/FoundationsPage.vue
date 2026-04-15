@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import {computed, ref} from 'vue'
 
+import { useFintI18n } from '@feugene/fint-i18n/vue'
 import {DsBadge, DsCard, DsLink, DsSwitch} from '@feugene/granularity'
 
 import InlineRichText from '../components/content/InlineRichText.vue'
@@ -15,6 +16,7 @@ import IconChevronDown from '~icons/lucide/chevron-down'
 import IconChevronRight from '~icons/lucide/chevron-right'
 import IconHash from '~icons/lucide/hash'
 
+const i18n = useFintI18n()
 const preferredQuickStartCardId = 'quick-start-uno-node'
 const guidesWithoutNarrativeDocs = new Set([
   'styling',
@@ -33,6 +35,7 @@ const foundationTokenGroups = computed(() => foundationTokenSectionOrder.map(sec
 })))
 const isDarkThemePreview = ref(false)
 const activeThemeName = computed(() => isDarkThemePreview.value ? 'dark' : 'light')
+const activeThemeLabel = computed(() => i18n.t(`showcase.foundationsPage.theme.${activeThemeName.value}`))
 const themeTokenSectionOrder = [...new Set(showcaseThemeTokens.map(token => token.section))]
 const collapsedThemeSections = ref<Record<string, boolean>>(
   Object.fromEntries(themeTokenSectionOrder.map(section => [section, true])),
@@ -59,10 +62,7 @@ function getVisibleCodeSamples(guide: (typeof showcaseFoundationGuides)[number])
     if (codeSample.language === 'md')
       return false
 
-    if ((guide.id === 'themes' || guide.id === 'tokens') && codeSample.language === 'css')
-      return false
-
-    return true
+    return !((guide.id === 'themes' || guide.id === 'tokens') && codeSample.language === 'css')
   })
 }
 
@@ -81,6 +81,10 @@ function toggleFoundationTokenSection(section: string) {
 function toggleThemeTokenSection(section: string) {
   collapsedThemeSections.value[section] = !collapsedThemeSections.value[section]
 }
+
+function getSectionToggleAriaLabel(section: string, isCollapsed: boolean) {
+  return `${i18n.t(`showcase.foundationsPage.${isCollapsed ? 'expandSection' : 'collapseSection'}`)} ${section}`
+}
 </script>
 
 <template>
@@ -88,11 +92,10 @@ function toggleThemeTokenSection(section: string) {
     <DsCard class="showcase-panel rounded-3xl border p-8">
       <div class="space-y-4">
         <h1 class="max-w-4xl text-1xl font-semibold leading-tight lg:text-2xl">
-          Foundations собирает установку, темы и базовые настройки в одном понятном разделе.
+          {{ $t('showcase.foundationsPage.heroTitle') }}
         </h1>
         <p class="showcase-text-muted max-w-3xl text-base leading-7">
-          Здесь собраны только полезные шаги для старта: установка, подключение стилей и ключевые рекомендации по
-          интеграции.
+          {{ $t('showcase.foundationsPage.heroDescription') }}
         </p>
       </div>
     </DsCard>
@@ -100,17 +103,21 @@ function toggleThemeTokenSection(section: string) {
     <section id="installation" class="space-y-6 scroll-mt-28">
       <DsCard class="showcase-panel rounded-3xl border p-6">
         <div class="space-y-3">
-          <h2 class="text-2xl font-semibold">Установка</h2>
-          <CodeBlock code="yarn add @feugene/granularity vue" language="bash" title="Install package"/>
+          <h2 class="text-2xl font-semibold">{{ $t('showcase.foundationsPage.installationTitle') }}</h2>
+          <CodeBlock
+            code="yarn add @feugene/granularity vue"
+            language="bash"
+            :title="$t('showcase.foundationsPage.installPackageTitle')"
+          />
         </div>
       </DsCard>
 
       <DsCard class="showcase-panel rounded-3xl border p-6">
         <div class="space-y-4">
           <div class="space-y-2">
-            <h2 class="text-2xl font-semibold">Quick-start map</h2>
+            <h2 class="text-2xl font-semibold">{{ $t('showcase.foundationsPage.quickStartTitle') }}</h2>
             <p class="showcase-text-muted text-sm leading-6">
-              <InlineRichText text="Выберите подходящий сценарий подключения: от простого импорта до `UnoCSS` preset."/>
+              <InlineRichText :text="$t('showcase.foundationsPage.quickStartDescription')"/>
             </p>
           </div>
 
@@ -126,7 +133,7 @@ function toggleThemeTokenSection(section: string) {
                     <InlineRichText :text="card.title"/>
                   </h3>
                   <DsBadge variant="primary" dark v-if="card.id === preferredQuickStartCardId">
-                    Предпочтительный способ
+                    {{ $t('showcase.foundationsPage.preferredMethod') }}
                   </DsBadge>
                 </div>
                 <p class="showcase-text-muted text-sm leading-6">
@@ -170,7 +177,7 @@ function toggleThemeTokenSection(section: string) {
 
           <div class="grid gap-4 md:grid-cols-2">
             <div class="space-y-3">
-              <h3 class="text-lg font-semibold">Что важно понять</h3>
+              <h3 class="text-lg font-semibold">{{ $t('showcase.foundationsPage.keyPointsTitle') }}</h3>
               <ul class="grid gap-3">
                 <li
                     v-for="item in guide.keyPoints"
@@ -183,7 +190,7 @@ function toggleThemeTokenSection(section: string) {
             </div>
 
             <div class="space-y-3">
-              <h3 class="text-lg font-semibold">Практические рекомендации</h3>
+              <h3 class="text-lg font-semibold">{{ $t('showcase.foundationsPage.recommendationsTitle') }}</h3>
               <ul class="grid gap-3">
                 <li
                     v-for="item in guide.recommendations"
@@ -197,15 +204,18 @@ function toggleThemeTokenSection(section: string) {
           </div>
 
           <div v-if="!guidesWithoutNarrativeDocs.has(guide.id) && guide.narrativeSource" class="space-y-4">
-            <CodeBlock :code="guide.narrativeSource" language="md" title="Connected doc excerpt"/>
+            <CodeBlock
+              :code="guide.narrativeSource"
+              language="md"
+              :title="$t('showcase.foundationsPage.connectedDocExcerptTitle')"
+            />
           </div>
 
           <div v-if="guide.id === 'tokens'" class="space-y-4">
             <div class="space-y-2">
-              <h3 class="text-lg font-semibold">Current token registry</h3>
+              <h3 class="text-lg font-semibold">{{ $t('showcase.foundationsPage.currentTokenRegistryTitle') }}</h3>
               <p class="showcase-text-muted text-sm leading-6">
-                Таблица собирается из актуального `packages/granularity/src/styles/tokens.css`, поэтому отражает текущий
-                набор foundation tokens в пакете.
+                {{ $t('showcase.foundationsPage.currentTokenRegistryDescription') }}
               </p>
             </div>
 
@@ -220,7 +230,7 @@ function toggleThemeTokenSection(section: string) {
                     <div class="space-y-1">
                       <h4 class="text-base font-semibold">{{ group.section }}</h4>
                       <p class="showcase-text-subtle text-xs">
-                        {{ group.tokens.length }} token{{ group.tokens.length === 1 ? '' : 's' }}
+                        {{ group.tokens.length }} {{ $t('showcase.foundationsPage.tokensCount') }}
                       </p>
                     </div>
 
@@ -228,7 +238,7 @@ function toggleThemeTokenSection(section: string) {
                         type="button"
                         class="showcase-panel flex h-9 w-9 items-center justify-center rounded-full border transition-colors hover:bg-[var(--showcase-surface-muted)]"
                         :aria-expanded="!collapsedFoundationSections[group.section]"
-                        :aria-label="`${collapsedFoundationSections[group.section] ? 'Expand' : 'Collapse'} ${group.section}`"
+                        :aria-label="getSectionToggleAriaLabel(group.section, collapsedFoundationSections[group.section])"
                         @click="toggleFoundationTokenSection(group.section)"
                     >
                       <component
@@ -242,9 +252,9 @@ function toggleThemeTokenSection(section: string) {
                     <table class="min-w-full border-collapse text-left text-sm">
                       <thead class="showcase-table-head">
                       <tr>
-                        <th class="min-w-[200px] px-5 py-3 font-semibold">Token</th>
-                        <th class="px-5 py-3 font-semibold">Color / value</th>
-                        <th class="px-5 py-3 font-semibold">Description</th>
+                        <th class="min-w-[200px] px-5 py-3 font-semibold">{{ $t('showcase.foundationsPage.table.token') }}</th>
+                        <th class="px-5 py-3 font-semibold">{{ $t('showcase.foundationsPage.table.value') }}</th>
+                        <th class="px-5 py-3 font-semibold">{{ $t('showcase.foundationsPage.table.description') }}</th>
                       </tr>
                       </thead>
 
@@ -280,7 +290,7 @@ function toggleThemeTokenSection(section: string) {
                           <div class="space-y-1">
                             <p>{{ token.description }}</p>
                             <p class="showcase-text-subtle text-xs">
-                              Source: `tokens.css`
+                              {{ $t('showcase.foundationsPage.table.source') }}: `tokens.css`
                             </p>
                           </div>
                         </td>
@@ -296,16 +306,16 @@ function toggleThemeTokenSection(section: string) {
           <div v-if="guide.id === 'themes'" class="space-y-4">
             <div class="flex flex-col gap-4 xl:flex-row xl:items-end xl:justify-between">
               <div class="space-y-2">
-                <h3 class="text-lg font-semibold">Current Theme token registry</h3>
+                <h3 class="text-lg font-semibold">{{ $t('showcase.foundationsPage.currentThemeRegistryTitle') }}</h3>
                 <p class="showcase-text-muted max-w-3xl text-sm leading-6">
-                  Таблица показывает semantic theme tokens из актуальных <kbd>light.css</kbd> и <kbd>dark.css</kbd>.
+                  {{ $t('showcase.foundationsPage.currentThemeRegistryDescription') }}
                 </p>
               </div>
 
               <DsCard class="showcase-panel-soft min-w-[220px] rounded-3xl border px-4 py-3">
                 <div class="flex items-center justify-between gap-4">
-                  <div class="text-sm font-semibold">Theme:</div>
-                  <div class="text-sm">{{ activeThemeName }}</div>
+                  <div class="text-sm font-semibold">{{ $t('showcase.foundationsPage.themeLabel') }}</div>
+                  <div class="text-sm">{{ activeThemeLabel }}</div>
                   <DsSwitch v-model="isDarkThemePreview" size="sm"/>
                 </div>
               </DsCard>
@@ -326,7 +336,7 @@ function toggleThemeTokenSection(section: string) {
                     <div class="space-y-1">
                       <h4 class="text-base font-semibold">{{ group.section }}</h4>
                       <p class="showcase-text-subtle text-xs">
-                        {{ group.tokens.length }} token{{ group.tokens.length === 1 ? '' : 's' }}
+                        {{ group.tokens.length }} {{ $t('showcase.foundationsPage.tokensCount') }}
                       </p>
                     </div>
 
@@ -334,7 +344,7 @@ function toggleThemeTokenSection(section: string) {
                         type="button"
                         class="showcase-panel flex h-9 w-9 items-center justify-center rounded-full border transition-colors hover:bg-[var(--showcase-surface-muted)]"
                         :aria-expanded="!collapsedThemeSections[group.section]"
-                        :aria-label="`${collapsedThemeSections[group.section] ? 'Expand' : 'Collapse'} ${group.section}`"
+                        :aria-label="getSectionToggleAriaLabel(group.section, collapsedThemeSections[group.section])"
                         @click="toggleThemeTokenSection(group.section)"
                     >
                       <component
@@ -348,9 +358,9 @@ function toggleThemeTokenSection(section: string) {
                     <table class="min-w-full border-collapse text-left text-sm">
                       <thead class="showcase-table-head">
                       <tr>
-                        <th class="min-w-[200px] px-5 py-3 font-semibold">Token</th>
-                        <th class="px-5 py-3 font-semibold">Color / value</th>
-                        <th class="px-5 py-3 font-semibold">Description</th>
+                        <th class="min-w-[200px] px-5 py-3 font-semibold">{{ $t('showcase.foundationsPage.table.token') }}</th>
+                        <th class="px-5 py-3 font-semibold">{{ $t('showcase.foundationsPage.table.value') }}</th>
+                        <th class="px-5 py-3 font-semibold">{{ $t('showcase.foundationsPage.table.description') }}</th>
                       </tr>
                       </thead>
 
@@ -388,7 +398,7 @@ function toggleThemeTokenSection(section: string) {
                           <div class="space-y-1">
                             <p>{{ token.description }}</p>
                             <p class="showcase-text-subtle text-xs">
-                              Source: <code>{{ activeThemeName }}.css</code>
+                              {{ $t('showcase.foundationsPage.table.source') }}: <code>{{ activeThemeName }}.css</code>
                             </p>
                           </div>
                         </td>

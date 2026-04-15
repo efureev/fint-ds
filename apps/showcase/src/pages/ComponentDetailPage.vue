@@ -6,8 +6,8 @@ import {DsCard} from '@feugene/granularity'
 
 import {
   getShowcaseComponentBySlug,
-  showcasePageRecord,
 } from '../app/showcase'
+import { useShowcasePageI18n } from '../app/useShowcasePageI18n'
 import EventsTable from '../components/doc/EventsTable.vue'
 import ExampleCard from '../components/doc/ExampleCard.vue'
 import InfoSectionCard from '../components/doc/InfoSectionCard.vue'
@@ -22,6 +22,7 @@ import {
 import {getShowcaseComponentDoc} from '../content/componentDocs'
 
 const route = useRoute()
+const { localizePageByName } = useShowcasePageI18n()
 
 const previewRegistry = {
   'ds-alert-closable-flow': defineAsyncComponent(() => import('../demos/components/ds-alert/DsAlertClosableDemo.vue')),
@@ -187,6 +188,7 @@ const componentDoc = computed(() => {
 const accessibilityItems = computed(() => createAccessibilityItems(componentEntity.value))
 const dependencyItems = computed(() => createDependencyItems(componentEntity.value))
 const relatedLinks = computed(() => createRelatedLinks(componentEntity.value))
+const componentsPage = computed(() => localizePageByName('components'))
 
 function resolvePreviewComponent(previewKey?: string) {
   if (!previewKey)
@@ -204,7 +206,7 @@ function resolvePreviewComponent(previewKey?: string) {
       </h1>
       <div class="flex flex-wrap items-center gap-3 mt-5">
         <span class="showcase-kicker text-xs font-semibold tracking-[0.18em]">
-          {{ showcasePageRecord.components.eyebrow }} / {{ componentEntity.group }}
+          {{ componentsPage.eyebrow }} / {{ componentEntity.group }}
         </span>
       </div>
       <div class="mt-2 space-y-4">

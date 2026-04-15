@@ -4,19 +4,15 @@ import { RouterLink } from 'vue-router'
 
 import { DsCard } from '@feugene/granularity'
 
-import { showcaseComponentEntities, showcasePageRecord } from '../app/showcase'
+import { showcaseComponentEntities } from '../app/showcase'
+import { useShowcasePageI18n } from '../app/useShowcasePageI18n'
 
-const page = showcasePageRecord.components
+const {
+  getEntityGroupLabel,
+  localizePageByName,
+} = useShowcasePageI18n()
 
-const groupLabels: Record<string, string> = {
-  actions: 'Actions',
-  feedback: 'Feedback',
-  navigation: 'Navigation',
-  overlays: 'Overlays',
-  forms: 'Forms',
-  data: 'Data display',
-  misc: 'Misc',
-}
+const page = computed(() => localizePageByName('components'))
 
 const searchQuery = ref('')
 
@@ -47,10 +43,10 @@ const groupedComponents = computed(() => {
   }
 
   return [...buckets.entries()]
-    .sort(([left], [right]) => (groupLabels[left] ?? left).localeCompare(groupLabels[right] ?? right))
+    .sort(([left], [right]) => getEntityGroupLabel('components', left).localeCompare(getEntityGroupLabel('components', right)))
     .map(([group, entities]) => ({
       group,
-      label: groupLabels[group] ?? group,
+      label: getEntityGroupLabel('components', group),
       entities: [...entities].sort((left, right) => left.title.localeCompare(right.title)),
     }))
 })
@@ -65,10 +61,10 @@ const groupedComponents = computed(() => {
           {{ page.eyebrow }}
         </span>
         <h1 class="max-w-4xl text-3xl font-semibold leading-tight lg:text-4xl">
-          Каталог компонентов
+          {{ $t('showcase.componentsPage.heroTitle') }}
         </h1>
         <p class="showcase-text-muted max-w-3xl text-base leading-7">
-          Ищите компоненты по названию и группе, а затем переходите к detail page без лишних метрик и служебного шума.
+          {{ $t('showcase.componentsPage.heroDescription') }}
         </p>
       </div>
     </DsCard>
@@ -78,21 +74,22 @@ const groupedComponents = computed(() => {
         <div class="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
           <div class="space-y-2">
             <h2 class="text-2xl font-semibold">
-              Component catalog
+              {{ $t('showcase.componentsPage.catalogTitle') }}
             </h2>
             <p class="showcase-text-muted max-w-3xl text-sm leading-6">
-              Поиск работает по имени, summary и группе. Сейчас в каталоге {{ componentsWithExamples.length }} компонентов уже сопровождаются примерами.
+              {{ $t('showcase.componentsPage.catalogDescription') }}
+              {{ componentsWithExamples.length }}.
             </p>
           </div>
 
           <label class="block w-full max-w-md">
             <span class="showcase-kicker mb-2 block text-xs font-semibold">
-              Search components
+              {{ $t('showcase.componentsPage.searchLabel') }}
             </span>
             <input
               v-model="searchQuery"
               type="search"
-              placeholder="Например: button, form, overlay"
+              :placeholder="$t('showcase.componentsPage.searchPlaceholder')"
               class="showcase-input w-full rounded-2xl border px-4 py-3 text-sm outline-none transition-colors"
             >
           </label>
@@ -133,7 +130,7 @@ const groupedComponents = computed(() => {
 
                 <div class="showcase-text-subtle mt-4 flex flex-wrap gap-2 text-xs">
                   <span class="showcase-link-chip rounded-full border px-3 py-1">
-                    {{ component.group }}
+                    {{ getEntityGroupLabel('components', component.group || 'misc') }}
                   </span>
                 </div>
               </RouterLink>
@@ -144,7 +141,7 @@ const groupedComponents = computed(() => {
             v-if="groupedComponents.length === 0"
             class="showcase-empty-state rounded-3xl border border-dashed px-5 py-8 text-sm leading-6"
           >
-            По текущему запросу компоненты не найдены. Попробуй искать по имени (`DsButton`) или группе (`forms`, `overlays`).
+            {{ $t('showcase.componentsPage.emptyState') }}
           </div>
         </div>
       </DsCard>

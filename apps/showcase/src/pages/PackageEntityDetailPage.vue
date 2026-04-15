@@ -8,8 +8,8 @@ import { DsBadge, DsCard } from '@feugene/granularity'
 import {
   getShowcaseEntityByPath,
   getShowcasePageByPath,
-  showcasePageRecord,
 } from '../app/showcase'
+import { useShowcasePageI18n } from '../app/useShowcasePageI18n'
 import CodeBlock from '../components/doc/CodeBlock.vue'
 import ApiTable from '../components/doc/ApiTable.vue'
 import ExampleCard from '../components/doc/ExampleCard.vue'
@@ -22,6 +22,7 @@ import PackagePreviewDemo from '../demos/package/PackagePreviewDemo.vue'
 import { getShowcasePackageDoc } from '../content/packageDocs'
 
 const route = useRoute()
+const { localizePage, localizePageByName } = useShowcasePageI18n()
 
 const entity = computed(() => {
   const resolved = getShowcaseEntityByPath(route.path)
@@ -31,12 +32,16 @@ const entity = computed(() => {
   return resolved
 })
 
-const page = computed(() => getShowcasePageByPath(route.path))
+const page = computed(() => {
+  const currentPage = getShowcasePageByPath(route.path)
+
+  return currentPage ? localizePage(currentPage) : undefined
+})
 const entityDoc = computed(() => entity.value ? getShowcasePackageDoc(entity.value) : undefined)
 const usageSnippet = computed(() => createUsageSnippet(entity.value))
 const dependencyItems = computed(() => createDependencyItems(entity.value))
 
-const pageEyebrow = computed(() => page.value?.eyebrow ?? showcasePageRecord.overview.eyebrow)
+const pageEyebrow = computed(() => page.value?.eyebrow ?? localizePageByName('overview').eyebrow)
 </script>
 
 <template>
