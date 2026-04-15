@@ -1,6 +1,6 @@
 // @vitest-environment jsdom
 
-import { beforeEach, describe, expect, it, vi } from 'vitest'
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import { flushPromises, mount } from '@vue/test-utils'
 import { createMemoryHistory, createRouter } from 'vue-router'
 
@@ -8,6 +8,8 @@ import App from '../../App.vue'
 import { setupShowcaseI18n } from '../../i18n'
 import ShowcaseLayout from '../../layouts/ShowcaseLayout.vue'
 import { showcaseChildRoutes } from '../routeDefinitions'
+
+const mountedWrappers: Array<ReturnType<typeof mount>> = []
 
 function createStorageMock() {
   const store = new Map<string, string>()
@@ -45,10 +47,13 @@ async function mountShowcaseAt(path: string) {
   await router.isReady()
 
   const wrapper = mount(App, {
+    attachTo: document.body,
     global: {
       plugins: [i18n, router],
     },
   })
+
+  mountedWrappers.push(wrapper)
 
   await flushPromises()
 
@@ -67,6 +72,15 @@ function findButtonByAriaLabel(wrapper: Awaited<ReturnType<typeof mountShowcaseA
 }
 
 describe('showcase layout integration', () => {
+  afterEach(() => {
+    while (mountedWrappers.length > 0) {
+      mountedWrappers.pop()?.unmount()
+    }
+
+    document.body.innerHTML = ''
+    vi.unstubAllGlobals()
+  })
+
   beforeEach(() => {
     const storageMock = createStorageMock()
 
@@ -200,5 +214,10 @@ describe('showcase layout integration', () => {
 
     expect(scrollableResults?.exists()).toBe(true)
     expect(scrollableResults?.classes()).toContain('min-h-0')
+
+    document.body.dispatchEvent(new MouseEvent('click', { bubbles: true }))
+    await flushPromises()
+
+    expect(wrapper.findAll('.showcase-overlay').some(node => node.text().includes('Быстрый поиск'))).toBe(false)
   })
 })

@@ -3,6 +3,7 @@ import { computed, ref, watch } from 'vue'
 import { RouterLink, useRoute } from 'vue-router'
 
 import { DsBadge, DsButton } from '@feugene/granularity'
+import { vClickOutside } from '@feugene/granularity/directives'
 
 import {
   searchShowcaseEntries,
@@ -44,7 +45,10 @@ function closeSearch() {
 </script>
 
 <template>
-  <div class="relative">
+  <div
+    v-click-outside="{ handler: closeSearch, enabled: isOpen }"
+    class="relative"
+  >
     <div class="inline-flex">
       <DsButton
         variant="ghost"
