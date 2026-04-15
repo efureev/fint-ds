@@ -76,18 +76,18 @@ const effectiveAriaLabel = computed(() => {
 
 const previewSummary = computed(() => {
   if (square.value)
-    return t('Square mode делает кнопку icon-only, поэтому `aria-label` должен описывать действие для screen reader.')
+    return t('Square mode makes the button icon-only, so `aria-label` should describe the action for screen readers.')
 
   if (loading.value)
-    return t('Loading автоматически блокирует кнопку и помогает защититься от повторного submit в асинхронных сценариях.')
+    return t('Loading automatically disables the button and helps prevent repeated submit actions in async scenarios.')
 
   if (disabled.value)
-    return t('Disabled сохраняет визуальный contract выбранных variant/tone, но выключает интерактивность и pointer events.')
+    return t('Disabled preserves the visual contract of the selected variant/tone while turning off interactivity and pointer events.')
 
   if (variant.value === 'ghost' || variant.value === 'ghost-border')
-    return t('Ghost-варианты лучше работают в тулбарах и плотных action-областях, где filled CTA был бы слишком тяжёлым.')
+    return t('Ghost variants work best in toolbars and dense action areas where a filled CTA would feel too heavy.')
 
-  return t('Соберите нужную комбинацию `variant`, `tone`, `size` и `type`, чтобы быстро проверить contract кнопки перед внедрением в продуктовый сценарий.')
+  return t('Combine `variant`, `tone`, `size`, and `type` to quickly verify the button contract before shipping it to a product scenario.')
 })
 
 function escapeAttribute(value: string) {

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {computed, defineAsyncComponent} from 'vue'
+import {computed, defineAsyncComponent, watch} from 'vue'
 import {RouterLink, useRoute} from 'vue-router'
 
 import {DsCard} from '@feugene/granularity'
@@ -22,7 +22,7 @@ import {
 import {getShowcaseComponentDoc} from '../content/componentDocs'
 
 const route = useRoute()
-const { localizePageByName } = useShowcasePageI18n()
+const { localizePageByName, useI18nScope } = useShowcasePageI18n()
 
 const previewRegistry = {
   'ds-alert-closable-flow': defineAsyncComponent(() => import('../demos/components/ds-alert/DsAlertClosableDemo.vue')),
@@ -196,10 +196,16 @@ function resolvePreviewComponent(previewKey?: string) {
 
   return previewRegistry[previewKey as keyof typeof previewRegistry]
 }
+watch(componentEntity, () => {
+  if (componentEntity.value) {
+    useI18nScope([componentEntity.value.id])
+  }
+})
 </script>
 
 <template>
   <div v-if="componentEntity && componentDoc" class="space-y-8">
+    <pre>{{componentEntity.id}}</pre>
     <div>
       <h1 class="max-w-4xl text-3xl font-semibold leading-tight lg:text-4xl">
         {{ componentEntity.title }}
