@@ -1,15 +1,16 @@
 <script setup lang="ts">
-import { computed, ref, watch } from 'vue'
-import { RouterLink, useRoute } from 'vue-router'
+import {computed, ref, watch} from 'vue'
+import {RouterLink, useRoute} from 'vue-router'
 
-import { DsBadge, DsButton } from '@feugene/granularity'
-import { vClickOutside } from '@feugene/granularity/directives'
+import {DsBadge, DsButton} from '@feugene/granularity'
+import {vClickOutside} from '@feugene/granularity/directives'
 
 import {
   searchShowcaseEntries,
   showcaseSuggestedSearchEntries,
 } from '../../app/showcaseDiscoverability'
 import SearchIcon from '~icons/lucide/search'
+
 const route = useRoute()
 
 const isOpen = ref(false)
@@ -46,24 +47,24 @@ function closeSearch() {
 
 <template>
   <div
-    v-click-outside="{ handler: closeSearch, enabled: isOpen }"
-    class="relative"
+      v-click-outside="{ handler: closeSearch, enabled: isOpen }"
+      class="relative"
   >
     <div class="inline-flex">
       <DsButton
-        variant="ghost"
-        size="sm"
-        square
-        :aria-label="$t('showcase.search.open')"
-        @click="toggleSearch()"
+          variant="ghost"
+          size="sm"
+          square
+          :aria-label="$t('showcase.search.open')"
+          @click="toggleSearch()"
       >
-        <SearchIcon />
+        <SearchIcon/>
       </DsButton>
     </div>
 
     <div
-      v-if="isOpen"
-      class="showcase-overlay absolute right-0 top-[calc(100%+0.75rem)] z-50 flex w-[min(92vw,30rem)] max-h-[calc(100dvh-8rem)] flex-col overflow-hidden rounded-[28px] border p-4 sm:max-h-[calc(100dvh-6rem)]"
+        v-if="isOpen"
+        class="showcase-overlay absolute right-0 top-[calc(100%+0.75rem)] z-50 flex w-[min(92vw,30rem)] max-h-[calc(100dvh-8rem)] flex-col overflow-hidden rounded-[28px] border p-4 sm:max-h-[calc(100dvh-6rem)]"
     >
       <div class="flex min-h-0 flex-1 flex-col space-y-3">
         <div class="flex items-center justify-between gap-3">
@@ -82,28 +83,29 @@ function closeSearch() {
         </div>
 
         <input
-          v-model="query"
-          type="search"
-          :placeholder="$t('showcase.search.placeholder')"
-          class="showcase-input w-full rounded-2xl border px-4 py-3 text-sm outline-none transition-colors"
+            v-model="query"
+            type="search"
+            :placeholder="$t('showcase.search.placeholder')"
+            class="showcase-input w-full rounded-2xl border px-4 py-3 text-sm outline-none transition-colors"
         >
 
-        <div v-if="hasNoResults" class="showcase-empty-state min-h-0 overflow-y-auto overscroll-contain space-y-3 rounded-2xl border border-dashed px-4 py-4">
+        <div v-if="hasNoResults"
+             class="showcase-empty-state min-h-0 overflow-y-auto overscroll-contain space-y-3 rounded-2xl border border-dashed px-4 py-4">
           <p class="text-sm leading-6">
             {{ $t('showcase.search.noResults') }}
           </p>
           <div class="flex flex-wrap gap-2">
             <RouterLink
-              to="/components"
-              class="showcase-link-chip inline-flex rounded-full border px-3 py-2 text-xs font-semibold uppercase tracking-[0.16em] transition-colors"
-              @click="closeSearch()"
+                to="/components"
+                class="showcase-link-chip inline-flex rounded-full border px-3 py-2 text-xs font-semibold uppercase tracking-[0.16em] transition-colors"
+                @click="closeSearch()"
             >
               {{ $t('showcase.search.openComponents') }}
             </RouterLink>
             <RouterLink
-              to="/utilities"
-              class="showcase-link-chip inline-flex rounded-full border px-3 py-2 text-xs font-semibold uppercase tracking-[0.16em] transition-colors"
-              @click="closeSearch()"
+                to="/utilities"
+                class="showcase-link-chip inline-flex rounded-full border px-3 py-2 text-xs font-semibold uppercase tracking-[0.16em] transition-colors"
+                @click="closeSearch()"
             >
               {{ $t('showcase.search.openUtilities') }}
             </RouterLink>
@@ -113,11 +115,11 @@ function closeSearch() {
         <div v-else class="min-h-0 overflow-y-auto overscroll-contain pr-1">
           <div class="grid gap-2">
             <RouterLink
-              v-for="result in results"
-              :key="result.id"
-              :to="result.href"
-              class="showcase-sidebar-item-inactive rounded-2xl border border-transparent px-4 py-3 transition-colors"
-              @click="closeSearch()"
+                v-for="result in results"
+                :key="result.id"
+                :to="result.href"
+                class="showcase-sidebar-item-inactive rounded-2xl border border-transparent px-4 py-3 transition-colors"
+                @click="closeSearch()"
             >
               <div class="flex items-start justify-between gap-3">
                 <div class="min-w-0">

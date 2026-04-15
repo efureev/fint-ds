@@ -72,7 +72,7 @@
     "heroTitle": "Каталог компонентов",
     "heroDescription": "Ищите компоненты по названию и группе, а затем переходите к detail page без лишнего служебного шума.",
     "catalogTitle": "Каталог компонентов",
-    "catalogDescription": "Поиск работает по имени, summary и группе. Компонентов с примерами:",
+    "catalogDescription": "Компонентов с примерами:",
     "searchLabel": "Поиск компонентов",
     "searchPlaceholder": "Например: button, form, overlay",
     "emptyState": "По текущему запросу компоненты не найдены. Попробуйте искать по имени (`DsButton`) или группе (`forms`, `overlays`)."

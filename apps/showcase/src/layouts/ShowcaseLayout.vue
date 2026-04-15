@@ -6,7 +6,7 @@ import {
   useRoute,
 } from 'vue-router'
 
-import { DsButton, useTheme } from '@feugene/granularity'
+import { DsButton } from '@feugene/granularity'
 
 import {
   getShowcaseEntityByPath,
@@ -32,17 +32,12 @@ import IconX from '~icons/lucide/x'
 const route = useRoute()
 const isMobileNavigationOpen = ref(false)
 
-const { initTheme } = useTheme()
 const {
   getEntityGroupLabel,
   localizePage,
   localizePageByName,
   localizeSections,
 } = useShowcasePageI18n()
-
-onMounted(() => {
-  initTheme()
-})
 
 watch(() => route.fullPath, () => {
   isMobileNavigationOpen.value = false

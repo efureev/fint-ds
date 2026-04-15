@@ -1,11 +1,12 @@
 <script setup lang="ts">
-import { computed, ref } from 'vue'
-import { RouterLink } from 'vue-router'
+import {computed, ref} from 'vue'
+import {RouterLink} from 'vue-router'
 
-import { DsCard } from '@feugene/granularity'
+import {DsCard} from '@feugene/granularity'
 
-import { showcaseComponentEntities } from '../app/showcase'
-import { useShowcasePageI18n } from '../app/useShowcasePageI18n'
+import {showcaseComponentEntities} from '../app/showcase'
+import {useShowcasePageI18n} from '../app/useShowcasePageI18n'
+import {DsBadge} from "@feugene/granularity";
 
 const {
   getEntityGroupLabel,
@@ -24,9 +25,9 @@ const filteredComponents = computed(() => {
 
   return showcaseComponentEntities.filter((entity) => {
     return [entity.name, entity.summary, entity.group]
-      .join(' ')
-      .toLowerCase()
-      .includes(query)
+        .join(' ')
+        .toLowerCase()
+        .includes(query)
   })
 })
 
@@ -43,12 +44,12 @@ const groupedComponents = computed(() => {
   }
 
   return [...buckets.entries()]
-    .sort(([left], [right]) => getEntityGroupLabel('components', left).localeCompare(getEntityGroupLabel('components', right)))
-    .map(([group, entities]) => ({
-      group,
-      label: getEntityGroupLabel('components', group),
-      entities: [...entities].sort((left, right) => left.title.localeCompare(right.title)),
-    }))
+      .sort(([left], [right]) => getEntityGroupLabel('components', left).localeCompare(getEntityGroupLabel('components', right)))
+      .map(([group, entities]) => ({
+        group,
+        label: getEntityGroupLabel('components', group),
+        entities: [...entities].sort((left, right) => left.title.localeCompare(right.title)),
+      }))
 })
 
 </script>
@@ -78,7 +79,7 @@ const groupedComponents = computed(() => {
             </h2>
             <p class="showcase-text-muted max-w-3xl text-sm leading-6">
               {{ $t('showcase.componentsPage.catalogDescription') }}
-              {{ componentsWithExamples.length }}.
+              <DsBadge tone="azure">{{ componentsWithExamples.length }}</DsBadge>
             </p>
           </div>
 
@@ -87,19 +88,19 @@ const groupedComponents = computed(() => {
               {{ $t('showcase.componentsPage.searchLabel') }}
             </span>
             <input
-              v-model="searchQuery"
-              type="search"
-              :placeholder="$t('showcase.componentsPage.searchPlaceholder')"
-              class="showcase-input w-full rounded-2xl border px-4 py-3 text-sm outline-none transition-colors"
+                v-model="searchQuery"
+                type="search"
+                :placeholder="$t('showcase.componentsPage.searchPlaceholder')"
+                class="showcase-input w-full rounded-2xl border px-4 py-3 text-sm outline-none transition-colors"
             >
           </label>
         </div>
 
         <div class="mt-6 space-y-8">
           <div
-            v-for="group in groupedComponents"
-            :key="group.group"
-            class="space-y-4"
+              v-for="group in groupedComponents"
+              :key="group.group"
+              class="space-y-4"
           >
             <div class="flex items-center gap-3">
               <h3 class="text-xl font-semibold">
@@ -112,10 +113,10 @@ const groupedComponents = computed(() => {
 
             <div class="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
               <RouterLink
-                v-for="component in group.entities"
-                :key="component.id"
-                :to="component.path"
-                class="showcase-card-link group block rounded-3xl border p-5 transition-colors"
+                  v-for="component in group.entities"
+                  :key="component.id"
+                  :to="component.path"
+                  class="showcase-card-link group block rounded-3xl border p-5 transition-colors"
               >
                 <div class="flex items-start gap-3">
                   <div>
@@ -138,8 +139,8 @@ const groupedComponents = computed(() => {
           </div>
 
           <div
-            v-if="groupedComponents.length === 0"
-            class="showcase-empty-state rounded-3xl border border-dashed px-5 py-8 text-sm leading-6"
+              v-if="groupedComponents.length === 0"
+              class="showcase-empty-state rounded-3xl border border-dashed px-5 py-8 text-sm leading-6"
           >
             {{ $t('showcase.componentsPage.emptyState') }}
           </div>

@@ -8,6 +8,7 @@ import {
   DsRadioGroup,
   DsSelect,
   DsSwitch,
+  DsCard,
   type DsButtonSize,
   type DsButtonTone,
   type DsButtonVariant,
@@ -15,7 +16,9 @@ import {
 import IconSparkles from '~icons/lucide/sparkles'
 
 import CodeBlock from '../../../components/doc/CodeBlock.vue'
+import {useFintI18n} from '@feugene/fint-i18n/vue'
 
+const {t} = useFintI18n()
 type DsButtonType = 'button' | 'submit' | 'reset'
 
 const variant = ref<DsButtonVariant>('primary')
@@ -73,18 +76,18 @@ const effectiveAriaLabel = computed(() => {
 
 const previewSummary = computed(() => {
   if (square.value)
-    return 'Square mode делает кнопку icon-only, поэтому `aria-label` должен описывать действие для screen reader.'
+    return t('Square mode делает кнопку icon-only, поэтому `aria-label` должен описывать действие для screen reader.')
 
   if (loading.value)
-    return 'Loading автоматически блокирует кнопку и помогает защититься от повторного submit в асинхронных сценариях.'
+    return t('Loading автоматически блокирует кнопку и помогает защититься от повторного submit в асинхронных сценариях.')
 
   if (disabled.value)
-    return 'Disabled сохраняет визуальный contract выбранных variant/tone, но выключает интерактивность и pointer events.'
+    return t('Disabled сохраняет визуальный contract выбранных variant/tone, но выключает интерактивность и pointer events.')
 
   if (variant.value === 'ghost' || variant.value === 'ghost-border')
-    return 'Ghost-варианты лучше работают в тулбарах и плотных action-областях, где filled CTA был бы слишком тяжёлым.'
+    return t('Ghost-варианты лучше работают в тулбарах и плотных action-областях, где filled CTA был бы слишком тяжёлым.')
 
-  return 'Соберите нужную комбинацию `variant`, `tone`, `size` и `type`, чтобы быстро проверить contract кнопки перед внедрением в продуктовый сценарий.'
+  return t('Соберите нужную комбинацию `variant`, `tone`, `size` и `type`, чтобы быстро проверить contract кнопки перед внедрением в продуктовый сценарий.')
 })
 
 function escapeAttribute(value: string) {
@@ -146,7 +149,8 @@ const previewCode = computed(() => {
             </template>
           </DsButton>
 
-          <div class="pointer-events-none absolute inset-x-6 bottom-6 flex justify-center border-t border-dashed border-[var(--preview-brd)] pt-2">
+          <div
+              class="pointer-events-none absolute inset-x-6 bottom-6 flex justify-center border-t border-dashed border-[var(--preview-brd)] pt-2">
             <div class="showcase-demo-text max-w-[40ch] text-center text-sm">
               {{ previewSummary }}
             </div>
@@ -159,7 +163,7 @@ const previewCode = computed(() => {
 
     <div class="showcase-demo-panel grid gap-4 rounded-[28px] border p-4 lg:p-5">
       <div class="showcase-demo-title text-sm font-semibold">
-        Свойства кнопки
+        {{ t('Properties') }}
       </div>
 
       <div class="grid gap-4">
@@ -197,7 +201,7 @@ const previewCode = computed(() => {
         </DsFormField>
       </div>
 
-      <div class="grid gap-3 rounded-2xl border border-[var(--brd)] bg-[var(--card)] p-4">
+      <DsCard class="grid gap-3 p-4">
         <DsSwitch v-model="loading" size="sm">
           Loading
         </DsSwitch>
@@ -207,7 +211,7 @@ const previewCode = computed(() => {
         <DsSwitch v-model="square" size="sm">
           Square / icon-only
         </DsSwitch>
-      </div>
+      </DsCard>
     </div>
   </div>
 </template>
