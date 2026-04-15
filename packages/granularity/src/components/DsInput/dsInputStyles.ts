@@ -1,6 +1,4 @@
-function splitClassTokens(value: string): string[] {
-  return value.split(/\s+/).filter(Boolean)
-}
+import { splitClassTokens } from '../shared/classTokens'
 
 const base =
   'w-full rounded-md border bg-[var(--bg)] text-[var(--fg)] placeholder:text-[var(--muted-fg)] focus:placeholder:text-transparent transition-colors duration-150 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring)] disabled:opacity-50 disabled:cursor-not-allowed'

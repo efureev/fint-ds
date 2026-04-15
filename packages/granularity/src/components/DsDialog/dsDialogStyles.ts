@@ -1,6 +1,4 @@
-function splitClassTokens(value: string): string[] {
-  return value.split(/\s+/).filter(Boolean)
-}
+import { splitClassTokens } from '../shared/classTokens'
 
 const dialogPanel = 'overflow-hidden rounded-[inherit] px-5 py-5'
 const header = 'flex items-center justify-between gap-4 flex-1 min-w-0 text-[14px] font-700 border-b border-[var(--brd)] px-5 py-3'

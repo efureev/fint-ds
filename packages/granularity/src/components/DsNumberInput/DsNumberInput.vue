@@ -2,19 +2,26 @@
 import type { InputHTMLAttributes } from 'vue'
 import { computed, nextTick, onBeforeUnmount, onMounted, onUpdated, ref, useSlots } from 'vue'
 
+export type {
+  DsNumberInputControlsDirection,
+  DsNumberInputSize,
+  DsNumberInputTextAlign,
+  NumberInputControlsDirection,
+  NumberInputSize,
+} from './dsNumberInputStyles'
+
+import {
+  dsNumberInputInputClass,
+  dsNumberInputShellClass,
+  type DsNumberInputControlsDirection,
+  type DsNumberInputSize,
+  type DsNumberInputState,
+  type DsNumberInputTextAlign,
+} from './dsNumberInputStyles'
+
 defineOptions({
   inheritAttrs: false,
 })
-
-type DsNumberInputState = 'default' | 'success' | 'warning' | 'danger'
-
-export type DsNumberInputSize = 'xs' | 'sm' | 'md' | 'lg'
-export type DsNumberInputControlsDirection = 'vertical' | 'horizontal'
-export type DsNumberInputTextAlign = 'left' | 'center' | 'right'
-
-// Backward-compatible type aliases.
-export type NumberInputSize = DsNumberInputSize
-export type NumberInputControlsDirection = DsNumberInputControlsDirection
 
 const ADDON_PX_BY_SIZE: Record<DsNumberInputSize, number> = {
   xs: 32,
@@ -28,26 +35,6 @@ const BASE_PADDING_X_LEN_BY_SIZE: Record<DsNumberInputSize, string> = {
   sm: '12px',
   md: '12px',
   lg: '16px',
-}
-
-const SIZE_CLASS_BY_SIZE: Record<DsNumberInputSize, string> = {
-  xs: 'h-7 px-2.5 text-[12px]',
-  sm: 'h-8 px-3 text-[13px]',
-  md: 'h-10 px-3 text-[14px]',
-  lg: 'h-11 px-4 text-[16px]',
-}
-
-const TEXT_ALIGN_CLASS_BY_ALIGN: Record<DsNumberInputTextAlign, string> = {
-  left: 'text-left',
-  center: 'text-center',
-  right: 'text-right',
-}
-
-const BORDER_CLASS_BY_STATE: Record<DsNumberInputState, string> = {
-  default: 'border-[var(--brd)]',
-  success: 'border-[var(--ds-success)] focus-within:ring-[var(--ds-success)]',
-  warning: 'border-[var(--ds-warning)] focus-within:ring-[var(--ds-warning)]',
-  danger: 'border-[var(--ds-danger)] focus-within:ring-[var(--ds-danger)]',
 }
 
 function px(n: number): string {
@@ -249,28 +236,19 @@ const verticalControlsStyle = computed(() => addonStyle('right', suffixLen.value
 const horizontalLeftControlsStyle = computed(() => addonStyle('left', prefixLen.value))
 const horizontalRightControlsStyle = computed(() => addonStyle('right', suffixLen.value))
 
-const sizeClass = computed(() => SIZE_CLASS_BY_SIZE[props.size])
-const textAlignClass = computed(() => TEXT_ALIGN_CLASS_BY_ALIGN[props.textAlign])
-
-const shellBase =
-  'relative w-full overflow-hidden rounded-md border bg-[var(--bg)] transition-colors duration-150 focus-within:ring-2 focus-within:ring-[var(--ring)]'
-
 const shellClassName = computed(() => {
-  const state: DsNumberInputState = props.state
-
-  return [
-    shellBase,
-    props.disabled ? 'opacity-50 cursor-not-allowed' : undefined,
-    props.invalid ? BORDER_CLASS_BY_STATE.danger : BORDER_CLASS_BY_STATE[state],
-  ]
-    .filter(Boolean)
-    .join(' ')
+  return dsNumberInputShellClass({
+    disabled: props.disabled,
+    state: props.invalid ? 'danger' : props.state,
+  })
 })
 
-const inputBase =
-  'w-full bg-transparent text-[var(--fg)] placeholder:text-[var(--muted-fg)] focus:placeholder:text-transparent focus:outline-none disabled:cursor-not-allowed'
-
-const inputClassName = computed(() => [inputBase, sizeClass.value, textAlignClass.value].join(' '))
+const inputClassName = computed(() => {
+  return dsNumberInputInputClass({
+    size: props.size,
+    textAlign: props.textAlign,
+  })
+})
 
 function isDigit(ch: string): boolean {
   return ch >= '0' && ch <= '9'
@@ -354,15 +332,13 @@ function stepBy(dir: 1 | -1): void {
   focus()
 }
 
-const controlsButtonBase =
-  'h-4 w-7 inline-flex items-center justify-center rounded text-[10px] text-[var(--muted-fg)] hover:bg-[var(--muted)] active:bg-[var(--muted)] disabled:opacity-50 disabled:cursor-not-allowed'
-
-const horizontalControlsButtonBase =
-  'h-full w-full inline-flex items-center justify-center text-[var(--muted-fg)] hover:bg-[var(--muted)] active:bg-[var(--muted)] disabled:opacity-50 disabled:cursor-not-allowed focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring)]'
 </script>
 
 <template>
-  <div :class="shellClassName">
+  <div
+    class="relative w-full overflow-hidden rounded-md border bg-[var(--bg)] transition-colors duration-150 focus-within:ring-2 focus-within:ring-[var(--ring)]"
+    :class="shellClassName"
+  >
     <div
       v-if="$slots.prefix"
       ref="prefixEl"
@@ -386,6 +362,7 @@ const horizontalControlsButtonBase =
       :disabled="props.disabled"
       :value="props.modelValue"
       :aria-invalid="props.invalid ? 'true' : undefined"
+      class="w-full bg-transparent text-[var(--fg)] placeholder:text-[var(--muted-fg)] focus:placeholder:text-transparent focus:outline-none disabled:cursor-not-allowed"
       :class="inputClassName"
       :style="inputStyle"
       @input="onInput"
@@ -412,7 +389,7 @@ const horizontalControlsButtonBase =
       <div class="flex flex-col justify-center gap-1">
         <button
           type="button"
-          :class="controlsButtonBase"
+          class="h-4 w-7 inline-flex items-center justify-center rounded text-[10px] text-[var(--muted-fg)] hover:bg-[var(--muted)] active:bg-[var(--muted)] disabled:opacity-50 disabled:cursor-not-allowed"
           :disabled="props.disabled"
           aria-label="Increase"
           @mousedown.prevent
@@ -430,7 +407,7 @@ const horizontalControlsButtonBase =
         </button>
         <button
           type="button"
-          :class="controlsButtonBase"
+          class="h-4 w-7 inline-flex items-center justify-center rounded text-[10px] text-[var(--muted-fg)] hover:bg-[var(--muted)] active:bg-[var(--muted)] disabled:opacity-50 disabled:cursor-not-allowed"
           :disabled="props.disabled"
           aria-label="Decrease"
           @mousedown.prevent
@@ -457,7 +434,7 @@ const horizontalControlsButtonBase =
     >
       <button
         type="button"
-        :class="horizontalControlsButtonBase"
+        class="h-full w-full inline-flex items-center justify-center text-[var(--muted-fg)] hover:bg-[var(--muted)] active:bg-[var(--muted)] disabled:opacity-50 disabled:cursor-not-allowed focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring)]"
         :disabled="props.disabled"
         aria-label="Decrease"
         @mousedown.prevent
@@ -483,7 +460,7 @@ const horizontalControlsButtonBase =
     >
       <button
         type="button"
-        :class="horizontalControlsButtonBase"
+        class="h-full w-full inline-flex items-center justify-center text-[var(--muted-fg)] hover:bg-[var(--muted)] active:bg-[var(--muted)] disabled:opacity-50 disabled:cursor-not-allowed focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring)]"
         :disabled="props.disabled"
         aria-label="Increase"
         @mousedown.prevent

@@ -1,6 +1,4 @@
-function splitClassTokens(value: string): string[] {
-  return value.split(/\s+/).filter(Boolean)
-}
+import { splitClassTokens } from '../shared/classTokens'
 
 const confirmDialogClasses = [
   'text-[14px] text-[var(--muted-fg)]',

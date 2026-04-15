@@ -1,3 +1,5 @@
+import { splitClassTokens } from '../shared/classTokens'
+
 export type DsDialogSize = 'sm' | 'md' | 'lg' | 'xl' | 'full'
 
 type DsModalClassTokens = {
@@ -11,10 +13,6 @@ type DsModalClassTokens = {
   panelWidth: readonly string[]
   panelRadius: readonly string[]
   panelHeight: readonly string[]
-}
-
-function splitClassTokens(value: string): string[] {
-  return value.split(/\s+/).filter(Boolean)
 }
 
 const root = 'fixed inset-0 z-50'

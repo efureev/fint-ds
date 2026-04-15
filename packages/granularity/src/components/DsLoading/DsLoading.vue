@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { computed, type Component } from 'vue'
 
+import { dsLoadingRootClass } from './dsLoadingStyles'
+
 import IconLoader from '~icons/lucide/loader-circle'
 
 const DEFAULT_LOADING_TEXT = 'Loading...'
@@ -39,24 +41,11 @@ const displayText = computed(() => {
 })
 
 const rootClass = computed(() => {
-  const base = [
-    props.fullscreen ? 'fixed inset-0' : 'absolute inset-0',
-    props.fullscreen ? 'z-50' : 'z-10',
-    'flex items-center justify-center',
-    'cursor-wait',
-    'select-none',
-    'pointer-events-auto',
-  ]
-
-  if (!props.background) {
-    base.push('bg-black/25')
-  }
-
-  if (props.customClass) {
-    base.push(props.customClass)
-  }
-
-  return base.join(' ')
+  return dsLoadingRootClass({
+    fullscreen: props.fullscreen,
+    hasBackground: props.background !== undefined,
+    customClass: props.customClass,
+  })
 })
 
 const rootStyle = computed(() => {
@@ -66,23 +55,33 @@ const rootStyle = computed(() => {
   } as Record<string, string | undefined>
 })
 
-const spinnerClass = computed(() => {
-  return [
-    'ds-loading__spinner',
-    'h-7 w-7',
-    props.animated ? 'ds-loading__spinner--animated' : '',
-    'text-[var(--muted-fg)]',
-    props.spinnerClass,
-  ]
-    .filter(Boolean)
-    .join(' ')
-})
+const spinnerClass = computed(() => props.spinnerClass)
 </script>
 
 <template>
-  <div data-ds-loading :class="rootClass" :style="rootStyle" role="status" aria-live="polite">
+  <div
+    data-ds-loading
+    class="flex items-center justify-center cursor-wait select-none pointer-events-auto"
+    :class="rootClass"
+    :style="rootStyle"
+    role="status"
+    aria-live="polite"
+  >
     <div class="flex flex-col items-center justify-center gap-2 px-4 text-center">
-      <component :is="Spinner" :class="spinnerClass" aria-hidden="true" />
+      <component
+        v-if="props.animated"
+        :is="Spinner"
+        class="ds-loading__spinner ds-loading__spinner--animated h-7 w-7 text-[var(--muted-fg)]"
+        :class="spinnerClass"
+        aria-hidden="true"
+      />
+      <component
+        v-else
+        :is="Spinner"
+        class="ds-loading__spinner h-7 w-7 text-[var(--muted-fg)]"
+        :class="spinnerClass"
+        aria-hidden="true"
+      />
       <div v-if="displayText" class="text-sm ds-muted">
         {{ displayText }}
       </div>
@@ -101,4 +100,5 @@ const spinnerClass = computed(() => {
   transform-origin: center;
   animation: ds-loading-spin 1s linear infinite;
 }
+
 </style>

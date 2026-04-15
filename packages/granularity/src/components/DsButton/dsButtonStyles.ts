@@ -1,3 +1,5 @@
+import { splitClassTokens } from '../shared/classTokens'
+
 export type DsButtonVariant = 'primary' | 'secondary' | 'outline' | 'ghost' | 'ghost-border'
 export type DsButtonTone = 'primary' | 'neutral' | 'success' | 'warning' | 'danger' | 'info' | 'slate' | 'azure'
 export type DsButtonSize = 'xs' | 'sm' | 'md' | 'lg'
@@ -22,10 +24,6 @@ type DsButtonToneTokens = {
   border: string
   borderHover: string
   borderActive: string
-}
-
-function splitClassTokens(value: string): string[] {
-  return value.split(/\s+/).filter(Boolean)
 }
 
 const base =
@@ -255,7 +253,6 @@ export const dsButtonSafelist = [...new Set([
 
 export function dsButtonClass(options: DsButtonClassOptions): string {
   return [
-    base,
     options.square ? squareSizes[options.size] : sizes[options.size],
     variantClass(options.variant, options.tone),
   ].join(' ')

@@ -5,10 +5,14 @@ import IconClose from '~icons/lucide/x'
 
 import DsBadge from '../DsBadge/DsBadge.vue'
 import type { DsBadgeRadius, DsBadgeSize, DsBadgeTone } from '../DsBadge'
-import type { DsInputSize } from '../DsInput/DsInput.vue'
+export type { DsInputTagSize, DsInputTagState } from './dsInputTagStyles'
 
-export type DsInputTagSize = DsInputSize
-export type DsInputTagState = 'default' | 'success' | 'warning' | 'danger'
+import {
+  dsInputTagInputClass,
+  dsInputTagWrapperClass,
+  type DsInputTagSize,
+  type DsInputTagState,
+} from './dsInputTagStyles'
 
 const REGEX_SPECIAL_CHAR_RE = /[.*+?^${}()|[\]\\]/g
 
@@ -199,59 +203,29 @@ function onPaste(e: ClipboardEvent): void {
   addMany(tags)
 }
 
-const wrapperBase =
-  'w-full flex flex-wrap items-center rounded-md border bg-[var(--bg)] text-[var(--fg)] transition-colors duration-150 focus-within:ring-2 focus-within:ring-[var(--ring)]'
-
-const wrapperSizeClass = computed(() => {
-  const map: Record<DsInputTagSize, string> = {
-    xs: 'min-h-7 px-2.5 py-1 gap-1.5',
-    sm: 'min-h-8 px-3 py-1 gap-1.5',
-    md: 'min-h-10 px-3 py-1.5 gap-2',
-    lg: 'min-h-11 px-4 py-2 gap-2',
-  }
-
-  return map[props.size]
-})
-
-const inputSizeClass = computed(() => {
-  const map: Record<DsInputTagSize, string> = {
-    xs: 'text-[12px]',
-    sm: 'text-[13px]',
-    md: 'text-[14px]',
-    lg: 'text-[16px]',
-  }
-
-  return map[props.size]
-})
-
 const wrapperClassName = computed(() => {
-  const borderByState: Record<DsInputTagState, string> = {
-    default: 'border-[var(--brd)]',
-    success: 'border-[var(--ds-success)] focus-within:ring-[var(--ds-success)]',
-    warning: 'border-[var(--ds-warning)] focus-within:ring-[var(--ds-warning)]',
-    danger: 'border-[var(--ds-danger)] focus-within:ring-[var(--ds-danger)]',
-  }
-
-  return [
-    wrapperBase,
-    wrapperSizeClass.value,
-    props.invalid ? borderByState.danger : borderByState[props.state],
-    props.disabled ? 'opacity-50 cursor-not-allowed' : 'cursor-text',
-  ].join(' ')
+  return dsInputTagWrapperClass({
+    size: props.size,
+    state: props.state,
+    invalid: props.invalid,
+    disabled: props.disabled,
+  })
 })
 
 const inputClassName = computed(() => {
-  return [
-    'flex-1 min-w-[120px] bg-transparent border-none outline-none placeholder:text-[var(--muted-fg)]',
-    inputSizeClass.value,
-  ].join(' ')
+  return dsInputTagInputClass(props.size)
 })
 
 const placeholderText = computed(() => props.modelValue.length > 0 ? undefined : props.placeholder)
 </script>
 
 <template>
-  <div data-testid="ds-input-tag" :class="wrapperClassName" @click="focus">
+  <div
+    data-testid="ds-input-tag"
+    class="w-full flex flex-wrap items-center rounded-md border bg-[var(--bg)] text-[var(--fg)] transition-colors duration-150 focus-within:ring-2 focus-within:ring-[var(--ring)]"
+    :class="wrapperClassName"
+    @click="focus"
+  >
     <DsBadge
       v-for="(tag, i) in props.modelValue"
       :key="`${tag}-${i}`"
@@ -289,6 +263,7 @@ const placeholderText = computed(() => props.modelValue.length > 0 ? undefined :
       :readonly="props.readonly"
       :placeholder="placeholderText"
       :aria-invalid="props.invalid ? 'true' : undefined"
+      class="flex-1 min-w-[120px] bg-transparent border-none outline-none placeholder:text-[var(--muted-fg)]"
       :class="inputClassName"
       @input="onInput"
       @keydown="onKeydown"

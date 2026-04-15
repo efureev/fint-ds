@@ -1,6 +1,4 @@
-function splitClassTokens(value: string): string[] {
-  return value.split(/\s+/).filter(Boolean)
-}
+import { splitClassTokens } from '../shared/classTokens'
 
 const sidebarClasses = [
   'border-r border-[var(--sidebar-brd)] bg-[var(--sidebar)] text-[var(--sidebar-fg)]',

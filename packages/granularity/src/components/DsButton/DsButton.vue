@@ -76,6 +76,7 @@ const className = computed(() => {
     :disabled="isDisabled"
     :aria-busy="props.loading ? 'true' : undefined"
     :aria-label="props.ariaLabel"
+    class="inline-flex items-center justify-center gap-2 select-none whitespace-nowrap rounded-md transition-colors duration-150 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring)] disabled:opacity-50 disabled:cursor-not-allowed"
     :class="className"
     :style="squareStyle"
   >

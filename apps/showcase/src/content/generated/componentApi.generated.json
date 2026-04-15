@@ -882,14 +882,14 @@
           {
             "name": "align",
             "description": "",
-            "type": "\"right\" | \"left\" | \"center\" | undefined",
+            "type": "DsDropdownAlign | undefined",
             "required": false,
             "default": "\"right\""
           },
           {
             "name": "width",
             "description": "",
-            "type": "\"48\" | \"auto\" | \"20\" | \"60\" | \"64\" | \"80\" | undefined",
+            "type": "DsDropdownWidth | undefined",
             "required": false,
             "default": "\"48\""
           },
@@ -2916,6 +2916,13 @@
         "origin": "generated",
         "items": [
           {
+            "name": "tone",
+            "description": "",
+            "type": "DsProgressBarTone | undefined",
+            "required": false,
+            "default": "\"primary\""
+          },
+          {
             "name": "ariaLabel",
             "description": "",
             "type": "string | undefined",
@@ -4231,7 +4238,7 @@
           {
             "name": "state",
             "description": "",
-            "type": "\"default\" | \"success\" | \"warning\" | \"danger\" | undefined",
+            "type": "DsTreeSelectState | undefined",
             "required": false,
             "default": "\"default\""
           },

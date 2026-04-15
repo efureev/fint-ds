@@ -3,6 +3,7 @@ import { computed } from 'vue'
 import { Dialog, DialogPanel, DialogTitle, TransitionChild, TransitionRoot } from '@headlessui/vue'
 
 import DsButton from '../DsButton/DsButton.vue'
+import { dsDrawerPanelClass, dsDrawerPanelEnterFrom } from './dsDrawerStyles'
 
 import IconClose from '~icons/lucide/x'
 
@@ -29,32 +30,14 @@ const emit = defineEmits<{
 const open = computed(() => props.modelValue)
 
 const panelClass = computed(() => {
-  const widthBySize: Record<NonNullable<typeof props.size>, string> = {
-    sm: 'w-[360px] max-w-[90vw]',
-    md: 'w-[420px] max-w-[92vw]',
-    lg: 'w-[560px] max-w-[94vw]',
-    full: 'w-[100vw]',
-  }
-
-  const sideClass = props.side === 'left' ? 'left-0 border-r' : 'right-0 border-l'
-
-  return [
-    'fixed inset-y-0',
-    sideClass,
-    widthBySize[props.size],
-    'border-[var(--brd)]',
-    'bg-[var(--card)] text-[var(--card-fg)]',
-    'shadow-[var(--ds-shadow-2)] outline-none',
-    'flex flex-col',
-  ].join(' ')
+  return dsDrawerPanelClass({
+    side: props.side,
+    size: props.size,
+  })
 })
 
 const panelEnterFrom = computed(() => {
-  if (props.side === 'left') {
-    return '-translate-x-full'
-  }
-
-  return 'translate-x-full'
+  return dsDrawerPanelEnterFrom(props.side)
 })
 
 function close(): void {
@@ -109,7 +92,12 @@ function onOverlayClick(): void {
             leave-from="translate-x-0"
             :leave-to="panelEnterFrom"
           >
-            <DialogPanel data-ds-drawer-panel tabindex="-1" :class="panelClass">
+            <DialogPanel
+              data-ds-drawer-panel
+              tabindex="-1"
+              class="fixed inset-y-0 flex flex-col"
+              :class="panelClass"
+            >
               <div class="px-5 py-4 border-b border-[var(--brd)] flex items-center justify-between gap-4">
                 <DialogTitle as="div" class="text-[14px] font-700 min-w-0 truncate">
                   <slot name="title">

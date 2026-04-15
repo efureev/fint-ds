@@ -2,17 +2,18 @@
 import { computed, nextTick, onUnmounted, ref, watch } from 'vue'
 import type { InputHTMLAttributes } from 'vue'
 
-import { vClickOutside } from '../../directives/clickOutside'
+import { vClickOutside } from '../../directives'
 import { useGranularityTranslations } from '../../internal/granularityI18n'
 import DsInput, { type DsInputSize } from '../DsInput/DsInput.vue'
-import DsTree from '../DsTree/DsTree.vue'
-import type { DsTreeFilterNodeMethod, DsTreePropsMap } from '../DsTree/dsTreeProps'
-import type {
-  DsTreeInstance,
-  DsTreeKey,
-  DsTreeNode,
-} from '../DsTree/dsTreeTypes'
+import DsTree, {
+  type DsTreeFilterNodeMethod,
+  type DsTreePropsMap,
+  type DsTreeInstance,
+  type DsTreeKey,
+  type DsTreeNode,
+} from '../DsTree'
 import type { DsTreeSelectModelValue, DsTreeSelectValueDisplay } from './dsTreeSelectTypes'
+import { dsTreeSelectClass, dsTreeSelectPanelClass, type DsTreeSelectState } from './dsTreeSelectStyles'
 
 type NodeKeyProp<T> = keyof T & string
 
@@ -28,7 +29,7 @@ const props = withDefaults(
     placeholder?: string
     size?: DsInputSize
     invalid?: boolean
-    state?: 'default' | 'success' | 'warning' | 'danger'
+    state?: DsTreeSelectState
 
     multiple?: boolean
     clearable?: boolean
@@ -217,20 +218,6 @@ const displayValue = computed(() => {
   return `${labels[0]} +${labels.length - 1}`
 })
 
-const base =
-  'w-full rounded-md border bg-[var(--bg)] text-[var(--fg)] placeholder:text-[var(--muted-fg)] transition-colors duration-150 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring)] disabled:opacity-50 disabled:cursor-not-allowed'
-
-const sizeClass = computed(() => {
-  const map: Record<NonNullable<typeof props.size>, string> = {
-    xs: 'h-7 px-2.5 text-[12px]',
-    sm: 'h-8 px-3 text-[13px]',
-    md: 'h-10 px-3 text-[14px]',
-    lg: 'h-11 px-4 text-[16px]',
-  }
-
-  return map[props.size]
-})
-
 const hasSelection = computed(() => selectedKeys.value.length > 0)
 
 const resolvedFilterPlaceholder = computed(() => {
@@ -238,31 +225,15 @@ const resolvedFilterPlaceholder = computed(() => {
 })
 
 const className = computed(() => {
-  const state = props.state
-  const borderByState: Record<typeof state, string> = {
-    default: 'border-[var(--brd)]',
-    success: 'border-[var(--ds-success)] focus-visible:ring-[var(--ds-success)]',
-    warning: 'border-[var(--ds-warning)] focus-visible:ring-[var(--ds-warning)]',
-    danger: 'border-[var(--ds-danger)] focus-visible:ring-[var(--ds-danger)]',
-  }
-
-  return [
-    base,
-    sizeClass.value,
-    // reserve space for a single right-side icon (chevron OR clear)
-    'pr-9',
-    props.invalid ? borderByState.danger : borderByState[state],
-  ].filter(Boolean).join(' ')
+  return dsTreeSelectClass({
+    size: props.size,
+    state: props.state,
+    invalid: props.invalid,
+  })
 })
 
 const panelClasses = computed(() => {
-  return [
-    'rounded-[var(--ds-radius-xl)]',
-    'border border-[var(--brd)]',
-    'bg-[var(--card)] text-[var(--card-fg)]',
-    'shadow-[var(--ds-shadow-2)]',
-    'overflow-hidden',
-  ].join(' ')
+  return dsTreeSelectPanelClass
 })
 
 function setOpen(next: boolean) {
@@ -459,6 +430,7 @@ function onNodeClick(data: T, node: DsTreeNode<T>): void {
         aria-readonly="true"
         :aria-expanded="open ? 'true' : 'false'"
         :aria-invalid="props.invalid ? 'true' : undefined"
+        class="w-full rounded-md border bg-[var(--bg)] text-[var(--fg)] placeholder:text-[var(--muted-fg)] transition-colors duration-150 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring)] disabled:opacity-50 disabled:cursor-not-allowed"
         :class="[className, $slots.value ? 'text-transparent placeholder:text-transparent' : '']"
         @pointerdown="onTriggerPointerDown"
         @click="toggleDropdown"

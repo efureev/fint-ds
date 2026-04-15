@@ -196,6 +196,12 @@ export const granularityComponentCssContracts = {
       'components/DsIcon/styles.css',
     ],
   },
+  DsProgressBar: {
+    files: [
+      { pattern: /packages\/granularity\/src\/components\/DsProgressBar\/tokens\.css$/, mustBeFileUrl: true },
+    ],
+    assetNames: ['components/DsProgressBar/tokens.css'],
+  },
 } as const satisfies Partial<Record<GranularityComponentName, GranularityComponentCssContract>>
 
 export const granularityStyleAssetContracts = [

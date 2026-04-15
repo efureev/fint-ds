@@ -1,6 +1,4 @@
-function splitClassTokens(value: string): string[] {
-  return value.split(/\s+/).filter(Boolean)
-}
+import { splitClassTokens } from '../shared/classTokens'
 
 export const dsFormFieldSafelist = [...new Set([
   ...splitClassTokens('flex flex-col gap-2'),

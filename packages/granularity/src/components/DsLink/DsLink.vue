@@ -1,13 +1,18 @@
 <script setup lang="ts">
 import { computed, useAttrs } from 'vue'
 
+export type { DsLinkSize, DsLinkUnderline, DsLinkVariant } from './dsLinkStyles'
+
+import {
+  dsLinkClass,
+  type DsLinkSize,
+  type DsLinkUnderline,
+  type DsLinkVariant,
+} from './dsLinkStyles'
+
 defineOptions({
   inheritAttrs: false,
 })
-
-export type DsLinkVariant = 'primary' | 'default' | 'muted' | 'danger'
-export type DsLinkUnderline = 'auto' | 'always' | 'none'
-export type DsLinkSize = 'sm' | 'md' | 'lg'
 
 const props = withDefaults(defineProps<{
   href?: string
@@ -55,52 +60,13 @@ const resolvedRel = computed(() => {
   return undefined
 })
 
-const base =
-  'inline-flex items-center gap-1 rounded-[6px] transition-colors duration-150 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring)]'
-
-const sizeClass = computed(() => {
-  const map: Record<DsLinkSize, string> = {
-    sm: 'text-sm',
-    md: 'text-[14px]',
-    lg: 'text-base',
-  }
-
-  return map[props.size]
-})
-
-const underlineClass = computed(() => {
-  if (props.disabled)
-    return 'no-underline'
-
-  if (props.underline === 'always')
-    return 'underline underline-offset-4'
-
-  if (props.underline === 'none')
-    return 'no-underline'
-
-  return 'no-underline hover:underline hover:underline-offset-4'
-})
-
-const variantClass = computed(() => {
-  const map: Record<DsLinkVariant, string> = {
-    primary:
-      'text-[var(--primary)] visited:text-[var(--primary)] hover:text-[var(--primary-hover)] active:text-[var(--primary-active)]',
-    default: 'text-[var(--fg)] hover:text-[var(--primary)] active:text-[var(--primary-active)]',
-    muted: 'text-[var(--muted-fg)] hover:text-[var(--fg)] active:text-[var(--fg)]',
-    danger: 'text-[var(--ds-danger)] hover:text-[var(--ds-danger-hover)] active:text-[var(--ds-danger-active)]',
-  }
-
-  return map[props.variant]
-})
-
-const disabledClass = computed(() => {
-  return props.disabled ? 'cursor-not-allowed opacity-60 text-[var(--muted-fg)]' : ''
-})
-
 const className = computed(() => {
-  return [base, sizeClass.value, underlineClass.value, variantClass.value, disabledClass.value]
-    .filter(Boolean)
-    .join(' ')
+  return dsLinkClass({
+    size: props.size,
+    underline: props.underline,
+    variant: props.variant,
+    disabled: props.disabled,
+  })
 })
 </script>
 
@@ -112,6 +78,7 @@ const className = computed(() => {
     :target="resolvedTarget"
     :rel="resolvedRel"
     :aria-label="props.ariaLabel"
+    class="inline-flex items-center gap-1 rounded-[6px] transition-colors duration-150 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring)]"
     :class="className"
   >
     <slot />
@@ -122,6 +89,7 @@ const className = computed(() => {
     v-bind="attrs"
     :aria-label="props.ariaLabel"
     :aria-disabled="props.disabled ? 'true' : undefined"
+    class="inline-flex items-center gap-1 rounded-[6px] transition-colors duration-150 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring)]"
     :class="className"
   >
     <slot />

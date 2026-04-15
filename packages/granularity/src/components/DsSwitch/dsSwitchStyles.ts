@@ -1,12 +1,10 @@
+import { splitClassTokens } from '../shared/classTokens'
+
 export type DsSwitchSize = 'sm' | 'md' | 'lg'
 
 type DsSwitchThumbClassOptions = {
     checked: boolean
     size: DsSwitchSize
-}
-
-function splitClassTokens(value: string): string[] {
-    return value.split(/\s+/).filter(Boolean)
 }
 
 const trackBase =

@@ -2,20 +2,29 @@
 import { computed, nextTick, onUnmounted, ref, watch } from 'vue'
 
 import DsInput from '../DsInput/DsInput.vue'
-import { vClickOutside } from '../../directives/clickOutside'
+import { vClickOutside } from '../../directives'
+export type {
+  DsSelectModelValue,
+  DsSelectOption,
+  DsSelectOptionsView,
+  DsSelectSize,
+  DsSelectUnderline,
+  DsSelectVariant,
+  DsSelectView,
+} from './dsSelectStyles'
 
-export type DsSelectView = 'default' | 'link'
-
-export type DsSelectSize = 'xs' | 'sm' | 'md' | 'lg'
-
-export type DsSelectVariant = 'primary' | 'default' | 'muted' | 'danger'
-export type DsSelectUnderline = 'auto' | 'always' | 'none'
-
-export type DsSelectOptionsView = 'native' | 'panel'
-
-export type DsSelectOption = { value: string; label: string }
-
-export type DsSelectModelValue = string | string[]
+import {
+  dsSelectNativeClass,
+  dsSelectPanelClasses,
+  dsSelectTriggerClass,
+  type DsSelectModelValue,
+  type DsSelectOption,
+  type DsSelectOptionsView,
+  type DsSelectSize,
+  type DsSelectUnderline,
+  type DsSelectVariant,
+  type DsSelectView,
+} from './dsSelectStyles'
 
 const props = withDefaults(
   defineProps<{
@@ -229,13 +238,7 @@ onUnmounted(() => {
 })
 
 const panelClasses = computed(() => {
-  return [
-    'rounded-[var(--ds-radius-xl)]',
-    'border border-[var(--brd)]',
-    'bg-[var(--card)] text-[var(--card-fg)]',
-    'shadow-[var(--ds-shadow-2)]',
-    'overflow-hidden',
-  ].join(' ')
+  return dsSelectPanelClasses
 })
 
 const visibleOptions = computed(() => {
@@ -316,70 +319,6 @@ function addCustom(): void {
   toggleValue(v)
 }
 
-const className = computed(() => {
-  const sizeClass = (() => {
-    const map: Record<NonNullable<typeof props.size>, string> = {
-      xs: 'h-7 px-2.5 text-[12px]',
-      sm: 'h-8 px-3 text-[13px]',
-      md: 'h-10 px-3 text-[14px]',
-      lg: 'h-11 px-4 text-[16px]',
-    }
-
-    return map[props.size]
-  })()
-
-  const textSizeClass = (() => {
-    const map: Record<NonNullable<typeof props.size>, string> = {
-      xs: 'text-[12px]',
-      sm: 'text-[13px]',
-      md: 'text-[14px]',
-      lg: 'text-[16px]',
-    }
-
-    return map[props.size]
-  })()
-
-  if (props.view === 'link') {
-    const underlineClass = (() => {
-      if (props.disabled) return 'no-underline'
-      if (props.underline === 'always') return 'underline underline-offset-4'
-      if (props.underline === 'none') return 'no-underline'
-      return 'no-underline hover:underline hover:underline-offset-4'
-    })()
-
-    const variantClass = (() => {
-      const v = props.variant
-      const map: Record<DsSelectVariant, string> = {
-        primary:
-          'text-[var(--primary)] hover:text-[var(--primary-hover)] active:text-[var(--primary-active)]',
-        default: 'text-[var(--fg)] hover:text-[var(--primary)] active:text-[var(--primary-active)]',
-        muted: 'text-[var(--muted-fg)] hover:text-[var(--fg)] active:text-[var(--fg)]',
-        danger:
-          'text-[var(--ds-danger)] hover:text-[var(--ds-danger-hover)] active:text-[var(--ds-danger-active)]',
-      }
-      return map[v]
-    })()
-
-    return [
-      'inline-block w-auto align-baseline',
-      'cursor-pointer',
-      'appearance-none bg-transparent border border-transparent px-0 py-0 rounded-[6px]',
-      textSizeClass,
-      underlineClass,
-      variantClass,
-      'transition-colors duration-150 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring)]',
-      'disabled:opacity-60 disabled:cursor-not-allowed disabled:text-[var(--muted-fg)] disabled:no-underline',
-    ].join(' ')
-  }
-
-  return [
-    'w-full rounded-md border border-[var(--brd)] bg-[var(--bg)] text-[var(--fg)]',
-    sizeClass,
-    'transition-colors duration-150 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring)]',
-    'disabled:opacity-50 disabled:cursor-not-allowed',
-  ].join(' ')
-})
-
 const showNativeChevron = computed(() => {
   return props.optionsView === 'native' && props.view !== 'link' && !props.multiple
 })
@@ -400,28 +339,25 @@ const panelClearVisible = computed(() => {
 })
 
 const nativeClassName = computed(() => {
-  return [
-    className.value,
-    showNativeChevron.value ? 'appearance-none pr-9' : '',
-  ].join(' ')
+  return dsSelectNativeClass({
+    view: props.view,
+    size: props.size,
+    disabled: props.disabled,
+    variant: props.variant,
+    underline: props.underline,
+    showNativeChevron: showNativeChevron.value,
+  })
 })
 
 const triggerClassName = computed(() => {
-  if (props.optionsView !== 'panel') return className.value
-
-  if (props.view === 'link') {
-    return [
-      className.value,
-      'inline-flex items-center gap-1',
-      'text-left',
-    ].join(' ')
-  }
-
-  return [
-    className.value,
-    'flex items-center justify-between',
-    'text-left',
-  ].join(' ')
+  return dsSelectTriggerClass({
+    view: props.view,
+    optionsView: props.optionsView,
+    size: props.size,
+    disabled: props.disabled,
+    variant: props.variant,
+    underline: props.underline,
+  })
 })
 
 function onChange(e: Event): void {
@@ -452,7 +388,12 @@ function clearSelection(): void {
       :multiple="props.multiple"
       :disabled="props.disabled"
       :aria-label="props.ariaLabel"
-      :class="nativeClassName"
+      :class="[
+        props.view === 'link'
+          ? 'cursor-pointer inline-block w-auto align-baseline appearance-none bg-transparent border border-transparent px-0 py-0 rounded-[6px] transition-colors duration-150 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring)]'
+          : 'w-full rounded-md border border-[var(--brd)] bg-[var(--bg)] text-[var(--fg)] transition-colors duration-150 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring)]',
+        nativeClassName,
+      ]"
       @change="onChange"
     >
       <option v-if="nativeClearOptionVisible" value="" />
@@ -490,7 +431,12 @@ function clearSelection(): void {
       role="combobox"
       aria-readonly="true"
       :aria-expanded="open ? 'true' : 'false'"
-      :class="triggerClassName"
+      :class="[
+        props.view === 'link'
+          ? 'cursor-pointer inline-block w-auto align-baseline appearance-none bg-transparent border border-transparent px-0 py-0 rounded-[6px] transition-colors duration-150 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring)]'
+          : 'w-full rounded-md border border-[var(--brd)] bg-[var(--bg)] text-[var(--fg)] transition-colors duration-150 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring)]',
+        triggerClassName,
+      ]"
       @click="toggleDropdown"
     >
       <span class="min-w-0 flex-1">

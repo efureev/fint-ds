@@ -1,7 +1,9 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 
-export type DsTextareaState = 'default' | 'success' | 'warning' | 'danger'
+export type { DsTextareaState } from './dsTextareaStyles'
+
+import { dsTextareaClass, type DsTextareaState } from './dsTextareaStyles'
 
 const props = withDefaults(defineProps<{
   modelValue: string
@@ -28,23 +30,11 @@ const emit = defineEmits<{
   (e: 'update:modelValue', value: string): void
 }>()
 
-const base =
-  'w-full rounded-md border bg-[var(--bg)] px-3 py-2 text-[14px] text-[var(--fg)] placeholder:text-[var(--muted-fg)] transition-colors duration-150 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring)] disabled:opacity-50 disabled:cursor-not-allowed'
-
 const className = computed(() => {
-  const state = props.state
-
-  const borderByState: Record<typeof state, string> = {
-    default: 'border-[var(--brd)]',
-    success: 'border-[var(--ds-success)] focus-visible:ring-[var(--ds-success)]',
-    warning: 'border-[var(--ds-warning)] focus-visible:ring-[var(--ds-warning)]',
-    danger: 'border-[var(--ds-danger)] focus-visible:ring-[var(--ds-danger)]',
-  }
-
-  return [
-    base,
-    props.invalid ? borderByState.danger : borderByState[state],
-  ].join(' ')
+  return dsTextareaClass({
+    state: props.state,
+    invalid: props.invalid,
+  })
 })
 
 function onInput(e: Event): void {
@@ -62,6 +52,7 @@ function onInput(e: Event): void {
     :disabled="props.disabled"
     :value="props.modelValue"
     :aria-invalid="props.invalid ? 'true' : undefined"
+    class="w-full rounded-md border bg-[var(--bg)] px-3 py-2 text-[14px] text-[var(--fg)] placeholder:text-[var(--muted-fg)] transition-colors duration-150 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring)] disabled:opacity-50 disabled:cursor-not-allowed"
     :class="className"
     @input="onInput"
   />

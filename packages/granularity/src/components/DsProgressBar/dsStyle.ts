@@ -1,8 +1,6 @@
-export type DsProgressBarTone = 'primary' | 'neutral' | 'success' | 'warning' | 'danger' | 'info' | 'slate' | 'azure'
+import { splitClassTokens } from '../shared/classTokens'
 
-function splitClassTokens(value: string): string[] {
-  return value.split(/\s+/).filter(Boolean)
-}
+export type DsProgressBarTone = 'primary' | 'neutral' | 'success' | 'warning' | 'danger' | 'info' | 'slate' | 'azure'
 
 function withVar(token: string): string {
   return `[${token}]`

@@ -1,8 +1,6 @@
-export type DsAvatarShape = 'circle' | 'square'
+import { splitClassTokens } from '../shared/classTokens'
 
-function splitClassTokens(value: string): string[] {
-    return value.split(/\s+/).filter(Boolean)
-}
+export type DsAvatarShape = 'circle' | 'square'
 
 const shapes: Record<DsAvatarShape, string> = {
     circle: 'rounded-full',

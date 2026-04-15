@@ -1,9 +1,23 @@
-import { mount } from '@vue/test-utils'
-import { describe, expect, it } from 'vitest'
+import { DOMWrapper, mount } from '@vue/test-utils'
+import { nextTick } from 'vue'
+import { afterEach, describe, expect, it } from 'vitest'
 
 import DsSelect from '../DsSelect.vue'
 
+function getTeleportedElement<T extends Element = HTMLElement>(selector: string): T {
+  const element = document.body.querySelector(selector)
+  expect(element).toBeTruthy()
+  return element as T
+}
+
+function getTeleportedOptions(): HTMLButtonElement[] {
+  return [...document.body.querySelectorAll<HTMLButtonElement>('button[role="option"]')]
+}
+
 describe('DsSelect', () => {
+  afterEach(() => {
+    document.body.innerHTML = ''
+  })
   it('поддерживает size=xs в view="default" (h/padding/font-size)', () => {
     const wrapper = mount(DsSelect, {
       props: {
@@ -180,6 +194,7 @@ describe('DsSelect', () => {
 
   it('в panel-режиме эмитит update:modelValue при выборе опции кликом', async () => {
     const wrapper = mount(DsSelect, {
+      attachTo: document.body,
       props: {
         modelValue: 'USD',
         optionsView: 'panel',
@@ -192,11 +207,13 @@ describe('DsSelect', () => {
     })
 
     await wrapper.get('[data-testid="ds-select-trigger"]').trigger('click')
+    await nextTick()
 
-    const eur = wrapper.findAll('button[role="option"]').find((b) => b.text().includes('EUR'))
+    const eur = getTeleportedOptions().find((button) => button.textContent?.includes('EUR'))
     expect(eur).toBeTruthy()
 
-    await eur!.trigger('click')
+    await new DOMWrapper(eur!).trigger('click')
+    await nextTick()
 
     expect(wrapper.emitted('update:modelValue')?.[0]).toEqual(['EUR'])
   })
@@ -242,6 +259,7 @@ describe('DsSelect', () => {
 
   it('в panel-режиме позволяет добавить кастомное значение (Enter)', async () => {
     const wrapper = mount(DsSelect, {
+      attachTo: document.body,
       props: {
         modelValue: '',
         optionsView: 'panel',
@@ -255,19 +273,23 @@ describe('DsSelect', () => {
     })
 
     await wrapper.get('[data-testid="ds-select-trigger"]').trigger('click')
+    await nextTick()
 
-    const input = wrapper.get('[data-testid="ds-select-custom-input"]')
+    const input = new DOMWrapper(getTeleportedElement<HTMLInputElement>('[data-testid="ds-select-custom-input"]'))
     await input.setValue('My custom')
+    await nextTick()
 
-    expect(wrapper.get('[data-testid="ds-select-add-option"]').text()).toContain('My custom')
+    expect(getTeleportedElement('[data-testid="ds-select-add-option"]').textContent).toContain('My custom')
 
     await input.trigger('keydown', { key: 'Enter' })
+    await nextTick()
 
     expect(wrapper.emitted('update:modelValue')?.[0]).toEqual(['My custom'])
   })
 
   it('в panel-режиме поддерживает multiple: клики по опциям добавляют/удаляют значения', async () => {
     const wrapper = mount(DsSelect, {
+      attachTo: document.body,
       props: {
         modelValue: [],
         multiple: true,
@@ -282,24 +304,28 @@ describe('DsSelect', () => {
     })
 
     await wrapper.get('[data-testid="ds-select-trigger"]').trigger('click')
+    await nextTick()
 
-    const options = wrapper.findAll('button[role="option"]')
-    expect(options.map(o => o.text())).toEqual(expect.arrayContaining(['Food', 'Cafe']))
+    const options = getTeleportedOptions()
+    expect(options.map((option) => option.textContent?.trim() ?? '')).toEqual(expect.arrayContaining(['Food', 'Cafe']))
 
-    const food = options.find(o => o.text().includes('Food'))!
-    const cafe = options.find(o => o.text().includes('Cafe'))!
+    const food = options.find((option) => option.textContent?.includes('Food'))!
+    const cafe = options.find((option) => option.textContent?.includes('Cafe'))!
 
-    await food.trigger('click')
+    await new DOMWrapper(food).trigger('click')
+    await nextTick()
     expect(wrapper.emitted('update:modelValue')?.at(-1)).toEqual([['1']])
 
     await wrapper.setProps({ modelValue: ['1'] })
 
-    await cafe.trigger('click')
+    await new DOMWrapper(cafe).trigger('click')
+    await nextTick()
     expect(wrapper.emitted('update:modelValue')?.at(-1)).toEqual([['1', '2']])
 
     await wrapper.setProps({ modelValue: ['1', '2'] })
 
-    await food.trigger('click')
+    await new DOMWrapper(getTeleportedOptions().find((option) => option.textContent?.includes('Food'))!).trigger('click')
+    await nextTick()
     expect(wrapper.emitted('update:modelValue')?.at(-1)).toEqual([['2']])
   })
 
