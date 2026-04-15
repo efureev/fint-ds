@@ -224,7 +224,7 @@ function getSidebarItemClass(item: SidebarNavigationItem) {
     >
       <button
         class="showcase-backdrop flex-1 backdrop-blur-sm"
-        aria-label="Закрыть навигацию"
+        :aria-label="$t('showcase.navigation.close')"
         @click="isMobileNavigationOpen = false"
       />
 
@@ -232,7 +232,7 @@ function getSidebarItemClass(item: SidebarNavigationItem) {
         <div class="flex items-center justify-between gap-3">
           <div>
             <p class="showcase-kicker text-xs font-semibold tracking-[0.18em]">
-              Навигация
+              {{ $t('showcase.header.navigationLabel') }}
             </p>
             <h2 class="text-lg font-semibold">
               {{ currentTitle }}
@@ -243,7 +243,7 @@ function getSidebarItemClass(item: SidebarNavigationItem) {
             variant="ghost"
             size="sm"
             square
-            aria-label="Закрыть навигацию"
+            :aria-label="$t('showcase.navigation.close')"
             @click="isMobileNavigationOpen = false"
           >
             <IconX class="h-4 w-4" aria-hidden="true" />
@@ -276,7 +276,7 @@ function getSidebarItemClass(item: SidebarNavigationItem) {
 
         <div class="showcase-inline-surface space-y-4 overflow-y-auto rounded-3xl border p-4">
           <p class="showcase-kicker text-xs font-semibold tracking-[0.18em]">
-            Контекстная навигация
+            {{ $t('showcase.header.contextNavigationLabel') }}
           </p>
           <section
             v-for="group in contextNavigationGroups"

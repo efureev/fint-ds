@@ -1,0 +1,23 @@
+{
+  "header": {
+    "subtitle": "Витрина пакета компонентов",
+    "openNavigation": "Открыть навигацию",
+    "searchLabel": "Быстрый поиск",
+    "navigationLabel": "Навигация",
+    "contextNavigationLabel": "Контекстная навигация"
+  },
+  "search": {
+    "open": "Открыть поиск",
+    "summary": "Ищите страницы, сущности и section anchors по названию, alias и контексту использования.",
+    "placeholder": "Например: DsButton, file validation, useTheme",
+    "noResults": "Ничего не найдено. Попробуйте имя сущности, export name, тип (`component`, `utility`) или section-title.",
+    "openComponents": "Открыть components",
+    "openUtilities": "Открыть utilities"
+  },
+  "theme": {
+    "toggle": "Переключить тему"
+  },
+  "navigation": {
+    "close": "Закрыть навигацию"
+  }
+}

@@ -5,6 +5,7 @@ import { flushPromises, mount } from '@vue/test-utils'
 import { createMemoryHistory, createRouter } from 'vue-router'
 
 import App from '../../App.vue'
+import { setupShowcaseI18n } from '../../i18n'
 import ShowcaseLayout from '../../layouts/ShowcaseLayout.vue'
 import { showcaseChildRoutes } from '../routeDefinitions'
 
@@ -38,13 +39,14 @@ function createShowcaseRouter() {
 
 async function mountShowcaseAt(path: string) {
   const router = createShowcaseRouter()
+  const i18n = await setupShowcaseI18n()
 
   await router.push(path)
   await router.isReady()
 
   const wrapper = mount(App, {
     global: {
-      plugins: [router],
+      plugins: [i18n, router],
     },
   })
 
@@ -183,7 +185,7 @@ describe('showcase layout integration', () => {
     await searchButton?.trigger('click')
     await flushPromises()
 
-    const searchPanel = wrapper.findAll('.showcase-overlay').find(node => node.text().includes('Quick search'))
+    const searchPanel = wrapper.findAll('.showcase-overlay').find(node => node.text().includes('Быстрый поиск'))
 
     expect(searchPanel).toBeTruthy()
     expect(searchPanel?.classes()).toContain('absolute')

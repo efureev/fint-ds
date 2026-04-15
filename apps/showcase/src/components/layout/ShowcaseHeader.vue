@@ -47,7 +47,7 @@ function getTopNavigationItemClass(item: ShowcaseNavigationItem) {
           variant="ghost"
           size="sm"
           square
-          aria-label="Открыть навигацию"
+          :aria-label="$t('showcase.header.openNavigation')"
           @click="emit('open-mobile-navigation')"
         >
           <IconMenu class="h-4 w-4" aria-hidden="true" />
@@ -68,7 +68,7 @@ function getTopNavigationItemClass(item: ShowcaseNavigationItem) {
               Granularity
             </p>
             <p class="showcase-text-subtle truncate text-xs">
-              Витрина пакета компонентов
+              {{ $t('showcase.header.subtitle') }}
             </p>
           </div>
         </RouterLink>

@@ -8,10 +8,18 @@ import './styles/showcase-theme.css'
 
 import App from './App.vue'
 import { router } from './app/router'
+import { setupShowcaseI18n } from './i18n'
 
 
-initThemeEarly()
+async function bootstrap() {
+  initThemeEarly()
 
-createApp(App)
-  .use(router)
-  .mount('#app')
+  const i18n = await setupShowcaseI18n()
+
+  createApp(App)
+    .use(i18n)
+    .use(router)
+    .mount('#app')
+}
+
+void bootstrap()

@@ -24,7 +24,7 @@ const { isDark, toggleTheme } = useTheme({ storageKey: props.storageKey })
     variant="ghost"
     size="sm"
     square
-    aria-label="Переключить тему"
+    :aria-label="$t('showcase.theme.toggle')"
     @click="toggleTheme"
   >
     <IconMoon v-if="isDark" class="h-4 w-4" aria-hidden="true" />

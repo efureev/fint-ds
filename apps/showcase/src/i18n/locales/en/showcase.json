@@ -1,0 +1,23 @@
+{
+  "header": {
+    "subtitle": "Component package showcase",
+    "openNavigation": "Open navigation",
+    "searchLabel": "Quick search",
+    "navigationLabel": "Navigation",
+    "contextNavigationLabel": "Context navigation"
+  },
+  "search": {
+    "open": "Open search",
+    "summary": "Search pages, entities, and section anchors by title, alias, and usage context.",
+    "placeholder": "For example: DsButton, file validation, useTheme",
+    "noResults": "Nothing found. Try an entity name, export name, type (`component`, `utility`), or section title.",
+    "openComponents": "Open components",
+    "openUtilities": "Open utilities"
+  },
+  "theme": {
+    "toggle": "Toggle theme"
+  },
+  "navigation": {
+    "close": "Close navigation"
+  }
+}

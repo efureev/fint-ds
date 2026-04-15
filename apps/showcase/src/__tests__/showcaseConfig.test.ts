@@ -1,4 +1,4 @@
-import { readFileSync } from 'node:fs'
+import { existsSync, readFileSync } from 'node:fs'
 import { fileURLToPath, URL } from 'node:url'
 import { describe, expect, it } from 'vitest'
 
@@ -19,6 +19,17 @@ const showcaseMainEntry = readFileSync(
   fileURLToPath(new URL('../main.ts', import.meta.url)),
   'utf8',
 )
+
+const showcaseI18nEntryPath = fileURLToPath(new URL('../i18n/index.ts', import.meta.url))
+const showcaseI18nMessagesPath = fileURLToPath(new URL('../i18n/messages.ts', import.meta.url))
+
+const showcaseI18nEntry = existsSync(showcaseI18nEntryPath)
+  ? readFileSync(showcaseI18nEntryPath, 'utf8')
+  : ''
+
+const showcaseI18nMessagesEntry = existsSync(showcaseI18nMessagesPath)
+  ? readFileSync(showcaseI18nMessagesPath, 'utf8')
+  : ''
 
 const showcaseAppEntry = readFileSync(
   fileURLToPath(new URL('../App.vue', import.meta.url)),
@@ -56,11 +67,29 @@ describe('showcase bootstrap config', () => {
     expect(showcaseMainEntry).toContain("import '@unocss/reset/tailwind-compat.css'")
     expect(showcaseMainEntry).toContain("import 'virtual:uno.css'")
     expect(showcaseMainEntry).toContain("import { initThemeEarly } from '@feugene/granularity'")
+    expect(showcaseMainEntry).toContain("import { setupShowcaseI18n } from './i18n'")
     expect(showcaseMainEntry).toContain("import { router } from './app/router'")
     expect(showcaseMainEntry).toContain('initThemeEarly()')
+    expect(showcaseMainEntry).toContain('const i18n = await setupShowcaseI18n()')
+    expect(showcaseMainEntry).toContain('.use(i18n)')
     expect(showcaseMainEntry).toContain('.use(router)')
     expect(showcaseMainEntry).not.toContain("@feugene/granularity/styles.css")
     expect(showcaseMainEntry).not.toContain('legacy')
+  })
+
+  it('подключает fint-i18n и отдельные app-level locale loaders для showcase', () => {
+    expect(showcasePackageJson).toContain('"@feugene/fint-i18n": "0.1.1"')
+    expect(existsSync(showcaseI18nEntryPath)).toBe(true)
+    expect(existsSync(showcaseI18nMessagesPath)).toBe(true)
+    expect(showcaseI18nEntry).toContain("import { createFintI18n } from '@feugene/fint-i18n/core'")
+    expect(showcaseI18nEntry).toContain("import { installI18n } from '@feugene/fint-i18n/vue'")
+    expect(showcaseI18nEntry).toContain("import { DS_I18N_BLOCK, dsLocaleLoaders } from '@feugene/granularity/i18n'")
+    expect(showcaseI18nEntry).toContain('SHOWCASE_I18N_BLOCK')
+    expect(showcaseI18nEntry).toContain('showcaseLocaleLoaders')
+    expect(showcaseI18nEntry).toContain('registerBlocks([SHOWCASE_I18N_BLOCK, DS_I18N_BLOCK])')
+    expect(showcaseI18nMessagesEntry).toContain("export const SHOWCASE_I18N_BLOCK = 'showcase'")
+    expect(showcaseI18nMessagesEntry).toContain("'./locales/en/showcase.json'")
+    expect(showcaseI18nMessagesEntry).toContain("'./locales/ru/showcase.json'")
   })
 
   it('использует router shell и root public API пакета в layout-компоненте', () => {

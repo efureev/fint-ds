@@ -50,7 +50,7 @@ function closeSearch() {
         variant="ghost"
         size="sm"
         square
-        aria-label="Открыть поиск"
+        :aria-label="$t('showcase.search.open')"
         @click="toggleSearch()"
       >
         <SearchIcon />
@@ -65,10 +65,10 @@ function closeSearch() {
         <div class="flex items-center justify-between gap-3">
           <div>
             <p class="showcase-kicker text-xs font-semibold tracking-[0.18em]">
-              Quick search
+              {{ $t('showcase.header.searchLabel') }}
             </p>
             <p class="showcase-text-muted text-sm leading-6">
-              Ищите страницы, сущности и section anchors по названию, alias и контексту использования.
+              {{ $t('showcase.search.summary') }}
             </p>
           </div>
 
@@ -80,13 +80,13 @@ function closeSearch() {
         <input
           v-model="query"
           type="search"
-          placeholder="Например: DsButton, file validation, useTheme"
+          :placeholder="$t('showcase.search.placeholder')"
           class="showcase-input w-full rounded-2xl border px-4 py-3 text-sm outline-none transition-colors"
         >
 
         <div v-if="hasNoResults" class="showcase-empty-state min-h-0 overflow-y-auto overscroll-contain space-y-3 rounded-2xl border border-dashed px-4 py-4">
           <p class="text-sm leading-6">
-            Ничего не найдено. Попробуйте имя сущности, export name, тип (`component`, `utility`) или section-title.
+            {{ $t('showcase.search.noResults') }}
           </p>
           <div class="flex flex-wrap gap-2">
             <RouterLink
@@ -94,14 +94,14 @@ function closeSearch() {
               class="showcase-link-chip inline-flex rounded-full border px-3 py-2 text-xs font-semibold uppercase tracking-[0.16em] transition-colors"
               @click="closeSearch()"
             >
-              Открыть components
+              {{ $t('showcase.search.openComponents') }}
             </RouterLink>
             <RouterLink
               to="/utilities"
               class="showcase-link-chip inline-flex rounded-full border px-3 py-2 text-xs font-semibold uppercase tracking-[0.16em] transition-colors"
               @click="closeSearch()"
             >
-              Открыть utilities
+              {{ $t('showcase.search.openUtilities') }}
             </RouterLink>
           </div>
         </div>
