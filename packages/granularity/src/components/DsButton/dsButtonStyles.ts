@@ -29,6 +29,8 @@ type DsButtonToneTokens = {
 const base =
   'inline-flex items-center justify-center gap-2 select-none whitespace-nowrap rounded-md transition-colors duration-150 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring)] disabled:opacity-50 disabled:cursor-not-allowed'
 
+export const dsButtonBaseClass = base
+
 const sizes: Record<DsButtonSize, string> = {
   xs: 'h-7 text-xs px-2.5',
   sm: 'h-8 text-sm px-3',

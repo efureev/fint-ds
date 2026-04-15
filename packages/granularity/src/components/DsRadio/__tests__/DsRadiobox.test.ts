@@ -2,8 +2,16 @@ import { mount } from '@vue/test-utils'
 import { describe, expect, it } from 'vitest'
 
 import DsRadio from '../DsRadio.vue'
+import { dsRadioSafelist } from '../safelist'
 
 describe('DsRadio (radiobox)', () => {
+  it('держит в safelist базовые классы точки, чтобы dot не пропадал в собранных стилях', () => {
+    expect(dsRadioSafelist).toContain('h-[6px]')
+    expect(dsRadioSafelist).toContain('w-[6px]')
+    expect(dsRadioSafelist).toContain('rounded-full')
+    expect(dsRadioSafelist).toContain('transition-[transform,opacity,background-color]')
+  })
+
   it('использует primary-цвет для кружочка (dot)', () => {
     const wrapper = mount(DsRadio, {
       props: {

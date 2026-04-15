@@ -6,6 +6,7 @@ export type { DsRadioVariant } from './dsRadioStyles'
 import {
   dsRadioButtonClass,
   dsRadioControlClass,
+  dsRadioDotBaseClass,
   dsRadioDotClass,
   dsRadioRootClass,
   type DsRadioVariant,
@@ -188,8 +189,7 @@ function onButtonClick(): void {
     >
       <span
         data-ds-radio-dot
-        class="h-[6px] w-[6px] rounded-full transition-[transform,opacity,background-color] duration-150"
-        :class="dotClassName"
+        :class="[dsRadioDotBaseClass, dotClassName]"
       />
     </span>
 

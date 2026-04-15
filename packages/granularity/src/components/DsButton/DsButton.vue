@@ -6,6 +6,7 @@ import IconLoader from '~icons/lucide/loader-circle'
 export type { DsButtonSize, DsButtonTone, DsButtonVariant } from './dsButtonStyles'
 
 import {
+  dsButtonBaseClass,
   dsButtonClass,
   type DsButtonSize,
   type DsButtonTone,
@@ -76,8 +77,7 @@ const className = computed(() => {
     :disabled="isDisabled"
     :aria-busy="props.loading ? 'true' : undefined"
     :aria-label="props.ariaLabel"
-    class="inline-flex items-center justify-center gap-2 select-none whitespace-nowrap rounded-md transition-colors duration-150 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring)] disabled:opacity-50 disabled:cursor-not-allowed"
-    :class="className"
+    :class="[dsButtonBaseClass, className]"
     :style="squareStyle"
   >
     <IconLoader v-if="props.loading" class="h-4 w-4 animate-spin" aria-hidden="true" />
