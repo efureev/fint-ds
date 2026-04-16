@@ -17,7 +17,18 @@
     "lib": ["ESNext", "DOM"],
     "skipLibCheck": true,
     "noEmit": true,
-    "types": ["vite/client", "node"]
+    "types": ["vite/client", "node"],
+    "paths": {
+      "@feugene/granularity": [
+        "../../packages/granularity/src/index.ts"
+      ],
+      "@feugene/granularity/components/*": [
+        "../../packages/granularity/src/components/*/index.ts"
+      ],
+      "@feugene/granularity/uno-node": [
+        "../../packages/granularity/src/unocss/preset.node.ts"
+      ]
+    }
   },
   "vueCompilerOptions": {
     "target": 3.3

@@ -7,7 +7,8 @@
   "types": "./dist/types/src/index.d.ts",
   "web-types": "./web-types.json",
   "files": [
-    "dist"
+    "dist",
+    "web-types.json"
   ],
   "sideEffects": [
     "**/*.css"

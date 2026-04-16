@@ -22,7 +22,7 @@ const ready = ref(false)
 
     <section class="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
       <div class="flex flex-wrap items-center gap-3">
-        <DsButton variant="primary" tone="success" @click="ready = !ready">
+        <DsButton variant="secondary" tone="success" @click="ready = !ready">
           {{ ready ? 'Готово' : 'Проверить preset' }}
         </DsButton>
         <span class="text-sm text-slate-500">

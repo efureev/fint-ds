@@ -2,6 +2,7 @@ import { describe, expect, it } from 'vitest'
 
 import { granularityDirectivesIndexSource, granularityViteConfigSource } from '../helpers/granularityTestUtils'
 import pkg from '../../../package.json'
+import webTypes from '../../../web-types.json'
 
 describe('granularity package contracts', () => {
   it('публикует раздельные browser-safe и node-only uno exports', () => {
@@ -68,6 +69,82 @@ describe('granularity package contracts', () => {
   it('складывает внутренние js-чанки библиотеки в dist/chunks', () => {
     expect(granularityViteConfigSource).toContain("export const granularityInternalChunkFileName = 'chunks/[name]-[hash].js'")
     expect(granularityViteConfigSource).toContain('chunkFileNames: granularityInternalChunkFileName')
+  })
+
+  it('публикует web-types для JetBrains IDE с именем пакета и props компонентов', () => {
+    expect(webTypes.name).toBe(pkg.name)
+    expect(pkg.files).toContain('web-types.json')
+
+    const vueComponents = webTypes.contributions.html['vue-components']
+    expect(Array.isArray(vueComponents)).toBe(true)
+
+    const dsButton = vueComponents.find(component => component.name === 'DsButton')
+    expect(dsButton).toBeDefined()
+    expect(dsButton?.source).toEqual({
+      module: '@feugene/granularity/components/DsButton',
+      symbol: 'DsButton',
+    })
+    expect(dsButton?.props).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({
+          name: 'variant',
+          required: false,
+          value: {
+            kind: 'plain',
+            type: "'primary' | 'secondary' | 'outline' | 'ghost' | 'ghost-border'",
+          },
+          type: {
+            module: '@feugene/granularity/components/DsButton',
+            name: 'DsButtonVariant',
+          },
+        }),
+        expect.objectContaining({
+          name: 'tone',
+          required: false,
+          value: {
+            kind: 'plain',
+            type: "'primary' | 'neutral' | 'success' | 'warning' | 'danger' | 'info' | 'slate' | 'azure'",
+          },
+          type: {
+            module: '@feugene/granularity/components/DsButton',
+            name: 'DsButtonTone',
+          },
+        }),
+        expect.objectContaining({
+          name: 'size',
+          required: false,
+          type: {
+            module: '@feugene/granularity/components/DsButton',
+            name: 'DsButtonSize',
+          },
+        }),
+        expect.objectContaining({
+          name: 'loading',
+          required: false,
+          type: 'boolean',
+        }),
+        expect.objectContaining({
+          name: 'disabled',
+          required: false,
+          type: 'boolean',
+        }),
+        expect.objectContaining({
+          name: 'square',
+          required: false,
+          type: 'boolean',
+        }),
+        expect.objectContaining({
+          name: 'type',
+          required: false,
+          type: "'button' | 'submit' | 'reset'",
+        }),
+        expect.objectContaining({
+          name: 'ariaLabel',
+          required: false,
+          type: 'string',
+        }),
+      ]),
+    )
   })
 
   it('собирает отдельные build-entry для top-level composables', () => {

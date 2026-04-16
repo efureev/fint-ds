@@ -27,6 +27,20 @@ const playground5UnoConfig = readFileSync(
   'utf8',
 )
 
+const playground5ViteEnv = readFileSync(
+  fileURLToPath(new URL('../../vite-env.d.ts', import.meta.url)),
+  'utf8',
+)
+
+const playground5Tsconfig = JSON.parse(readFileSync(
+  fileURLToPath(new URL('../../tsconfig.json', import.meta.url)),
+  'utf8',
+)) as {
+  compilerOptions?: {
+    paths?: Record<string, string[]>
+  }
+}
+
 describe('playground-5 config', () => {
   it('выделяет vue, reset и granularity в отдельные чанки', () => {
     expect(playground5VueChunkGroup.name).toBe('vue')
@@ -47,6 +61,15 @@ describe('playground-5 config', () => {
     expect(playground5MainEntry).toContain("import('./reset')")
     expect(playground5MainEntry).toContain("import('./granularity')")
     expect(playground5MainEntry).toContain("import('./app-styles')")
+  })
+
+  it('мапит локальные granularity imports на source-entry для IDE и TS в monorepo', () => {
+    expect(playground5Tsconfig.compilerOptions?.paths).toMatchObject({
+      '@feugene/granularity': ['../../packages/granularity/src/index.ts'],
+      '@feugene/granularity/components/*': ['../../packages/granularity/src/components/*/index.ts'],
+      '@feugene/granularity/uno-node': ['../../packages/granularity/src/unocss/preset.node.ts'],
+    })
+    expect(playground5ViteEnv).toContain('/// <reference types="unplugin-icons/types/vue" />')
   })
 
   it('показывает на странице примерные размеры bundle', () => {
